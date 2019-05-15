@@ -111,7 +111,16 @@ namespace MonitoringClient.ViewModel
         }
         public void CheckForDuplicates()
         {
-            var dc = _duplicateChecker.FindDuplicates(Logentries);
+            //var hashSet = new HashSet<IEntity>();
+            //var ret = new List<IEntity>();
+            //foreach (var item in Logentries)
+            //{
+            //    if (!hashSet.Add(item))
+            //    {
+            //        ret.Add(item);
+            //    }
+            //}
+            DuplicateLogentries = (ObservableCollection<LogentriesModel>) _duplicateChecker.FindDuplicates(Logentries);
         }
         private void OnNavigate(object obj)
         {
