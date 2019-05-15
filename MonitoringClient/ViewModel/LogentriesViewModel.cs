@@ -1,4 +1,5 @@
-﻿using MonitoringClient.Model;
+﻿using DuplicateCheckerLib;
+using MonitoringClient.Model;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,13 @@ namespace MonitoringClient.ViewModel
         private readonly Action<object> navigate;
         private LoadButtonCommand _loadButtonCommand;
         private ConfirmButtonCommand _confirmButtonCommand;
+        private FindDuplicatesButtonCommand _findDuplicatesButtonCommand;
+        private DuplicateChecker _duplicateChecker;
 
         public ICommand Navigate { get; set; }
         public ObservableCollection<LogentriesModel> Logentries { get; set; }
-        public string ConnectionString { get; set; }
+        public ObservableCollection<LogentriesModel> DuplicateLogentries { get; set; }
+        public string ConnectionString { get; set; } // Server = localhost; Database = inventarisierungsloesung; Uid = root; Pwd = password;
         public LoadButtonCommand LoadButtonCommand
         {
             get { return this._loadButtonCommand; }
@@ -32,14 +36,25 @@ namespace MonitoringClient.ViewModel
             get { return this._confirmButtonCommand; }
             set { this._confirmButtonCommand = value; }
         }
+        public FindDuplicatesButtonCommand FindDuplicatesButtonCommand
+        {
+            get { return this._findDuplicatesButtonCommand; }
+            set { this._findDuplicatesButtonCommand = value; }
+        }
+
         public LogentriesViewModel(Action<object> navigate)
         {
             Navigate = new BaseCommand(OnNavigate);
             this.navigate = navigate;
+
+            ConnectionString = "Server = localhost; Database = ; Uid = root; Pwd = ;";
+
             _loadButtonCommand = new LoadButtonCommand(this);
             _confirmButtonCommand = new ConfirmButtonCommand(this);
             Logentries = new ObservableCollection<LogentriesModel>();
-            ConnectionString = "Server = localhost; Database = ; Uid = root; Pwd = ;";
+            DuplicateLogentries = new ObservableCollection<LogentriesModel>();
+            _duplicateChecker = new DuplicateChecker();
+            _findDuplicatesButtonCommand = new FindDuplicatesButtonCommand(this);
         }
         public void LoadLogentries()
         {
@@ -93,6 +108,10 @@ namespace MonitoringClient.ViewModel
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
+        }
+        public void CheckForDuplicates()
+        {
+            var dc = _duplicateChecker.FindDuplicates(Logentries);
         }
         private void OnNavigate(object obj)
         {
