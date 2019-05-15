@@ -32,6 +32,34 @@ namespace MonitoringClient.ViewModel
         }
         public void AddMessageAndValidation()
         {
+            ValidationOfProperties();
+            if (_validationOk == true)
+            {
+                var connection = new MySqlConnection(ConnectionString);
+                try
+                {
+                    connection.Open();
+                    using (var cmd = connection.CreateCommand())
+                    {
+                        cmd.CommandText = "LogMessageAdd";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@i_pod", POD);
+                        cmd.Parameters.AddWithValue("@i_hostname", Hostname);
+                        cmd.Parameters.AddWithValue("@i_severity", Severity);
+                        cmd.Parameters.AddWithValue("@i_message", Message);
+                        cmd.ExecuteNonQuery();
+                    }
+                    connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+                }
+            }
+        }
+
+        private void ValidationOfProperties()
+        {
             if (string.IsNullOrEmpty(POD))
             {
                 MessageBox.Show("POD darf nicht leer sein!");
@@ -56,28 +84,9 @@ namespace MonitoringClient.ViewModel
             else
             {
                 _validationOk = true;
-                var connection = new MySqlConnection(ConnectionString);
-                try
-                {
-                    connection.Open();
-                    using (var cmd = connection.CreateCommand())
-                    {
-                        cmd.CommandText = "LogMessageAdd";
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@i_pod", POD);
-                        cmd.Parameters.AddWithValue("@i_hostname", Hostname);
-                        cmd.Parameters.AddWithValue("@i_severity", Severity);
-                        cmd.Parameters.AddWithValue("@i_message", Message);
-                        cmd.ExecuteNonQuery();
-                    }
-                    connection.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-                }
             }
         }
+
         private void OnNavigate(object obj)
         {
             AddMessageAndValidation();

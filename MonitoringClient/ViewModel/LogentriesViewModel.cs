@@ -2,12 +2,8 @@
 using MonitoringClient.Model;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using static MonitoringClient.ViewModel.NavigationViewModel;
@@ -25,7 +21,7 @@ namespace MonitoringClient.ViewModel
         public ICommand Navigate { get; set; }
         public ObservableCollection<LogentriesModel> Logentries { get; set; }
         public ObservableCollection<LogentriesModel> DuplicateLogentries { get; set; }
-        public string ConnectionString { get; set; } // Server = localhost; Database = inventarisierungsloesung; Uid = root; Pwd = password;
+        public string ConnectionString { get; set; }
         public LoadButtonCommand LoadButtonCommand
         {
             get { return this._loadButtonCommand; }
@@ -52,10 +48,10 @@ namespace MonitoringClient.ViewModel
             _loadButtonCommand = new LoadButtonCommand(this);
             _confirmButtonCommand = new ConfirmButtonCommand(this);
             Logentries = new ObservableCollection<LogentriesModel>();
-            DuplicateLogentries = new ObservableCollection<LogentriesModel>();
             _duplicateChecker = new DuplicateChecker();
             _findDuplicatesButtonCommand = new FindDuplicatesButtonCommand(this);
         }
+
         public void LoadLogentries()
         {
             this.Logentries.Clear();
@@ -111,16 +107,13 @@ namespace MonitoringClient.ViewModel
         }
         public void CheckForDuplicates()
         {
-            //var hashSet = new HashSet<IEntity>();
-            //var ret = new List<IEntity>();
-            //foreach (var item in Logentries)
-            //{
-            //    if (!hashSet.Add(item))
-            //    {
-            //        ret.Add(item);
-            //    }
-            //}
-            DuplicateLogentries = (ObservableCollection<LogentriesModel>) _duplicateChecker.FindDuplicates(Logentries);
+            var enumerableListeOfDuplicates = _duplicateChecker.FindDuplicates(Logentries);
+            this.Logentries.Clear();
+            foreach (var element in enumerableListeOfDuplicates)
+            {
+                Logentries.Add((LogentriesModel)element);
+            }
+
         }
         private void OnNavigate(object obj)
         {

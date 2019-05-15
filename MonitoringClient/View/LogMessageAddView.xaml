@@ -83,20 +83,19 @@
             <Button x:Name="button_save"
                     Command="{Binding Navigate}"
                     Grid.Row="4"
-                    Grid.Column="3"
+                    Grid.Column="2"
                     Content="Save"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
-                    Width="75"/>
+                    Width="75" Margin="0,6,2,5"/>
             <Button x:Name="button_back"
                     Command="{Binding NavigateBack}"
                     Grid.Row="4"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
+                    Grid.Column="1"
                     Content="Back"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Width="75"/>
+                    Width="75" Margin="0,6,0,5"/>
         </Grid>
     </GroupBox>
 </UserControl>

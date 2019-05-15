@@ -1,9 +1,4 @@
 ﻿using DuplicateCheckerLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MonitoringClient.Model
 {
@@ -28,6 +23,10 @@ namespace MonitoringClient.Model
             this.Message = message;
         }
 
+        public override bool Equals(object value)
+        {
+            return Equals(value as LogentriesModel);
+        }
         public bool Equals(LogentriesModel other)
         {
             if (object.ReferenceEquals(null, other)) return false;
@@ -36,7 +35,6 @@ namespace MonitoringClient.Model
             return (object.Equals(this.Severity, other.Severity)) &&
                    (object.Equals(this.Message, other.Message));
         }
-
         public override int GetHashCode()
         {
             unchecked
@@ -50,7 +48,6 @@ namespace MonitoringClient.Model
                 return hash;
             }
         }
-
         public static bool operator ==(LogentriesModel lm1, LogentriesModel lm2)
         {
             if (object.ReferenceEquals(lm1, lm2))

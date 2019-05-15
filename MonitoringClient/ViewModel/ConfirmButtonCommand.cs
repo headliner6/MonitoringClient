@@ -1,17 +1,16 @@
 ﻿using MonitoringClient.Model;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace MonitoringClient.ViewModel
 {
     public class ConfirmButtonCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged;
+
         private LogentriesViewModel _logentriesViewModel;
+        public event EventHandler CanExecuteChanged;
+
         public ConfirmButtonCommand(LogentriesViewModel lvm)
         {
             this._logentriesViewModel = lvm;

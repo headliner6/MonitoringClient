@@ -9,9 +9,9 @@ namespace MonitoringClient.ViewModel
 {
     public class FindDuplicatesButtonCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged;
-
         private LogentriesViewModel _logentriesViewModel;
+        public event EventHandler CanExecuteChanged;
+                
         public FindDuplicatesButtonCommand(LogentriesViewModel lvm)
         {
             this._logentriesViewModel = lvm;
