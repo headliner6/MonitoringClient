@@ -58,7 +58,7 @@ namespace MonitoringClient.ViewModel
             }
         }
 
-        private void ValidationOfProperties()
+        private void ValidationOfProperties() // TODO: Exception werfen anstelle von nur "MessageBox". Dann muss _validationOk nicht mehr verwendet werden.
         {
             if (string.IsNullOrEmpty(POD))
             {
