@@ -20,7 +20,6 @@ namespace MonitoringClient.ViewModel
 
         public ICommand Navigate { get; set; }
         public ObservableCollection<LogentriesModel> Logentries { get; set; }
-        public ObservableCollection<LogentriesModel> DuplicateLogentries { get; set; }
         public string ConnectionString { get; set; }
         public LoadButtonCommand LoadButtonCommand
         {
