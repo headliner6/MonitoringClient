@@ -1,7 +1,7 @@
 ﻿MonitoringClient
 
 
-winexe
+library
 C#
 .cs
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\
@@ -9,7 +9,7 @@ MonitoringClient
 none
 false
 DEBUG;TRACE
-D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\App.xaml
+
 41157761078
 
 152032745676

@@ -72,6 +72,7 @@
         </GroupBox>
         <GroupBox Header="Data" Grid.Row="1">
             <DataGrid x:Name="logentrie_dataGrid"
+                      IsReadOnly="true"
                       ItemsSource="{Binding Path=Logentries, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       HorizontalAlignment="stretch"
                       Grid.Row="1"
