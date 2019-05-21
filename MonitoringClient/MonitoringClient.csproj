@@ -78,6 +78,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Repository\IRepositoryBase.cs" />
+    <Compile Include="Repository\LogentriesModelRepository.cs" />
+    <Compile Include="Repository\RepositoryBase.cs" />
+    <Compile Include="ViewModel\BaseCommand.cs" />
     <Compile Include="ViewModel\ConfirmButtonCommand.cs" />
     <Compile Include="ViewModel\FindDuplicatesButtonCommand.cs" />
     <Compile Include="ViewModel\LoadButtonCommand.cs" />

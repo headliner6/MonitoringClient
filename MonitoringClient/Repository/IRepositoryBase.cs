@@ -8,7 +8,7 @@ namespace MonitoringClient.Repository
 {
     public interface IRepositoryBase<M>
     {
-        string ConnectionString { get;}
+        string ConnectionString { get; set; }
         /// <summary>
         /// Zählt in der Datenbank die Anzahl Model-Objekte vom Typ M, die der
         /// Where-Bedingung entsprechen

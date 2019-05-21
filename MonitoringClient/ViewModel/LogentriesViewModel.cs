@@ -1,8 +1,10 @@
 ﻿using DuplicateCheckerLib;
 using MonitoringClient.Model;
+using MonitoringClient.Repository;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data;
 using System.Windows;
 using System.Windows.Input;
@@ -10,16 +12,28 @@ using static MonitoringClient.ViewModel.NavigationViewModel;
 
 namespace MonitoringClient.ViewModel
 {
-    public class LogentriesViewModel
+    public class LogentriesViewModel : INotifyPropertyChanged
     {
         private readonly Action<object> navigate;
         private LoadButtonCommand _loadButtonCommand;
         private ConfirmButtonCommand _confirmButtonCommand;
         private FindDuplicatesButtonCommand _findDuplicatesButtonCommand;
         private DuplicateChecker _duplicateChecker;
+        private LogentriesModelRepository _logentriesModelRepository;
+        private ObservableCollection<LogentriesModel> _logentries;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand Navigate { get; set; }
-        public ObservableCollection<LogentriesModel> Logentries { get; set; }
+        public ObservableCollection<LogentriesModel> Logentries
+        {
+            get { return _logentries; }
+            set
+            {
+                _logentries = value;
+                OnPropertyChanged("Logentries");
+            }
+        }
         public string ConnectionString { get; set; }
         public LoadButtonCommand LoadButtonCommand
         {
@@ -42,47 +56,19 @@ namespace MonitoringClient.ViewModel
             Navigate = new BaseCommand(OnNavigate);
             this.navigate = navigate;
 
-            ConnectionString = "Server = localhost; Database = ; Uid = root; Pwd = ;";
+            _logentriesModelRepository = new LogentriesModelRepository();
 
+            ConnectionString = _logentriesModelRepository.ConnectionString;
             _loadButtonCommand = new LoadButtonCommand(this);
             _confirmButtonCommand = new ConfirmButtonCommand(this);
             Logentries = new ObservableCollection<LogentriesModel>();
             _duplicateChecker = new DuplicateChecker();
             _findDuplicatesButtonCommand = new FindDuplicatesButtonCommand(this);
         }
-
         public void LoadLogentries()
         {
-            this.Logentries.Clear();
-            var connection = new MySqlConnection(ConnectionString);
-            try
-            {
-                connection.Open();
-                using (var cmd = connection.CreateCommand())
-                {
-                    cmd.CommandText = "SELECT id, pod, location, hostname, severity, timestamp, message FROM v_logentries";
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Logentries.Add(new LogentriesModel(
-                                reader.GetInt32("Id"),
-                                reader.GetString("Pod"),
-                                reader.GetValue(reader.GetOrdinal("Location")) as string,
-                                reader.GetString("Hostname"),
-                                reader.GetInt32("Severity"),
-                                reader.GetString("Timestamp"),
-                                reader.GetString("Message")
-                                ));
-                        }
-                    }
-                }
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-            }
+            _logentriesModelRepository.ConnectionString = ConnectionString;
+            Logentries = _logentriesModelRepository.LoadLogentries();
         }
         public void ConfirmLogentries(int id)
         {
@@ -112,7 +98,14 @@ namespace MonitoringClient.ViewModel
             {
                 Logentries.Add((LogentriesModel)element);
             }
-
+        }
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
         }
         private void OnNavigate(object obj)
         {

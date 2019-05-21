@@ -73,7 +73,7 @@
         <GroupBox Header="Data" Grid.Row="1">
             <DataGrid x:Name="logentrie_dataGrid"
                       IsReadOnly="true"
-                      ItemsSource="{Binding Path=Logentries, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding Path=Logentries, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
                       HorizontalAlignment="stretch"
                       Grid.Row="1"
                       VerticalScrollBarVisibility="auto"

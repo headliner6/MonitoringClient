@@ -273,6 +273,8 @@ C:\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\Mon
 C:\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\MonitoringClient.csproj.CopyComplete
 C:\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\MonitoringClient.exe
 C:\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\MonitoringClient.pdb
-D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\MonitoringClient.dll.config
-D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\MonitoringClient.dll
-D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\MonitoringClient.dll
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\MonitoringClient.exe.config
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\MonitoringClient.exe
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\MonitoringClient.exe.config
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\App.g.cs
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\MonitoringClient.exe
