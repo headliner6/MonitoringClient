@@ -4,9 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MonitoringClient.Repository
@@ -18,6 +15,7 @@ namespace MonitoringClient.Repository
         public LogentriesModelRepository()
         {
             Items = new ObservableCollection<LogentriesModel>();
+            TableName = "v_logentries";
         }
         public ObservableCollection<LogentriesModel> LoadLogentries()
         {
@@ -28,7 +26,7 @@ namespace MonitoringClient.Repository
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT id, pod, location, hostname, severity, timestamp, message FROM v_logentries";
+                    cmd.CommandText = $"SELECT id, pod, location, hostname, severity, timestamp, message FROM {this.TableName}";
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -95,6 +93,37 @@ namespace MonitoringClient.Repository
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
+        }
+
+        public override LogentriesModel GetSingle<P>(P pkValue)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public override void Add(LogentriesModel entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Delete(LogentriesModel entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Update(LogentriesModel entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<LogentriesModel> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<LogentriesModel> GetAll()
+        {
+            throw new NotImplementedException();
         }
     }
 }

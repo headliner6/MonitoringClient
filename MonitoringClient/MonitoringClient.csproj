@@ -78,7 +78,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\LocationModel.cs" />
     <Compile Include="Repository\IRepositoryBase.cs" />
+    <Compile Include="Repository\LocationModelRepository.cs" />
     <Compile Include="Repository\LogentriesModelRepository.cs" />
     <Compile Include="Repository\RepositoryBase.cs" />
     <Compile Include="ViewModel\BaseCommand.cs" />

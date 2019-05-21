@@ -6,6 +6,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using static MonitoringClient.ViewModel.NavigationViewModel;
@@ -78,11 +79,7 @@ namespace MonitoringClient.ViewModel
         {
             this.LoadLogentries();
             var enumerableListeOfDuplicates = _duplicateChecker.FindDuplicates(Logentries);
-            this.Logentries.Clear();
-            foreach (var element in enumerableListeOfDuplicates)
-            {
-                Logentries.Add((LogentriesModel)element);
-            }
+            Logentries = new ObservableCollection<LogentriesModel>(enumerableListeOfDuplicates.Cast<LogentriesModel>());
         }
         protected void OnPropertyChanged(string name)
         {
