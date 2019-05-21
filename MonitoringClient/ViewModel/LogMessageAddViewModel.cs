@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using MonitoringClient.Repository;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,7 +17,8 @@ namespace MonitoringClient.ViewModel
     {
         private readonly Action<object> navigate;
         private bool _validationOk;
-        public ICommand Navigate { get; set; }
+        private LogentriesModelRepository _logentriesModelRepository;
+        public ICommand NavigateAndSave { get; set; }
         public ICommand NavigateBack { get; set; }
         public string POD { set; get; }
         public string Hostname { get; set; }
@@ -27,37 +29,10 @@ namespace MonitoringClient.ViewModel
         public LogMessageAddViewModel(Action<object> navigate)
         {
             NavigateBack = new BaseCommand(OnNavigateBack);
-            Navigate = new BaseCommand(OnNavigate);
+            NavigateAndSave = new BaseCommand(OnNavigateAndSave);
             this.navigate = navigate;
+            _logentriesModelRepository = new LogentriesModelRepository();
         }
-        public void AddMessageAndValidation()
-        {
-            ValidationOfProperties();
-            if (_validationOk == true)
-            {
-                var connection = new MySqlConnection(ConnectionString);
-                try
-                {
-                    connection.Open();
-                    using (var cmd = connection.CreateCommand())
-                    {
-                        cmd.CommandText = "LogMessageAdd";
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@i_pod", POD);
-                        cmd.Parameters.AddWithValue("@i_hostname", Hostname);
-                        cmd.Parameters.AddWithValue("@i_severity", Severity);
-                        cmd.Parameters.AddWithValue("@i_message", Message);
-                        cmd.ExecuteNonQuery();
-                    }
-                    connection.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-                }
-            }
-        }
-
         private void ValidationOfProperties() // TODO: Exception werfen anstelle von nur "MessageBox". Dann muss _validationOk nicht mehr verwendet werden.
         {
             if (string.IsNullOrEmpty(POD))
@@ -87,11 +62,13 @@ namespace MonitoringClient.ViewModel
             }
         }
 
-        private void OnNavigate(object obj)
+        private void OnNavigateAndSave(object obj)
         {
-            AddMessageAndValidation();
+            ValidationOfProperties();
             if (_validationOk == true)
             {
+                _logentriesModelRepository.ConnectionString = ConnectionString;
+                _logentriesModelRepository.AddMessage(POD, Hostname, Severity, Message);
                 navigate.Invoke("LogentriesView");
             }
         }

@@ -76,6 +76,7 @@ namespace MonitoringClient.ViewModel
         }
         public void CheckForDuplicates()
         {
+            this.LoadLogentries();
             var enumerableListeOfDuplicates = _duplicateChecker.FindDuplicates(Logentries);
             this.Logentries.Clear();
             foreach (var element in enumerableListeOfDuplicates)

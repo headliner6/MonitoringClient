@@ -15,12 +15,10 @@ namespace MonitoringClient.Repository
     {
         public override string TableName { get; }
         public override ObservableCollection<LogentriesModel> Items { get; set; }
-
         public LogentriesModelRepository()
         {
             Items = new ObservableCollection<LogentriesModel>();
         }
-
         public ObservableCollection<LogentriesModel> LoadLogentries()
         {
             this.Items.Clear();
@@ -66,6 +64,29 @@ namespace MonitoringClient.Repository
                     cmd.CommandText = "LogClear";
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@_logentries_id", id);
+                    cmd.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+            }
+        }
+        public void AddMessage(string pod, string hostname, string severity, string message)
+        {
+            var connection = new MySqlConnection(ConnectionString);
+            try
+            {
+                connection.Open();
+                using (var cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = "LogMessageAdd";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@i_pod", pod);
+                    cmd.Parameters.AddWithValue("@i_hostname", hostname);
+                    cmd.Parameters.AddWithValue("@i_severity", severity);
+                    cmd.Parameters.AddWithValue("@i_message", message);
                     cmd.ExecuteNonQuery();
                 }
                 connection.Close();
