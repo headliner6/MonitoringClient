@@ -7,9 +7,9 @@ using System.Windows.Input;
 
 namespace MonitoringClient.ViewModel
 {
-    public class BaseCommand : ICommand // TODO: Outsourcing
+    public class BaseCommand : ICommand
     {
-        private Predicate<object> _canExecute;
+        private readonly Predicate<object> _canExecute;
         private Action<object> _method;
         public event EventHandler CanExecuteChanged;
 

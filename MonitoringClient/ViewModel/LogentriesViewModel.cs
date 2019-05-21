@@ -1,24 +1,18 @@
 ﻿using DuplicateCheckerLib;
 using MonitoringClient.Model;
 using MonitoringClient.Repository;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
-using static MonitoringClient.ViewModel.NavigationViewModel;
 
 namespace MonitoringClient.ViewModel
 {
     public class LogentriesViewModel : INotifyPropertyChanged
     {
         private readonly Action<object> navigate;
-        private LoadButtonCommand _loadButtonCommand;
-        private ConfirmButtonCommand _confirmButtonCommand;
-        private FindDuplicatesButtonCommand _findDuplicatesButtonCommand;
         private DuplicateChecker _duplicateChecker;
         private LogentriesModelRepository _logentriesModelRepository;
         private ObservableCollection<LogentriesModel> _logentries;
@@ -36,21 +30,9 @@ namespace MonitoringClient.ViewModel
             }
         }
         public string ConnectionString { get; set; }
-        public LoadButtonCommand LoadButtonCommand
-        {
-            get { return this._loadButtonCommand; }
-            set { this._loadButtonCommand = value; }
-        }
-        public ConfirmButtonCommand ConfirmButtonCommand
-        {
-            get { return this._confirmButtonCommand; }
-            set { this._confirmButtonCommand = value; }
-        }
-        public FindDuplicatesButtonCommand FindDuplicatesButtonCommand
-        {
-            get { return this._findDuplicatesButtonCommand; }
-            set { this._findDuplicatesButtonCommand = value; }
-        }
+        public LoadButtonCommand LoadButtonCommand { get; set; }
+        public ConfirmButtonCommand ConfirmButtonCommand { get; set; }
+        public FindDuplicatesButtonCommand FindDuplicatesButtonCommand { get; set; }
 
         public LogentriesViewModel(Action<object> navigate)
         {
@@ -60,11 +42,11 @@ namespace MonitoringClient.ViewModel
             _logentriesModelRepository = new LogentriesModelRepository();
 
             ConnectionString = _logentriesModelRepository.ConnectionString;
-            _loadButtonCommand = new LoadButtonCommand(this);
-            _confirmButtonCommand = new ConfirmButtonCommand(this);
+            LoadButtonCommand = new LoadButtonCommand(this);
+            ConfirmButtonCommand = new ConfirmButtonCommand(this);
             Logentries = new ObservableCollection<LogentriesModel>();
             _duplicateChecker = new DuplicateChecker();
-            _findDuplicatesButtonCommand = new FindDuplicatesButtonCommand(this);
+            FindDuplicatesButtonCommand = new FindDuplicatesButtonCommand(this);
         }
         public void LoadLogentries()
         {
@@ -83,11 +65,7 @@ namespace MonitoringClient.ViewModel
         }
         protected void OnPropertyChanged(string name)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
         private void OnNavigate(object obj)
         {
