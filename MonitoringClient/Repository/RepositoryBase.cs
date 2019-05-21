@@ -36,5 +36,35 @@ namespace MonitoringClient.Repository
                 }
             }
         }
+
+        public M GetSingle<P>(P pkValue)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Add(M entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(M entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(M entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<M> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<M> GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

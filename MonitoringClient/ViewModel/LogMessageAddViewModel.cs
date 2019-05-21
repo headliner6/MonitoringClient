@@ -61,7 +61,6 @@ namespace MonitoringClient.ViewModel
                 _validationOk = true;
             }
         }
-
         private void OnNavigateAndSave(object obj)
         {
             ValidationOfProperties();
