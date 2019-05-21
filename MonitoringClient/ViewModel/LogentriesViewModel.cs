@@ -72,23 +72,7 @@ namespace MonitoringClient.ViewModel
         }
         public void ConfirmLogentries(int id)
         {
-            var connection = new MySqlConnection(ConnectionString);
-            try
-            {
-                connection.Open();
-                using (var cmd = connection.CreateCommand())
-                {
-                    cmd.CommandText = "LogClear";
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@_logentries_id", id);
-                    cmd.ExecuteNonQuery();
-                }
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-            }
+            _logentriesModelRepository.ConfirmLogentries(id);
         }
         public void CheckForDuplicates()
         {

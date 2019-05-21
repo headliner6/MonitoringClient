@@ -16,7 +16,11 @@ namespace MonitoringClient.ViewModel
         public object SelectedViewModel
         {
             get { return selectedViewModel; }
-            set { selectedViewModel = value; OnPropertyChanged("SelectedViewModel"); }
+            set
+            {
+                selectedViewModel = value;
+                OnPropertyChanged("SelectedViewModel");
+            }
         }
         public NavigationViewModel()
         {
