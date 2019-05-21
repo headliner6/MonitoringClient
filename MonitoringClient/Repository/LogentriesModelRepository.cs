@@ -99,31 +99,84 @@ namespace MonitoringClient.Repository
         {
             throw new NotImplementedException();
         }
-
-
         public override void Add(LogentriesModel entity)
         {
             throw new NotImplementedException();
         }
-
         public override void Delete(LogentriesModel entity)
         {
-            throw new NotImplementedException();
+            MessageBox.Show("Delete steht nicht zur Verfügung");
         }
-
         public override void Update(LogentriesModel entity)
         {
-            throw new NotImplementedException();
+            MessageBox.Show("Update steht nicht zur Verfügung");
         }
-
         public override List<LogentriesModel> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
         {
-            throw new NotImplementedException();
+            var logentries = new List<LogentriesModel>();
+            var connection = new MySqlConnection(ConnectionString);
+            try
+            {
+                connection.Open();
+                using (var cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = $"SELECT * FROM {this.TableName} WHERE {whereCondition}";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            logentries.Add(new LogentriesModel(
+                                reader.GetInt32("Id"),
+                                reader.GetString("Pod"),
+                                reader.GetValue(reader.GetOrdinal("Location")) as string,
+                                reader.GetString("Hostname"),
+                                reader.GetInt32("Severity"),
+                                reader.GetString("Timestamp"),
+                                reader.GetString("Message")
+                                ));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+            }
+            return logentries;
         }
-
         public override List<LogentriesModel> GetAll()
         {
-            throw new NotImplementedException();
+            var logentries = new List<LogentriesModel>();
+            var connection = new MySqlConnection(ConnectionString);
+
+            try
+            {
+                connection.Open();
+                using (var cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = $"SELECT * FROM {this.TableName}";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            logentries.Add(new LogentriesModel(
+                                reader.GetInt32("Id"),
+                                reader.GetString("Pod"),
+                                reader.GetValue(reader.GetOrdinal("Location")) as string,
+                                reader.GetString("Hostname"),
+                                reader.GetInt32("Severity"),
+                                reader.GetString("Timestamp"),
+                                reader.GetString("Message")
+                                ));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+            }
+            return logentries;
         }
     }
 }
