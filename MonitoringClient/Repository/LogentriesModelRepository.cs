@@ -95,13 +95,32 @@ namespace MonitoringClient.Repository
             }
         }
 
-        public override LogentriesModel GetSingle<P>(P pkValue)
+        public override LogentriesModel GetSingle<P>(P pkValue) // TODO
         {
             throw new NotImplementedException();
         }
         public override void Add(LogentriesModel entity)
         {
-            throw new NotImplementedException();
+            var connection = new MySqlConnection(ConnectionString);
+            try
+            {
+                connection.Open();
+                using (var cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = $"INSERT INTO {this.TableName} (Pod, Location, Hostname, Severity, Message) VALUES (@id, @pod, @location, @hostname, @severity, @message)";
+                    cmd.Parameters.AddWithValue("@pod", entity.Pod);
+                    cmd.Parameters.AddWithValue("@location", entity.Location);
+                    cmd.Parameters.AddWithValue("@hostname", entity.Hostname);
+                    cmd.Parameters.AddWithValue("@severity", entity.Severity);
+                    cmd.Parameters.AddWithValue("@message", entity.Message);
+                    cmd.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+            }
         }
         public override void Delete(LogentriesModel entity)
         {
@@ -111,7 +130,7 @@ namespace MonitoringClient.Repository
         {
             MessageBox.Show("Update steht nicht zur Verfügung");
         }
-        public override List<LogentriesModel> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
+        public override List<LogentriesModel> GetAll(string whereCondition, Dictionary<string, object> parameterValues) // TODO
         {
             var logentries = new List<LogentriesModel>();
             var connection = new MySqlConnection(ConnectionString);
