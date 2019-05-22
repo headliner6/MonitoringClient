@@ -130,39 +130,7 @@ namespace MonitoringClient.Repository
         {
             MessageBox.Show("Update steht nicht zur Verfügung");
         }
-        public override List<LogentriesModel> GetAll(string whereCondition, Dictionary<string, object> parameterValues) // TODO
-        {
-            var logentries = new List<LogentriesModel>();
-            var connection = new MySqlConnection(ConnectionString);
-            try
-            {
-                connection.Open();
-                using (var cmd = connection.CreateCommand())
-                {
-                    cmd.CommandText = $"SELECT * FROM {this.TableName} WHERE {whereCondition}";
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            logentries.Add(new LogentriesModel(
-                                reader.GetInt32("Id"),
-                                reader.GetString("Pod"),
-                                reader.GetValue(reader.GetOrdinal("Location")) as string,
-                                reader.GetString("Hostname"),
-                                reader.GetInt32("Severity"),
-                                reader.GetString("Timestamp"),
-                                reader.GetString("Message")
-                                ));
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-            }
-            return logentries;
-        }
+
         public override List<LogentriesModel> GetAll()
         {
             var logentries = new List<LogentriesModel>();
@@ -196,6 +164,11 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
             return logentries;
+        }
+
+        public override List<LogentriesModel> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
+        {
+            throw new NotImplementedException();
         }
     }
 }
