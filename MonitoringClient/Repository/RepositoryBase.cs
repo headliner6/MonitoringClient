@@ -19,7 +19,7 @@ namespace MonitoringClient.Repository
             this.ConnectionString = "Server = localhost; Database = ; Uid = root; Pwd = ;";
         }
 
-        public long Count(string whereCondition, Dictionary<string, object> parameterValues)
+        public long Count(string whereCondition, Dictionary<string, object> parameterValues) // TODO
         {
             throw new NotImplementedException();
         }
