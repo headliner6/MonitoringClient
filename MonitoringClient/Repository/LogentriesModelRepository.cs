@@ -1,6 +1,7 @@
 ﻿using MonitoringClient.Model;
 using MySql.Data.MySqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -12,6 +13,7 @@ namespace MonitoringClient.Repository
     {
         public override string TableName { get; }
         public override ObservableCollection<LogentriesModel> Items { get; set; }
+        private LogentriesModel _item;
         public LogentriesModelRepository()
         {
             Items = new ObservableCollection<LogentriesModel>();
@@ -95,9 +97,39 @@ namespace MonitoringClient.Repository
             }
         }
 
-        public override LogentriesModel GetSingle<P>(P pkValue) // TODO
+        public override LogentriesModel GetSingle<P>(P pkValue)
         {
-            throw new NotImplementedException();
+            var connection = new MySqlConnection(ConnectionString);
+            try
+            {
+                connection.Open();
+                using (var cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = $"SELECT * FROM {this.TableName} WHERE id = @primaryKey";
+                    cmd.Parameters.AddWithValue("@primaryKey", pkValue);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            _item = (new LogentriesModel(
+                                reader.GetInt32("Id"),
+                                reader.GetString("Pod"),
+                                reader.GetValue(reader.GetOrdinal("Location")) as string,
+                                reader.GetString("Hostname"),
+                                reader.GetInt32("Severity"),
+                                reader.GetString("Timestamp"),
+                                reader.GetString("Message")
+                                ));
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+            }
+            return _item;
         }
         public override void Add(LogentriesModel entity)
         {
@@ -158,6 +190,7 @@ namespace MonitoringClient.Repository
                         }
                     }
                 }
+                connection.Close();
             }
             catch (Exception ex)
             {
@@ -168,7 +201,49 @@ namespace MonitoringClient.Repository
 
         public override List<LogentriesModel> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
         {
-            throw new NotImplementedException();
+            var logentries = new List<LogentriesModel>();
+            var connection = new MySqlConnection(ConnectionString);
+            if (string.IsNullOrEmpty(whereCondition))
+            {
+                MessageBox.Show("WhereCondition darf nicht leer sein!");
+            }
+            else
+            {
+                try
+                {
+                    connection.Open();
+                    //var statement = $"SELECT * FROM {this.TableName} WHERE {whereCondition}";
+                    using (var cmd = connection.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT * FROM {this.TableName} WHERE {whereCondition}";
+                        foreach (KeyValuePair<string, object> entry in parameterValues)
+                        {
+                            cmd.Parameters.AddWithValue(entry.Key.ToString(), entry.Value);
+                        }
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                logentries.Add(new LogentriesModel(
+                                    reader.GetInt32("Id"),
+                                    reader.GetString("Pod"),
+                                    reader.GetValue(reader.GetOrdinal("Location")) as string,
+                                    reader.GetString("Hostname"),
+                                    reader.GetInt32("Severity"),
+                                    reader.GetString("Timestamp"),
+                                    reader.GetString("Message")
+                                ));
+                            }
+                        }
+                    }
+                    connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+                }
+            }
+            return logentries;
         }
     }
 }

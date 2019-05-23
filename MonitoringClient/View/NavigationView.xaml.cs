@@ -1,5 +1,4 @@
 ﻿using System.Windows.Controls;
-using MonitoringClient.ViewModel;
 
 namespace MonitoringClient.View
 {
@@ -8,7 +7,6 @@ namespace MonitoringClient.View
         public NavigationView()
         {
             InitializeComponent();
-            this.DataContext = new NavigationViewModel();
         }
     }
 }
