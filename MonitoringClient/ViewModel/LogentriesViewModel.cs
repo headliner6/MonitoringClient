@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MonitoringClient.ViewModel
@@ -60,8 +61,12 @@ namespace MonitoringClient.ViewModel
         public void CheckForDuplicates()
         {
             this.LoadLogentries();
-            var enumerableListeOfDuplicates = _duplicateChecker.FindDuplicates(Logentries);
-            Logentries = new ObservableCollection<LogentriesModel>(enumerableListeOfDuplicates.Cast<LogentriesModel>());
+            Logentries = new ObservableCollection<LogentriesModel>(_duplicateChecker.FindDuplicates(Logentries).Cast<LogentriesModel>());
+            if (Logentries.Count == 0)
+            {
+                MessageBox.Show("Keine Duplikate vorhanden!");
+                this.LoadLogentries();
+            }
         }
         protected void OnPropertyChanged(string name)
         {
