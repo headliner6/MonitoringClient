@@ -11,9 +11,9 @@ namespace MonitoringClient.Repository
 {
     public class LogentriesModelRepository : RepositoryBase<LogentriesModel>
     {
+        private LogentriesModel _item;
         public override string TableName { get; }
         public override ObservableCollection<LogentriesModel> Items { get; set; }
-        private LogentriesModel _item;
         public LogentriesModelRepository()
         {
             Items = new ObservableCollection<LogentriesModel>();

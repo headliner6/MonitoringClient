@@ -82,8 +82,11 @@ namespace MonitoringClient.ViewModel
 
         public void Test()
         {
-            //var dic = new Dictionary<string, object>();
-            //dic.Add("id", 2);
+            MessageBox.Show("" + _logentriesModelRepository.Count());
+            //var dic = new Dictionary<string, object>
+            //{
+            //    { "id", 2 }
+            //};
             //MessageBox.Show("" + _logentriesModelRepository.Count("Id = @Id", dic));
 
             //var a = _logentriesModelRepository.GetAll();
@@ -102,9 +105,8 @@ namespace MonitoringClient.ViewModel
             //}
 
             //_logentriesModelRepository.Add(lm);
-            var lm = _logentriesModelRepository.GetSingle<int>(1);
-            MessageBox.Show(lm.Hostname);
-
+            //var lm = _logentriesModelRepository.GetSingle<int>(1);
+            //MessageBox.Show(lm.Hostname);
         }
     }
 }
