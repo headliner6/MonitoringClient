@@ -20,11 +20,11 @@ namespace MonitoringClient.Repository
             this.ConnectionString = "Server = localhost; Database = ; Uid = root; Pwd = ;";
         }
 
-        public long Count(string whereCondition, Dictionary<string, object> parameterValues)
+        public long Count(string whereCondition, Dictionary<string, object> parameterValues) // Funktioniert, 24.05.2019
         {
-            var connection = new MySqlConnection(ConnectionString);
             try
             {
+                var connection = new MySqlConnection(ConnectionString);
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
@@ -44,11 +44,11 @@ namespace MonitoringClient.Repository
 
         }
 
-        public long Count()
+        public long Count() // Funktioniert, 24.05.2019
         {
-            var connection = new MySqlConnection(ConnectionString);
             try
             {
+                var connection = new MySqlConnection(ConnectionString);
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {

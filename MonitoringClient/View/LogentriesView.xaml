@@ -68,6 +68,14 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Width="140" Margin="95,15,258,16" />
+                <Button x:Name="button_Test"
+                        Command="{Binding Path=TestButtonCommand}"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Content="Test"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Width="140" Margin="251,15,106,16" />
             </Grid>
         </GroupBox>
         <GroupBox Header="Data" Grid.Row="1">

@@ -1,4 +1,5 @@
 ﻿using DuplicateCheckerLib;
+using System;
 
 namespace MonitoringClient.Model
 {
@@ -9,10 +10,10 @@ namespace MonitoringClient.Model
         public string Location { get; set; }
         public string Hostname { get; set; }
         public int Severity { get; set; }
-        public string Timestamp { get; set; }
+        public DateTime Timestamp { get; set; }
         public string Message { get; set; }
 
-        public LogentriesModel(int id, string pod, string location, string hostname, int severity, string timestamp, string message)
+        public LogentriesModel(int id, string pod, string location, string hostname, int severity, DateTime timestamp, string message)
         {
             this.Id = id;
             this.Pod = pod;

@@ -90,6 +90,7 @@
     <Compile Include="ViewModel\LogentriesViewModel.cs" />
     <Compile Include="ViewModel\LogMessageAddViewModel.cs" />
     <Compile Include="ViewModel\NavigationViewModel.cs" />
+    <Compile Include="ViewModel\TestButtonCommand.cs" />
     <Compile Include="View\LogentriesView.xaml.cs">
       <DependentUpon>LogentriesView.xaml</DependentUpon>
     </Compile>

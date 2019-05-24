@@ -22,9 +22,9 @@ namespace MonitoringClient.Repository
         public ObservableCollection<LogentriesModel> LoadLogentries()
         {
             this.Items.Clear();
-            var connection = new MySqlConnection(ConnectionString);
             try
             {
+                var connection = new MySqlConnection(ConnectionString);
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
@@ -39,7 +39,7 @@ namespace MonitoringClient.Repository
                                 reader.GetValue(reader.GetOrdinal("Location")) as string,
                                 reader.GetString("Hostname"),
                                 reader.GetInt32("Severity"),
-                                reader.GetString("Timestamp"),
+                                reader.GetDateTime("Timestamp"),
                                 reader.GetString("Message")
                                 ));
                         }
@@ -55,9 +55,9 @@ namespace MonitoringClient.Repository
         }
         public void ConfirmLogentries(int id)
         {
-            var connection = new MySqlConnection(ConnectionString);
             try
             {
+                var connection = new MySqlConnection(ConnectionString);
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
@@ -75,9 +75,9 @@ namespace MonitoringClient.Repository
         }
         public void AddMessage(string pod, string hostname, string severity, string message)
         {
-            var connection = new MySqlConnection(ConnectionString);
             try
             {
+                var connection = new MySqlConnection(ConnectionString);
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
@@ -99,9 +99,9 @@ namespace MonitoringClient.Repository
 
         public override LogentriesModel GetSingle<P>(P pkValue)
         {
-            var connection = new MySqlConnection(ConnectionString);
             try
             {
+                var connection = new MySqlConnection(ConnectionString);
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
@@ -117,7 +117,7 @@ namespace MonitoringClient.Repository
                                 reader.GetValue(reader.GetOrdinal("Location")) as string,
                                 reader.GetString("Hostname"),
                                 reader.GetInt32("Severity"),
-                                reader.GetString("Timestamp"),
+                                reader.GetDateTime("Timestamp"),
                                 reader.GetString("Message")
                                 ));
                         }
@@ -130,20 +130,21 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
             return _item;
-        }
+        } // Funktioniert, 24.05.2019
         public override void Add(LogentriesModel entity)
         {
-            var connection = new MySqlConnection(ConnectionString);
             try
             {
+                var connection = new MySqlConnection(ConnectionString);
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = $"INSERT INTO {this.TableName} (Pod, Location, Hostname, Severity, Message) VALUES (@id, @pod, @location, @hostname, @severity, @message)";
+                    cmd.CommandText = $"INSERT INTO {this.TableName} (Pod, Location, Hostname, Severity, Timestamp, Message) VALUES (@pod, @location, @hostname, @severity, @timestamp, @message)";
                     cmd.Parameters.AddWithValue("@pod", entity.Pod);
                     cmd.Parameters.AddWithValue("@location", entity.Location);
                     cmd.Parameters.AddWithValue("@hostname", entity.Hostname);
                     cmd.Parameters.AddWithValue("@severity", entity.Severity);
+                    cmd.Parameters.AddWithValue("@timestamp", entity.Timestamp);
                     cmd.Parameters.AddWithValue("@message", entity.Message);
                     cmd.ExecuteNonQuery();
                 }
@@ -153,23 +154,22 @@ namespace MonitoringClient.Repository
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
-        }
+        } // FUnktioniert, 24.05.2019
         public override void Delete(LogentriesModel entity)
         {
-            MessageBox.Show("Delete steht nicht zur Verfügung");
-        }
+            MessageBox.Show("Delete steht nicht zur Verfügung!");
+        } // Funktioniert, 24.05.2019
         public override void Update(LogentriesModel entity)
         {
-            MessageBox.Show("Update steht nicht zur Verfügung");
-        }
+            MessageBox.Show("Update steht nicht zur Verfügung!");
+        } // Funktioniert, 24.05.2019
 
         public override List<LogentriesModel> GetAll()
         {
             var logentries = new List<LogentriesModel>();
-            var connection = new MySqlConnection(ConnectionString);
-
             try
             {
+                var connection = new MySqlConnection(ConnectionString);
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
@@ -184,7 +184,7 @@ namespace MonitoringClient.Repository
                                 reader.GetValue(reader.GetOrdinal("Location")) as string,
                                 reader.GetString("Hostname"),
                                 reader.GetInt32("Severity"),
-                                reader.GetString("Timestamp"),
+                                reader.GetDateTime("Timestamp"),
                                 reader.GetString("Message")
                                 ));
                         }
@@ -197,12 +197,11 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
             return logentries;
-        }
+        } // Funktioniert, 24.05.2019
 
         public override List<LogentriesModel> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
         {
             var logentries = new List<LogentriesModel>();
-            var connection = new MySqlConnection(ConnectionString);
             if (string.IsNullOrEmpty(whereCondition))
             {
                 MessageBox.Show("WhereCondition darf nicht leer sein!");
@@ -211,8 +210,8 @@ namespace MonitoringClient.Repository
             {
                 try
                 {
+                    var connection = new MySqlConnection(ConnectionString);
                     connection.Open();
-                    //var statement = $"SELECT * FROM {this.TableName} WHERE {whereCondition}";
                     using (var cmd = connection.CreateCommand())
                     {
                         cmd.CommandText = $"SELECT * FROM {this.TableName} WHERE {whereCondition}";
@@ -230,7 +229,7 @@ namespace MonitoringClient.Repository
                                     reader.GetValue(reader.GetOrdinal("Location")) as string,
                                     reader.GetString("Hostname"),
                                     reader.GetInt32("Severity"),
-                                    reader.GetString("Timestamp"),
+                                    reader.GetDateTime("Timestamp"),
                                     reader.GetString("Message")
                                 ));
                             }
@@ -244,6 +243,6 @@ namespace MonitoringClient.Repository
                 }
             }
             return logentries;
-        }
+        } // Funktioniert, 24.05.2019
     }
 }

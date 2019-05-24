@@ -2,6 +2,7 @@
 using MonitoringClient.Model;
 using MonitoringClient.Repository;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
@@ -34,6 +35,7 @@ namespace MonitoringClient.ViewModel
         public LoadButtonCommand LoadButtonCommand { get; set; }
         public ConfirmButtonCommand ConfirmButtonCommand { get; set; }
         public FindDuplicatesButtonCommand FindDuplicatesButtonCommand { get; set; }
+        public TestButtonCommand TestButtonCommand { get; set; }
 
         public LogentriesViewModel(Action<object> navigate)
         {
@@ -48,6 +50,7 @@ namespace MonitoringClient.ViewModel
             Logentries = new ObservableCollection<LogentriesModel>();
             _duplicateChecker = new DuplicateChecker();
             FindDuplicatesButtonCommand = new FindDuplicatesButtonCommand(this);
+            TestButtonCommand = new TestButtonCommand(this);
         }
         public void LoadLogentries()
         {
@@ -75,6 +78,33 @@ namespace MonitoringClient.ViewModel
         private void OnNavigate(object obj)
         {
             navigate.Invoke("LogMessageAddView");
+        }
+
+        public void Test()
+        {
+            //var dic = new Dictionary<string, object>();
+            //dic.Add("id", 2);
+            //MessageBox.Show("" + _logentriesModelRepository.Count("Id = @Id", dic));
+
+            //var a = _logentriesModelRepository.GetAll();
+            //foreach (LogentriesModel lm in a)
+            //{
+            //    MessageBox.Show(lm.Hostname)
+            //}
+            //LogentriesModel lm = new LogentriesModel(66, "podtest", "locationtest", "hostnametest", 666, DateTime.Now, "messagetest");
+            //_logentriesModelRepository.Update(lm);
+            //_logentriesModelRepository.Delete(lm);
+
+            //var b = _logentriesModelRepository.GetAll("Id > @Id", dic);
+            //foreach (LogentriesModel lm in b)
+            //{
+            //    MessageBox.Show(lm.Hostname);
+            //}
+
+            //_logentriesModelRepository.Add(lm);
+            var lm = _logentriesModelRepository.GetSingle<int>(1);
+            MessageBox.Show(lm.Hostname);
+
         }
     }
 }
