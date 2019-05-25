@@ -1,18 +1,21 @@
-﻿using System;
+﻿using MonitoringClient.Model;
+using MonitoringClient.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MonitoringClient.ViewModel
+namespace MonitoringClient.Command
 {
-    public class LoadButtonCommand : ICommand
+    public class TestButtonCommand : ICommand
     {
+
         private LogentriesViewModel _logentriesViewModel;
         public event EventHandler CanExecuteChanged;
-                
-        public LoadButtonCommand(LogentriesViewModel lvm)
+
+        public TestButtonCommand(LogentriesViewModel lvm)
         {
             this._logentriesViewModel = lvm;
         }
@@ -22,7 +25,7 @@ namespace MonitoringClient.ViewModel
         }
         public void Execute(object parameter)
         {
-            _logentriesViewModel.LoadLogentries();
+            _logentriesViewModel.Test();
         }
     }
 }

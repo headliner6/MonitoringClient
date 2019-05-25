@@ -1,4 +1,5 @@
-﻿using MonitoringClient.Repository;
+﻿using MonitoringClient.Command;
+using MonitoringClient.Repository;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;

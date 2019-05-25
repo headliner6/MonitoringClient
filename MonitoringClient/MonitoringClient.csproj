@@ -83,14 +83,14 @@
     <Compile Include="Repository\LocationModelRepository.cs" />
     <Compile Include="Repository\LogentriesModelRepository.cs" />
     <Compile Include="Repository\RepositoryBase.cs" />
-    <Compile Include="ViewModel\BaseCommand.cs" />
-    <Compile Include="ViewModel\ConfirmButtonCommand.cs" />
-    <Compile Include="ViewModel\FindDuplicatesButtonCommand.cs" />
-    <Compile Include="ViewModel\LoadButtonCommand.cs" />
+    <Compile Include="Command\BaseCommand.cs" />
+    <Compile Include="Command\ConfirmButtonCommand.cs" />
+    <Compile Include="Command\FindDuplicatesButtonCommand.cs" />
+    <Compile Include="Command\LoadButtonCommand.cs" />
     <Compile Include="ViewModel\LogentriesViewModel.cs" />
     <Compile Include="ViewModel\LogMessageAddViewModel.cs" />
     <Compile Include="ViewModel\NavigationViewModel.cs" />
-    <Compile Include="ViewModel\TestButtonCommand.cs" />
+    <Compile Include="Command\TestButtonCommand.cs" />
     <Compile Include="View\LogentriesView.xaml.cs">
       <DependentUpon>LogentriesView.xaml</DependentUpon>
     </Compile>

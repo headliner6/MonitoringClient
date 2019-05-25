@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MonitoringClient.ViewModel
+namespace MonitoringClient.Command
 {
     public class BaseCommand : ICommand
     {

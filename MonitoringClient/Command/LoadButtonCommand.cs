@@ -1,18 +1,19 @@
-﻿using System;
+﻿using MonitoringClient.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MonitoringClient.ViewModel
+namespace MonitoringClient.Command
 {
-    public class FindDuplicatesButtonCommand : ICommand
+    public class LoadButtonCommand : ICommand
     {
         private LogentriesViewModel _logentriesViewModel;
         public event EventHandler CanExecuteChanged;
                 
-        public FindDuplicatesButtonCommand(LogentriesViewModel lvm)
+        public LoadButtonCommand(LogentriesViewModel lvm)
         {
             this._logentriesViewModel = lvm;
         }
@@ -22,7 +23,7 @@ namespace MonitoringClient.ViewModel
         }
         public void Execute(object parameter)
         {
-            _logentriesViewModel.CheckForDuplicates();
+            _logentriesViewModel.LoadLogentries();
         }
     }
 }

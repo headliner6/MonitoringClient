@@ -1,4 +1,5 @@
 ﻿using DuplicateCheckerLib;
+using MonitoringClient.Command;
 using MonitoringClient.Model;
 using MonitoringClient.Repository;
 using System;
@@ -13,7 +14,7 @@ namespace MonitoringClient.ViewModel
 {
     public class LogentriesViewModel : INotifyPropertyChanged
     {
-        private LocationModelRepository _locationModelRepository;
+        private readonly LocationModelRepository _locationModelRepository;
         private readonly Action<object> navigate;
         private DuplicateChecker _duplicateChecker;
         private LogentriesModelRepository _logentriesModelRepository;

@@ -1,9 +1,10 @@
 ﻿using MonitoringClient.Model;
+using MonitoringClient.ViewModel;
 using System;
 using System.Linq;
 using System.Windows.Input;
 
-namespace MonitoringClient.ViewModel
+namespace MonitoringClient.Command
 {
     public class ConfirmButtonCommand : ICommand
     {
