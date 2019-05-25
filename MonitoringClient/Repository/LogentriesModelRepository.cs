@@ -14,11 +14,13 @@ namespace MonitoringClient.Repository
         private LogentriesModel _item;
         public override string TableName { get; }
         public override ObservableCollection<LogentriesModel> Items { get; set; }
+
         public LogentriesModelRepository()
         {
             Items = new ObservableCollection<LogentriesModel>();
             TableName = "v_logentries";
         }
+
         public ObservableCollection<LogentriesModel> LoadLogentries()
         {
             this.Items.Clear();
@@ -53,6 +55,7 @@ namespace MonitoringClient.Repository
             }
             return Items;
         }
+
         public void ConfirmLogentries(int id)
         {
             try
@@ -73,6 +76,7 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
         }
+
         public void AddMessage(string pod, string hostname, string severity, string message)
         {
             try
@@ -131,6 +135,7 @@ namespace MonitoringClient.Repository
             }
             return _item;
         } // Funktioniert, 24.05.2019
+
         public override void Add(LogentriesModel entity)
         {
             try
@@ -155,10 +160,12 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
         } // FUnktioniert, 24.05.2019
+
         public override void Delete(LogentriesModel entity)
         {
             MessageBox.Show("Delete steht nicht zur Verfügung!");
         } // Funktioniert, 24.05.2019
+
         public override void Update(LogentriesModel entity)
         {
             MessageBox.Show("Update steht nicht zur Verfügung!");
