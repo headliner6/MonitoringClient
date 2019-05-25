@@ -198,5 +198,10 @@ namespace MonitoringClient.Repository
             }
             return locations;
         }
+
+        public override IQueryable<LocationModel> Query(string whereCondition, Dictionary<string, object> parameterValues)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
