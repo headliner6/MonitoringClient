@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MonitoringClient.Repository
@@ -63,8 +61,8 @@ namespace MonitoringClient.Repository
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = $"INSERT INTO {this.TableName} (adress_fk, designation, building, room) VALUES (@adress_fk, @designation, @building, @room)";
-                    cmd.Parameters.AddWithValue("@adress_fk", entity.AdressNumber);
+                    cmd.CommandText = $"INSERT INTO {this.TableName} (address_fk, designation, building, room) VALUES (@address_fk, @designation, @building, @room)";
+                    cmd.Parameters.AddWithValue("@address_fk", entity.Addressnumber);
                     cmd.Parameters.AddWithValue("@designation", entity.Designation);
                     cmd.Parameters.AddWithValue("@building", entity.Building);
                     cmd.Parameters.AddWithValue("@room", entity.Room);
@@ -106,9 +104,9 @@ namespace MonitoringClient.Repository
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = $"UPDATE {this.TableName} SET adress_fk = @adress_fk, designation = @designation, building = @building, room = @room  WHERE location_id = @location_id";
+                    cmd.CommandText = $"UPDATE {this.TableName} SET address_fk = @address_fk, designation = @designation, building = @building, room = @room  WHERE location_id = @location_id";
                     cmd.Parameters.AddWithValue("@location_id", entity.Id);
-                    cmd.Parameters.AddWithValue("@adress_fk", entity.AdressNumber);
+                    cmd.Parameters.AddWithValue("@address_fk", entity.Addressnumber);
                     cmd.Parameters.AddWithValue("@designation", entity.Designation);
                     cmd.Parameters.AddWithValue("@building", entity.Building);
                     cmd.Parameters.AddWithValue("@room", entity.Room);

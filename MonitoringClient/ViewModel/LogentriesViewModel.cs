@@ -2,7 +2,6 @@
 using MonitoringClient.Model;
 using MonitoringClient.Repository;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +13,7 @@ namespace MonitoringClient.ViewModel
 {
     public class LogentriesViewModel : INotifyPropertyChanged
     {
+        private LocationModelRepository _locationModelRepository;
         private readonly Action<object> navigate;
         private DuplicateChecker _duplicateChecker;
         private LogentriesModelRepository _logentriesModelRepository;
@@ -82,7 +82,16 @@ namespace MonitoringClient.ViewModel
 
         public void Test()
         {
-            MessageBox.Show("" + _logentriesModelRepository.Count());
+
+            //// Test LocationRepo
+            //_locationModelRepository = new LocationModelRepository();
+            //_locationModelRepository.ConnectionString = ConnectionString;
+            //var e = new LocationModel(2, 3, "Test", 6, 6);
+            //_locationModelRepository.Update(e);
+
+            ////Test LogentriesRepo
+            //_locationModelRepository = new LocationModelRepository();
+            //MessageBox.Show("" + _locationModelRepository.Count());
             //var dic = new Dictionary<string, object>
             //{
             //    { "id", 2 }
