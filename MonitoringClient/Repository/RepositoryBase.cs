@@ -62,11 +62,22 @@ namespace MonitoringClient.Repository
                 return 0;
             }
         }
+
         public abstract M GetSingle<P>(P pkValue);
+
         public abstract void Add(M entity);
+
         public abstract void Delete(M entity);
+
         public abstract void Update(M entity);
+
         public abstract List<M> GetAll(string whereCondition, Dictionary<string, object> parameterValues);
+
         public abstract List<M> GetAll();
+
+        public abstract IQueryable<M> Query(string whereCondition, Dictionary<string, object> parameterValues)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

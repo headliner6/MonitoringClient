@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Linq;
 using System.Windows;
 
 namespace MonitoringClient.Repository
@@ -251,5 +252,10 @@ namespace MonitoringClient.Repository
             }
             return logentries;
         } // Funktioniert, 24.05.2019
+
+        public override IQueryable<LogentriesModel> Query(string whereCondition, Dictionary<string, object> parameterValues)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
