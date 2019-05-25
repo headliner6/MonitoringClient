@@ -75,9 +75,6 @@ namespace MonitoringClient.Repository
 
         public abstract List<M> GetAll();
 
-        public abstract IQueryable<M> Query(string whereCondition, Dictionary<string, object> parameterValues)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract IQueryable<M> Query(string whereCondition, Dictionary<string, object> parameterValues);
     }
 }
