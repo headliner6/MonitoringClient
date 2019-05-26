@@ -278,5 +278,3 @@ D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\MonitoringClient.exe.config
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\App.g.cs
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\MonitoringClient.exe
-C:\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\View\LocationsView.g.cs
-C:\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\View\LocationsView.baml

@@ -17,9 +17,6 @@
         <DataTemplate DataType="{x:Type vm:LogMessageAddViewModel}">
             <view:LogMessageAddView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:LocationsViewModel}">
-            <view:LocationsView/>
-        </DataTemplate>
     </UserControl.Resources>
     <ContentControl x:Name="Pages" Content="{Binding SelectedViewModel}"/>
 </UserControl>

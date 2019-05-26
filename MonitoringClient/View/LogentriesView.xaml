@@ -68,15 +68,6 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Width="140" Margin="95,15,258,16" />
-                <Button x:Name="button_Locations"
-                        Visibility="Visible"
-                        Command="{Binding Path=NvaigateLocationsView}"
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Content="Locations"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Width="58" Margin="478,15,-20,0" Grid.ColumnSpan="2" Height="36" />
             </Grid>
         </GroupBox>
         <GroupBox Header="Data" Grid.Row="1">

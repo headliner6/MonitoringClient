@@ -110,7 +110,11 @@ namespace MonitoringClient.Repository
                     cmd.Parameters.AddWithValue("@designation", entity.Designation);
                     cmd.Parameters.AddWithValue("@building", entity.Building);
                     cmd.Parameters.AddWithValue("@room", entity.Room);
-                    cmd.ExecuteNonQuery();
+                    var finish = cmd.ExecuteNonQuery();
+                    if (finish == 1)
+                    {
+                        MessageBox.Show("Update erfolgreich!");
+                    }
                 }
                 connection.Close();
             }

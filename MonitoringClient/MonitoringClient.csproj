@@ -78,12 +78,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Command\AddButtonCommand.cs" />
-    <Compile Include="Command\DeleteButtonCommand.cs" />
-    <Compile Include="Command\GetAllButtonCommand.cs" />
-    <Compile Include="Command\GetAllCorrectButtonCommand.cs" />
-    <Compile Include="Command\GetSingleButtonCommand.cs" />
-    <Compile Include="Command\UpdateButtonCommand.cs" />
     <Compile Include="Model\LocationsModel.cs" />
     <Compile Include="Repository\IRepositoryBase.cs" />
     <Compile Include="Repository\LocationModelRepository.cs" />
@@ -94,13 +88,9 @@
     <Compile Include="Command\FindDuplicatesButtonCommand.cs" />
     <Compile Include="Command\LoadButtonCommand.cs" />
     <Compile Include="ViewModel\IViewModel.cs" />
-    <Compile Include="ViewModel\LocationsViewModel.cs" />
     <Compile Include="ViewModel\LogentriesViewModel.cs" />
     <Compile Include="ViewModel\LogMessageAddViewModel.cs" />
     <Compile Include="ViewModel\NavigationViewModel.cs" />
-    <Compile Include="View\LocationsView.xaml.cs">
-      <DependentUpon>LocationsView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\LogentriesView.xaml.cs">
       <DependentUpon>LogentriesView.xaml</DependentUpon>
     </Compile>
@@ -122,10 +112,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\LocationsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\LogentriesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
