@@ -24,15 +24,15 @@ namespace MonitoringClient.ViewModel
         }
         public NavigationViewModel()
         {
-            SelectedViewModel = new LogentriesViewModel(OpenLogMessageAddView);
+            SelectedViewModel = new LogentriesViewModel(OpenLogMessageAddView, OpenLocationsView);
         }
         private void OpenLogMessageAddView(object obj)
         {
             if (obj.ToString() == "LogMessageAddView")
             {
-                LogentriesViewModel lvm = (LogentriesViewModel)selectedViewModel;
+                var lvm = (IViewModel)selectedViewModel;
                 SelectedViewModel = new LogMessageAddViewModel(OpenLogentriesView);
-                LogMessageAddViewModel lmavm = (LogMessageAddViewModel)selectedViewModel;
+                var lmavm = (IViewModel) selectedViewModel;
                 lmavm.ConnectionString = lvm.ConnectionString;
             }
         }
@@ -40,11 +40,21 @@ namespace MonitoringClient.ViewModel
         {
             if (obj.ToString() == "LogentriesView")
             {
-                LogMessageAddViewModel lmavm = (LogMessageAddViewModel)selectedViewModel;
-                SelectedViewModel = new LogentriesViewModel(OpenLogMessageAddView);
+                var lmavm = (IViewModel)selectedViewModel;
+                SelectedViewModel = new LogentriesViewModel(OpenLogMessageAddView, OpenLocationsView);
                 LogentriesViewModel lvm = (LogentriesViewModel)selectedViewModel;
                 lvm.ConnectionString = lmavm.ConnectionString;
                 lvm.LoadLogentries();
+            }
+        }
+        private void OpenLocationsView(object obj)
+        {
+            if (obj.ToString() == "LocationsView")
+            {
+                var lvm = (IViewModel)selectedViewModel;
+                SelectedViewModel = new LocationsViewModel(OpenLogentriesView);
+                var lcvm = (IViewModel)selectedViewModel;
+                lcvm.ConnectionString = lvm.ConnectionString;
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;

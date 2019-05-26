@@ -1,22 +1,15 @@
 ﻿using MonitoringClient.Command;
 using MonitoringClient.Repository;
-using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using static MonitoringClient.ViewModel.NavigationViewModel;
 
 namespace MonitoringClient.ViewModel
 {
-    public class LogMessageAddViewModel
+    public class LogMessageAddViewModel : IViewModel
     {
-        private readonly Action<object> navigate;
+        private readonly Action<object> navigateToLogentriesView;
         private bool _validationOk;
         private LogentriesModelRepository _logentriesModelRepository;
         public ICommand NavigateAndSave { get; set; }
@@ -27,11 +20,11 @@ namespace MonitoringClient.ViewModel
         public string Message { get; set; }
         public string ConnectionString { get; set; }
 
-        public LogMessageAddViewModel(Action<object> navigate)
+        public LogMessageAddViewModel(Action<object> navigateToLogentriesView)
         {
             NavigateBack = new BaseCommand(OnNavigateBack);
             NavigateAndSave = new BaseCommand(OnNavigateAndSave);
-            this.navigate = navigate;
+            this.navigateToLogentriesView = navigateToLogentriesView;
             _logentriesModelRepository = new LogentriesModelRepository();
         }
         private void ValidationOfProperties() // TODO: Exception werfen anstelle von nur "MessageBox". Dann muss _validationOk nicht mehr verwendet werden.
@@ -69,12 +62,12 @@ namespace MonitoringClient.ViewModel
             {
                 _logentriesModelRepository.ConnectionString = ConnectionString;
                 _logentriesModelRepository.AddMessage(POD, Hostname, Severity, Message);
-                navigate.Invoke("LogentriesView");
+                navigateToLogentriesView.Invoke("LogentriesView");
             }
         }
         private void OnNavigateBack(object obj)
         {
-            navigate.Invoke("LogentriesView");
+            navigateToLogentriesView.Invoke("LogentriesView");
         }
     }
 }

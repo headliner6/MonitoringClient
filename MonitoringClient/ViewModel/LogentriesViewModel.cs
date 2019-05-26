@@ -12,17 +12,18 @@ using System.Windows.Input;
 
 namespace MonitoringClient.ViewModel
 {
-    public class LogentriesViewModel : INotifyPropertyChanged
+    public class LogentriesViewModel : INotifyPropertyChanged, IViewModel
     {
-        private readonly LocationModelRepository _locationModelRepository;
-        private readonly Action<object> navigate;
+        private readonly Action<object> navigateToLogMessageAddView;
+        private readonly Action<object> navigateToLocationsView;
         private DuplicateChecker _duplicateChecker;
         private LogentriesModelRepository _logentriesModelRepository;
         private ObservableCollection<LogentriesModel> _logentries;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ICommand Navigate { get; set; }
+        public ICommand NavigateLogMessageAddView { get; set; }
+        public ICommand NvaigateLocationsView { get; set; }
         public ObservableCollection<LogentriesModel> Logentries
         {
             get { return _logentries; }
@@ -36,12 +37,13 @@ namespace MonitoringClient.ViewModel
         public LoadButtonCommand LoadButtonCommand { get; set; }
         public ConfirmButtonCommand ConfirmButtonCommand { get; set; }
         public FindDuplicatesButtonCommand FindDuplicatesButtonCommand { get; set; }
-        public TestButtonCommand TestButtonCommand { get; set; }
 
-        public LogentriesViewModel(Action<object> navigate)
+        public LogentriesViewModel(Action<object> navigateToLogMessageAddView, Action<object> navigateToLocationsView)
         {
-            Navigate = new BaseCommand(OnNavigate);
-            this.navigate = navigate;
+            NavigateLogMessageAddView = new BaseCommand(StartLogMessageAddView);
+            NvaigateLocationsView = new BaseCommand(StartLocationsView);
+            this.navigateToLogMessageAddView = navigateToLogMessageAddView;
+            this.navigateToLocationsView = navigateToLocationsView;
 
             _logentriesModelRepository = new LogentriesModelRepository();
 
@@ -51,7 +53,6 @@ namespace MonitoringClient.ViewModel
             Logentries = new ObservableCollection<LogentriesModel>();
             _duplicateChecker = new DuplicateChecker();
             FindDuplicatesButtonCommand = new FindDuplicatesButtonCommand(this);
-            TestButtonCommand = new TestButtonCommand(this);
         }
         public void LoadLogentries()
         {
@@ -76,47 +77,13 @@ namespace MonitoringClient.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
-        private void OnNavigate(object obj)
+        private void StartLogMessageAddView(object obj)
         {
-            navigate.Invoke("LogMessageAddView");
+            navigateToLogMessageAddView.Invoke("LogMessageAddView");
         }
-
-        public void Test()
+        private void StartLocationsView(object obj)
         {
-
-            //// Test LocationRepo
-            //_locationModelRepository = new LocationModelRepository();
-            //_locationModelRepository.ConnectionString = ConnectionString;
-            //var e = new LocationModel(2, 3, "Test", 6, 6);
-            //_locationModelRepository.Update(e);
-
-            ////Test LogentriesRepo
-            //_locationModelRepository = new LocationModelRepository();
-            //MessageBox.Show("" + _locationModelRepository.Count());
-            //var dic = new Dictionary<string, object>
-            //{
-            //    { "id", 2 }
-            //};
-            //MessageBox.Show("" + _logentriesModelRepository.Count("Id = @Id", dic));
-
-            //var a = _logentriesModelRepository.GetAll();
-            //foreach (LogentriesModel lm in a)
-            //{
-            //    MessageBox.Show(lm.Hostname)
-            //}
-            //LogentriesModel lm = new LogentriesModel(66, "podtest", "locationtest", "hostnametest", 666, DateTime.Now, "messagetest");
-            //_logentriesModelRepository.Update(lm);
-            //_logentriesModelRepository.Delete(lm);
-
-            //var b = _logentriesModelRepository.GetAll("Id > @Id", dic);
-            //foreach (LogentriesModel lm in b)
-            //{
-            //    MessageBox.Show(lm.Hostname);
-            //}
-
-            //_logentriesModelRepository.Add(lm);
-            //var lm = _logentriesModelRepository.GetSingle<int>(1);
-            //MessageBox.Show(lm.Hostname);
+            navigateToLocationsView.Invoke("LocationsView");
         }
     }
 }

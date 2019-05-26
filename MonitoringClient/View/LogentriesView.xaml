@@ -36,7 +36,7 @@
                          Width="500"
                          Height="20"/>
                 <Button x:Name="button_load"
-                        Command="{Binding LoadButtonCommand}"
+                        Command="{Binding Path=LoadButtonCommand}"
                         Grid.Row="1"
                         Grid.Column="0"
                         Content="Load"
@@ -44,7 +44,7 @@
                         VerticalAlignment="Center"
                         Width="70"/>
                 <Button x:Name="button_confirm"
-                        Command="{Binding ConfirmButtonCommand}"
+                        Command="{Binding Path=ConfirmButtonCommand}"
                         CommandParameter="{Binding ElementName=logentrie_dataGrid, Path=SelectedItems}"
                         Grid.Row="1"
                         Grid.Column="0"
@@ -53,7 +53,7 @@
                         VerticalAlignment="Center"
                         Width="70" Margin="81,15,0,16" />
                 <Button x:Name="button_add"
-                        Command="{Binding Navigate}"
+                        Command="{Binding Path=NavigateLogMessageAddView}"
                         Grid.Row="1"
                         Grid.Column="1"
                         Content="Add"
@@ -68,14 +68,15 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Width="140" Margin="95,15,258,16" />
-                <Button x:Name="button_Test"
-                        Command="{Binding Path=TestButtonCommand}"
+                <Button x:Name="button_Locations"
+                        Visibility="Visible"
+                        Command="{Binding Path=NvaigateLocationsView}"
                         Grid.Row="1"
                         Grid.Column="1"
-                        Content="Test"
+                        Content="Locations"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Width="140" Margin="251,15,106,16" />
+                        Width="58" Margin="478,15,-20,0" Grid.ColumnSpan="2" Height="36" />
             </Grid>
         </GroupBox>
         <GroupBox Header="Data" Grid.Row="1">

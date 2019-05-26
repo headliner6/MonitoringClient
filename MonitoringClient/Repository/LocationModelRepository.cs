@@ -8,19 +8,19 @@ using System.Windows;
 
 namespace MonitoringClient.Repository
 {
-    class LocationModelRepository : RepositoryBase<LocationModel>
+    class LocationModelRepository : RepositoryBase<LocationsModel>
     {
-        private LocationModel _item;
+        private LocationsModel _item;
         public override string TableName { get; }
-        public override ObservableCollection<LocationModel> Items { get; set; }
+        public override ObservableCollection<LocationsModel> Items { get; set; }
 
         public LocationModelRepository()
         {
-            Items = new ObservableCollection<LocationModel>();
+            Items = new ObservableCollection<LocationsModel>();
             TableName = "Location";
         }
       
-        public override LocationModel GetSingle<P>(P pkValue)
+        public override LocationsModel GetSingle<P>(P pkValue)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace MonitoringClient.Repository
                     {
                         while (reader.Read())
                         {
-                            _item = (new LocationModel(
+                            _item = (new LocationsModel(
                                 reader.GetInt32("Id"),
                                 reader.GetInt32("Adressnumber"),
                                 reader.GetValue(reader.GetOrdinal("Designation")) as string,
@@ -53,7 +53,7 @@ namespace MonitoringClient.Repository
             return _item;
         }
 
-        public override void Add(LocationModel entity)
+        public override void Add(LocationsModel entity)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace MonitoringClient.Repository
             }
         }
 
-        public override void Delete(LocationModel entity)
+        public override void Delete(LocationsModel entity)
         {
             try
             {
@@ -96,7 +96,7 @@ namespace MonitoringClient.Repository
             }
         }
 
-        public override void Update(LocationModel entity)
+        public override void Update(LocationsModel entity)
         {
             try
             {
@@ -120,9 +120,9 @@ namespace MonitoringClient.Repository
             }
         }
 
-        public override List<LocationModel> GetAll()
+        public override List<LocationsModel> GetAll()
         {
-            var locations = new List<LocationModel>();
+            var locations = new List<LocationsModel>();
             try
             {
                 var connection = new MySqlConnection(ConnectionString);
@@ -134,12 +134,12 @@ namespace MonitoringClient.Repository
                     {
                         while (reader.Read())
                         {
-                            locations.Add(new LocationModel(
-                                reader.GetInt32("Id"),
-                                reader.GetInt32("Adressnumber"),
+                            locations.Add(new LocationsModel(
+                                reader.GetInt32("Location_id"),
+                                reader.GetInt32("Address_fk"),
                                 reader.GetValue(reader.GetOrdinal("Designation")) as string,
                                 reader.GetInt32("Building"),
-                                reader.GetInt32("Rooom")
+                                reader.GetInt32("Room")
                                 ));
                         }
                     }
@@ -153,9 +153,9 @@ namespace MonitoringClient.Repository
             return locations;
         }
 
-        public override List<LocationModel> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
+        public override List<LocationsModel> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
         {
-            var locations = new List<LocationModel>();
+            var locations = new List<LocationsModel>();
             if (string.IsNullOrEmpty(whereCondition))
             {
                 MessageBox.Show("WhereCondition darf nicht leer sein!");
@@ -177,7 +177,7 @@ namespace MonitoringClient.Repository
                         {
                             while (reader.Read())
                             {
-                                locations.Add(new LocationModel(
+                                locations.Add(new LocationsModel(
                                     reader.GetInt32("Id"),
                                     reader.GetInt32("Adressnumber"),
                                     reader.GetValue(reader.GetOrdinal("Designation")) as string,
@@ -197,7 +197,7 @@ namespace MonitoringClient.Repository
             return locations;
         }
 
-        public override IQueryable<LocationModel> Query(string whereCondition, Dictionary<string, object> parameterValues)
+        public override IQueryable<LocationsModel> Query(string whereCondition, Dictionary<string, object> parameterValues)
         {
             throw new NotImplementedException();
         }
