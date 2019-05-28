@@ -123,7 +123,7 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
         }
-
+        //TODO: Hierarchie "parent_location" berücksichtigen. Mit einer Tree-Struktur aus der DB herauslesen
         public override List<LocationsModel> GetAll()
         {
             var locations = new List<LocationsModel>();
@@ -157,6 +157,7 @@ namespace MonitoringClient.Repository
             return locations;
         }
 
+        //TODO: Hierarchie "parent_location" berücksichtigen. Mit einer Tree-Struktur aus der DB herauslesen
         public override List<LocationsModel> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
         {
             var locations = new List<LocationsModel>();
@@ -199,11 +200,6 @@ namespace MonitoringClient.Repository
                 }
             }
             return locations;
-        }
-
-        public override IQueryable<LocationsModel> Query(string whereCondition, Dictionary<string, object> parameterValues)
-        {
-            throw new NotImplementedException();
         }
     }
 }

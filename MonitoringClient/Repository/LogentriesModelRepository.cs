@@ -251,10 +251,5 @@ namespace MonitoringClient.Repository
             }
             return logentries;
         } // Funktioniert, 24.05.2019
-
-        public override IQueryable<LogentriesModel> Query(string whereCondition, Dictionary<string, object> parameterValues)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
