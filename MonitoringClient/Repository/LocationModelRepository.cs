@@ -28,18 +28,19 @@ namespace MonitoringClient.Repository
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = $"SELECT * FROM {this.TableName} WHERE id = @primaryKey";
+                    cmd.CommandText = $"SELECT * FROM {this.TableName} WHERE location_id = @primaryKey";
                     cmd.Parameters.AddWithValue("@primaryKey", pkValue);
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             _item = (new LocationsModel(
-                                reader.GetInt32("Id"),
-                                reader.GetInt32("Adressnumber"),
-                                reader.GetValue(reader.GetOrdinal("Designation")) as string,
-                                reader.GetInt32("Building"),
-                                reader.GetInt32("Rooom")
+                                reader.GetInt32("location_id"),
+                                reader.GetInt32("parent_location"),
+                                reader.GetInt32("address_fk"),
+                                reader.GetValue(reader.GetOrdinal("designation")) as string,
+                                reader.GetInt32("building"),
+                                reader.GetInt32("room")
                                 ));
                         }
                     }
@@ -61,7 +62,8 @@ namespace MonitoringClient.Repository
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = $"INSERT INTO {this.TableName} (address_fk, designation, building, room) VALUES (@address_fk, @designation, @building, @room)";
+                    cmd.CommandText = $"INSERT INTO {this.TableName} (parent_location, address_fk, designation, building, room) VALUES (@parent_location, @address_fk, @designation, @building, @room)";
+                    cmd.Parameters.AddWithValue("@parent_location", entity.ParentLocation);
                     cmd.Parameters.AddWithValue("@address_fk", entity.Addressnumber);
                     cmd.Parameters.AddWithValue("@designation", entity.Designation);
                     cmd.Parameters.AddWithValue("@building", entity.Building);
@@ -104,8 +106,9 @@ namespace MonitoringClient.Repository
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = $"UPDATE {this.TableName} SET address_fk = @address_fk, designation = @designation, building = @building, room = @room  WHERE location_id = @location_id";
+                    cmd.CommandText = $"UPDATE {this.TableName} SET parent_location = @parent_location, address_fk = @address_fk, designation = @designation, building = @building, room = @room  WHERE location_id = @location_id";
                     cmd.Parameters.AddWithValue("@location_id", entity.Id);
+                    cmd.Parameters.AddWithValue("@parent_location", entity.ParentLocation);
                     cmd.Parameters.AddWithValue("@address_fk", entity.Addressnumber);
                     cmd.Parameters.AddWithValue("@designation", entity.Designation);
                     cmd.Parameters.AddWithValue("@building", entity.Building);
@@ -139,11 +142,12 @@ namespace MonitoringClient.Repository
                         while (reader.Read())
                         {
                             locations.Add(new LocationsModel(
-                                reader.GetInt32("Location_id"),
-                                reader.GetInt32("Address_fk"),
-                                reader.GetValue(reader.GetOrdinal("Designation")) as string,
-                                reader.GetInt32("Building"),
-                                reader.GetInt32("Room")
+                                reader.GetInt32("location_id"),
+                                reader.GetInt32("parent_location"),
+                                reader.GetInt32("address_fk"),
+                                reader.GetValue(reader.GetOrdinal("designation")) as string,
+                                reader.GetInt32("building"),
+                                reader.GetInt32("room")
                                 ));
                         }
                     }
@@ -183,11 +187,12 @@ namespace MonitoringClient.Repository
                             while (reader.Read())
                             {
                                 locations.Add(new LocationsModel(
-                                    reader.GetInt32("Id"),
-                                    reader.GetInt32("Adressnumber"),
-                                    reader.GetValue(reader.GetOrdinal("Designation")) as string,
-                                    reader.GetInt32("Building"),
-                                    reader.GetInt32("Rooom")
+                                    reader.GetInt32("location_id"),
+                                    reader.GetInt32("parent_location"),
+                                    reader.GetInt32("address_fk"),
+                                    reader.GetValue(reader.GetOrdinal("designation")) as string,
+                                    reader.GetInt32("building"),
+                                    reader.GetInt32("room")
                                     ));
                             }
                         }
