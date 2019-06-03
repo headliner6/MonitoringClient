@@ -161,11 +161,13 @@ namespace MonitoringClient.Repository
             }
         } // FUnktioniert, 24.05.2019
 
+        //TODO: Überprüfen ob Delete mit View möglich ist
         public override void Delete(LogentriesModel entity)
         {
             MessageBox.Show("Delete steht nicht zur Verfügung!");
         } // Funktioniert, 24.05.2019
 
+        //TODO: Überprüfen ob Delete mit View möglich ist
         public override void Update(LogentriesModel entity)
         {
             MessageBox.Show("Update steht nicht zur Verfügung!");
