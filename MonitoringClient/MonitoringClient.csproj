@@ -78,7 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DataStructures\Node.cs" />
+    <Compile Include="DataStructures\LocationNode.cs" />
     <Compile Include="DataStructures\LocationTree.cs" />
     <Compile Include="Model\LocationsModel.cs" />
     <Compile Include="Repository\IRepositoryBase.cs" />
