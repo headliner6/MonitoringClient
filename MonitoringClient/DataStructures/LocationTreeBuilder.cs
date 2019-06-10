@@ -35,7 +35,7 @@ namespace MonitoringClient.DataStructures
                 }
             }
         }
-
+        //TODO: Test mit mehreren MainTreeRootNode in der DB
         private TreeNode<LocationModel> FindMainTreeRootNode(List<LocationModel> locations)
         {
             TreeNode<LocationModel> mainParentNode = null;
