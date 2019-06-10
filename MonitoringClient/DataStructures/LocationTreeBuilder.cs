@@ -11,7 +11,7 @@ namespace MonitoringClient.DataStructures
     {
         public List<TreeNode<LocationModel>> BuildTree(List<LocationModel> locations)
         {
-            var mainParentNode = FindTreeRootNode(locations);
+            var mainParentNode = FindMainTreeRootNode(locations);
             locations.Reverse();
             BuildTree(mainParentNode, locations);
             var tree = new List<TreeNode<LocationModel>>();
@@ -33,11 +33,10 @@ namespace MonitoringClient.DataStructures
                     foreach (var child in mainParentNode.ChildNodes)
                     BuildTree(child, locations);
                 }
-
             }
         }
 
-        private TreeNode<LocationModel> FindTreeRootNode(List<LocationModel> locations)
+        private TreeNode<LocationModel> FindMainTreeRootNode(List<LocationModel> locations)
         {
             TreeNode<LocationModel> mainParentNode = null;
             foreach (var location in locations.Reverse<LocationModel>())
