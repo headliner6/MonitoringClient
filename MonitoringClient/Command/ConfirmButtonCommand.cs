@@ -9,10 +9,10 @@ namespace MonitoringClient.Command
     public class ConfirmButtonCommand : ICommand
     {
 
-        private LogentriesViewModel _logentriesViewModel;
+        private LogEntryViewModel _logentriesViewModel;
         public event EventHandler CanExecuteChanged;
 
-        public ConfirmButtonCommand(LogentriesViewModel lvm)
+        public ConfirmButtonCommand(LogEntryViewModel lvm)
         {
             this._logentriesViewModel = lvm;
         }
@@ -25,7 +25,7 @@ namespace MonitoringClient.Command
             if (parameter != null)
             {
                 System.Collections.IList sellectedItems = (System.Collections.IList)parameter;
-                var sellectedItemscollection = sellectedItems.Cast<LogentriesModel>().ToList();
+                var sellectedItemscollection = sellectedItems.Cast<LogEntryModel>().ToList();
                 foreach (var lm in sellectedItemscollection)
                 {
                     _logentriesViewModel.ConfirmLogentries(lm.Id);

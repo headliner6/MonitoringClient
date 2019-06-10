@@ -11,7 +11,7 @@ namespace MonitoringClient.ViewModel
     {
         private readonly Action<object> navigateToLogentriesView;
         private bool _validationOk;
-        private LogentriesModelRepository _logentriesModelRepository;
+        private LogEntryModelRepository _logentriesModelRepository;
         public ICommand NavigateAndSave { get; set; }
         public ICommand NavigateBack { get; set; }
         public string POD { set; get; }
@@ -25,7 +25,7 @@ namespace MonitoringClient.ViewModel
             NavigateBack = new BaseCommand(OnNavigateBack);
             NavigateAndSave = new BaseCommand(OnNavigateAndSave);
             this.navigateToLogentriesView = navigateToLogentriesView;
-            _logentriesModelRepository = new LogentriesModelRepository();
+            _logentriesModelRepository = new LogEntryModelRepository();
         }
         private void ValidationOfProperties() // TODO: Exception werfen anstelle von nur "MessageBox". Dann muss _validationOk nicht mehr verwendet werden.
         {

@@ -10,10 +10,10 @@ namespace MonitoringClient.Command
 {
     public class LoadButtonCommand : ICommand
     {
-        private LogentriesViewModel _logentriesViewModel;
+        private LogEntryViewModel _logentriesViewModel;
         public event EventHandler CanExecuteChanged;
                 
-        public LoadButtonCommand(LogentriesViewModel lvm)
+        public LoadButtonCommand(LogEntryViewModel lvm)
         {
             this._logentriesViewModel = lvm;
         }

@@ -24,7 +24,7 @@ namespace MonitoringClient.ViewModel
         }
         public NavigationViewModel()
         {
-            SelectedViewModel = new LogentriesViewModel(OpenLogMessageAddView);
+            SelectedViewModel = new LogEntryViewModel(OpenLogMessageAddView);
         }
         private void OpenLogMessageAddView(object obj)
         {
@@ -41,8 +41,8 @@ namespace MonitoringClient.ViewModel
             if (obj.ToString() == "LogentriesView")
             {
                 var lmavm = (IViewModel) selectedViewModel;
-                SelectedViewModel = new LogentriesViewModel(OpenLogMessageAddView);
-                LogentriesViewModel lvm = (LogentriesViewModel) selectedViewModel;
+                SelectedViewModel = new LogEntryViewModel(OpenLogMessageAddView);
+                LogEntryViewModel lvm = (LogEntryViewModel) selectedViewModel;
                 lvm.ConnectionString = lmavm.ConnectionString;
                 lvm.LoadLogentries();
             }

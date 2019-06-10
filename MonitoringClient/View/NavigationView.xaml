@@ -11,8 +11,8 @@
         <vm:NavigationViewModel/>
     </UserControl.DataContext>
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type vm:LogentriesViewModel}">
-            <view:LogentriesView/>
+        <DataTemplate DataType="{x:Type vm:LogEntryViewModel}">
+            <view:LogEntryView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:LogMessageAddViewModel}">
             <view:LogMessageAddView/>

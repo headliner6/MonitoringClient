@@ -1,26 +1,27 @@
 ﻿using MonitoringClient.Model;
+using MonitoringClient.DataStructures;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows;
+using System.Linq;
 
 namespace MonitoringClient.Repository
 {
-    class LocationModelRepository : RepositoryBase<LocationsModel>
+    class LocationModelRepository : RepositoryBase<LocationModel>
     {
-        private LocationsModel _item;
+        private LocationModel _item;
         public override string TableName { get; }
-        public override ObservableCollection<LocationsModel> Items { get; set; }
+        public override ObservableCollection<LocationModel> Items { get; set; }
 
         public LocationModelRepository()
         {
-            Items = new ObservableCollection<LocationsModel>();
+            Items = new ObservableCollection<LocationModel>();
             TableName = "Location";
         }
       
-        public override LocationsModel GetSingle<P>(P pkValue)
+        public override LocationModel GetSingle<P>(P pkValue)
         {
             try
             {
@@ -34,7 +35,7 @@ namespace MonitoringClient.Repository
                     {
                         while (reader.Read())
                         {
-                            _item = (new LocationsModel(
+                            _item = (new LocationModel(
                                 reader.GetInt32("location_id"),
                                 reader.GetInt32("parent_location"),
                                 reader.GetInt32("address_fk"),
@@ -54,7 +55,7 @@ namespace MonitoringClient.Repository
             return _item;
         }
 
-        public override void Add(LocationsModel entity)
+        public override void Add(LocationModel entity)
         {
             try
             {
@@ -78,7 +79,7 @@ namespace MonitoringClient.Repository
             }
         }
 
-        public override void Delete(LocationsModel entity)
+        public override void Delete(LocationModel entity)
         {
             try
             {
@@ -98,7 +99,7 @@ namespace MonitoringClient.Repository
             }
         }
 
-        public override void Update(LocationsModel entity)
+        public override void Update(LocationModel entity)
         {
             try
             {
@@ -126,10 +127,9 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
         }
-        //TODO: Hierarchie "parent_location" berücksichtigen. Mit einer Tree-Struktur aus der DB herauslesen
-        public override List<LocationsModel> GetAll()
+        public override List<LocationModel> GetAll()
         {
-            var locations = new List<LocationsModel>();
+            var locations = new List<LocationModel>();
             try
             {
                 var connection = new MySqlConnection(ConnectionString);
@@ -141,7 +141,7 @@ namespace MonitoringClient.Repository
                     {
                         while (reader.Read())
                         {
-                            locations.Add(new LocationsModel(
+                            locations.Add(new LocationModel(
                                 reader.GetInt32("location_id"),
                                 reader.GetInt32("parent_location"),
                                 reader.GetInt32("address_fk"),
@@ -158,13 +158,15 @@ namespace MonitoringClient.Repository
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
-            return locations;
+            var locationTreeBuilder = new LocationTreeBuilder();
+            locations.Sort((x, y) => x.ParentLocation.CompareTo(y.ParentLocation));
+            return new List<LocationModel>(locationTreeBuilder.BuildTree(locations).Cast<LocationModel>());
         }
 
         //TODO: Hierarchie "parent_location" berücksichtigen. Mit einer Tree-Struktur aus der DB herauslesen
-        public override List<LocationsModel> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
+        public override List<LocationModel> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
         {
-            var locations = new List<LocationsModel>();
+            var locations = new List<LocationModel>();
             if (string.IsNullOrEmpty(whereCondition))
             {
                 MessageBox.Show("WhereCondition darf nicht leer sein!");
@@ -186,7 +188,7 @@ namespace MonitoringClient.Repository
                         {
                             while (reader.Read())
                             {
-                                locations.Add(new LocationsModel(
+                                locations.Add(new LocationModel(
                                     reader.GetInt32("location_id"),
                                     reader.GetInt32("parent_location"),
                                     reader.GetInt32("address_fk"),
@@ -204,7 +206,9 @@ namespace MonitoringClient.Repository
                     MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                 }
             }
-            return locations;
+            var locationTreeBuilder = new LocationTreeBuilder();
+            locations.Sort((x, y) => x.ParentLocation.CompareTo(y.ParentLocation));
+            return new List<LocationModel>(locationTreeBuilder.BuildTree(locations).Cast<LocationModel>());
         }
     }
 }

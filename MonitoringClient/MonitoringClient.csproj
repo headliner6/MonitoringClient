@@ -78,23 +78,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DataStructures\LocationNode.cs" />
-    <Compile Include="DataStructures\LocationTree.cs" />
-    <Compile Include="Model\LocationsModel.cs" />
-    <Compile Include="Repository\IRepositoryBase.cs" />
+    <Compile Include="DataStructures\LocationTreeBuilder.cs" />
+    <Compile Include="DataStructures\TreeNode.cs" />
+    <Compile Include="Model\LocationModel.cs" />
+    <Compile Include="Services\IRepositoryBase.cs" />
     <Compile Include="Repository\LocationModelRepository.cs" />
-    <Compile Include="Repository\LogentriesModelRepository.cs" />
+    <Compile Include="Repository\LogEntryModelRepository.cs" />
     <Compile Include="Repository\RepositoryBase.cs" />
     <Compile Include="Command\BaseCommand.cs" />
     <Compile Include="Command\ConfirmButtonCommand.cs" />
     <Compile Include="Command\FindDuplicatesButtonCommand.cs" />
     <Compile Include="Command\LoadButtonCommand.cs" />
-    <Compile Include="ViewModel\IViewModel.cs" />
-    <Compile Include="ViewModel\LogentriesViewModel.cs" />
+    <Compile Include="Services\IViewModel.cs" />
+    <Compile Include="ViewModel\LogEntryViewModel.cs" />
     <Compile Include="ViewModel\LogMessageAddViewModel.cs" />
     <Compile Include="ViewModel\NavigationViewModel.cs" />
-    <Compile Include="View\LogentriesView.xaml.cs">
-      <DependentUpon>LogentriesView.xaml</DependentUpon>
+    <Compile Include="View\LogEntryView.xaml.cs">
+      <DependentUpon>LogEntryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LogMessageAddView.xaml.cs">
       <DependentUpon>LogMessageAddView.xaml</DependentUpon>
@@ -114,7 +114,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\LogentriesView.xaml">
+    <Page Include="View\LogEntryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -128,7 +128,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\LogentriesModel.cs" />
+    <Compile Include="Model\LogEntryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
