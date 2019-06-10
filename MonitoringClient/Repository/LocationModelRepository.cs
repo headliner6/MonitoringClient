@@ -163,7 +163,6 @@ namespace MonitoringClient.Repository
             return new List<LocationModel>(locationTreeBuilder.BuildTree(locations).Cast<LocationModel>());
         }
 
-        //TODO: Hierarchie "parent_location" berücksichtigen. Mit einer Tree-Struktur aus der DB herauslesen
         public override List<LocationModel> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
         {
             var locations = new List<LocationModel>();
