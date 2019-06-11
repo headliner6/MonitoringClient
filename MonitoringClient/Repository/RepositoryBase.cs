@@ -12,6 +12,7 @@ namespace MonitoringClient.Repository
     public abstract class RepositoryBase<M> : IRepositoryBase<M>
     {
         public abstract string TableName { get; }
+        //TODO: in ViewModel implementieren, da Sachen fürs View im ViewModel bearbeitet werden.
         public abstract ObservableCollection<M> Items { get; set;}
         public string ConnectionString { get; set; } // Server = localhost; Database =inventarisierungsloesung; Uid = root; Pwd = password;
 

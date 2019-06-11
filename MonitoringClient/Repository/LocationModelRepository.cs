@@ -13,6 +13,7 @@ namespace MonitoringClient.Repository
     {
         private LocationModel _item;
         public override string TableName { get; }
+        //TODO: Umsetzung im LocationViewModel .. LocationViewModel erstellen und LocationView erstellen um ein paar Methoden im UI zur Verfügung zu stellen
         public override ObservableCollection<LocationModel> Items { get; set; }
 
         public LocationModelRepository()
