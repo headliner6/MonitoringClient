@@ -13,7 +13,7 @@ namespace MonitoringClient.ViewModel
 {
     public class LocationViewModel : INotifyPropertyChanged, IViewModel
     {
-        private readonly Action<object> navigateToLogentriesView;
+        private readonly Action<object> navigateToLogEntryView;
         private ObservableCollection<LocationModel> _locations;
 
         private LocationModelRepository _locationModelRepository;
@@ -37,16 +37,16 @@ namespace MonitoringClient.ViewModel
             throw new NotImplementedException();
         }
 
-        public LocationViewModel(Action<object> navigateToLogentriesView)
+        public LocationViewModel(Action<object> navigateToLogEntryView)
         {
             _locationModelRepository = new LocationModelRepository();
             NavigateBack = new BaseCommand(OnNavigateBack);
-            this.navigateToLogentriesView = navigateToLogentriesView;
+            this.navigateToLogEntryView = navigateToLogEntryView;
         }
 
         private void OnNavigateBack(object obj)
         {
-            throw new NotImplementedException();
+            navigateToLogEntryView.Invoke("LogEntryView");
         }
     }
 }

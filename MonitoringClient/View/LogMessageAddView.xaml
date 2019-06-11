@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:MonitoringClient.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <GroupBox Header="Details">
+    <GroupBox Header="Message Data">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>

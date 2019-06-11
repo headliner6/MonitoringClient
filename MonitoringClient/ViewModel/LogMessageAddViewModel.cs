@@ -9,22 +9,22 @@ namespace MonitoringClient.ViewModel
 {
     public class LogMessageAddViewModel : IViewModel
     {
-        private readonly Action<object> navigateToLogentriesView;
+        private readonly Action<object> navigateToLogEntryView;
         private bool _validationOk;
         private LogEntryModelRepository _logentriesModelRepository;
-        public ICommand NavigateAndSave { get; set; }
-        public ICommand NavigateBack { get; set; }
+        public BaseCommand NavigateAndSave { get; set; }
+        public BaseCommand NavigateBack { get; set; }
         public string POD { set; get; }
         public string Hostname { get; set; }
         public string Severity { get; set; }
         public string Message { get; set; }
         public string ConnectionString { get; set; }
 
-        public LogMessageAddViewModel(Action<object> navigateToLogentriesView)
+        public LogMessageAddViewModel(Action<object> navigateToLogEntryView)
         {
             NavigateBack = new BaseCommand(OnNavigateBack);
             NavigateAndSave = new BaseCommand(OnNavigateAndSave);
-            this.navigateToLogentriesView = navigateToLogentriesView;
+            this.navigateToLogEntryView = navigateToLogEntryView;
             _logentriesModelRepository = new LogEntryModelRepository();
         }
         private void ValidationOfProperties() // TODO: Exception werfen anstelle von nur "MessageBox". Dann muss _validationOk nicht mehr verwendet werden.
@@ -62,12 +62,12 @@ namespace MonitoringClient.ViewModel
             {
                 _logentriesModelRepository.ConnectionString = ConnectionString;
                 _logentriesModelRepository.AddMessage(POD, Hostname, Severity, Message);
-                navigateToLogentriesView.Invoke("LogEntryView");
+                navigateToLogEntryView.Invoke("LogEntryView");
             }
         }
         private void OnNavigateBack(object obj)
         {
-            navigateToLogentriesView.Invoke("LogEntryView");
+            navigateToLogEntryView.Invoke("LogEntryView");
         }
     }
 }

@@ -11,7 +11,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <GroupBox Header="Navigation" Grid.Row="0">
+        <GroupBox Header="LogEntry Navigation" Grid.Row="0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
@@ -77,7 +77,7 @@
                         Width="83" Margin="417,4.8,3.2,4.8" Height="40" Grid.Row="1" />
             </Grid>
         </GroupBox>
-        <GroupBox Header="Data" Grid.Row="1">
+        <GroupBox Header="LogEntry Data" Grid.Row="1">
             <DataGrid x:Name="logentrie_dataGrid"
                       IsReadOnly="true"
                       ItemsSource="{Binding Path=Logentries, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
