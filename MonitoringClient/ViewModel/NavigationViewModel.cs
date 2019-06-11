@@ -30,10 +30,10 @@ namespace MonitoringClient.ViewModel
         {
             if (obj.ToString() == "LogMessageAddView")
             {
-                var lvm = (IViewModel) selectedViewModel;
+                var levm = (IViewModel) selectedViewModel;
                 SelectedViewModel = new LogMessageAddViewModel(OpenLogentryView);
                 var lmavm = (LogMessageAddViewModel) selectedViewModel;
-                lmavm.ConnectionString = lvm.ConnectionString;
+                lmavm.ConnectionString = levm.ConnectionString;
             }
         }
         private void OpenLogentryView(object obj)
@@ -42,19 +42,19 @@ namespace MonitoringClient.ViewModel
             {
                 var lmavm = (IViewModel) selectedViewModel;
                 SelectedViewModel = new LogEntryViewModel(OpenLogMessageAddView, OpenLocationView);
-                LogEntryViewModel lvm = (LogEntryViewModel) selectedViewModel;
-                lvm.ConnectionString = lmavm.ConnectionString;
-                lvm.LoadLogentries();
+                LogEntryViewModel levm = (LogEntryViewModel) selectedViewModel;
+                levm.ConnectionString = lmavm.ConnectionString;
+                levm.LoadLogentries();
             }
         }
         private void OpenLocationView(object obj)
         {
             if (obj.ToString() == "LocationView")
             {
-                var lvm = (IViewModel)selectedViewModel;
+                var levm = (IViewModel)selectedViewModel;
                 SelectedViewModel = new LocationViewModel(OpenLogentryView);
                 var lcvm = (IViewModel)selectedViewModel;
-                lcvm.ConnectionString = lvm.ConnectionString;
+                lcvm.ConnectionString = levm.ConnectionString;
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;

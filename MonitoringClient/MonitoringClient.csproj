@@ -78,6 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Command\GetAllLocationsButtonCommand.cs" />
     <Compile Include="DataStructures\LocationTreeBuilder.cs" />
     <Compile Include="DataStructures\TreeNode.cs" />
     <Compile Include="Model\LocationModel.cs" />

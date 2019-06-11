@@ -49,7 +49,7 @@
                         VerticalAlignment="Center"
                         Width="98" Margin="96,9,349,-1" Height="23" />
                 <Button x:Name="button_GetAll"
-                        Command="{Binding GetAllButtonCommand}"
+                        Command="{Binding GetAllLocationsButtonCommand}"
                         Grid.Column="1"
                         Content="GetAll"
                         HorizontalAlignment="Center"
@@ -71,14 +71,19 @@
                         Width="140" Margin="475,10,-68,-2" Height="23" Grid.ColumnSpan="2" />
             </Grid>
         </GroupBox>
-        <GroupBox Header="Location Data" Grid.Row="1">
-            <DataGrid x:Name="locations_dataGrid"
-                      IsReadOnly="true"
+        <TreeView Grid.Row="1" ItemsSource="{Binding Locations}" Margin="10">
+            <TreeView.ItemTemplate>
+                <DataTemplate>
+                    <TreeViewItem Header="{Binding FolderLabel}"/>
+                </DataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+        <!--<GroupBox Header="Location Data" Grid.Row="1">
+            <TreeView x:Name="locations_treeView"
                       ItemsSource="{Binding Path=Locations, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
                       HorizontalAlignment="stretch"
                       Grid.Row="1"
-                      VerticalScrollBarVisibility="auto"
                       Height="200"/>
-        </GroupBox>
+        </GroupBox>-->
     </Grid>
 </UserControl>
