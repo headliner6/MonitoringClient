@@ -47,7 +47,7 @@ namespace MonitoringClient.ViewModel
             var locationTreeBuilder = new LocationTreeBuilder();
             var locations = _locationModelRepository.GetAll();
             locations.Sort((x, y) => x.ParentLocation.CompareTo(y.ParentLocation));
-            _locations = new List<TreeNode<LocationModel>>(locationTreeBuilder.BuildTree(locations));
+            Locations = new List<TreeNode<LocationModel>>(locationTreeBuilder.BuildTree(locations));
         }
 
         protected void OnPropertyChanged(string name)
@@ -57,7 +57,7 @@ namespace MonitoringClient.ViewModel
 
         private void OnNavigateBack(object obj)
         {
-            navigateToLogEntryView.Invoke("Locations");
+            navigateToLogEntryView.Invoke("LogEntryView");
         }
     }
 }

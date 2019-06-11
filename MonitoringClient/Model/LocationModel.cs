@@ -9,6 +9,8 @@ namespace MonitoringClient.Model
         public string Designation { get; set; }
         public int Building { get; set; }
         public int Room { get; set; }
+        public LocationModel()
+        { }
         public LocationModel(int id, int parentLocation, int addressnumber, string designation, int Building, int Room)
         {
             this.Id = id;
