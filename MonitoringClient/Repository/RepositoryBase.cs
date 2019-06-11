@@ -21,7 +21,7 @@ namespace MonitoringClient.Repository
             this.ConnectionString = "Server = localhost; Database = ; Uid = root; Pwd = ;";
         }
 
-        public long Count(string whereCondition, Dictionary<string, object> parameterValues) // Funktioniert, 24.05.2019
+        public long Count(string whereCondition, Dictionary<string, object> parameterValues)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace MonitoringClient.Repository
 
         }
 
-        public long Count() // Funktioniert, 24.05.2019
+        public long Count()
         {
             try
             {

@@ -1,6 +1,5 @@
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\MonitoringClient.csprojAssemblyReference.cache
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\MainWindow.g.cs
-D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\View\LogentriesView.g.cs
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\View\LogMessageAddView.g.cs
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\MonitoringClient_MarkupCompile.cache
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\MonitoringClient_MarkupCompile.lref
@@ -13,7 +12,6 @@ D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\View\NavigationView.g.cs
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\MainWindow.baml
-D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\View\LogentriesView.baml
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\View\LogMessageAddView.baml
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\View\NavigationView.baml
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\MonitoringClient.g.resources
@@ -278,3 +276,7 @@ C:\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\Mon
 C:\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\MonitoringClient.csproj.CoreCompileInputs.cache
 C:\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\MonitoringClient.csproj.CopyComplete
 C:\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\MonitoringClient.csprojAssemblyReference.cache
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\View\LocationView.g.cs
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\View\LogEntryView.g.cs
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\View\LocationView.baml
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\View\LogEntryView.baml

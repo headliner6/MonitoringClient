@@ -14,6 +14,7 @@ namespace MonitoringClient.ViewModel
     public class LogEntryViewModel : INotifyPropertyChanged, IViewModel
     {
         private readonly Action<object> navigateToLogMessageAddView;
+        private readonly Action<object> navigateToLocationView;
         private DuplicateChecker _duplicateChecker;
         private LogEntryModelRepository _logentriesModelRepository;
         private ObservableCollection<LogEntryModel> _logentries;
@@ -21,6 +22,7 @@ namespace MonitoringClient.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         public BaseCommand NavigateLogMessageAddView { get; set; }
+        public BaseCommand NavigateLocationView { get; set; }
         public ObservableCollection<LogEntryModel> Logentries
         {
             get { return _logentries; }
@@ -35,10 +37,12 @@ namespace MonitoringClient.ViewModel
         public ConfirmButtonCommand ConfirmButtonCommand { get; set; }
         public FindDuplicatesButtonCommand FindDuplicatesButtonCommand { get; set; }
 
-        public LogEntryViewModel(Action<object> navigateToLogMessageAddView)
+        public LogEntryViewModel(Action<object> navigateToLogMessageAddView, Action<object> navigateToLocationView)
         {
             NavigateLogMessageAddView = new BaseCommand(StartLogMessageAddView);
+            NavigateLocationView = new BaseCommand(StartLocationView);
             this.navigateToLogMessageAddView = navigateToLogMessageAddView;
+            this.navigateToLocationView = navigateToLocationView;
 
             _logentriesModelRepository = new LogEntryModelRepository();
 
@@ -75,6 +79,10 @@ namespace MonitoringClient.ViewModel
         private void StartLogMessageAddView(object obj)
         {
             navigateToLogMessageAddView.Invoke("LogMessageAddView");
+        }
+        private void StartLocationView(object obj)
+        {
+            navigateToLocationView.Invoke("LocationView");
         }
     }
 }

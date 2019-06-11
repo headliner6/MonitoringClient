@@ -24,27 +24,37 @@ namespace MonitoringClient.ViewModel
         }
         public NavigationViewModel()
         {
-            SelectedViewModel = new LogEntryViewModel(OpenLogMessageAddView);
+            SelectedViewModel = new LogEntryViewModel(OpenLogMessageAddView, OpenLocationView);
         }
         private void OpenLogMessageAddView(object obj)
         {
             if (obj.ToString() == "LogMessageAddView")
             {
                 var lvm = (IViewModel) selectedViewModel;
-                SelectedViewModel = new LogMessageAddViewModel(OpenLogentriesView);
+                SelectedViewModel = new LogMessageAddViewModel(OpenLogentryView);
                 var lmavm = (LogMessageAddViewModel) selectedViewModel;
                 lmavm.ConnectionString = lvm.ConnectionString;
             }
         }
-        private void OpenLogentriesView(object obj)
+        private void OpenLogentryView(object obj)
         {
-            if (obj.ToString() == "LogentriesView")
+            if (obj.ToString() == "LogEntryView")
             {
                 var lmavm = (IViewModel) selectedViewModel;
-                SelectedViewModel = new LogEntryViewModel(OpenLogMessageAddView);
+                SelectedViewModel = new LogEntryViewModel(OpenLogMessageAddView, OpenLocationView);
                 LogEntryViewModel lvm = (LogEntryViewModel) selectedViewModel;
                 lvm.ConnectionString = lmavm.ConnectionString;
                 lvm.LoadLogentries();
+            }
+        }
+        private void OpenLocationView(object obj)
+        {
+            if (obj.ToString() == "LocationView")
+            {
+                var lvm = (IViewModel)selectedViewModel;
+                SelectedViewModel = new LocationViewModel(OpenLogentryView);
+                var lcvm = (IViewModel)selectedViewModel;
+                lcvm.ConnectionString = lvm.ConnectionString;
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;

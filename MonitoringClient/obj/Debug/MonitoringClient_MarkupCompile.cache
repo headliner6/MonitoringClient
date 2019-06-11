@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\App.xaml
-4-382560932
+51540070773
 
-28471882642
+26919628409
 1301446688085
-MainWindow.xaml;View\LogEntryView.xaml;View\LogMessageAddView.xaml;View\NavigationView.xaml;
+MainWindow.xaml;View\LocationView.xaml;View\LogEntryView.xaml;View\LogMessageAddView.xaml;View\NavigationView.xaml;
 
-True
+False
 

@@ -62,12 +62,12 @@ namespace MonitoringClient.ViewModel
             {
                 _logentriesModelRepository.ConnectionString = ConnectionString;
                 _logentriesModelRepository.AddMessage(POD, Hostname, Severity, Message);
-                navigateToLogentriesView.Invoke("LogentriesView");
+                navigateToLogentriesView.Invoke("LogEntryView");
             }
         }
         private void OnNavigateBack(object obj)
         {
-            navigateToLogentriesView.Invoke("LogentriesView");
+            navigateToLogentriesView.Invoke("LogEntryView");
         }
     }
 }

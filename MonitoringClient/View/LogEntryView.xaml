@@ -42,7 +42,7 @@
                         Content="Load"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
-                        Width="70"/>
+                        Width="70" Height="20" Margin="0,14.8"/>
                 <Button x:Name="button_confirm"
                         Command="{Binding Path=ConfirmButtonCommand}"
                         CommandParameter="{Binding ElementName=logentrie_dataGrid, Path=SelectedItems}"
@@ -51,7 +51,7 @@
                         Content="Confirm"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Width="70" Margin="81,15,0,16" />
+                        Width="70" Margin="82,14.8,0,14.8" Height="20" />
                 <Button x:Name="button_add"
                         Command="{Binding Path=NavigateLogMessageAddView}"
                         Grid.Row="1"
@@ -59,7 +59,7 @@
                         Content="Add"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
-                        Width="70" RenderTransformOrigin="0.5,0.5" Margin="0,15,413,16" />
+                        Width="70" RenderTransformOrigin="0.5,0.5" Margin="0,14.8,425.2,14.8" Height="20" />
                 <Button x:Name="button_findDuplicates"
                         Command="{Binding Path=FindDuplicatesButtonCommand}"
                         Grid.Row="1"
@@ -67,7 +67,14 @@
                         Content="Find Duplicates"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Width="140" Margin="95,15,258,16" />
+                        Width="140" Margin="93.2,14.8,273.2,14.8" Height="20" />
+                <Button x:Name="button_locationView"
+                        Command="{Binding Path=NavigateLocationView}"
+                        Grid.Column="1"
+                        Content="LocationView"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Width="83" Margin="417,4.8,3.2,4.8" Height="40" Grid.Row="1" />
             </Grid>
         </GroupBox>
         <GroupBox Header="Data" Grid.Row="1">
