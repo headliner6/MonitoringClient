@@ -158,9 +158,7 @@ namespace MonitoringClient.Repository
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
-            var locationTreeBuilder = new LocationTreeBuilder();
-            locations.Sort((x, y) => x.ParentLocation.CompareTo(y.ParentLocation));
-            return new List<LocationModel>(locationTreeBuilder.BuildTree(locations).Cast<LocationModel>());
+            return locations;
         }
 
         public override List<LocationModel> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
@@ -205,9 +203,7 @@ namespace MonitoringClient.Repository
                     MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                 }
             }
-            var locationTreeBuilder = new LocationTreeBuilder();
-            locations.Sort((x, y) => x.ParentLocation.CompareTo(y.ParentLocation));
-            return new List<LocationModel>(locationTreeBuilder.BuildTree(locations).Cast<LocationModel>());
+            return locations;
         }
     }
 }

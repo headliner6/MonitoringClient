@@ -53,9 +53,6 @@ namespace MonitoringClient.ViewModel
         {
             _logentriesModelRepository.ConnectionString = ConnectionString;
             Logentries = _logentriesModelRepository.LoadLogentries();
-            var repo = new LocationModelRepository();
-            repo.ConnectionString = ConnectionString;
-            var l = repo.GetAll();
         }
         public void ConfirmLogentries(int id)
         {
