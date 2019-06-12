@@ -1,6 +1,7 @@
 ﻿using MonitoringClient.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,23 +10,23 @@ namespace MonitoringClient.DataStructures
 {
     public class LocationTreeBuilder
     {
-        public List<TreeNode<LocationModel>> BuildTree(List<LocationModel> locations)
+        public ObservableCollection<LocationNode> BuildTree(List<LocationModel> locations)
         {
             var mainParentNode = FindMainTreeRootNode(locations);
             locations.Reverse();
             BuildTree(mainParentNode, locations);
-            var tree = new List<TreeNode<LocationModel>>();
+            var tree = new ObservableCollection<LocationNode>();
             tree.Add(mainParentNode);
             return tree;
         }
 
-        private void BuildTree(TreeNode<LocationModel> mainParentNode, List<LocationModel> locations)
+        private void BuildTree(LocationNode mainParentNode, List<LocationModel> locations)
         {
             foreach (var location in locations.Reverse<LocationModel>())
             {
-                if (location.ParentLocation.Equals(mainParentNode.Element.Id))
+                if (location.ParentLocation.Equals(mainParentNode.Location.Id))
                 {
-                    mainParentNode.ChildNodes.Add(new TreeNode<LocationModel>(location));
+                    mainParentNode.ChildNodes.Add(new LocationNode(location));
                     locations.Remove(location);
                 }
                 else
@@ -36,14 +37,14 @@ namespace MonitoringClient.DataStructures
             }
         }
         //TODO: Test mit mehreren MainTreeRootNode in der DB
-        private TreeNode<LocationModel> FindMainTreeRootNode(List<LocationModel> locations)
+        private LocationNode FindMainTreeRootNode(List<LocationModel> locations)
         {
-            TreeNode<LocationModel> mainParentNode = null;
+            LocationNode mainParentNode = null;
             foreach (var location in locations.Reverse<LocationModel>())
             {
                 if (location.ParentLocation == 0)
                 {
-                    mainParentNode = new TreeNode<LocationModel>(location);
+                    mainParentNode = new LocationNode(location);
                     locations.Remove(location);
                 }
             }

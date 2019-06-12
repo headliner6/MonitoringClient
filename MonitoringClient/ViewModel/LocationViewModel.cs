@@ -15,12 +15,12 @@ namespace MonitoringClient.ViewModel
     public class LocationViewModel : INotifyPropertyChanged, IViewModel
     {
         private readonly Action<object> navigateToLogEntryView;
-        private List<TreeNode<LocationModel>> _locations;
+        private ObservableCollection<LocationNode> _locations;
         private LocationModelRepository _locationModelRepository;
 
         public event PropertyChangedEventHandler PropertyChanged;
         public string ConnectionString { get; set; }
-        public List<TreeNode<LocationModel>> Locations
+        public ObservableCollection<LocationNode> Locations
         {
             get { return _locations; }
             set
@@ -47,7 +47,7 @@ namespace MonitoringClient.ViewModel
             var locationTreeBuilder = new LocationTreeBuilder();
             var locations = _locationModelRepository.GetAll();
             locations.Sort((x, y) => x.ParentLocation.CompareTo(y.ParentLocation));
-            Locations = new List<TreeNode<LocationModel>>(locationTreeBuilder.BuildTree(locations));
+            Locations = locationTreeBuilder.BuildTree(locations);
         }
 
         protected void OnPropertyChanged(string name)

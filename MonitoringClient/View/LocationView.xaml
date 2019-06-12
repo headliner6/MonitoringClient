@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:MonitoringClient.Model"
+             xmlns:local="clr-namespace:MonitoringClient.DataStructures"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="850">
     <Grid>
@@ -71,19 +71,12 @@
                         Width="140" Margin="475,10,-68,-2" Height="23" Grid.ColumnSpan="2" />
             </Grid>
         </GroupBox>
-        <TreeView Grid.Row="1" ItemsSource="{Binding Locations}" Margin="10" Height="200">
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Locations}" DataType="{x:Type local:LocationModel}">
-                    <TreeViewItem Header="{Binding Designation}"/>
+        <TreeView Grid.Row="1" ItemsSource="{Binding Locations}">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type local:LocationNode}" ItemsSource="{Binding ChildNodes}">
+                    <TextBlock Text="{Binding Location.Designation}"></TextBlock>
                 </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
+            </TreeView.Resources>
         </TreeView>
-        <!--<GroupBox Header="Location Data" Grid.Row="1">
-            <TreeView x:Name="locations_treeView"
-                      ItemsSource="{Binding Path=Locations, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
-                      HorizontalAlignment="stretch"
-                      Grid.Row="1"
-                      Height="200"/>
-        </GroupBox>-->
     </Grid>
 </UserControl>
