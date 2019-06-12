@@ -8,70 +8,36 @@
              d:DesignHeight="450" d:DesignWidth="850">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" MinHeight="68" />
-            <RowDefinition Height="auto" MinHeight="236" />
+            <RowDefinition Height="auto" MinHeight="70" />
+            <RowDefinition Height="auto" MinHeight="250" />
         </Grid.RowDefinitions>
         <GroupBox Header="Location Navigation" Grid.Row="0">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="60"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="button_GetSingle"
-                        Command="{Binding Path=GetSingleButtonCommand}"
-                        Grid.Column="0"
-                        Content="GetSingle"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Width="70" Margin="0,9,0,-1" Height="23"/>
-                <Button x:Name="button_Add"
-                        Command="{Binding Path=AddButtonCommand}"
-                        Grid.Column="0"
-                        Content="Add"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Width="70" Margin="82,10,10,-2" Height="23" />
-                <Button x:Name="button_Delete"
-                        Command="{Binding Path=DeleteButtonCommand}"
-                        Content="Delete"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        Width="72" RenderTransformOrigin="0.5,0.5" Margin="0,9,461,-1" Height="23" Grid.Column="1" />
-                <Button x:Name="button_Update"
-                        Command="{Binding Path=UpdateButtonCommand}"
-                        Grid.Column="1"
-                        Content="Update"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Width="98" Margin="96,9,349,-1" Height="23" />
-                <Button x:Name="button_GetAllCorrect"
-                        Command="{Binding Path=GetAllCorrectButtonCommand}"
-                        Grid.Column="1"
-                        Content="GetAllCorrect"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Width="140" Margin="319,10,86,-2" Height="23" />
-                <Button x:Name="button_Back"
+                <Button x:Name="button_locationView"
                         Command="{Binding Path=NavigateBack}"
-                        Grid.Column="1"
+                        Grid.Column="2"
                         Content="Back"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Width="140" Margin="475,10,-68,-2" Height="23" Grid.ColumnSpan="2" />
+                        Width="60"/>
             </Grid>
         </GroupBox>
         <GroupBox Header="Location Data" Grid.Row="1">
             <TreeView Grid.Row="1" ItemsSource="{Binding Locations}">
-            <TreeView.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type local:LocationNode}" ItemsSource="{Binding ChildNodes}">
-                    <TextBlock Text="{Binding Location.Designation}"></TextBlock>
-                </HierarchicalDataTemplate>
-            </TreeView.Resources>
-        </TreeView>
-       </GroupBox>
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate DataType="{x:Type local:LocationNode}" ItemsSource="{Binding ChildNodes}">
+                        <TextBlock Text="{Binding Location.Designation}"></TextBlock>
+                    </HierarchicalDataTemplate>
+                </TreeView.Resources>
+            </TreeView>
+        </GroupBox>
     </Grid>
 </UserControl>
