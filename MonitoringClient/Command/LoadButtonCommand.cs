@@ -23,7 +23,7 @@ namespace MonitoringClient.Command
         }
         public void Execute(object parameter)
         {
-            _logentriesViewModel.LoadLogentries();
+            _logentriesViewModel.GetAll();
         }
     }
 }

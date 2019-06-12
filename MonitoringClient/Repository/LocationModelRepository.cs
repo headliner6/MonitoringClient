@@ -11,19 +11,16 @@ namespace MonitoringClient.Repository
 {
     class LocationModelRepository : RepositoryBase<LocationModel>
     {
-        private LocationModel _item;
         public override string TableName { get; }
-        //TODO: Umsetzung im LocationViewModel .. LocationViewModel erstellen und LocationView erstellen um ein paar Methoden im UI zur Verfügung zu stellen
-        public override ObservableCollection<LocationModel> Items { get; set; }
 
         public LocationModelRepository()
         {
-            Items = new ObservableCollection<LocationModel>();
             TableName = "Location";
         }
       
         public override LocationModel GetSingle<P>(P pkValue)
         {
+            var item = new LocationModel();
             try
             {
                 var connection = new MySqlConnection(ConnectionString);
@@ -36,7 +33,7 @@ namespace MonitoringClient.Repository
                     {
                         while (reader.Read())
                         {
-                            _item = (new LocationModel(
+                            item = (new LocationModel(
                                 reader.GetInt32("location_id"),
                                 reader.GetInt32("parent_location"),
                                 reader.GetInt32("address_fk"),
@@ -53,7 +50,7 @@ namespace MonitoringClient.Repository
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
-            return _item;
+            return item;
         }
 
         public override void Add(LocationModel entity)

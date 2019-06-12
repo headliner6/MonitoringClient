@@ -27,7 +27,7 @@ namespace MonitoringClient.ViewModel
             this.navigateToLogEntryView = navigateToLogEntryView;
             _logentriesModelRepository = new LogEntryModelRepository();
         }
-        private void ValidationOfProperties() // TODO: Exception werfen anstelle von nur "MessageBox". Dann muss _validationOk nicht mehr verwendet werden.
+        private void ValidationOfProperties()
         {
             if (string.IsNullOrEmpty(POD))
             {

@@ -29,7 +29,7 @@ namespace MonitoringClient.Command
                 foreach (var lm in sellectedItemscollection)
                 {
                     _logentriesViewModel.ConfirmLogentries(lm.Id);
-                    _logentriesViewModel.LoadLogentries();
+                    _logentriesViewModel.GetAll();
                 }
             }
         }

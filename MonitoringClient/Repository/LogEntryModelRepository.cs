@@ -11,49 +11,10 @@ namespace MonitoringClient.Repository
 {
     public class LogEntryModelRepository : RepositoryBase<LogEntryModel>
     {
-        private LogEntryModel _item;
         public override string TableName { get; }
-        public override ObservableCollection<LogEntryModel> Items { get; set; }
-
         public LogEntryModelRepository()
         {
-            Items = new ObservableCollection<LogEntryModel>();
             TableName = "v_logentries";
-        }
-
-        public ObservableCollection<LogEntryModel> LoadLogentries()
-        {
-            this.Items.Clear();
-            try
-            {
-                var connection = new MySqlConnection(ConnectionString);
-                connection.Open();
-                using (var cmd = connection.CreateCommand())
-                {
-                    cmd.CommandText = $"SELECT id, pod, location, hostname, severity, timestamp, message FROM {this.TableName}";
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Items.Add(new LogEntryModel(
-                                reader.GetInt32("Id"),
-                                reader.GetString("Pod"),
-                                reader.GetValue(reader.GetOrdinal("Location")) as string,
-                                reader.GetString("Hostname"),
-                                reader.GetInt32("Severity"),
-                                reader.GetDateTime("Timestamp"),
-                                reader.GetString("Message")
-                                ));
-                        }
-                    }
-                }
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-            }
-            return Items;
         }
 
         public void ConfirmLogentries(int id)
@@ -103,6 +64,7 @@ namespace MonitoringClient.Repository
 
         public override LogEntryModel GetSingle<P>(P pkValue)
         {
+            var item = new LogEntryModel();
             try
             {
                 var connection = new MySqlConnection(ConnectionString);
@@ -115,7 +77,7 @@ namespace MonitoringClient.Repository
                     {
                         while (reader.Read())
                         {
-                            _item = (new LogEntryModel(
+                            item = (new LogEntryModel(
                                 reader.GetInt32("Id"),
                                 reader.GetString("Pod"),
                                 reader.GetValue(reader.GetOrdinal("Location")) as string,
@@ -133,45 +95,22 @@ namespace MonitoringClient.Repository
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
-            return _item;
-        } // Funktioniert, 24.05.2019
+            return item;
+        }
 
         public override void Add(LogEntryModel entity)
         {
-            try
-            {
-                var connection = new MySqlConnection(ConnectionString);
-                connection.Open();
-                using (var cmd = connection.CreateCommand())
-                {
-                    cmd.CommandText = $"INSERT INTO {this.TableName} (Pod, Location, Hostname, Severity, Timestamp, Message) VALUES (@pod, @location, @hostname, @severity, @timestamp, @message)";
-                    cmd.Parameters.AddWithValue("@pod", entity.Pod);
-                    cmd.Parameters.AddWithValue("@location", entity.Location);
-                    cmd.Parameters.AddWithValue("@hostname", entity.Hostname);
-                    cmd.Parameters.AddWithValue("@severity", entity.Severity);
-                    cmd.Parameters.AddWithValue("@timestamp", entity.Timestamp);
-                    cmd.Parameters.AddWithValue("@message", entity.Message);
-                    cmd.ExecuteNonQuery();
-                }
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-            }
-        } // FUnktioniert, 24.05.2019
+            MessageBox.Show("Add Methode steht bei einer View nicht zur Verfügung!");
+        }
 
-        //TODO: Überprüfen ob Delete mit View möglich ist
         public override void Delete(LogEntryModel entity)
         {
-            MessageBox.Show("Delete steht nicht zur Verfügung!");
-        } // Funktioniert, 24.05.2019
-
-        //TODO: Überprüfen ob Delete mit View möglich ist
+            MessageBox.Show("Delete Methode steht bei einer View nicht zur Verfügung!");
+        }
         public override void Update(LogEntryModel entity)
         {
-            MessageBox.Show("Update steht nicht zur Verfügung!");
-        } // Funktioniert, 24.05.2019
+            MessageBox.Show("Update Methode steht bei einer View nicht zur Verfügung!");
+        }
 
         public override List<LogEntryModel> GetAll()
         {
@@ -206,7 +145,7 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
             return logentries;
-        } // Funktioniert, 24.05.2019
+        }
 
         public override List<LogEntryModel> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
         {
@@ -252,6 +191,6 @@ namespace MonitoringClient.Repository
                 }
             }
             return logentries;
-        } // Funktioniert, 24.05.2019
+        }
     }
 }

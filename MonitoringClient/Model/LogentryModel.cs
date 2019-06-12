@@ -13,6 +13,7 @@ namespace MonitoringClient.Model
         public DateTime Timestamp { get; set; }
         public string Message { get; set; }
 
+        public LogEntryModel() { }
         public LogEntryModel(int id, string pod, string location, string hostname, int severity, DateTime timestamp, string message)
         {
             this.Id = id;

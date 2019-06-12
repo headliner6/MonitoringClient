@@ -44,7 +44,7 @@ namespace MonitoringClient.ViewModel
                 SelectedViewModel = new LogEntryViewModel(OpenLogMessageAddView, OpenLocationView);
                 LogEntryViewModel levm = (LogEntryViewModel) selectedViewModel;
                 levm.ConnectionString = lmavm.ConnectionString;
-                levm.LoadLogentries();
+                levm.GetAll();
             }
         }
         private void OpenLocationView(object obj)
@@ -53,8 +53,9 @@ namespace MonitoringClient.ViewModel
             {
                 var levm = (IViewModel)selectedViewModel;
                 SelectedViewModel = new LocationViewModel(OpenLogentryView);
-                var lcvm = (IViewModel)selectedViewModel;
+                var lcvm = (LocationViewModel)selectedViewModel;
                 lcvm.ConnectionString = levm.ConnectionString;
+                lcvm.GetAll();
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;

@@ -53,10 +53,10 @@ namespace MonitoringClient.ViewModel
             _duplicateChecker = new DuplicateChecker();
             FindDuplicatesButtonCommand = new FindDuplicatesButtonCommand(this);
         }
-        public void LoadLogentries()
+        public void GetAll()
         {
             _logentriesModelRepository.ConnectionString = ConnectionString;
-            Logentries = _logentriesModelRepository.LoadLogentries();
+            Logentries = new ObservableCollection<LogEntryModel>(_logentriesModelRepository.GetAll());
         }
         public void ConfirmLogentries(int id)
         {
@@ -64,12 +64,12 @@ namespace MonitoringClient.ViewModel
         }
         public void CheckForDuplicates()
         {
-            this.LoadLogentries();
+            this.GetAll();
             Logentries = new ObservableCollection<LogEntryModel>(_duplicateChecker.FindDuplicates(Logentries).Cast<LogEntryModel>());
             if (Logentries.Count == 0)
             {
                 MessageBox.Show("Keine Duplikate vorhanden!");
-                this.LoadLogentries();
+                this.GetAll();
             }
         }
         protected void OnPropertyChanged(string name)

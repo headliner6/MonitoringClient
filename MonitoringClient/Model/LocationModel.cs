@@ -1,5 +1,4 @@
-﻿
-namespace MonitoringClient.Model
+﻿namespace MonitoringClient.Model
 {
     public class LocationModel
     {

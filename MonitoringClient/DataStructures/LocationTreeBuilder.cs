@@ -1,10 +1,7 @@
 ﻿using MonitoringClient.Model;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MonitoringClient.DataStructures
 {
@@ -36,7 +33,7 @@ namespace MonitoringClient.DataStructures
                 }
             }
         }
-        //TODO: Test mit mehreren MainTreeRootNode in der DB
+
         private LocationNode FindMainTreeRootNode(List<LocationModel> locations)
         {
             LocationNode mainParentNode = null;
