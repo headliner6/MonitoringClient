@@ -1,6 +1,7 @@
 ﻿using MonitoringClient.Model;
 using MonitoringClient.ViewModel;
 using System;
+using System.Collections;
 using System.Linq;
 using System.Windows.Input;
 
@@ -9,12 +10,12 @@ namespace MonitoringClient.Command
     public class ConfirmButtonCommand : ICommand
     {
 
-        private LogEntryViewModel _logentriesViewModel;
+        private LogEntryViewModel _logEntryViewModel;
         public event EventHandler CanExecuteChanged;
 
-        public ConfirmButtonCommand(LogEntryViewModel lvm)
+        public ConfirmButtonCommand(LogEntryViewModel levm)
         {
-            this._logentriesViewModel = lvm;
+            this._logEntryViewModel = levm;
         }
         public bool CanExecute(object parameter)
         {
@@ -24,12 +25,12 @@ namespace MonitoringClient.Command
         {
             if (parameter != null)
             {
-                System.Collections.IList sellectedItems = (System.Collections.IList)parameter;
+                var sellectedItems = (IList)parameter;
                 var sellectedItemscollection = sellectedItems.Cast<LogEntryModel>().ToList();
-                foreach (var lm in sellectedItemscollection)
+                foreach (var logEntry in sellectedItemscollection)
                 {
-                    _logentriesViewModel.ConfirmLogentries(lm.Id);
-                    _logentriesViewModel.GetAll();
+                    _logEntryViewModel.ConfirmLogentries(logEntry.Id);
+                    _logEntryViewModel.GetAll();
                 }
             }
         }

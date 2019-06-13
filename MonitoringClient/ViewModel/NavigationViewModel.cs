@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows.Input;
 
 namespace MonitoringClient.ViewModel
 {
     public class NavigationViewModel : INotifyPropertyChanged
     {
-        public ICommand LoadLogentriesView { get; set; }
-        public ICommand LoadLogMessageView { get; set; }
         private object selectedViewModel;
         public object SelectedViewModel
         {
@@ -30,34 +23,36 @@ namespace MonitoringClient.ViewModel
         {
             if (obj.ToString() == "LogMessageAddView")
             {
-                var levm = (IViewModel) selectedViewModel;
+                var logEntryViewModel = (IViewModel) selectedViewModel;
                 SelectedViewModel = new LogMessageAddViewModel(OpenLogentryView);
-                var lmavm = (LogMessageAddViewModel) selectedViewModel;
-                lmavm.ConnectionString = levm.ConnectionString;
-            }
-        }
-        private void OpenLogentryView(object obj)
-        {
-            if (obj.ToString() == "LogEntryView")
-            {
-                var lmavm = (IViewModel) selectedViewModel;
-                SelectedViewModel = new LogEntryViewModel(OpenLogMessageAddView, OpenLocationView);
-                LogEntryViewModel levm = (LogEntryViewModel) selectedViewModel;
-                levm.ConnectionString = lmavm.ConnectionString;
-                levm.GetAll();
+                var logMessageAddViewModel = (LogMessageAddViewModel) selectedViewModel;
+                logMessageAddViewModel.ConnectionString = logEntryViewModel.ConnectionString;
             }
         }
         private void OpenLocationView(object obj)
         {
             if (obj.ToString() == "LocationView")
             {
-                var levm = (IViewModel)selectedViewModel;
+                var logEntryViewModel = (IViewModel)selectedViewModel;
                 SelectedViewModel = new LocationViewModel(OpenLogentryView);
-                var lcvm = (LocationViewModel)selectedViewModel;
-                lcvm.ConnectionString = levm.ConnectionString;
-                lcvm.GetAll();
+                var locationViewModel = (LocationViewModel)selectedViewModel;
+                locationViewModel.ConnectionString = logEntryViewModel.ConnectionString;
+                locationViewModel.GetAll();
             }
         }
+
+        private void OpenLogentryView(object obj)
+        {
+            if (obj.ToString() == "LogEntryView")
+            {
+                var logMessageAddViewModel = (IViewModel) selectedViewModel;
+                SelectedViewModel = new LogEntryViewModel(OpenLogMessageAddView, OpenLocationView);
+                LogEntryViewModel logEntryViewModel = (LogEntryViewModel) selectedViewModel;
+                logEntryViewModel.ConnectionString = logMessageAddViewModel.ConnectionString;
+                logEntryViewModel.GetAll();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propName)
         {

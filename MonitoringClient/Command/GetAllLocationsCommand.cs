@@ -8,13 +8,13 @@ using System.Windows.Input;
 
  namespace MonitoringClient.Command
 {
-    public class GetAllLocationsButtonCommand : ICommand
+    public class GetAllLocationsCommand : ICommand
     {
         private LocationViewModel _locationViewModel;
         public event EventHandler CanExecuteChanged;
-        public GetAllLocationsButtonCommand(LocationViewModel lcvm)
+        public GetAllLocationsCommand(LocationViewModel lvm)
         {
-            this._locationViewModel = lcvm;
+            this._locationViewModel = lvm;
         }
         public bool CanExecute(object parameter)
         {

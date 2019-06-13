@@ -13,9 +13,8 @@ namespace MonitoringClient.Repository
     class LocationModelRepository : RepositoryBase<LocationModel>
     {
         public override string TableName { get; }
-        public override string PrimaryKey => "id";
-        public override string InsertIntoEntityFieldForSqlStatement => "parent_location, address_fk, designation, building, room";
-
+        public override string PrimaryKey { get { return "id"; } }
+        public override string InsertIntoEntityFieldForSqlStatement { get { return "parent_location, address_fk, designation, building, room"; } }
         public LocationModelRepository()
         {
             TableName = "Location";

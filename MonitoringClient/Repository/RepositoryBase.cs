@@ -15,7 +15,7 @@ namespace MonitoringClient.Repository
         where M : IModel, new()
     {
         public abstract string TableName { get; }
-        public string ConnectionString { get; set; } // Server = localhost; Database =inventarisierungsloesung; Uid = root; Pwd = password;
+        public string ConnectionString { get; set; } // "Server = localhost; Database = inventarisierungsloesung; Uid = root; Pwd = password;"
         public abstract string PrimaryKey { get; }
         public abstract string InsertIntoEntityFieldForSqlStatement { get; }
 

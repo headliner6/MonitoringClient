@@ -13,10 +13,5 @@ namespace MonitoringClient.DataStructures
             this.Location = location;
             this.ChildNodes = new ObservableCollection<LocationNode>();
         }
-
-        public void AddChildNode(LocationModel element)
-        {
-            this.ChildNodes.Add(new LocationNode(element));
-        }
     }
 }

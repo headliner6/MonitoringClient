@@ -17,7 +17,7 @@ namespace MonitoringClient.ViewModel
         private readonly Action<object> navigateToLogMessageAddView;
         private readonly Action<object> navigateToLocationView;
         private DuplicateChecker _duplicateChecker;
-        private LogEntryModelRepository _logentriesModelRepository;
+        private LogEntryModelRepository _logEntryModelRepository;
         private ObservableCollection<LogEntryModel> _logentries;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -42,26 +42,26 @@ namespace MonitoringClient.ViewModel
         {
             NavigateLogMessageAddView = new BaseCommand(StartLogMessageAddView);
             NavigateLocationView = new BaseCommand(StartLocationView);
+            LoadButtonCommand = new LoadButtonCommand(this);
+            ConfirmButtonCommand = new ConfirmButtonCommand(this);
+            FindDuplicatesButtonCommand = new FindDuplicatesButtonCommand(this);
             this.navigateToLogMessageAddView = navigateToLogMessageAddView;
             this.navigateToLocationView = navigateToLocationView;
 
-            _logentriesModelRepository = new LogEntryModelRepository();
-
-            ConnectionString = _logentriesModelRepository.ConnectionString;
-            LoadButtonCommand = new LoadButtonCommand(this);
-            ConfirmButtonCommand = new ConfirmButtonCommand(this);
             Logentries = new ObservableCollection<LogEntryModel>();
             _duplicateChecker = new DuplicateChecker();
-            FindDuplicatesButtonCommand = new FindDuplicatesButtonCommand(this);
+            _logEntryModelRepository = new LogEntryModelRepository();
+
+            ConnectionString = _logEntryModelRepository.ConnectionString;
         }
         public void GetAll()
         {
-            _logentriesModelRepository.ConnectionString = ConnectionString;
-            Logentries = new ObservableCollection<LogEntryModel>(_logentriesModelRepository.GetAll());
+            _logEntryModelRepository.ConnectionString = ConnectionString;
+            Logentries = new ObservableCollection<LogEntryModel>(_logEntryModelRepository.GetAll());
         }
         public void ConfirmLogentries(int id)
         {
-            _logentriesModelRepository.ConfirmLogentries(id);
+            _logEntryModelRepository.ConfirmLogentries(id);
         }
         public void CheckForDuplicates()
         {

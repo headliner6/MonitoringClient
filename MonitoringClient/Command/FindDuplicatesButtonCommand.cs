@@ -10,12 +10,12 @@ namespace MonitoringClient.Command
 {
     public class FindDuplicatesButtonCommand : ICommand
     {
-        private LogEntryViewModel _logentriesViewModel;
+        private LogEntryViewModel _logEntryViewModel;
         public event EventHandler CanExecuteChanged;
                 
-        public FindDuplicatesButtonCommand(LogEntryViewModel lvm)
+        public FindDuplicatesButtonCommand(LogEntryViewModel levm)
         {
-            this._logentriesViewModel = lvm;
+            this._logEntryViewModel = levm;
         }
         public bool CanExecute(object parameter)
         {
@@ -23,7 +23,7 @@ namespace MonitoringClient.Command
         }
         public void Execute(object parameter)
         {
-            _logentriesViewModel.CheckForDuplicates();
+            _logEntryViewModel.CheckForDuplicates();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace MonitoringClient.ViewModel
     {
         private readonly Action<object> navigateToLogEntryView;
         private bool _validationOk;
-        private LogEntryModelRepository _logentriesModelRepository;
+        private LogEntryModelRepository _logEntryModelRepository;
         public ICommand NavigateAndSave { get; set; }
         public ICommand NavigateBack { get; set; }
         public string POD { set; get; }
@@ -25,7 +25,7 @@ namespace MonitoringClient.ViewModel
             NavigateBack = new BaseCommand(OnNavigateBack);
             NavigateAndSave = new BaseCommand(OnNavigateAndSave);
             this.navigateToLogEntryView = navigateToLogEntryView;
-            _logentriesModelRepository = new LogEntryModelRepository();
+            _logEntryModelRepository = new LogEntryModelRepository();
         }
         private void ValidationOfProperties()
         {
@@ -40,7 +40,6 @@ namespace MonitoringClient.ViewModel
             else if (Regex.IsMatch(Severity, "[^0-9]"))
             {
                 MessageBox.Show("Severity darf nur Zahlen enthalten!");
-                Severity = Severity.Remove(Severity.Length - 1);
             }
             else if (string.IsNullOrEmpty(Hostname))
             {
@@ -60,8 +59,8 @@ namespace MonitoringClient.ViewModel
             ValidationOfProperties();
             if (_validationOk == true)
             {
-                _logentriesModelRepository.ConnectionString = ConnectionString;
-                _logentriesModelRepository.AddMessage(POD, Hostname, Severity, Message);
+                _logEntryModelRepository.ConnectionString = ConnectionString;
+                _logEntryModelRepository.AddMessage(POD, Hostname, Severity, Message);
                 navigateToLogEntryView.Invoke("LogEntryView");
             }
         }

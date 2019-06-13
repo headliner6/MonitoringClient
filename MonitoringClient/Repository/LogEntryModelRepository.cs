@@ -12,8 +12,8 @@ namespace MonitoringClient.Repository
     public class LogEntryModelRepository : RepositoryBase<LogEntryModel>
     {
         public override string TableName { get; }
-        public override string PrimaryKey => "id";
-        public override string InsertIntoEntityFieldForSqlStatement => throw new NotSupportedException();
+        public override string PrimaryKey { get { return "id"; } }
+        public override string InsertIntoEntityFieldForSqlStatement { get { throw new NotSupportedException(); } }
 
         public LogEntryModelRepository()
         {
