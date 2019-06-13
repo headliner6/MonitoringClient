@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace MonitoringClient.ViewModel
 {
@@ -31,7 +32,7 @@ namespace MonitoringClient.ViewModel
         }
 
         public GetAllLocationsButtonCommand GetAllLocationsButtonCommand { get; set; }
-        public BaseCommand NavigateBack { get; set; }
+        public ICommand NavigateBack { get; set; }
 
         public LocationViewModel(Action<object> navigateToLogEntryView)
         {

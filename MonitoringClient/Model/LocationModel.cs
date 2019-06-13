@@ -1,6 +1,8 @@
-﻿namespace MonitoringClient.Model
+﻿using MonitoringClient.Services;
+
+namespace MonitoringClient.Model
 {
-    public class LocationModel
+    public class LocationModel : IModel
     {
         public int Id { get; set; }
         public int ParentLocation { get; set; }

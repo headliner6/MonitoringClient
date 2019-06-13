@@ -1,9 +1,10 @@
 ﻿using DuplicateCheckerLib;
+using MonitoringClient.Services;
 using System;
 
 namespace MonitoringClient.Model
 {
-    public class LogEntryModel : IEntity
+    public class LogEntryModel : IEntity, IModel
     {
         public int Id { get; set; }
         public string Pod { get; set; }

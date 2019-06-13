@@ -82,6 +82,7 @@
     <Compile Include="DataStructures\LocationTreeBuilder.cs" />
     <Compile Include="DataStructures\LocationNode.cs" />
     <Compile Include="Model\LocationModel.cs" />
+    <Compile Include="Services\IModel.cs" />
     <Compile Include="Services\IRepositoryBase.cs" />
     <Compile Include="Repository\LocationModelRepository.cs" />
     <Compile Include="Repository\LogEntryModelRepository.cs" />

@@ -12,6 +12,9 @@ namespace MonitoringClient.Repository
     public class LogEntryModelRepository : RepositoryBase<LogEntryModel>
     {
         public override string TableName { get; }
+        public override string PrimaryKey => "id";
+        public override string InsertIntoEntityFieldForSqlStatement => throw new NotSupportedException();
+
         public LogEntryModelRepository()
         {
             TableName = "v_logentries";
@@ -62,135 +65,60 @@ namespace MonitoringClient.Repository
             }
         }
 
-        public override LogEntryModel GetSingle<P>(P pkValue)
+        public override LogEntryModel GetEntityFromDB(MySqlDataReader reader)
         {
-            var item = new LogEntryModel();
-            try
+            var logEntry = new LogEntryModel();
+            while (reader.Read())
             {
-                var connection = new MySqlConnection(ConnectionString);
-                connection.Open();
-                using (var cmd = connection.CreateCommand())
-                {
-                    cmd.CommandText = $"SELECT * FROM {this.TableName} WHERE id = @primaryKey";
-                    cmd.Parameters.AddWithValue("@primaryKey", pkValue);
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            item = (new LogEntryModel(
-                                reader.GetInt32("Id"),
-                                reader.GetString("Pod"),
-                                reader.GetValue(reader.GetOrdinal("Location")) as string,
-                                reader.GetString("Hostname"),
-                                reader.GetInt32("Severity"),
-                                reader.GetDateTime("Timestamp"),
-                                reader.GetString("Message")
-                                ));
-                        }
-                    }
-                }
-                connection.Close();
+                logEntry = new LogEntryModel(
+                    reader.GetInt32("Id"),
+                    reader.GetString("Pod"),
+                    reader.GetValue(reader.GetOrdinal("Location")) as string,
+                    reader.GetString("Hostname"),
+                    reader.GetInt32("Severity"),
+                    reader.GetDateTime("Timestamp"),
+                    reader.GetString("Message")
+                );
             }
-            catch (Exception ex)
+            return logEntry;
+        }
+
+        public override List<LogEntryModel> GetEntitiesFromDB(MySqlDataReader reader)
+        {
+            var logEntries = new List<LogEntryModel>();
+            while (reader.Read())
             {
-                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+                logEntries.Add(new LogEntryModel(
+                    reader.GetInt32("Id"),
+                    reader.GetString("Pod"),
+                    reader.GetValue(reader.GetOrdinal("Location")) as string,
+                    reader.GetString("Hostname"),
+                    reader.GetInt32("Severity"),
+                    reader.GetDateTime("Timestamp"),
+                    reader.GetString("Message")
+                ));
             }
-            return item;
+            return logEntries;
         }
 
         public override void Add(LogEntryModel entity)
         {
-            MessageBox.Show("Add Methode steht bei einer View nicht zur Verfügung!");
+            throw new NotSupportedException();
         }
 
         public override void Delete(LogEntryModel entity)
         {
-            MessageBox.Show("Delete Methode steht bei einer View nicht zur Verfügung!");
+            throw new NotSupportedException();
         }
+
         public override void Update(LogEntryModel entity)
         {
-            MessageBox.Show("Update Methode steht bei einer View nicht zur Verfügung!");
+            throw new NotSupportedException();
         }
 
-        public override List<LogEntryModel> GetAll()
+        public override string SqlStatementValues(LogEntryModel entity)
         {
-            var logentries = new List<LogEntryModel>();
-            try
-            {
-                var connection = new MySqlConnection(ConnectionString);
-                connection.Open();
-                using (var cmd = connection.CreateCommand())
-                {
-                    cmd.CommandText = $"SELECT * FROM {this.TableName}";
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            logentries.Add(new LogEntryModel(
-                                reader.GetInt32("Id"),
-                                reader.GetString("Pod"),
-                                reader.GetValue(reader.GetOrdinal("Location")) as string,
-                                reader.GetString("Hostname"),
-                                reader.GetInt32("Severity"),
-                                reader.GetDateTime("Timestamp"),
-                                reader.GetString("Message")
-                                ));
-                        }
-                    }
-                }
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-            }
-            return logentries;
-        }
-
-        public override List<LogEntryModel> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
-        {
-            var logentries = new List<LogEntryModel>();
-            if (string.IsNullOrEmpty(whereCondition))
-            {
-                MessageBox.Show("WhereCondition darf nicht leer sein!");
-            }
-            else
-            {
-                try
-                {
-                    var connection = new MySqlConnection(ConnectionString);
-                    connection.Open();
-                    using (var cmd = connection.CreateCommand())
-                    {
-                        cmd.CommandText = $"SELECT * FROM {this.TableName} WHERE {whereCondition}";
-                        foreach (KeyValuePair<string, object> entry in parameterValues)
-                        {
-                            cmd.Parameters.AddWithValue(entry.Key.ToString(), entry.Value);
-                        }
-                        using (var reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                logentries.Add(new LogEntryModel(
-                                    reader.GetInt32("Id"),
-                                    reader.GetString("Pod"),
-                                    reader.GetValue(reader.GetOrdinal("Location")) as string,
-                                    reader.GetString("Hostname"),
-                                    reader.GetInt32("Severity"),
-                                    reader.GetDateTime("Timestamp"),
-                                    reader.GetString("Message")
-                                ));
-                            }
-                        }
-                    }
-                    connection.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-                }
-            }
-            return logentries;
+            throw new NotSupportedException();
         }
     }
 }

@@ -6,202 +6,58 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Linq;
+using System.Data;
 
 namespace MonitoringClient.Repository
 {
     class LocationModelRepository : RepositoryBase<LocationModel>
     {
         public override string TableName { get; }
+        public override string PrimaryKey => "id";
+        public override string InsertIntoEntityFieldForSqlStatement => "parent_location, address_fk, designation, building, room";
 
         public LocationModelRepository()
         {
             TableName = "Location";
         }
-      
-        public override LocationModel GetSingle<P>(P pkValue)
-        {
-            var item = new LocationModel();
-            try
-            {
-                var connection = new MySqlConnection(ConnectionString);
-                connection.Open();
-                using (var cmd = connection.CreateCommand())
-                {
-                    cmd.CommandText = $"SELECT * FROM {this.TableName} WHERE location_id = @primaryKey";
-                    cmd.Parameters.AddWithValue("@primaryKey", pkValue);
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            item = (new LocationModel(
-                                reader.GetInt32("location_id"),
-                                reader.GetInt32("parent_location"),
-                                reader.GetInt32("address_fk"),
-                                reader.GetValue(reader.GetOrdinal("designation")) as string,
-                                reader.GetInt32("building"),
-                                reader.GetInt32("room")
-                                ));
-                        }
-                    }
-                }
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-            }
-            return item;
-        }
 
-        public override void Add(LocationModel entity)
-        {
-            try
-            {
-                var connection = new MySqlConnection(ConnectionString);
-                connection.Open();
-                using (var cmd = connection.CreateCommand())
-                {
-                    cmd.CommandText = $"INSERT INTO {this.TableName} (parent_location, address_fk, designation, building, room) VALUES (@parent_location, @address_fk, @designation, @building, @room)";
-                    cmd.Parameters.AddWithValue("@parent_location", entity.ParentLocation);
-                    cmd.Parameters.AddWithValue("@address_fk", entity.Addressnumber);
-                    cmd.Parameters.AddWithValue("@designation", entity.Designation);
-                    cmd.Parameters.AddWithValue("@building", entity.Building);
-                    cmd.Parameters.AddWithValue("@room", entity.Room);
-                    cmd.ExecuteNonQuery();
-                }
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-            }
-        }
-
-        public override void Delete(LocationModel entity)
-        {
-            try
-            {
-                var connection = new MySqlConnection(ConnectionString);
-                connection.Open();
-                using (var cmd = connection.CreateCommand())
-                {
-                    cmd.CommandText = $"DELETE FROM {this.TableName} WHERE location_id = @location_id";
-                    cmd.Parameters.AddWithValue("@location_id", entity.Id);
-                    cmd.ExecuteNonQuery();
-                }
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-            }
-        }
-
-        public override void Update(LocationModel entity)
-        {
-            try
-            {
-                var connection = new MySqlConnection(ConnectionString);
-                connection.Open();
-                using (var cmd = connection.CreateCommand())
-                {
-                    cmd.CommandText = $"UPDATE {this.TableName} SET parent_location = @parent_location, address_fk = @address_fk, designation = @designation, building = @building, room = @room  WHERE location_id = @location_id";
-                    cmd.Parameters.AddWithValue("@location_id", entity.Id);
-                    cmd.Parameters.AddWithValue("@parent_location", entity.ParentLocation);
-                    cmd.Parameters.AddWithValue("@address_fk", entity.Addressnumber);
-                    cmd.Parameters.AddWithValue("@designation", entity.Designation);
-                    cmd.Parameters.AddWithValue("@building", entity.Building);
-                    cmd.Parameters.AddWithValue("@room", entity.Room);
-                    var finish = cmd.ExecuteNonQuery();
-                    if (finish == 1)
-                    {
-                        MessageBox.Show("Update erfolgreich!");
-                    }
-                }
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-            }
-        }
-        public override List<LocationModel> GetAll()
+        public override List<LocationModel> GetEntitiesFromDB(MySqlDataReader reader)
         {
             var locations = new List<LocationModel>();
-            try
+            while (reader.Read())
             {
-                var connection = new MySqlConnection(ConnectionString);
-                connection.Open();
-                using (var cmd = connection.CreateCommand())
-                {
-                    cmd.CommandText = $"SELECT * FROM {this.TableName}";
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            locations.Add(new LocationModel(
-                                reader.GetInt32("location_id"),
-                                reader.GetInt32("parent_location"),
-                                reader.GetInt32("address_fk"),
-                                reader.GetValue(reader.GetOrdinal("designation")) as string,
-                                reader.GetInt32("building"),
-                                reader.GetInt32("room")
-                                ));
-                        }
-                    }
-                }
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+                locations.Add(new LocationModel(
+                    reader.GetInt32("location_id"),
+                    reader.GetInt32("parent_location"),
+                    reader.GetInt32("address_fk"),
+                    reader.GetValue(reader.GetOrdinal("designation")) as string,
+                    reader.GetInt32("building"),
+                    reader.GetInt32("room")
+                ));
             }
             return locations;
         }
 
-        public override List<LocationModel> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
+        public override LocationModel GetEntityFromDB(MySqlDataReader reader)
         {
-            var locations = new List<LocationModel>();
-            if (string.IsNullOrEmpty(whereCondition))
+            var location = new LocationModel();
+            while (reader.Read())
             {
-                MessageBox.Show("WhereCondition darf nicht leer sein!");
+                location = new LocationModel(
+                    reader.GetInt32("location_id"),
+                    reader.GetInt32("parent_location"),
+                    reader.GetInt32("address_fk"),
+                    reader.GetValue(reader.GetOrdinal("designation")) as string,
+                    reader.GetInt32("building"),
+                    reader.GetInt32("room")
+                );
             }
-            else
-            {
-                try
-                {
-                    var connection = new MySqlConnection(ConnectionString);
-                    connection.Open();
-                    using (var cmd = connection.CreateCommand())
-                    {
-                        cmd.CommandText = $"SELECT * FROM {this.TableName} WHERE {whereCondition}";
-                        foreach (KeyValuePair<string, object> entry in parameterValues)
-                        {
-                            cmd.Parameters.AddWithValue(entry.Key.ToString(), entry.Value);
-                        }
-                        using (var reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                locations.Add(new LocationModel(
-                                    reader.GetInt32("location_id"),
-                                    reader.GetInt32("parent_location"),
-                                    reader.GetInt32("address_fk"),
-                                    reader.GetValue(reader.GetOrdinal("designation")) as string,
-                                    reader.GetInt32("building"),
-                                    reader.GetInt32("room")
-                                    ));
-                            }
-                        }
-                    }
-                    connection.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-                }
-            }
-            return locations;
+            return location;
+        }
+
+        public override string SqlStatementValues(LocationModel entity)
+        {
+            return $"parent_location = {entity.ParentLocation}, address_fk = {entity.Addressnumber}, designation = {entity.Designation}, building = {entity.Building}, room = {entity.Room}";
         }
     }
 }

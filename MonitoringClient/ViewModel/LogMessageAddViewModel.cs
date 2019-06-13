@@ -12,8 +12,8 @@ namespace MonitoringClient.ViewModel
         private readonly Action<object> navigateToLogEntryView;
         private bool _validationOk;
         private LogEntryModelRepository _logentriesModelRepository;
-        public BaseCommand NavigateAndSave { get; set; }
-        public BaseCommand NavigateBack { get; set; }
+        public ICommand NavigateAndSave { get; set; }
+        public ICommand NavigateBack { get; set; }
         public string POD { set; get; }
         public string Hostname { get; set; }
         public string Severity { get; set; }

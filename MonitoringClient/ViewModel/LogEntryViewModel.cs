@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 
 namespace MonitoringClient.ViewModel
 {
@@ -21,8 +22,8 @@ namespace MonitoringClient.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public BaseCommand NavigateLogMessageAddView { get; set; }
-        public BaseCommand NavigateLocationView { get; set; }
+        public ICommand NavigateLogMessageAddView { get; set; }
+        public ICommand NavigateLocationView { get; set; }
         public ObservableCollection<LogEntryModel> Logentries
         {
             get { return _logentries; }
