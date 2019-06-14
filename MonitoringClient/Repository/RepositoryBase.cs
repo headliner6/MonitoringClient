@@ -130,7 +130,7 @@ namespace MonitoringClient.Repository
                 using (var cmd = connection.CreateCommand())
                 {
                     cmd.CommandText = $"DELETE FROM {this.TableName} WHERE {PrimaryKey} = {entity.Id}";
-                    var finish = cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                 }
                 connection.Close();
             }
@@ -149,7 +149,6 @@ namespace MonitoringClient.Repository
                 using (var cmd = connection.CreateCommand())
                 {
                     cmd.CommandText = $"UPDATE {this.TableName} SET {SqlStatementValues(entity)}  WHERE {PrimaryKey} = {entity.Id}";
-
                     var finish = cmd.ExecuteNonQuery();
                     if (finish == 1)
                     {

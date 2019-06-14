@@ -13,7 +13,7 @@ namespace MonitoringClient.Repository
     {
         public override string TableName { get; }
         public override string PrimaryKey { get { return "id"; } }
-        public override string InsertIntoEntityFieldForSqlStatement { get { throw new NotSupportedException(); } }
+        public override string InsertIntoEntityFieldForSqlStatement { get { return "pod, location, hostname, severity, timestamp, message"; } }
 
         public LogEntryModelRepository()
         {
@@ -118,7 +118,7 @@ namespace MonitoringClient.Repository
 
         public override string SqlStatementValues(LogEntryModel entity)
         {
-            throw new NotSupportedException();
+            return $"pod = {entity.Pod}, location = {entity.Location}, hostname = {entity.Hostname}, severity = {entity.Severity}, timestamp = {entity.Timestamp}, message = {entity.Message}";
         }
     }
 }
