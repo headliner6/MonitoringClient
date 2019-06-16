@@ -116,9 +116,14 @@ namespace MonitoringClient.Repository
             throw new NotSupportedException();
         }
 
-        public override string SqlStatementValues(LogEntryModel entity)
+        public override string UpdateSqlStatementValues(LogEntryModel entity)
         {
-            return $"pod = {entity.Pod}, location = {entity.Location}, hostname = {entity.Hostname}, severity = {entity.Severity}, timestamp = {entity.Timestamp}, message = {entity.Message}";
+            return $"pod = '{entity.Pod}', location = '{entity.Location}', hostname = '{entity.Hostname}', severity = {entity.Severity}, timestamp = {entity.Timestamp}, message = '{entity.Message}'";
+        }
+
+        public override string AddSqlStatementValues(LogEntryModel entity)
+        {
+            return $"pod = '{entity.Pod}', location = '{entity.Location}', hostname = '{entity.Hostname}', severity = {entity.Severity}, timestamp = {entity.Timestamp}, message = '{entity.Message}'";
         }
     }
 }

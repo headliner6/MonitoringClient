@@ -13,7 +13,7 @@ namespace MonitoringClient.Repository
     class LocationModelRepository : RepositoryBase<LocationModel>
     {
         public override string TableName { get; }
-        public override string PrimaryKey { get { return "id"; } }
+        public override string PrimaryKey { get { return "location_id"; } }
         public override string InsertIntoEntityFieldForSqlStatement { get { return "parent_location, address_fk, designation, building, room"; } }
         public LocationModelRepository()
         {
@@ -39,7 +39,7 @@ namespace MonitoringClient.Repository
 
         public override LocationModel GetEntityFromDB(MySqlDataReader reader)
         {
-            var location = new LocationModel();
+           var location = new LocationModel();
             while (reader.Read())
             {
                 location = new LocationModel(
@@ -54,9 +54,14 @@ namespace MonitoringClient.Repository
             return location;
         }
 
-        public override string SqlStatementValues(LocationModel entity)
+        public override string UpdateSqlStatementValues(LocationModel entity)
         {
-            return $"parent_location = {entity.ParentLocation}, address_fk = {entity.Addressnumber}, designation = {entity.Designation}, building = {entity.Building}, room = {entity.Room}";
+            return $"parent_location = {entity.ParentLocation}, address_fk = {entity.Addressnumber}, designation = '{entity.Designation}', building = {entity.Building}, room = {entity.Room}";
+        }
+
+        public override string AddSqlStatementValues(LocationModel entity)
+        {
+            return $"{entity.ParentLocation},{entity.Addressnumber},'{entity.Designation}', {entity.Building}, {entity.Room}";
         }
     }
 }

@@ -21,12 +21,13 @@ namespace MonitoringClient.Repository
 
         protected RepositoryBase()
         {
-            this.ConnectionString = "Server = localhost; Database = ; Uid = root; Pwd = ;";
+            this.ConnectionString = "Server = localhost; Database = ; Uid = root; Pwd = ;"
         }
 
         public abstract List<M> GetEntitiesFromDB(MySqlDataReader reader);
         public abstract M GetEntityFromDB(MySqlDataReader reader);
-        public abstract string SqlStatementValues(M entity);
+        public abstract string UpdateSqlStatementValues(M entity);
+        public abstract string AddSqlStatementValues(M entity);
 
         public long Count(string whereCondition, Dictionary<string, object> parameterValues)
         {
@@ -73,21 +74,18 @@ namespace MonitoringClient.Repository
 
         public M GetSingle<P>(P pkValue)
         {
-            M entity = new M();
+            var entity = new M();
             try
             {
                 var connection = new MySqlConnection(ConnectionString);
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = $"SELECT * FROM {this.TableName} WHERE {this.PrimaryKey} = @primaryKey";
+                    cmd.CommandText = $"SELECT * FROM {this.TableName} WHERE {this.PrimaryKey} = @primaryKey;";
                     cmd.Parameters.AddWithValue("@primaryKey", pkValue);
                     using (var reader = cmd.ExecuteReader())
                     {
-                        while (reader.Read())
-                        {
                             entity = GetEntityFromDB(reader);
-                        }
                     }
                 }
                 connection.Close();
@@ -108,8 +106,8 @@ namespace MonitoringClient.Repository
                 using (var cmd = connection.CreateCommand())
                 {
                     cmd.CommandText = $"INSERT INTO {this.TableName}" +
-                        $"{InsertIntoEntityFieldForSqlStatement}" +
-                        $"VALUES ({SqlStatementValues(entity)})";
+                        $" ({InsertIntoEntityFieldForSqlStatement}) "  +
+                        $"VALUES ({AddSqlStatementValues(entity)});";
   
                     cmd.ExecuteNonQuery();
                 }
@@ -148,7 +146,7 @@ namespace MonitoringClient.Repository
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = $"UPDATE {this.TableName} SET {SqlStatementValues(entity)}  WHERE {PrimaryKey} = {entity.Id}";
+                    cmd.CommandText = $"UPDATE {this.TableName} SET {UpdateSqlStatementValues(entity)}  WHERE {PrimaryKey} = {entity.Id};";
                     var finish = cmd.ExecuteNonQuery();
                     if (finish == 1)
                     {
