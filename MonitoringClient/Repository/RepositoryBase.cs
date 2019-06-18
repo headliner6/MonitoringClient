@@ -219,5 +219,10 @@ namespace MonitoringClient.Repository
             }
             return entities;
         } // funktioniert, 16.06.2019
+
+        public IQueryable<M> Query(string whereCondition, Dictionary<string, object> parameterValues)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

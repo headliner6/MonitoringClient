@@ -51,7 +51,7 @@ namespace MonitoringClient.Repository
         /// <returns></returns>
         List<M> GetAll();
 
-        //IQueryable<M> Query(string whereCondition, Dictionary<string, object> parameterValues);
+        IQueryable<M> Query(string whereCondition, Dictionary<string, object> parameterValues);
 
         /// <summary>
         /// Zählt in der Datenbank die Anzahl Model-Objekte vom Typ M, die der
