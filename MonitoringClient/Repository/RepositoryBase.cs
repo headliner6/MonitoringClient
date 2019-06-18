@@ -31,6 +31,10 @@ namespace MonitoringClient.Repository
 
         public long Count(string whereCondition, Dictionary<string, object> parameterValues)
         {
+            if (string.IsNullOrEmpty(whereCondition))
+            {
+                MessageBox.Show("WhereCondition darf nicht leer sein!");
+            }
             try
             {
                 var connection = new MySqlConnection(ConnectionString);
@@ -219,10 +223,5 @@ namespace MonitoringClient.Repository
             }
             return entities;
         } // funktioniert, 16.06.2019
-
-        public IQueryable<M> Query(string whereCondition, Dictionary<string, object> parameterValues)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
