@@ -1,17 +1,26 @@
 ﻿using DuplicateCheckerLib;
+using LinqToDB.Mapping;
 using MonitoringClient.Services;
 using System;
 
 namespace MonitoringClient.Model
 {
+    [Table ("v_logentries")]
     public class LogEntryModel : IEntity, IModel
     {
+        [Column ("id"), PrimaryKey, NotNull]
         public int Id { get; set; }
+        [Column ("POD")]
         public string Pod { get; set; }
+        [Column ("LOCATION")]
         public string Location { get; set; }
+        [Column ("HOSTNAME")]
         public string Hostname { get; set; }
+        [Column ("SEVERITY")]
         public int Severity { get; set; }
+        [Column ("TIMESTAMP")]
         public DateTime Timestamp { get; set; }
+        [Column ("MESSAGE")]
         public string Message { get; set; }
 
         public LogEntryModel() { }
