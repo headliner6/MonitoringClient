@@ -21,7 +21,7 @@ namespace MonitoringClient.Repository
 
         protected RepositoryBase()
         {
-            this.ConnectionString = "Server = localhost; Database = ; Uid = root; Pwd = ;"
+            this.ConnectionString = "Server = localhost; Database = ; Uid = root; Pwd = ;";
         }
 
         public abstract List<M> GetEntitiesFromDB(MySqlDataReader reader);
@@ -31,6 +31,10 @@ namespace MonitoringClient.Repository
 
         public long Count(string whereCondition, Dictionary<string, object> parameterValues)
         {
+            if (string.IsNullOrEmpty(whereCondition))
+            {
+                MessageBox.Show("WhereCondition darf nicht leer sein!");
+            }
             try
             {
                 var connection = new MySqlConnection(ConnectionString);
