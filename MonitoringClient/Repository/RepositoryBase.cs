@@ -29,29 +29,44 @@ namespace MonitoringClient.Repository
         public abstract List<M> GetEntitiesFromDB(MySqlDataReader reader);
         public long Count(string whereCondition, Dictionary<string, object> parameterValues)
         {
-            if (string.IsNullOrEmpty(whereCondition))
-            {
-                MessageBox.Show("WhereCondition darf nicht leer sein!");
-            }
             try
             {
-                var connection = new MySqlConnection(ConnectionString);
-                connection.Open();
-                using (var cmd = connection.CreateCommand())
+                using (var context = new DataContext(DbProvider, ConnectionString))
                 {
-                    cmd.CommandText = $"SELECT COUNT(*) FROM {this.TableName} WHERE {whereCondition}";
-                    foreach (KeyValuePair<string, object> entry in parameterValues)
-                    {
-                        cmd.Parameters.AddWithValue(entry.Key.ToString(), entry.Value);
-                    }
-                    return (long)cmd.ExecuteScalar();
+                    var table = context.GetTable<M>();
+                    //IQueryable<M> tableQuery = table.Where(row =>)
+                    return 0;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-                return 0;
+                throw ex;
             }
+
+            //if (string.IsNullOrEmpty(whereCondition))
+            //{
+            //    MessageBox.Show("WhereCondition darf nicht leer sein!");
+            //}
+            //try
+            //{
+            //    var connection = new MySqlConnection(ConnectionString);
+            //    connection.Open();
+            //    using (var cmd = connection.CreateCommand())
+            //    {
+            //        cmd.CommandText = $"SELECT COUNT(*) FROM {this.TableName} WHERE {whereCondition}";
+            //        foreach (KeyValuePair<string, object> entry in parameterValues)
+            //        {
+            //            cmd.Parameters.AddWithValue(entry.Key.ToString(), entry.Value);
+            //        }
+            //        return (long)cmd.ExecuteScalar();
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+            //    return 0;
+            //}
         } // funktioniert, 16.06.2019
 
         public long Count()
