@@ -18,8 +18,6 @@ namespace MonitoringClient.Repository
     {
         public abstract string TableName { get; }
         public string ConnectionString { get; set; } // "Server = localhost; Database = inventarisierungsloesung; Uid = root; Pwd = password;"
-        public abstract string PrimaryKey { get; }
-        public abstract string InsertIntoEntityFieldForSqlStatement { get; }
         public string DbProvider { get; }
 
         protected RepositoryBase()
@@ -29,10 +27,6 @@ namespace MonitoringClient.Repository
         }
 
         public abstract List<M> GetEntitiesFromDB(MySqlDataReader reader);
-        public abstract M GetEntityFromDB(MySqlDataReader reader);
-        public abstract string UpdateSqlStatementValues(M entity);
-        public abstract string AddSqlStatementValues(M entity);
-
         public long Count(string whereCondition, Dictionary<string, object> parameterValues)
         {
             if (string.IsNullOrEmpty(whereCondition))
@@ -98,65 +92,52 @@ namespace MonitoringClient.Repository
         {
             try
             {
-                var connection = new MySqlConnection(ConnectionString);
-                connection.Open();
-                using (var cmd = connection.CreateCommand())
+                using (var context = new DataContext(DbProvider, ConnectionString))
                 {
-                    cmd.CommandText = $"INSERT INTO {this.TableName}" +
-                        $" ({InsertIntoEntityFieldForSqlStatement}) " +
-                        $"VALUES ({AddSqlStatementValues(entity)});";
-
-                    cmd.ExecuteNonQuery();
+                    context.Insert<M>(entity);
                 }
-                connection.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+                throw ex;
             }
-        } // funktioniert, 16.06.2019
+        } // funktioniert, 19.06.2019 inkl. LINQ
 
         public virtual void Delete(M entity)
         {
             try
             {
-                var connection = new MySqlConnection(ConnectionString);
-                connection.Open();
-                using (var cmd = connection.CreateCommand())
+                using (var context = new DataContext(DbProvider, ConnectionString))
                 {
-                    cmd.CommandText = $"DELETE FROM {this.TableName} WHERE {PrimaryKey} = {entity.Id}";
-                    cmd.ExecuteNonQuery();
+                    context.Delete<M>(entity);
                 }
-                connection.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
-        } // funktioniert, 16.06.2019
+        } // funktioniert, 19.06.2019 inkl. LINQ
 
         public virtual void Update(M entity)
         {
             try
             {
-                var connection = new MySqlConnection(ConnectionString);
-                connection.Open();
-                using (var cmd = connection.CreateCommand())
+                using (var context = new DataContext(DbProvider, ConnectionString))
                 {
-                    cmd.CommandText = $"UPDATE {this.TableName} SET {UpdateSqlStatementValues(entity)}  WHERE {PrimaryKey} = {entity.Id};";
-                    var finish = cmd.ExecuteNonQuery();
+                    var finish = context.Update<M>(entity);
                     if (finish == 1)
                     {
                         MessageBox.Show("Update erfolgreich!");
                     }
                 }
-                connection.Close();
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
-        } // funktioniert, 16.06.2019
+        } // funktioniert, 19.06.2019 inkl. LINQ
 
         public IQueryable<M> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
         {
