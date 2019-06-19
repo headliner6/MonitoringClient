@@ -78,18 +78,13 @@ namespace MonitoringClient.Repository
 
         public M GetSingle<P>(P pkValue)
         {
-            var entity = new M();
             try
             {
                 using (var context = new DataContext(DbProvider, ConnectionString))
                 {
                     var table = context.GetTable<M>();
                     IQueryable<M> tableQuery = table.Where(row => row.Id.Equals(pkValue));
-                    foreach (var e in tableQuery)
-                    {
-                        entity = e;
-                    }
-                    return entity;
+                    return tableQuery.FirstOrDefault();
                 }
             }
             catch (Exception ex)
