@@ -58,7 +58,6 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                 return 0;
             }
-
         } // funktioniert, 16.06.2019
 
         public long Count()
@@ -67,14 +66,13 @@ namespace MonitoringClient.Repository
             {
                 using (var context = new DataContext(DbProvider, ConnectionString))
                 {
-                    var table = context.GetTable<M>();
-                    return table.Count();
+                   return context.GetTable<M>().Count();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-                return 0;
+                throw ex;
             }
         } // funktioniert, 16.06.2019 inkl. LINQ
 
