@@ -78,7 +78,7 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                 return 0;
             }
-        } // funktioniert, 16.06.2019
+        } // funktioniert, 16.06.2019 inkl. LINQ
 
         public M GetSingle<P>(P pkValue)
         {
