@@ -63,5 +63,11 @@ namespace MonitoringClient.Repository
         {
             return $"{entity.ParentLocation},{entity.Addressnumber},'{entity.Designation}', {entity.Building}, {entity.Room}";
         }
+
+        public void Test(DataContext context)
+        {
+            var locations = context.GetTable<LocationModel>();
+            IQueryable<LocationModel> locationQuery = locations.Where(l => l.Id.Equals(PrimaryKey));
+        }
     }
 }

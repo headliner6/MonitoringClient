@@ -74,32 +74,30 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                 throw ex;
             }
-        } // funktioniert, 16.06.2019 inkl. LINQ
+        } // funktioniert, 19.06.2019 inkl. LINQ
 
         public M GetSingle<P>(P pkValue)
         {
             var entity = new M();
             try
             {
-                var connection = new MySqlConnection(ConnectionString);
-                connection.Open();
-                using (var cmd = connection.CreateCommand())
+                using (var context = new DataContext(DbProvider, ConnectionString))
                 {
-                    cmd.CommandText = $"SELECT * FROM {this.TableName} WHERE {this.PrimaryKey} = @primaryKey;";
-                    cmd.Parameters.AddWithValue("@primaryKey", pkValue);
-                    using (var reader = cmd.ExecuteReader())
+                    var table = context.GetTable<M>();
+                    IQueryable<M> tableQuery = table.Where(row => row.Id.Equals(pkValue));
+                    foreach (var e in tableQuery)
                     {
-                        entity = GetEntityFromDB(reader);
+                        entity = e;
                     }
+                    return entity;
                 }
-                connection.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+                throw ex;
             }
-            return entity;
-        }// funktioniert, 16.06.2019
+        }// funktioniert, 19.06.2019 inkl. LINQ
 
         public virtual void Add(M entity)
         {
@@ -214,6 +212,6 @@ namespace MonitoringClient.Repository
                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                throw ex;
             }
-        } // funktioniert, 16.06.2019 inkl. LINQ
+        } // funktioniert, 19.06.2019 inkl. LINQ
     }
 }
