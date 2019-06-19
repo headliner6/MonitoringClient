@@ -206,27 +206,19 @@ namespace MonitoringClient.Repository
 
         public IQueryable<M> GetAll()
         {
-            var entities = new List<M>();
             try
             {
-                var connection = new MySqlConnection(ConnectionString);
-                connection.Open();
-                using (var cmd = connection.CreateCommand())
+                using (var context = new DataContext(_dbProvider, ConnectionString))
                 {
-                    cmd.CommandText = $"SELECT * FROM {this.TableName}";
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        entities = GetEntitiesFromDB(reader);
-                    }
+                    return context.GetTable<M>();
                 }
-                connection.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
-            return entities.AsQueryable();
-        } // funktioniert, 16.06.2019
-        
+            return null;
+        } // funktioniert, 16.06.2019 inkl. LINQ
+
     }
 }
