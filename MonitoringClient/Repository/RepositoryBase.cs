@@ -165,7 +165,7 @@ namespace MonitoringClient.Repository
             }
         } // funktioniert, 16.06.2019
 
-        public List<M> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
+        public IQueryable<M> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
         {
             var entities = new List<M>();
             if (string.IsNullOrEmpty(whereCondition))
@@ -197,10 +197,10 @@ namespace MonitoringClient.Repository
                     MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                 }
             }
-            return entities;
+            return entities.AsQueryable();
         } // funktioniert, 16.06.2019
 
-        public List<M> GetAll()
+        public IQueryable<M> GetAll()
         {
             var entities = new List<M>();
             try
@@ -221,7 +221,7 @@ namespace MonitoringClient.Repository
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
-            return entities;
+            return entities.AsQueryable();
         } // funktioniert, 16.06.2019
     }
 }

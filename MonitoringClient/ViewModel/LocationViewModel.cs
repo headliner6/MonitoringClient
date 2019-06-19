@@ -46,7 +46,7 @@ namespace MonitoringClient.ViewModel
         {
             _locationModelRepository.ConnectionString = ConnectionString;
             var locationTreeBuilder = new LocationTreeBuilder();
-            var locations = _locationModelRepository.GetAll();
+            var locations = _locationModelRepository.GetAll().ToList();
             locations.Sort((x, y) => x.ParentLocation.CompareTo(y.ParentLocation));
             Locations = locationTreeBuilder.BuildTree(locations);
         }

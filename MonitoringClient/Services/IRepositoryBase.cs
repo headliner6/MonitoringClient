@@ -44,12 +44,12 @@ namespace MonitoringClient.Repository
         /// <param name="parameterValues">Parameter-Werte für die Wherebedingung
         /// bspw: {{"netPrice", 10.5}, {"active", true}, {"desc", "Wolle%"}}</param>
         /// <returns></returns>
-        List<M> GetAll(string whereCondition, Dictionary<string, object> parameterValues);
+        IQueryable<M> GetAll(string whereCondition, Dictionary<string, object> parameterValues);
         /// <summary>
         /// Gibt eine Liste aller in der DB vorhandenen Model-Objekte vom Typ M zurück
         /// </summary>
         /// <returns></returns>
-        List<M> GetAll();
+        IQueryable<M> GetAll();
         /// <summary>
         /// Zählt in der Datenbank die Anzahl Model-Objekte vom Typ M, die der
         /// Where-Bedingung entsprechen

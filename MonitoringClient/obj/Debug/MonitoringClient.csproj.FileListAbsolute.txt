@@ -282,3 +282,6 @@ D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\View\LogEntryView.baml
 C:\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\View\LocationView.g.cs
 C:\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\View\LocationView.baml
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\linq2db.dll
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\linq2db.pdb
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\linq2db.xml
