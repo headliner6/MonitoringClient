@@ -1,4 +1,6 @@
-﻿using MonitoringClient.Services;
+﻿using LinqToDB;
+using MonitoringClient.Model;
+using MonitoringClient.Services;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -12,16 +14,20 @@ using System.Windows;
 namespace MonitoringClient.Repository
 {
     public abstract class RepositoryBase<M> : IRepositoryBase<M>
-        where M : IModel, new()
+        where M : class, IModel, new()
     {
         public abstract string TableName { get; }
         public string ConnectionString { get; set; } // "Server = localhost; Database = inventarisierungsloesung; Uid = root; Pwd = password;"
         public abstract string PrimaryKey { get; }
         public abstract string InsertIntoEntityFieldForSqlStatement { get; }
+        private string _dataBase { get; }
+        private string _dbProvider { get; }
 
         protected RepositoryBase()
         {
             this.ConnectionString = "Server = localhost; Database = inventarisierungsloesung; Uid = root; Pwd = password;"/*"Server = localhost; Database = ; Uid = root; Pwd = ;"*/;
+            this._dataBase = "inventarisierungsloesung";
+            this._dbProvider = "MySql";
         }
 
         public abstract List<M> GetEntitiesFromDB(MySqlDataReader reader);
@@ -61,12 +67,10 @@ namespace MonitoringClient.Repository
         {
             try
             {
-                var connection = new MySqlConnection(ConnectionString);
-                connection.Open();
-                using (var cmd = connection.CreateCommand())
+                using (var context = new DataContext(_dbProvider, ConnectionString))
                 {
-                    cmd.CommandText = $"select count(*) from {this.TableName}";
-                    return (long)cmd.ExecuteScalar();
+                    var table = context.GetTable<M>();
+                    return table.Count();
                 }
             }
             catch (Exception ex)
@@ -223,5 +227,6 @@ namespace MonitoringClient.Repository
             }
             return entities.AsQueryable();
         } // funktioniert, 16.06.2019
+        
     }
 }

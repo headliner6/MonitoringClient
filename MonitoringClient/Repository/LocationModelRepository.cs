@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Linq;
 using System.Data;
+using LinqToDB;
 
 namespace MonitoringClient.Repository
 {
@@ -17,7 +18,7 @@ namespace MonitoringClient.Repository
         public override string InsertIntoEntityFieldForSqlStatement { get { return "parent_location, address_fk, designation, building, room"; } }
         public LocationModelRepository()
         {
-            TableName = "Location";
+            TableName = "location";
         }
 
         public override List<LocationModel> GetEntitiesFromDB(MySqlDataReader reader)
