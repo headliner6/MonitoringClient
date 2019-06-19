@@ -20,14 +20,12 @@ namespace MonitoringClient.Repository
         public string ConnectionString { get; set; } // "Server = localhost; Database = inventarisierungsloesung; Uid = root; Pwd = password;"
         public abstract string PrimaryKey { get; }
         public abstract string InsertIntoEntityFieldForSqlStatement { get; }
-        private string _dataBase { get; }
-        private string _dbProvider { get; }
+        public string DbProvider { get; }
 
         protected RepositoryBase()
         {
             this.ConnectionString = "Server = localhost; Database = inventarisierungsloesung; Uid = root; Pwd = password;"/*"Server = localhost; Database = ; Uid = root; Pwd = ;"*/;
-            this._dataBase = "inventarisierungsloesung";
-            this._dbProvider = "MySql";
+            this.DbProvider = "MySql";
         }
 
         public abstract List<M> GetEntitiesFromDB(MySqlDataReader reader);
@@ -67,7 +65,7 @@ namespace MonitoringClient.Repository
         {
             try
             {
-                using (var context = new DataContext(_dbProvider, ConnectionString))
+                using (var context = new DataContext(DbProvider, ConnectionString))
                 {
                     var table = context.GetTable<M>();
                     return table.Count();
@@ -208,17 +206,16 @@ namespace MonitoringClient.Repository
         {
             try
             {
-                using (var context = new DataContext(_dbProvider, ConnectionString))
+                using (var context = new DataContext(DbProvider, ConnectionString))
                 {
                     return context.GetTable<M>();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+               MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+               throw ex;
             }
-            return null;
         } // funktioniert, 16.06.2019 inkl. LINQ
-
     }
 }
