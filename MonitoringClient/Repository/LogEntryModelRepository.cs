@@ -21,10 +21,9 @@ namespace MonitoringClient.Repository
             try
             {
                 using (var dataConnection = new DataConnection(DbProvider, ConnectionString))
-                {
+                {   
                     dataConnection.QueryProc<LogEntryModel>("LogClear", new DataParameter("@_logentries_id", id));
                 }
-
             }
             catch (Exception ex)
             {
@@ -44,7 +43,6 @@ namespace MonitoringClient.Repository
                         new DataParameter("@i_severity", severity),
                         new DataParameter("@i_message", message));
                 }
-
             }
             catch (Exception ex)
             {
