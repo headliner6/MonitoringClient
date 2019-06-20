@@ -28,7 +28,7 @@ namespace MonitoringClient.Repository
         }
 
         public abstract List<M> GetEntitiesFromDB(MySqlDataReader reader);
-        public long Count(Expression <Func<M, bool>> whereCondition) // Parameter als Query / Delegate --> Query in den einzelnen Repos erstellen. Ohne Dictionary etc.
+        public long Count(Expression <Func<M, bool>> whereCondition)
         {
             try
             {
