@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,7 +45,7 @@ namespace MonitoringClient.Repository
         /// <param name="parameterValues">Parameter-Werte für die Wherebedingung
         /// bspw: {{"netPrice", 10.5}, {"active", true}, {"desc", "Wolle%"}}</param>
         /// <returns></returns>
-        IQueryable<M> GetAll(string whereCondition, Dictionary<string, object> parameterValues);
+        IQueryable<M> GetAll(Expression<Func<M, bool>> whereCondition);
         /// <summary>
         /// Gibt eine Liste aller in der DB vorhandenen Model-Objekte vom Typ M zurück
         /// </summary>
@@ -60,7 +61,7 @@ namespace MonitoringClient.Repository
         /// <param name="parameterValues">Parameter-Werte für die Wherebedingung
         /// bspw: {{"netPrice", 10.5}, {"active", true}, {"desc", "Wolle%"}}</param>
         /// <returns></returns>
-        long Count(string whereCondition, Dictionary<string, object> parameterValues);
+        long Count(Expression<Func<M, bool>> whereCondition);
         /// <summary>
         /// Zählt alle Model-Objekte vom Typ M
         /// </summary>

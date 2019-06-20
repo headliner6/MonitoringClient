@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,15 +28,13 @@ namespace MonitoringClient.Repository
         }
 
         public abstract List<M> GetEntitiesFromDB(MySqlDataReader reader);
-        public long Count(string whereCondition, Dictionary<string, object> parameterValues)
+        public long Count(Expression <Func<M, bool>> whereCondition) // Parameter als Query / Delegate --> Query in den einzelnen Repos erstellen. Ohne Dictionary etc.
         {
             try
             {
                 using (var context = new DataContext(DbProvider, ConnectionString))
                 {
-                    var table = context.GetTable<M>();
-                    //IQueryable<M> tableQuery = table.Where(row =>)
-                    return 0;
+                    return context.GetTable<M>().Where(whereCondition).Count();
                 }
             }
             catch (Exception ex)
@@ -43,30 +42,6 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                 throw ex;
             }
-
-            //if (string.IsNullOrEmpty(whereCondition))
-            //{
-            //    MessageBox.Show("WhereCondition darf nicht leer sein!");
-            //}
-            //try
-            //{
-            //    var connection = new MySqlConnection(ConnectionString);
-            //    connection.Open();
-            //    using (var cmd = connection.CreateCommand())
-            //    {
-            //        cmd.CommandText = $"SELECT COUNT(*) FROM {this.TableName} WHERE {whereCondition}";
-            //        foreach (KeyValuePair<string, object> entry in parameterValues)
-            //        {
-            //            cmd.Parameters.AddWithValue(entry.Key.ToString(), entry.Value);
-            //        }
-            //        return (long)cmd.ExecuteScalar();
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-            //    return 0;
-            //}
         } // funktioniert, 16.06.2019
 
         public long Count()
@@ -154,39 +129,20 @@ namespace MonitoringClient.Repository
             }
         } // funktioniert, 19.06.2019 inkl. LINQ
 
-        public IQueryable<M> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
+        public IQueryable<M> GetAll(Expression<Func<M, bool>> whereCondition)
         {
-            var entities = new List<M>();
-            if (string.IsNullOrEmpty(whereCondition))
+            try
             {
-                MessageBox.Show("WhereCondition darf nicht leer sein!");
-            }
-            else
-            {
-                try
+                using (var context = new DataContext(DbProvider, ConnectionString))
                 {
-                    var connection = new MySqlConnection(ConnectionString);
-                    connection.Open();
-                    using (var cmd = connection.CreateCommand())
-                    {
-                        cmd.CommandText = $"SELECT * FROM {this.TableName} WHERE {whereCondition}";
-                        foreach (KeyValuePair<string, object> entry in parameterValues)
-                        {
-                            cmd.Parameters.AddWithValue(entry.Key.ToString(), entry.Value);
-                        }
-                        using (var reader = cmd.ExecuteReader())
-                        {
-                            entities = GetEntitiesFromDB(reader);
-                        }
-                    }
-                    connection.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+                    return context.GetTable<M>().Where(whereCondition);
                 }
             }
-            return entities.AsQueryable();
+            catch (Exception ex)
+            {
+                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+                throw ex;
+            }
         } // funktioniert, 16.06.2019
 
         public IQueryable<M> GetAll()
