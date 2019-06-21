@@ -48,7 +48,7 @@ namespace MonitoringClient.Repository
             catch (Exception ex)
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-                return 0;
+                throw ex;
             }
 
         }
@@ -68,7 +68,7 @@ namespace MonitoringClient.Repository
             catch (Exception ex)
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-                return 0;
+                throw ex;
             }
         }
 
@@ -108,8 +108,12 @@ namespace MonitoringClient.Repository
                     cmd.CommandText = $"INSERT INTO {this.TableName}" +
                         $" ({InsertIntoEntityFieldForSqlStatement}) "  +
                         $"VALUES ({AddSqlStatementValues(entity)});";
-  
-                    cmd.ExecuteNonQuery();
+
+                    var finish = cmd.ExecuteNonQuery();
+                    if (finish == 1)
+                    {
+                        MessageBox.Show("Hinzufuegen war erfolgreich!");
+                    }
                 }
                 connection.Close();
             }
@@ -128,7 +132,11 @@ namespace MonitoringClient.Repository
                 using (var cmd = connection.CreateCommand())
                 {
                     cmd.CommandText = $"DELETE FROM {this.TableName} WHERE {PrimaryKey} = {entity.Id}";
-                    cmd.ExecuteNonQuery();
+                    var finish = cmd.ExecuteNonQuery();
+                    if (finish == 1)
+                    {
+                        MessageBox.Show("Loeschen war erfolgreich!");
+                    }
                 }
                 connection.Close();
             }
@@ -150,7 +158,7 @@ namespace MonitoringClient.Repository
                     var finish = cmd.ExecuteNonQuery();
                     if (finish == 1)
                     {
-                        MessageBox.Show("Update erfolgreich!");
+                        MessageBox.Show("Update war erfolgreich!");
                     }
                 }
                 connection.Close();
