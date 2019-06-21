@@ -1,9 +1,15 @@
 ﻿using LinqToDB;
+using MonitoringClient.Model;
 using MonitoringClient.Services;
+using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace MonitoringClient.Repository
@@ -12,19 +18,16 @@ namespace MonitoringClient.Repository
         where M : class, IModel, new()
     {
         public abstract string TableName { get; }
-        public string ConnectionString { get; set; }
+        public string ConnectionString { get; set; } // "Server = localhost; Database = inventarisierungsloesung; Uid = root; Pwd = password;"
         public string DbProvider { get; }
 
         protected RepositoryBase()
         {
-            this.ConnectionString = "Server = localhost; Database = ; Uid = root; Pwd = ;";
+            this.ConnectionString = "Server = localhost; Database = inventarisierungsloesung; Uid = root; Pwd = password;"/*"Server = localhost; Database = ; Uid = root; Pwd = ;"*/;
             this.DbProvider = "MySql";
         }
 
-<<<<<<< HEAD
         public abstract List<M> GetEntitiesFromDB(MySqlDataReader reader);
-=======
->>>>>>> 56147a035ff992272ac0cb69a1b65b57fc3be0c7
         public long Count(Expression <Func<M, bool>> whereCondition)
         {
             try
@@ -39,11 +42,7 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                 throw ex;
             }
-<<<<<<< HEAD
         } // funktioniert, 21.06.2019 inkl. LINQ
-=======
-        }
->>>>>>> 56147a035ff992272ac0cb69a1b65b57fc3be0c7
 
         public long Count()
         {
@@ -59,7 +58,7 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                 throw ex;
             }
-        }
+        } // funktioniert, 19.06.2019 inkl. LINQ
 
         public M GetSingle<P>(P pkValue)
         {
@@ -77,7 +76,7 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                 throw ex;
             }
-        }
+        }// funktioniert, 19.06.2019 inkl. LINQ
 
         public virtual void Add(M entity)
         {
@@ -97,7 +96,7 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                 throw ex;
             }
-        }
+        } // funktioniert, 19.06.2019 inkl. LINQ
 
         public virtual void Delete(M entity)
         {
@@ -116,7 +115,7 @@ namespace MonitoringClient.Repository
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
-        }
+        } // funktioniert, 19.06.2019 inkl. LINQ
 
         public virtual void Update(M entity)
         {
@@ -136,7 +135,7 @@ namespace MonitoringClient.Repository
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
-        }
+        } // funktioniert, 19.06.2019 inkl. LINQ
 
         public IQueryable<M> GetAll(Expression<Func<M, bool>> whereCondition)
         {
@@ -152,11 +151,7 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                 throw ex;
             }
-<<<<<<< HEAD
         } // funktioniert, 21.06.2019 inkl. LINQ
-=======
-        }
->>>>>>> 56147a035ff992272ac0cb69a1b65b57fc3be0c7
 
         public IQueryable<M> GetAll()
         {
@@ -172,6 +167,6 @@ namespace MonitoringClient.Repository
                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                throw ex;
             }
-        }
+        } // funktioniert, 19.06.2019 inkl. LINQ
     }
 }

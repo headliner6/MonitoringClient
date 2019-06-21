@@ -3,6 +3,7 @@ using MonitoringClient.Command;
 using MonitoringClient.Model;
 using MonitoringClient.Repository;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
