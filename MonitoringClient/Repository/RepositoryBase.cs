@@ -134,7 +134,7 @@ namespace MonitoringClient.Repository
                     var finish = cmd.ExecuteNonQuery();
                     if (finish == 1)
                     {
-                        MessageBox.Show("Loeschung war erfolgreich!");
+                        MessageBox.Show("Loeschen war erfolgreich!");
                     }
                 }
                 connection.Close();
