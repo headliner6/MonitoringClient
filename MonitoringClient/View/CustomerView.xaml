@@ -4,35 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="700">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70" />
-            <RowDefinition Height="400" />
+            <RowDefinition Height="auto" MinHeight="70" />
+            <RowDefinition Height="auto" MinHeight="250" />
         </Grid.RowDefinitions>
         <GroupBox Header="Customer Navigation" Grid.Row="0">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="button_back"
                         Command="{Binding Path=NavigateBack}"
-                        Grid.Row="1"
-                        Grid.Column="0"
                         Content="Back"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Width="70" Height="20" Margin="0,14.8"/>
+                        Margin="0,16,-39,15" Width="70"/>
             </Grid>
         </GroupBox>
-        <GroupBox Header="CustomerData" Grid.Row="1" Margin="0,0,0,60">
+        <GroupBox Header="CustomerData" Grid.Row="1" Height="auto">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
@@ -42,74 +38,68 @@
                           ItemsSource="{Binding Path=Logentries, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
                           HorizontalAlignment="stretch"
                           Grid.Row="0"
-                          VerticalScrollBarVisibility="auto" Margin="0,0,-599,0"/>
+                          VerticalScrollBarVisibility="auto"
+                          Height="180" Margin="0,10,-503,2"/>
                 <TextBlock x:Name="txtblock_Addressnumber"
                        Grid.Row="1"
                        Text="Adressnummer: "
-                       Width="100"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center" Margin="10,14,0,71"/>
+                       Height="20"
+                       Width="100" Margin="10,9,138,88"/>
                 <TextBox x:Name="txtbox_Addressnumber"
                      Text="{Binding Path=POD}"
                      HorizontalAlignment="Left"
                      Grid.Row="1"
-                     Width="150"
-                     Height="20" Margin="110,10,-85,71"/>
+                        Height="20"
+                        Width="150" Margin="110,9,-11,89"/>
                 <TextBlock x:Name="txtblock_PhoneNumber"
                        Grid.Row="1"
                        Text="Telefonnummer: "
-                       Width="100"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center" Margin="10,50,0,35"/>
+                        Height="20"
+                        Width="100" Margin="10,45,140,54"/>
                 <TextBox x:Name="txtbox_PhoneNumber"
                      Text="{Binding Path=POD}"
                      HorizontalAlignment="Left"
                      Grid.Row="1"
-                     Width="150"
-                     Height="20" Margin="110,46,-81,35"/>
+                        Height="20"
+                        Width="150" Margin="110,45,-9,55"/>
                 <TextBlock x:Name="txtblock_Email"
                        Grid.Row="1"
                        Text="Email-Adresse: "
-                       Width="100"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center" Margin="10,85,0,0"/>
+                        Height="20"
+                        Width="100" Margin="10,79,142,22"/>
                 <TextBox x:Name="txtbox_Email"
                      Text="{Binding Path=POD}"
                      HorizontalAlignment="Left"
                      Grid.Row="1"
-                     Width="150"
-                     Height="20" Margin="110,81,-83,0"/>
+                        Height="20"
+                        Width="150" Margin="110,79,-7,23"/>
                 <TextBlock x:Name="txtblock_Website"
                        Grid.Row="1"
                        Text="Website: "
-                       Width="100"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center" Margin="278,14,-198,71"/>
+                        Height="20"
+                        Width="100" Margin="273,12,-119,91"/>
                 <TextBox x:Name="txtbox_Website"
                      Text="{Binding Path=POD}"
                      HorizontalAlignment="Left"
                      Grid.Row="1"
                      Width="150"
-                     Height="20" Margin="378,10,-347,71"/>
+                     Height="20" Margin="353,13,-247,92"/>
                 <TextBlock x:Name="txtblock_Password"
                        Grid.Row="1"
                        Text="Passwort: "
-                       Width="100"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center" Margin="278,50,-196,35"/>
+                           Height="20"
+                        Width="100" Margin="274,47,-119,57"/>
                 <TextBox x:Name="txtbox_Password"
                      Text="{Binding Path=POD}"
                      HorizontalAlignment="Left"
                      Grid.Row="1"
                      Width="150"
-                     Height="20" Margin="378,46,-345,35"/>
+                     Height="20" Margin="353,49,-246,57"/>
                 <Button x:Name="button_save"
-                        Command="{Binding Path=ConfirmButtonCommand}"
-                        Grid.Row="1"
+                        Command="{Binding Path=Save}"
                         Content="Save"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Width="70" Margin="708,187,-604,-106" Height="20" />
+                        Grid.Row="1"
+                        Margin="566,13,-382,58"/>
             </Grid>
         </GroupBox>
     </Grid>

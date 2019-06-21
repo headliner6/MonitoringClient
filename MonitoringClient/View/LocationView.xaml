@@ -31,13 +31,21 @@
             </Grid>
         </GroupBox>
         <GroupBox Header="Location Data" Grid.Row="1">
-            <TreeView Grid.Row="1" ItemsSource="{Binding Locations}">
-                <TreeView.Resources>
-                    <HierarchicalDataTemplate DataType="{x:Type local:LocationNode}" ItemsSource="{Binding ChildNodes}">
-                        <TextBlock Text="{Binding Location.Designation}"></TextBlock>
-                    </HierarchicalDataTemplate>
-                </TreeView.Resources>
-            </TreeView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <TreeView Grid.Row="0" ItemsSource="{Binding Locations}" Margin="0,0,-777,-158">
+                    <TreeView.Resources>
+                        <HierarchicalDataTemplate DataType="{x:Type local:LocationNode}" ItemsSource="{Binding ChildNodes}">
+                            <TextBlock Text="{Binding Location.Designation}"></TextBlock>
+                        </HierarchicalDataTemplate>
+                    </TreeView.Resources>
+                </TreeView>
+            </Grid>
         </GroupBox>
     </Grid>
 </UserControl>
