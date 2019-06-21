@@ -416,3 +416,4 @@ C:\Workspace\HF\MonitoringClient\obj\Debug\MonitoringClient.csproj.CoreCompileIn
 C:\Workspace\HF\MonitoringClient\obj\Debug\MonitoringClient.csproj.CopyComplete
 C:\Workspace\HF\MonitoringClient\obj\Debug\MonitoringClient.exe
 C:\Workspace\HF\MonitoringClient\obj\Debug\MonitoringClient.pdb
+C:\Workspace\HF\MonitoringClient\obj\Debug\View\CustomerView.g.cs

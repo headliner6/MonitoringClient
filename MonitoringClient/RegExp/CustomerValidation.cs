@@ -8,8 +8,8 @@ namespace MonitoringClient.RegExp
 {
     public class CustomerValidation
     {
-        public void PersonIdValidation() { }
-        public void AdressnumberValidation() { }
+        public void CustomerIdValidation() { }
+        public void AddressnumberValidation() { }
         public void CustomerAccountNumberValidation() { }
         public void PhoneNumberValidation() { }
         public void EmailValidation() { }

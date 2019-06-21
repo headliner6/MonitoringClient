@@ -90,6 +90,7 @@
     <Compile Include="DataStructures\CreatePasswordHash.cs" />
     <Compile Include="Model\CustomerModel.cs" />
     <Compile Include="Model\LocationModel.cs" />
+    <Compile Include="RegExp\CustomerValidation.cs" />
     <Compile Include="Services\IModel.cs" />
     <Compile Include="Services\IRepositoryBase.cs" />
     <Compile Include="Repository\LocationModelRepository.cs" />
@@ -104,6 +105,9 @@
     <Compile Include="ViewModel\LogEntryViewModel.cs" />
     <Compile Include="ViewModel\LogMessageAddViewModel.cs" />
     <Compile Include="ViewModel\NavigationViewModel.cs" />
+    <Compile Include="View\CustomerView.xaml.cs">
+      <DependentUpon>CustomerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LocationView.xaml.cs">
       <DependentUpon>LocationView.xaml</DependentUpon>
     </Compile>
@@ -128,6 +132,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\CustomerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LocationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
