@@ -20,11 +20,6 @@ namespace MonitoringClient.Repository
             this.ConnectionString = "Server = localhost; Database = ; Uid = root; Pwd = ;";
             this.DbProvider = "MySql";
         }
-
-<<<<<<< HEAD
-        public abstract List<M> GetEntitiesFromDB(MySqlDataReader reader);
-=======
->>>>>>> 56147a035ff992272ac0cb69a1b65b57fc3be0c7
         public long Count(Expression <Func<M, bool>> whereCondition)
         {
             try
@@ -39,11 +34,7 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                 throw ex;
             }
-<<<<<<< HEAD
         } // funktioniert, 21.06.2019 inkl. LINQ
-=======
-        }
->>>>>>> 56147a035ff992272ac0cb69a1b65b57fc3be0c7
 
         public long Count()
         {
@@ -152,11 +143,7 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                 throw ex;
             }
-<<<<<<< HEAD
         } // funktioniert, 21.06.2019 inkl. LINQ
-=======
-        }
->>>>>>> 56147a035ff992272ac0cb69a1b65b57fc3be0c7
 
         public IQueryable<M> GetAll()
         {
