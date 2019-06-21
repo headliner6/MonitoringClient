@@ -84,7 +84,11 @@ namespace MonitoringClient.Repository
             {
                 using (var context = new DataContext(DbProvider, ConnectionString))
                 {
-                    context.Insert<M>(entity);
+                    var finish = context.Insert<M>(entity);
+                    if (finish == 1)
+                    {
+                        MessageBox.Show("Hinzufuegen war erfolgreich!");
+                    }
                 }
             }
             catch (Exception ex)
@@ -100,7 +104,11 @@ namespace MonitoringClient.Repository
             {
                 using (var context = new DataContext(DbProvider, ConnectionString))
                 {
-                    context.Delete<M>(entity);
+                    var finish = context.Delete<M>(entity);
+                    if (finish == 1)
+                    {
+                        MessageBox.Show("Loeschen war erfolgreich!");
+                    }
                 }
             }
             catch (Exception ex)
@@ -118,7 +126,7 @@ namespace MonitoringClient.Repository
                     var finish = context.Update<M>(entity);
                     if (finish == 1)
                     {
-                        MessageBox.Show("Update erfolgreich!");
+                        MessageBox.Show("Update war erfolgreich!");
                     }
                 }
 
