@@ -1,9 +1,6 @@
 ﻿using LinqToDB.Data;
 using MonitoringClient.Model;
-using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Windows;
 
 namespace MonitoringClient.Repository
@@ -49,25 +46,6 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
         }
-
-        public override List<LogEntryModel> GetEntitiesFromDB(MySqlDataReader reader)
-        {
-            var logEntries = new List<LogEntryModel>();
-            while (reader.Read())
-            {
-                logEntries.Add(new LogEntryModel(
-                    reader.GetInt32("Id"),
-                    reader.GetString("Pod"),
-                    reader.GetValue(reader.GetOrdinal("Location")) as string,
-                    reader.GetString("Hostname"),
-                    reader.GetInt32("Severity"),
-                    reader.GetDateTime("Timestamp"),
-                    reader.GetString("Message")
-                ));
-            }
-            return logEntries;
-        }
-
         public override void Add(LogEntryModel entity)
         {
             throw new NotSupportedException();
