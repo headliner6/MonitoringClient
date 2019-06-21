@@ -42,7 +42,7 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                 throw ex;
             }
-        } // funktioniert, 16.06.2019
+        } // funktioniert, 21.06.2019 inkl. LINQ
 
         public long Count()
         {
@@ -143,7 +143,7 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                 throw ex;
             }
-        } // funktioniert, 16.06.2019
+        } // funktioniert, 21.06.2019 inkl. LINQ
 
         public IQueryable<M> GetAll()
         {
