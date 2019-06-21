@@ -20,6 +20,9 @@
         <DataTemplate DataType="{x:Type vm:LocationViewModel}">
             <view:LocationView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:CustomerViewModel}">
+            <view:CustomerView/>
+        </DataTemplate>
     </UserControl.Resources>
     <ContentControl x:Name="Pages" Content="{Binding SelectedViewModel}"/>
 </UserControl>

@@ -84,6 +84,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Command\GetAllCustomersCommand.cs" />
     <Compile Include="Command\GetAllLocationsCommand.cs" />
     <Compile Include="DataStructures\LocationTreeBuilder.cs" />
     <Compile Include="DataStructures\LocationNode.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Model\CustomerModel.cs" />
     <Compile Include="Model\LocationModel.cs" />
     <Compile Include="RegExp\CustomerValidation.cs" />
+    <Compile Include="Repository\CustomerRepository.cs" />
     <Compile Include="Services\IModel.cs" />
     <Compile Include="Services\IRepositoryBase.cs" />
     <Compile Include="Repository\LocationModelRepository.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Command\FindDuplicatesButtonCommand.cs" />
     <Compile Include="Command\LoadButtonCommand.cs" />
     <Compile Include="Services\IViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\LocationViewModel.cs" />
     <Compile Include="ViewModel\LogEntryViewModel.cs" />
     <Compile Include="ViewModel\LogMessageAddViewModel.cs" />

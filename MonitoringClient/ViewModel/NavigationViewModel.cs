@@ -17,7 +17,7 @@ namespace MonitoringClient.ViewModel
         }
         public NavigationViewModel()
         {
-            SelectedViewModel = new LogEntryViewModel(OpenLogMessageAddView, OpenLocationView);
+            SelectedViewModel = new LogEntryViewModel(OpenLogMessageAddView, OpenLocationView, OpenCustomerView);
         }
         private void OpenLogMessageAddView(object obj)
         {
@@ -41,18 +41,28 @@ namespace MonitoringClient.ViewModel
             }
         }
 
+        private void OpenCustomerView(object obj)
+        {
+            if (obj.ToString() == "CustomerView")
+            {
+                var logEntryViewModel = (IViewModel)selectedViewModel;
+                SelectedViewModel = new CustomerViewModel(OpenLogentryView);
+                var customerViewModel = (CustomerViewModel)selectedViewModel;
+                customerViewModel.ConnectionString = logEntryViewModel.ConnectionString;
+            }
+        }
+
         private void OpenLogentryView(object obj)
         {
             if (obj.ToString() == "LogEntryView")
             {
                 var logMessageAddViewModel = (IViewModel) selectedViewModel;
-                SelectedViewModel = new LogEntryViewModel(OpenLogMessageAddView, OpenLocationView);
+                SelectedViewModel = new LogEntryViewModel(OpenLogMessageAddView, OpenLocationView, OpenCustomerView);
                 LogEntryViewModel logEntryViewModel = (LogEntryViewModel) selectedViewModel;
                 logEntryViewModel.ConnectionString = logMessageAddViewModel.ConnectionString;
                 logEntryViewModel.GetAll();
             }
         }
-
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propName)
         {

@@ -1,4 +1,5 @@
 ﻿using LinqToDB.Mapping;
+using MonitoringClient.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,10 @@ using System.Threading.Tasks;
 namespace MonitoringClient.Model
 {
     [Table ("customer")]
-    public class CustomerModel
+    public class CustomerModel : IModel
     {
         [Column("CUSTOMER_ID")]
-        public int CustomerId { get; set; }
+        public int Id { get; set; }
         [Column ("FIRSTNAME")]
         public string Firstname { get; set; }
         [Column("LASTNAME")]

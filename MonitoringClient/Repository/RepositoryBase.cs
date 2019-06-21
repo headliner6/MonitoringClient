@@ -27,7 +27,6 @@ namespace MonitoringClient.Repository
             this.DbProvider = "MySql";
         }
 
-        public abstract List<M> GetEntitiesFromDB(MySqlDataReader reader);
         public long Count(Expression <Func<M, bool>> whereCondition)
         {
             try

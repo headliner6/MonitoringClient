@@ -18,6 +18,7 @@ namespace MonitoringClient.ViewModel
     {
         private readonly Action<object> navigateToLogMessageAddView;
         private readonly Action<object> navigateToLocationView;
+        private readonly Action<object> navigateToCustomerView;
         private DuplicateChecker _duplicateChecker;
         private LogEntryModelRepository _logEntryModelRepository;
         private ObservableCollection<LogEntryModel> _logentries;
@@ -26,6 +27,7 @@ namespace MonitoringClient.ViewModel
 
         public ICommand NavigateLogMessageAddView { get; set; }
         public ICommand NavigateLocationView { get; set; }
+        public ICommand NavigateCustomerView { get; set; }
         public ObservableCollection<LogEntryModel> Logentries
         {
             get { return _logentries; }
@@ -40,15 +42,17 @@ namespace MonitoringClient.ViewModel
         public ConfirmButtonCommand ConfirmButtonCommand { get; set; }
         public FindDuplicatesButtonCommand FindDuplicatesButtonCommand { get; set; }
 
-        public LogEntryViewModel(Action<object> navigateToLogMessageAddView, Action<object> navigateToLocationView)
+        public LogEntryViewModel(Action<object> navigateToLogMessageAddView, Action<object> navigateToLocationView, Action<object> navigateToCustomerView)
         {
             NavigateLogMessageAddView = new BaseCommand(StartLogMessageAddView);
             NavigateLocationView = new BaseCommand(StartLocationView);
+            NavigateCustomerView = new BaseCommand(StartCustomerView);
             LoadButtonCommand = new LoadButtonCommand(this);
             ConfirmButtonCommand = new ConfirmButtonCommand(this);
             FindDuplicatesButtonCommand = new FindDuplicatesButtonCommand(this);
             this.navigateToLogMessageAddView = navigateToLogMessageAddView;
             this.navigateToLocationView = navigateToLocationView;
+            this.navigateToCustomerView = navigateToCustomerView;
 
             Logentries = new ObservableCollection<LogEntryModel>();
             _duplicateChecker = new DuplicateChecker();
@@ -86,6 +90,10 @@ namespace MonitoringClient.ViewModel
         private void StartLocationView(object obj)
         {
             navigateToLocationView.Invoke("LocationView");
+        }
+        private void StartCustomerView(object obj)
+        {
+            navigateToCustomerView.Invoke("CustomerView");
         }
     }
 }
