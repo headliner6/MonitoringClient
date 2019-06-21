@@ -2,11 +2,6 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MonitoringClient.Repository
@@ -15,7 +10,7 @@ namespace MonitoringClient.Repository
         where M : IModel, new()
     {
         public abstract string TableName { get; }
-        public string ConnectionString { get; set; } // "Server = localhost; Database = inventarisierungsloesung; Uid = root; Pwd = password;"
+        public string ConnectionString { get; set; }
         public abstract string PrimaryKey { get; }
         public abstract string InsertIntoEntityFieldForSqlStatement { get; }
 
@@ -52,7 +47,7 @@ namespace MonitoringClient.Repository
             catch (Exception ex)
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-                return 0;
+                throw ex;
             }
 
         }
@@ -72,7 +67,7 @@ namespace MonitoringClient.Repository
             catch (Exception ex)
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-                return 0;
+                throw ex;
             }
         }
 
@@ -112,8 +107,12 @@ namespace MonitoringClient.Repository
                     cmd.CommandText = $"INSERT INTO {this.TableName}" +
                         $" ({InsertIntoEntityFieldForSqlStatement}) "  +
                         $"VALUES ({AddSqlStatementValues(entity)});";
-  
-                    cmd.ExecuteNonQuery();
+
+                    var finish = cmd.ExecuteNonQuery();
+                    if (finish == 1)
+                    {
+                        MessageBox.Show("Hinzufuegen war erfolgreich!");
+                    }
                 }
                 connection.Close();
             }
@@ -132,7 +131,11 @@ namespace MonitoringClient.Repository
                 using (var cmd = connection.CreateCommand())
                 {
                     cmd.CommandText = $"DELETE FROM {this.TableName} WHERE {PrimaryKey} = {entity.Id}";
-                    cmd.ExecuteNonQuery();
+                    var finish = cmd.ExecuteNonQuery();
+                    if (finish == 1)
+                    {
+                        MessageBox.Show("Loeschung war erfolgreich!");
+                    }
                 }
                 connection.Close();
             }
@@ -154,7 +157,7 @@ namespace MonitoringClient.Repository
                     var finish = cmd.ExecuteNonQuery();
                     if (finish == 1)
                     {
-                        MessageBox.Show("Update erfolgreich!");
+                        MessageBox.Show("Update war erfolgreich!");
                     }
                 }
                 connection.Close();
