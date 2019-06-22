@@ -49,6 +49,7 @@ namespace MonitoringClient.ViewModel
                 SelectedViewModel = new CustomerViewModel(OpenLogentryView);
                 var customerViewModel = (CustomerViewModel)selectedViewModel;
                 customerViewModel.ConnectionString = logEntryViewModel.ConnectionString;
+                customerViewModel.GetAll();
             }
         }
 

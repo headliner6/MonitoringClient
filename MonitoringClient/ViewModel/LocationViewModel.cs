@@ -31,7 +31,6 @@ namespace MonitoringClient.ViewModel
             }
         }
 
-        public GetAllLocationsCommand GetAllLocationsCommand { get; set; }
         public ICommand NavigateBack { get; set; }
 
         public LocationViewModel(Action<object> navigateToLogEntryView)
@@ -39,8 +38,6 @@ namespace MonitoringClient.ViewModel
             _locationModelRepository = new LocationModelRepository();
             NavigateBack = new BaseCommand(OnNavigateBack);
             this.navigateToLogEntryView = navigateToLogEntryView;
-
-            GetAllLocationsCommand = new GetAllLocationsCommand(this);
         }
         public void GetAll()
         {

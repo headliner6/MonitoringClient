@@ -11,7 +11,7 @@ namespace MonitoringClient.Model
     [Table ("customer")]
     public class CustomerModel : IModel
     {
-        [Column("CUSTOMER_ID")]
+        [Column("CUSTOMER_ID"), PrimaryKey, NotNull]
         public int Id { get; set; }
         [Column ("FIRSTNAME")]
         public string Firstname { get; set; }

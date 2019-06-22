@@ -84,8 +84,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Command\GetAllCustomersCommand.cs" />
-    <Compile Include="Command\GetAllLocationsCommand.cs" />
     <Compile Include="DataStructures\LocationTreeBuilder.cs" />
     <Compile Include="DataStructures\LocationNode.cs" />
     <Compile Include="DataStructures\CreatePasswordHash.cs" />

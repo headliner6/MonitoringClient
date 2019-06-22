@@ -1,4 +1,5 @@
 ﻿using MonitoringClient.Command;
+using MonitoringClient.DataStructures;
 using MonitoringClient.Model;
 using MonitoringClient.Repository;
 using System;
@@ -17,9 +18,80 @@ namespace MonitoringClient.ViewModel
         private readonly Action<object> navigateToLogEntryView;
         private ObservableCollection<CustomerModel> _customers;
         private CustomerRepository _customerRepository;
+        private CustomerModel _selectedItem;
+        private int _addressnumber;
+        private string _phoneNumber;
+        private string _email;
+        private string _website;
+        private string _password;
 
+        public ICommand SaveCustomerCommand { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public string ConnectionString { get; set; }
+        public CustomerModel SelectedItem
+        {
+            get
+            {
+                FillSelectedItemIntoProperties();
+                return _selectedItem;
+            }
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged("SelectedItem");
+            }
+        }
+        public int Addressnumber
+        {
+            get
+            { return _addressnumber; }
+            set
+            {
+                _addressnumber = value;
+                OnPropertyChanged("Addressnumber");
+            }
+        }
+        public string PhoneNumber
+        {
+            get
+            { return _phoneNumber; }
+            set
+            {
+                _phoneNumber = value;
+                OnPropertyChanged("PhoneNumber");
+            }
+        }
+        public string Email
+        {
+            get
+            { return _email; }
+            set
+            {
+                _email = value;
+                OnPropertyChanged("Email");
+            }
+        }
+        public string Website
+        {
+            get
+            { return _website; }
+            set
+            {
+                _website = value;
+                OnPropertyChanged("Website");
+            }
+        }
+        public string Password
+        {
+            get
+            { return _password; }
+            set
+            {
+                _password = value;
+                OnPropertyChanged("Password");
+            }
+        }
+
         public ObservableCollection<CustomerModel> Customers
         {
             get { return _customers; }
@@ -29,16 +101,62 @@ namespace MonitoringClient.ViewModel
                 OnPropertyChanged("Customers");
             }
         }
-        public GetAllCustomersCommand GetAllCustomersCommand { get; set; }
         public ICommand NavigateBack { get; set; }
 
         public CustomerViewModel(Action<object> navigateToLogEntryView)
         {
             _customerRepository = new CustomerRepository();
             NavigateBack = new BaseCommand(OnNavigateBack);
+            SaveCustomerCommand = new BaseCommand(SaveCustomer);
             this.navigateToLogEntryView = navigateToLogEntryView;
+        }
 
-            GetAllCustomersCommand = new GetAllCustomersCommand(this);
+        public void GetAll()
+        {
+            _customerRepository.ConnectionString = ConnectionString;
+            Customers = new ObservableCollection<CustomerModel>(_customerRepository.GetAll());
+        }
+
+        private void SaveCustomer(object obj)
+        {
+            //ValidationOfProperties();
+            _customerRepository.ConnectionString = ConnectionString;
+            if (_customerRepository.GetSingle<int>(_selectedItem.Id) != null)
+            {
+                _customerRepository.Update(CreateCustomerToSave());
+                this.GetAll();
+            }
+            else
+            {
+                _customerRepository.Add(CreateCustomerToSave());
+                this.GetAll();
+            }
+        }
+        private CustomerModel CreateCustomerToSave()
+        {
+            var customer = new CustomerModel();
+            customer.Id = _selectedItem.Id;
+            customer.Firstname = _selectedItem.Firstname;
+            customer.Lastname = _selectedItem.Lastname;
+            customer.Addressnumber = Addressnumber;
+            customer.CustomerAccountNumber = _selectedItem.CustomerAccountNumber;
+            customer.PhoneNumber = PhoneNumber;
+            customer.Email = Email;
+            customer.Website = Website;
+            customer.Password = new CreatePasswordHash().GetMD5Hash(Password);
+            return customer;
+        }
+
+        private void FillSelectedItemIntoProperties()
+        {
+            if (_selectedItem != null)
+            {
+                Addressnumber = _selectedItem.Addressnumber;
+                PhoneNumber = _selectedItem.PhoneNumber;
+                Email = _selectedItem.Email;
+                Website = _selectedItem.Website;
+                Password = _selectedItem.Password;
+            }
         }
 
         protected void OnPropertyChanged(string name)

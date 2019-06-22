@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="700">
+             d:DesignHeight="515" d:DesignWidth="700">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" MinHeight="70" />
@@ -33,73 +33,75 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <DataGrid x:Name="logentrie_dataGrid2"
+                <DataGrid x:Name="customer_dataGrid"
                           IsReadOnly="true"
-                          ItemsSource="{Binding Path=Logentries, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
+                          ItemsSource="{Binding Path=Customers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
+                          SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
+                          SelectionMode="Single"
                           HorizontalAlignment="stretch"
                           Grid.Row="0"
                           VerticalScrollBarVisibility="auto"
-                          Height="180" Margin="0,10,-503,2"/>
+                          Height="180" Margin="0,10,-366,5"/>
                 <TextBlock x:Name="txtblock_Addressnumber"
                        Grid.Row="1"
-                       Text="Adressnummer: "
+                       Text="Address number: "
                        Height="20"
-                       Width="100" Margin="10,9,138,88"/>
+                       Width="100" Margin="10,1,202,138"/>
                 <TextBox x:Name="txtbox_Addressnumber"
-                     Text="{Binding Path=POD}"
+                         Text="{Binding Path=Addressnumber}"
                      HorizontalAlignment="Left"
                      Grid.Row="1"
                         Height="20"
-                        Width="150" Margin="110,9,-11,89"/>
+                        Width="150" Margin="136,2,0,140"/>
                 <TextBlock x:Name="txtblock_PhoneNumber"
                        Grid.Row="1"
-                       Text="Telefonnummer: "
+                       Text="Phone number: "
                         Height="20"
-                        Width="100" Margin="10,45,140,54"/>
+                        Width="100" Margin="12,29,204,116"/>
                 <TextBox x:Name="txtbox_PhoneNumber"
-                     Text="{Binding Path=POD}"
+                     Text="{Binding Path=PhoneNumber}"
                      HorizontalAlignment="Left"
                      Grid.Row="1"
                         Height="20"
-                        Width="150" Margin="110,45,-9,55"/>
+                        Width="150" Margin="136,30,0,117"/>
                 <TextBlock x:Name="txtblock_Email"
                        Grid.Row="1"
-                       Text="Email-Adresse: "
+                       Text="Email address: "
                         Height="20"
-                        Width="100" Margin="10,79,142,22"/>
+                        Width="100" Margin="12,54,205,92" RenderTransformOrigin="0.21,-0.15"/>
                 <TextBox x:Name="txtbox_Email"
-                     Text="{Binding Path=POD}"
+                     Text="{Binding Path=Email}"
                      HorizontalAlignment="Left"
                      Grid.Row="1"
                         Height="20"
-                        Width="150" Margin="110,79,-7,23"/>
+                        Width="150" Margin="136,55,0,93"/>
                 <TextBlock x:Name="txtblock_Website"
                        Grid.Row="1"
                        Text="Website: "
                         Height="20"
-                        Width="100" Margin="273,12,-119,91"/>
+                        Width="100" Margin="324,6,-106,143"/>
                 <TextBox x:Name="txtbox_Website"
-                     Text="{Binding Path=POD}"
+                     Text="{Binding Path=Website}"
                      HorizontalAlignment="Left"
                      Grid.Row="1"
                      Width="150"
-                     Height="20" Margin="353,13,-247,92"/>
+                     Height="20" Margin="425,7,-255,144"/>
                 <TextBlock x:Name="txtblock_Password"
                        Grid.Row="1"
-                       Text="Passwort: "
+                       Text="Password: "
                            Height="20"
-                        Width="100" Margin="274,47,-119,57"/>
+                        Width="100" Margin="324,32,-105,118"/>
                 <TextBox x:Name="txtbox_Password"
-                     Text="{Binding Path=POD}"
+                     Text="{Binding Path=Password}"
                      HorizontalAlignment="Left"
                      Grid.Row="1"
                      Width="150"
-                     Height="20" Margin="353,49,-246,57"/>
+                     Height="20" Margin="425,33,-254,119"/>
                 <Button x:Name="button_save"
-                        Command="{Binding Path=Save}"
+                        Command="{Binding Path=SaveCustomerCommand}"
                         Content="Save"
                         Grid.Row="1"
-                        Margin="566,13,-382,58"/>
+                        Margin="619,8,-356,119"/>
             </Grid>
         </GroupBox>
     </Grid>
