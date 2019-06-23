@@ -41,67 +41,97 @@
                           HorizontalAlignment="stretch"
                           Grid.Row="0"
                           VerticalScrollBarVisibility="auto"
-                          Height="180" Margin="0,10,-366,5"/>
-                <TextBlock x:Name="txtblock_Addressnumber"
-                       Grid.Row="1"
-                       Text="Address number: "
-                       Height="20"
-                       Width="100" Margin="10,1,202,138"/>
-                <TextBox x:Name="txtbox_Addressnumber"
-                         Text="{Binding Path=Addressnumber}"
-                     HorizontalAlignment="Left"
-                     Grid.Row="1"
-                        Height="20"
-                        Width="150" Margin="136,2,0,140"/>
-                <TextBlock x:Name="txtblock_PhoneNumber"
-                       Grid.Row="1"
-                       Text="Phone number: "
-                        Height="20"
-                        Width="100" Margin="12,29,204,116"/>
-                <TextBox x:Name="txtbox_PhoneNumber"
-                     Text="{Binding Path=PhoneNumber}"
-                     HorizontalAlignment="Left"
-                     Grid.Row="1"
-                        Height="20"
-                        Width="150" Margin="136,30,0,117"/>
-                <TextBlock x:Name="txtblock_Email"
-                       Grid.Row="1"
-                       Text="Email address: "
-                        Height="20"
-                        Width="100" Margin="12,54,205,92" RenderTransformOrigin="0.21,-0.15"/>
-                <TextBox x:Name="txtbox_Email"
-                     Text="{Binding Path=Email}"
-                     HorizontalAlignment="Left"
-                     Grid.Row="1"
-                        Height="20"
-                        Width="150" Margin="136,55,0,93"/>
-                <TextBlock x:Name="txtblock_Website"
-                       Grid.Row="1"
-                       Text="Website: "
-                        Height="20"
-                        Width="100" Margin="324,6,-106,143"/>
-                <TextBox x:Name="txtbox_Website"
-                     Text="{Binding Path=Website}"
-                     HorizontalAlignment="Left"
-                     Grid.Row="1"
-                     Width="150"
-                     Height="20" Margin="425,7,-255,144"/>
-                <TextBlock x:Name="txtblock_Password"
-                       Grid.Row="1"
-                       Text="Password: "
-                           Height="20"
-                        Width="100" Margin="324,32,-105,118"/>
-                <TextBox x:Name="txtbox_Password"
-                     Text="{Binding Path=Password}"
-                     HorizontalAlignment="Left"
-                     Grid.Row="1"
-                     Width="150"
-                     Height="20" Margin="425,33,-254,119"/>
-                <Button x:Name="button_save"
-                        Command="{Binding Path=SaveCustomerCommand}"
-                        Content="Save"
-                        Grid.Row="1"
-                        Margin="619,8,-356,119"/>
+                          Margin="2"
+                          Height="180"/>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition Width="90"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="txtblock_Addressnumber"
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               Text="Address number: "
+                               HorizontalAlignment="Left"        
+                               Margin="2"
+                               Width="100"/>
+                    <TextBox x:Name="txtbox_Addressnumber"
+                             Text="{Binding Path=Addressnumber}"
+                             Grid.Row="0"
+                             Grid.Column="0"
+                             HorizontalAlignment="Right"
+                             Margin="2"
+                             Width="200"/>
+                    <TextBlock x:Name="txtblock_PhoneNumber"
+                               Grid.Row="1"
+                               Grid.Column="0"        
+                               Text="Phone number: "
+                               HorizontalAlignment="Left"
+                               Margin="2"
+                               Width="100"/>
+                    <TextBox x:Name="txtbox_PhoneNumber"
+                             Text="{Binding Path=PhoneNumber}"
+                             Grid.Row="1"
+                             Grid.Column="0"        
+                             HorizontalAlignment="Right"     
+                             Margin="2"
+                             Width="200"/>
+                    <TextBlock x:Name="txtblock_Email"
+                               Grid.Row="2"
+                               Grid.Column="0"        
+                               Text="Email address: "
+                               HorizontalAlignment="Left"     
+                               Margin="2"
+                               Width="100"/>
+                    <TextBox x:Name="txtbox_Email"
+                             Text="{Binding Path=Email}"
+                             Grid.Row="2"
+                             Grid.Column="0"        
+                             HorizontalAlignment="Right"
+                             Margin="2"
+                             Width="200"/>
+                    <TextBlock x:Name="txtblock_Website"
+                               Grid.Row="0"
+                               Grid.Column="1"        
+                               Text="Website: "
+                               Margin="2"
+                               HorizontalAlignment="Left"        
+                               Width="60"/>
+                    <TextBox x:Name="txtbox_Website"
+                             Text="{Binding Path=Website}"
+                             Grid.Row="0"
+                             Grid.Column="1"  
+                             HorizontalAlignment="Right"        
+                             Margin="2"
+                             Width="235"/>
+                    <TextBlock x:Name="txtblock_Password"
+                               Grid.Row="1"
+                               Grid.Column="1"
+                               Text="Password: "
+                               HorizontalAlignment="Left"
+                               Margin="2"
+                               Width="60"/>
+                    <TextBox x:Name="txtbox_Password"
+                             Text="{Binding Path=Password}"
+                             Grid.Row="1"
+                             Grid.Column="1"
+                             HorizontalAlignment="Right" 
+                             Margin="2"
+                             Width="235"/>
+                    <Button x:Name="button_save"
+                            Command="{Binding Path=SaveCustomerCommand}"
+                            Content="Save"
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Grid.RowSpan="3"
+                            Margin="2"/>
+                </Grid>
             </Grid>
         </GroupBox>
     </Grid>
