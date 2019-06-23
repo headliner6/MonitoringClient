@@ -138,33 +138,17 @@ namespace MonitoringClient.Repository
 
         public IQueryable<M> GetAll(Expression<Func<M, bool>> whereCondition)
         {
-            try
+            using (var context = new DataContext(DbProvider, ConnectionString))
             {
-                using (var context = new DataContext(DbProvider, ConnectionString))
-                {
-                    return context.GetTable<M>().Where(whereCondition);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-                throw ex;
+                return context.GetTable<M>().Where(whereCondition);
             }
         } // funktioniert, 21.06.2019 inkl. LINQ
 
         public IQueryable<M> GetAll()
         {
-            try
+            using (var context = new DataContext(DbProvider, ConnectionString))
             {
-                using (var context = new DataContext(DbProvider, ConnectionString))
-                {
-                    return context.GetTable<M>();
-                }
-            }
-            catch (Exception ex)
-            {
-               MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-               throw ex;
+                return context.GetTable<M>();
             }
         } // funktioniert, 19.06.2019 inkl. LINQ
     }

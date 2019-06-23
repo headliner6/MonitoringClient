@@ -62,8 +62,15 @@ namespace MonitoringClient.ViewModel
         }
         public void GetAll()
         {
-            _logEntryModelRepository.ConnectionString = ConnectionString;
-            Logentries = new ObservableCollection<LogEntryModel>(_logEntryModelRepository.GetAll());
+            try
+            {
+                _logEntryModelRepository.ConnectionString = ConnectionString;
+                Logentries = new ObservableCollection<LogEntryModel>(_logEntryModelRepository.GetAll());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+            }
         }
         public void ConfirmLogentries(int id)
         {

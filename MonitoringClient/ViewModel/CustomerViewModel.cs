@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MonitoringClient.ViewModel
@@ -113,37 +114,53 @@ namespace MonitoringClient.ViewModel
 
         public void GetAll()
         {
-            _customerRepository.ConnectionString = ConnectionString;
-            Customers = new ObservableCollection<CustomerModel>(_customerRepository.GetAll());
+            try
+            {
+                _customerRepository.ConnectionString = ConnectionString;
+                Customers = new ObservableCollection<CustomerModel>(_customerRepository.GetAll());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+            }
         }
 
         private void SaveCustomer(object obj)
         {
-            //ValidationOfProperties();
-            _customerRepository.ConnectionString = ConnectionString;
-            if (_customerRepository.GetSingle<int>(_selectedItem.Id) != null)
+            try
             {
-                _customerRepository.Update(CreateCustomerToSave());
-                this.GetAll();
+                //ValidationOfProperties();
+                _customerRepository.ConnectionString = ConnectionString;
+                if (_customerRepository.GetSingle<int>(_selectedItem.Id) != null)
+                {
+                    _customerRepository.Update(CreateCustomerToSave());
+                    this.GetAll();
+                }
+                else
+                {
+                    _customerRepository.Add(CreateCustomerToSave());
+                    this.GetAll();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                _customerRepository.Add(CreateCustomerToSave());
-                this.GetAll();
+                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
         }
         private CustomerModel CreateCustomerToSave()
         {
-            var customer = new CustomerModel();
-            customer.Id = _selectedItem.Id;
-            customer.Firstname = _selectedItem.Firstname;
-            customer.Lastname = _selectedItem.Lastname;
-            customer.Addressnumber = Addressnumber;
-            customer.CustomerAccountNumber = _selectedItem.CustomerAccountNumber;
-            customer.PhoneNumber = PhoneNumber;
-            customer.Email = Email;
-            customer.Website = Website;
-            customer.Password = new CreatePasswordHash().GetMD5Hash(Password);
+            var customer = new CustomerModel
+            {
+                Id = _selectedItem.Id,
+                Firstname = _selectedItem.Firstname,
+                Lastname = _selectedItem.Lastname,
+                Addressnumber = Addressnumber,
+                CustomerAccountNumber = _selectedItem.CustomerAccountNumber,
+                PhoneNumber = PhoneNumber,
+                Email = Email,
+                Website = Website,
+                Password = new CreatePasswordHash().GetMD5Hash(Password)
+            };
             return customer;
         }
 

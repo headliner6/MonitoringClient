@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MonitoringClient.ViewModel
@@ -41,11 +42,18 @@ namespace MonitoringClient.ViewModel
         }
         public void GetAll()
         {
-            _locationModelRepository.ConnectionString = ConnectionString;
-            var locationTreeBuilder = new LocationTreeBuilder();
-            var locations = _locationModelRepository.GetAll().ToList();
-            locations.Sort((x, y) => x.ParentLocation.CompareTo(y.ParentLocation));
-            Locations = locationTreeBuilder.BuildTree(locations);
+            try
+            {
+                _locationModelRepository.ConnectionString = ConnectionString;
+                var locationTreeBuilder = new LocationTreeBuilder();
+                var locations = _locationModelRepository.GetAll().ToList();
+                locations.Sort((x, y) => x.ParentLocation.CompareTo(y.ParentLocation));
+                Locations = locationTreeBuilder.BuildTree(locations);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+            }
         }
 
         protected void OnPropertyChanged(string name)
