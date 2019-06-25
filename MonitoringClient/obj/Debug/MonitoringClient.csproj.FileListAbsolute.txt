@@ -418,3 +418,5 @@ C:\Workspace\HF\MonitoringClient\obj\Debug\MonitoringClient.exe
 C:\Workspace\HF\MonitoringClient\obj\Debug\MonitoringClient.pdb
 C:\Workspace\HF\MonitoringClient\obj\Debug\View\CustomerView.g.cs
 C:\Workspace\HF\MonitoringClient\obj\Debug\View\CustomerView.baml
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\View\CustomerView.baml
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\View\CustomerView.g.cs
