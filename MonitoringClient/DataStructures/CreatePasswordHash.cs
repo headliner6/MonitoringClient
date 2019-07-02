@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace MonitoringClient.DataStructures
 {
+
+    //TODO: mit SALT ergänzen, MD5Hashes können schnell entcripted werden
     public class CreatePasswordHash
     {
         public string GetMD5Hash(string input)
