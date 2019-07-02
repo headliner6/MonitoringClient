@@ -62,6 +62,10 @@ namespace MonitoringClient.ViewModel
         }
         public void GetAll()
         {
+            int? x;
+            x = null;
+            int x1 = x.HasValue ? x.Value : default(int);
+
             try
             {
                 _logEntryModelRepository.ConnectionString = ConnectionString;
