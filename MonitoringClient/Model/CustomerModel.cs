@@ -1,10 +1,5 @@
 ﻿using LinqToDB.Mapping;
 using MonitoringClient.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MonitoringClient.Model
 {
@@ -18,7 +13,7 @@ namespace MonitoringClient.Model
         [Column("LASTNAME")]
         public string Lastname { get; set; }
         [Column("ADDRESSNUMBER")]
-        public int Addressnumber { get; set; }
+        public string Addressnumber { get; set; }
         [Column("KUNDENKONTO_FK")]
         public int CustomerAccountNumber { get; set; }
         [Column("TEL")]

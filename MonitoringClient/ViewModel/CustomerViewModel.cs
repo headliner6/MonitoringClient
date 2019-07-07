@@ -1,6 +1,7 @@
 ﻿using MonitoringClient.Command;
 using MonitoringClient.DataStructures;
 using MonitoringClient.Model;
+using MonitoringClient.RegExp;
 using MonitoringClient.Repository;
 using System;
 using System.Collections.Generic;
@@ -15,15 +16,16 @@ using System.Windows.Input;
 
 namespace MonitoringClient.ViewModel
 {
-    public class CustomerViewModel : INotifyPropertyChanged, IViewModel
+    public class CustomerViewModel : INotifyPropertyChanged, IViewModel, IDataErrorInfo
     {
         private readonly Action<object> navigateToLogEntryView;
         private ObservableCollection<CustomerModel> _customers;
         private CustomerRepository _customerRepository;
         private CustomerModel _selectedItem;
+        private CustomerValidation _customerValidation;
         private string _firstname;
         private string _lastname;
-        private int _addressnumber;
+        private string _addressnumber;
         private int _customerAccountNumber;
         private string _phoneNumber;
         private string _email;
@@ -67,7 +69,7 @@ namespace MonitoringClient.ViewModel
                 OnPropertyChanged("Lastname");
             }
         }
-        public int Addressnumber
+        public string Addressnumber
         {
             get
             { return _addressnumber; }
@@ -136,6 +138,8 @@ namespace MonitoringClient.ViewModel
             SaveCustomerCommand = new BaseCommand(SaveCustomer);
             CreateNewCustomer = new BaseCommand(ClearPropertiesAndSelectedItem);
             this.navigateToLogEntryView = navigateToLogEntryView;
+            _customerValidation = new CustomerValidation();
+            ClearPropertiesAndSelectedItem();
         }
 
         public void GetAll()
@@ -156,25 +160,32 @@ namespace MonitoringClient.ViewModel
             var passwordBox = parameter as PasswordBox;
             var password = passwordBox.Password;
             passwordBox.Clear();
-            try
+
+            if (isCustomerValid == false && _customerValidation.PasswordValidation(password))
             {
-                //ValidationOfProperties();
-                _customerRepository.ConnectionString = ConnectionString;
-                if (_selectedItem != null)
-                {
-                    _customerRepository.Update(CreateCustomerToSave(password));
-                }
-                else
-                {
-                    _customerRepository.Add(CreateCustomerToSave(password));
-                }
-                this.GetAll();
-                this.ClearPropertiesAndSelectedItem();
+                MessageBox.Show("Nicht alle Eingabewerte sind gueltig!");
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-            }
+                try
+                {
+                    _customerRepository.ConnectionString = ConnectionString;
+                    if (_selectedItem != null)
+                    {
+                        _customerRepository.Update(CreateCustomerToSave(password));
+                    }
+                    else
+                    {
+                        _customerRepository.Add(CreateCustomerToSave(password));
+                    }
+                    this.GetAll();
+                    this.ClearPropertiesAndSelectedItem();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+                }
+            }             
         }
         private CustomerModel CreateCustomerToSave(string password)
         {
@@ -209,24 +220,24 @@ namespace MonitoringClient.ViewModel
         private void ClearPropertiesAndSelectedItem(object obj)
         {
             SelectedItem = null;
-            Firstname = string.Empty;
-            Lastname = string.Empty;
-            Addressnumber = 0;
+            Firstname = "";
+            Lastname = "";
+            Addressnumber = "";
             CustomerAccountNumber = 0;
-            PhoneNumber = string.Empty;
-            Email = string.Empty;
-            Website = string.Empty;
+            PhoneNumber = "";
+            Email = "";
+            Website = "";
         }
         private void ClearPropertiesAndSelectedItem()
         {
             SelectedItem = null;
-            Firstname = string.Empty;
-            Lastname = string.Empty;
-            Addressnumber = 0;
+            Firstname = "";
+            Lastname = "";
+            Addressnumber = "";
             CustomerAccountNumber = 0;
-            PhoneNumber = string.Empty;
-            Email = string.Empty;
-            Website = string.Empty;
+            PhoneNumber = "";
+            Email = "";
+            Website = "";
         }
         protected void OnPropertyChanged(string name)
         {
@@ -235,6 +246,80 @@ namespace MonitoringClient.ViewModel
         private void OnNavigateBack(object obj)
         {
             navigateToLogEntryView.Invoke("LogEntryView");
+        }
+
+
+        string IDataErrorInfo.Error
+        {
+            get
+            {
+                return null;
+            }
+        }
+        string IDataErrorInfo.this[string propertyName]
+        {
+            get
+            {
+                return GetValidationError(propertyName);
+            }
+        }
+
+        public bool isCustomerValid
+        {
+            get
+            {
+                foreach (string property in ValidatedProperties)
+                {
+                    if(GetValidationError(property) != null)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+        private readonly string[] ValidatedProperties =
+        {
+            "Firstname",
+            "Lastname",
+            "Addressnumber",
+            "CustomerAccountNumber",
+            "PhoneNumber",
+            "EmailAddress",
+            "Website",
+        };
+
+        private string GetValidationError(string propertyName)
+        {
+            string error = null;
+
+            switch (propertyName)
+            {
+                case "Firstname":
+                    error = _customerValidation.FirstnameValidation(_firstname);
+                    break;
+
+                case "Lastname":
+                    error = _customerValidation.LastnameValidation(_lastname);
+                    break;
+
+                case "Addressnumber":
+                    error = _customerValidation.AddressnumberValidation(_addressnumber);
+                    break;
+                case "CustomerAccountNumber":
+                    error = _customerValidation.CustomerAccountNumberValidation(_customerAccountNumber.ToString());
+                    break;
+                case "PhoneNumber":
+                    error = _customerValidation.PhoneNumberValidation(_phoneNumber);
+                    break;
+                case "Email":
+                    error = _customerValidation.EmailValidation(_email);
+                    break;
+                case "Website":
+                    error = _customerValidation.WebsiteValidation(_website);
+                    break;
+            }
+            return error;
         }
     }
 }

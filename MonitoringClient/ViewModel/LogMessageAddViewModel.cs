@@ -1,23 +1,68 @@
 ﻿using MonitoringClient.Command;
+using MonitoringClient.RegExp;
 using MonitoringClient.Repository;
 using System;
+using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 
 namespace MonitoringClient.ViewModel
 {
-    public class LogMessageAddViewModel : IViewModel
+    public class LogMessageAddViewModel : IViewModel, IDataErrorInfo, INotifyPropertyChanged
     {
         private readonly Action<object> navigateToLogEntryView;
-        private bool _validationOk;
         private LogEntryModelRepository _logEntryModelRepository;
+        private LogMessageValidation _logMessageValidation;
+        private string _pod;
+        private string _hostname;
+        private string _severity;
+        private string _message;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public ICommand NavigateAndSave { get; set; }
         public ICommand NavigateBack { get; set; }
-        public string POD { set; get; }
-        public string Hostname { get; set; }
-        public string Severity { get; set; }
-        public string Message { get; set; }
+        public string POD
+        {
+            get { return _pod; }
+            set
+            {
+                _pod = value;
+                OnPropertyChanged("POD");
+            }
+
+        }
+        public string Hostname
+        {
+            get { return _hostname; }
+            set
+            {
+                _hostname = value;
+                OnPropertyChanged("Hostname");
+            }
+
+        }
+        public string Severity
+        {
+            get { return _severity; }
+            set
+            {
+                _severity = value;
+                OnPropertyChanged("Severity");
+            }
+
+        }
+        public string Message
+        {
+            get { return _message; }
+            set
+            {
+                _message = value;
+                OnPropertyChanged("Message");
+            }
+
+        }
         public string ConnectionString { get; set; }
 
         public LogMessageAddViewModel(Action<object> navigateToLogEntryView)
@@ -26,47 +71,99 @@ namespace MonitoringClient.ViewModel
             NavigateAndSave = new BaseCommand(OnNavigateAndSave);
             this.navigateToLogEntryView = navigateToLogEntryView;
             _logEntryModelRepository = new LogEntryModelRepository();
+            _logMessageValidation = new LogMessageValidation();
+            ClearAllFields();
         }
-        private void ValidationOfProperties()
-        {
-            if (string.IsNullOrEmpty(POD))
-            {
-                MessageBox.Show("POD darf nicht leer sein!");
-            }
-            else if (string.IsNullOrEmpty(Severity))
-            {
-                MessageBox.Show("Severity darf nicht leer sein!");
-            }
-            else if (Regex.IsMatch(Severity, "[^0-9]"))
-            {
-                MessageBox.Show("Severity darf nur Zahlen enthalten!");
-            }
-            else if (string.IsNullOrEmpty(Hostname))
-            {
-                MessageBox.Show("Hostname darf nicht leer sein!");
-            }
-            else if (string.IsNullOrEmpty(Message))
-            {
-                MessageBox.Show("Message darf nicht leer sein!");
-            }
-            else
-            {
-                _validationOk = true;
-            }
-        }
+       
         private void OnNavigateAndSave(object obj)
         {
-            ValidationOfProperties();
-            if (_validationOk == true)
+            if (isLogMessageValid == true)
             {
                 _logEntryModelRepository.ConnectionString = ConnectionString;
                 _logEntryModelRepository.AddMessage(POD, Hostname, Severity, Message);
                 navigateToLogEntryView.Invoke("LogEntryView");
             }
+            else
+            {
+                MessageBox.Show("Nicht alle Eingabewerte sind gueltig!");
+            }
         }
         private void OnNavigateBack(object obj)
         {
             navigateToLogEntryView.Invoke("LogEntryView");
+        }
+
+        private void ClearAllFields()
+        {
+            POD = "";
+            Hostname = "";
+            Severity = "";
+            Message = "";
+        }
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        string IDataErrorInfo.Error
+        {
+            get
+            {
+                return null;
+            }
+        }
+        string IDataErrorInfo.this[string propertyName]
+        {
+            get
+            {
+                return GetValidationError(propertyName);
+            }
+        }
+
+        public bool isLogMessageValid
+        {
+            get
+            {
+                foreach (string property in ValidatedProperties)
+                {
+                    if (GetValidationError(property) != null)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+        private readonly string[] ValidatedProperties =
+        {
+            "POD",
+            "Hostname",
+            "Severity",
+            "Message"
+        };
+
+        private string GetValidationError(string propertyName)
+        {
+            string error = null;
+
+            switch (propertyName)
+            {
+                case "POD":
+                    error = _logMessageValidation.PodValidation(_pod);
+                    break;
+
+                case "Hostname":
+                    error = _logMessageValidation.HostnameValidation(_hostname);
+                    break;
+
+                case "Severity":
+                    error = _logMessageValidation.SeverityValidation(_severity);
+                    break;
+                case "Message":
+                    error = _logMessageValidation.MessageValidation(_message);
+                    break;
+            }
+            return error;
         }
     }
 }
