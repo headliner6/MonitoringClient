@@ -77,7 +77,7 @@ namespace MonitoringClient.ViewModel
        
         private void OnNavigateAndSave(object obj)
         {
-            if (isLogMessageValid == true)
+            if (IsLogMessageValid == true)
             {
                 _logEntryModelRepository.ConnectionString = ConnectionString;
                 _logEntryModelRepository.AddMessage(POD, Hostname, Severity, Message);
@@ -120,7 +120,7 @@ namespace MonitoringClient.ViewModel
             }
         }
 
-        public bool isLogMessageValid
+        public bool IsLogMessageValid
         {
             get
             {

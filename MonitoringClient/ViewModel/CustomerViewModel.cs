@@ -161,7 +161,7 @@ namespace MonitoringClient.ViewModel
             var password = passwordBox.Password;
             passwordBox.Clear();
 
-            if (isCustomerValid == false && _customerValidation.PasswordValidation(password))
+            if (IsCustomerValid == false && _customerValidation.PasswordValidation(password))
             {
                 MessageBox.Show("Nicht alle Eingabewerte sind gueltig!");
             }
@@ -264,7 +264,7 @@ namespace MonitoringClient.ViewModel
             }
         }
 
-        public bool isCustomerValid
+        public bool IsCustomerValid
         {
             get
             {
