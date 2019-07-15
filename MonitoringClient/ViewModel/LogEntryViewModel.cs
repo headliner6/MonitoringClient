@@ -79,12 +79,14 @@ namespace MonitoringClient.ViewModel
         }
         public void CheckForDuplicates()
         {
-            this.GetAll();
-            Logentries = new ObservableCollection<LogEntryModel>(_duplicateChecker.FindDuplicates(Logentries).Cast<LogEntryModel>());
-            if (Logentries.Count == 0)
+            var logentries = new ObservableCollection<LogEntryModel>(_duplicateChecker.FindDuplicates(Logentries).Cast<LogEntryModel>());
+            if (logentries.Count == 0)
             {
                 MessageBox.Show("Keine Duplikate vorhanden!");
-                this.GetAll();
+            }
+            else
+            {
+                Logentries = logentries;
             }
         }
         protected void OnPropertyChanged(string name)

@@ -55,9 +55,11 @@
                           IsReadOnly="true"
                           ItemsSource="{Binding Path=Logentries, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
                           HorizontalAlignment="stretch"
+                          RowHeaderWidth="0"
                           Grid.Row="0"
                           VerticalScrollBarVisibility="auto"
                           Margin="2"
+                          MaxWidth="1000"
                           Height="180"/>
                 <Button x:Name="button_load"
                         Command="{Binding Path=LoadButtonCommand}"

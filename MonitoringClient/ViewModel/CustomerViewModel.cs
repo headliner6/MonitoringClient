@@ -139,7 +139,6 @@ namespace MonitoringClient.ViewModel
             CreateNewCustomer = new BaseCommand(ClearPropertiesAndSelectedItem);
             this.navigateToLogEntryView = navigateToLogEntryView;
             _customerValidation = new CustomerValidation();
-            ClearPropertiesAndSelectedItem();
         }
 
         public void GetAll()
@@ -161,11 +160,7 @@ namespace MonitoringClient.ViewModel
             var password = passwordBox.Password;
             passwordBox.Clear();
 
-            if (_customerValidation.PasswordValidation(password) || IsCustomerValid == false)
-            {
-                MessageBox.Show("Nicht alle Eingabewerte sind gueltig!");
-            }
-            else
+            if (_customerValidation.PasswordValidation(password) && IsCustomerValid == true)
             {
                 try
                 {
@@ -185,6 +180,10 @@ namespace MonitoringClient.ViewModel
                 {
                     MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                 }
+            }
+            else
+            {
+                MessageBox.Show("Nicht alle Eingabewerte sind gueltig!");
             }             
         }
         private CustomerModel CreateCustomerToSave(string password)
@@ -201,7 +200,7 @@ namespace MonitoringClient.ViewModel
             customer.PhoneNumber = PhoneNumber;
             customer.Email = Email;
             customer.Website = Website;
-            customer.Password = new CreatePasswordHash().GetMD5Hash(password);
+            customer.Password = new CreatePasswordHash().GetSaltedHash(password);
             return customer;
         }
         private void FillSelectedItemIntoProperties()
@@ -220,24 +219,24 @@ namespace MonitoringClient.ViewModel
         private void ClearPropertiesAndSelectedItem(object obj)
         {
             SelectedItem = null;
-            Firstname = "";
-            Lastname = "";
-            Addressnumber = "";
+            Firstname = null;
+            Lastname = null;
+            Addressnumber = null;
             CustomerAccountNumber = 0;
-            PhoneNumber = "";
-            Email = "";
-            Website = "";
+            PhoneNumber = null;
+            Email = null;
+            Website = null;
         }
         private void ClearPropertiesAndSelectedItem()
         {
             SelectedItem = null;
-            Firstname = "";
-            Lastname = "";
-            Addressnumber = "";
+            Firstname = null;
+            Lastname = null;
+            Addressnumber = null;
             CustomerAccountNumber = 0;
-            PhoneNumber = "";
-            Email = "";
-            Website = "";
+            PhoneNumber = null;
+            Email = null;
+            Website = null;
         }
         protected void OnPropertyChanged(string name)
         {
@@ -247,7 +246,6 @@ namespace MonitoringClient.ViewModel
         {
             navigateToLogEntryView.Invoke("LogEntryView");
         }
-
 
         string IDataErrorInfo.Error
         {
@@ -263,7 +261,6 @@ namespace MonitoringClient.ViewModel
                 return GetValidationError(propertyName);
             }
         }
-
         public bool IsCustomerValid
         {
             get
@@ -288,7 +285,6 @@ namespace MonitoringClient.ViewModel
             "EmailAddress",
             "Website",
         };
-
         private string GetValidationError(string propertyName)
         {
             string error = null;

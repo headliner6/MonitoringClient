@@ -38,10 +38,12 @@
                           ItemsSource="{Binding Path=Customers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
                           SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
                           SelectionMode="Single"
+                          RowHeaderWidth="0"
                           HorizontalAlignment="stretch"
                           Grid.Row="0"
                           VerticalScrollBarVisibility="auto"
                           Margin="2"
+                          MaxWidth="950"
                           Height="180"/>
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>

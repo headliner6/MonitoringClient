@@ -14,9 +14,9 @@ namespace MonitoringClient.RegExp
         {
             if (firstname == null)
             {
-                return null;
+                return "Firstname darf nicht leer sein!";
             }
-            if (!Regex.IsMatch(firstname, @"^[a - z] +[0 - 9_\/\s,.-] +$"))
+            if (!Regex.IsMatch(firstname, @"^[a-zA-Z]+$"))
             {
                 return "Firstname darf nicht leer sein!";
             }
@@ -27,9 +27,9 @@ namespace MonitoringClient.RegExp
         {
             if (lastname == null)
             {
-                return null;
+                return "Lastname darf nicht leer sein!";
             }
-            if (!Regex.IsMatch(lastname, @"^[a - z] +[0 - 9_\/\s,.-] +$")) 
+            if (!Regex.IsMatch(lastname, @"^[a-zA-Z]+$")) 
             {
                 return "Lastname darf nicht leer sein!";
             }
@@ -40,9 +40,9 @@ namespace MonitoringClient.RegExp
         {
             if (addressnumber == null)
             {
-                return null;
+                return "Addressnumber muss zwingend mit Präfix 'CU' beginnen und anschliessend 5 Ziffern beinhalten.";
             }
-            if (!Regex.IsMatch(addressnumber, "(^CU[0-9]{5}$)"))
+            if (!Regex.IsMatch(addressnumber, @"(^CU[0-9]{5}$)"))
             {
                 return "Addressnumber muss zwingend mit Präfix 'CU' beginnen und anschliessend 5 Ziffern beinhalten.";
             }
@@ -52,43 +52,43 @@ namespace MonitoringClient.RegExp
         {
             if (accountNumber == null)
             {
-                return null;
+                return "CustomerAccountNumber muss 1-8 sein!";
             }
-            if (!Regex.IsMatch(accountNumber, "(^[1-8]{1}$)"))
+            if (!Regex.IsMatch(accountNumber, @"^[1-8]{1}$"))
             {
                 return "CustomerAccountNumber muss 1-8 sein!";
             }
             return null;
         }
-        public string PhoneNumberValidation(string phoneNumber)
+        public string PhoneNumberValidation(string phoneNumber) // TODO: komplett überarbeiten gemäss Dokumentation
         {
             if (phoneNumber == null)
             {
-                return null;
+                return "Phone number muss ein gültiges Format haben!! Bsp.: +41 75 409 00 00-56";
             }
-            if (true)
+            if (!Regex.IsMatch(phoneNumber, @"^(0|0041|\+41)?[1-9\s][0-9\s]{1,12}$"))
             {
                 return "Phone number muss ein gültiges Format haben!! Bsp.: +41 75 409 00 00-56";
             }
             return null;
         }
-        public string EmailValidation(string email)
+        public string EmailValidation(string email) // TODO: 1% Ausnahme muss dokumentiert werden
         {
             if (email == null)
             {
-                return null;
+                return "Email address muss ein gültiges Format haben! Bsp.: test@provider.ch";
             }
-            if (true)
+            if (!Regex.IsMatch(email, @"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"))
             {
                 return "Email address muss ein gültiges Format haben! Bsp.: test@provider.ch";
             }
             return null;
         }
-        public string WebsiteValidation(string website)
+        public string WebsiteValidation(string website) // TODO: wwww.ch darf nicht gülitg sein
         {
             if (website == null)
             {
-                return null;
+                return "Website muss ein gültiges Format haben!Bsp.: www.google.ch";
             }
             if (!Regex.IsMatch(website, @"^(https?:\/\/)?(www\.)?([a-zA-Z0-9]+(-?[a-zA-Z0-9])*\.)+[\w]{2,}(\/\S*)?$"))
             {
@@ -100,7 +100,7 @@ namespace MonitoringClient.RegExp
         {
             if (password == null)
             {
-                return true;
+                return false;
             }
             if (!Regex.IsMatch(password, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"))
             {
