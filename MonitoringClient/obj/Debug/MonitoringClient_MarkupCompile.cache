@@ -4,17 +4,26 @@
 winexe
 C#
 .cs
-D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\
+C:\Workspace\HF\MonitoringClient\obj\Debug\
 MonitoringClient
 none
 false
 DEBUG;TRACE
+<<<<<<< HEAD
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\App.xaml
 61543880953
 
 34-1228823536
 132-1038878023
 MainWindow.xaml;View\CustomerView.xaml;View\LocationView.xaml;View\LogEntryView.xaml;View\LogMessageAddView.xaml;View\NavigationView.xaml;
+=======
+C:\Workspace\HF\MonitoringClient\App.xaml
+51540070773
+
+28-2034721252
+133-1019363117
+MainWindow.xaml;View\LocationView.xaml;View\LogEntryView.xaml;View\LogMessageAddView.xaml;View\NavigationView.xaml;
+>>>>>>> ad0ff86a7bd02819f6ed5bee2e50fdc4972d4286
 
 False
 

@@ -285,6 +285,13 @@ C:\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\Vie
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\linq2db.dll
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\linq2db.pdb
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\linq2db.xml
+<<<<<<< HEAD
+=======
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\EntityFramework.dll
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\EntityFramework.SqlServer.dll
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\EntityFramework.xml
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\EntityFramework.SqlServer.xml
+>>>>>>> ad0ff86a7bd02819f6ed5bee2e50fdc4972d4286
 C:\Workspace\HF\MonitoringClient\bin\Debug\MonitoringClient.exe.config
 C:\Workspace\HF\MonitoringClient\bin\Debug\MonitoringClient.exe
 C:\Workspace\HF\MonitoringClient\bin\Debug\MonitoringClient.pdb
@@ -386,9 +393,19 @@ C:\Workspace\HF\MonitoringClient\bin\Debug\System.Xml.XPath.dll
 C:\Workspace\HF\MonitoringClient\bin\Debug\System.Xml.XPath.XDocument.dll
 C:\Workspace\HF\MonitoringClient\bin\Debug\BouncyCastle.Crypto.dll
 C:\Workspace\HF\MonitoringClient\bin\Debug\DuplicateCheckerLib.dll
+<<<<<<< HEAD
 C:\Workspace\HF\MonitoringClient\bin\Debug\Google.Protobuf.dll
 C:\Workspace\HF\MonitoringClient\bin\Debug\linq2db.dll
 C:\Workspace\HF\MonitoringClient\bin\Debug\MySql.Data.dll
+=======
+C:\Workspace\HF\MonitoringClient\bin\Debug\EntityFramework.dll
+C:\Workspace\HF\MonitoringClient\bin\Debug\EntityFramework.SqlServer.dll
+C:\Workspace\HF\MonitoringClient\bin\Debug\Google.Protobuf.dll
+C:\Workspace\HF\MonitoringClient\bin\Debug\linq2db.dll
+C:\Workspace\HF\MonitoringClient\bin\Debug\MySql.Data.dll
+C:\Workspace\HF\MonitoringClient\bin\Debug\EntityFramework.xml
+C:\Workspace\HF\MonitoringClient\bin\Debug\EntityFramework.SqlServer.xml
+>>>>>>> ad0ff86a7bd02819f6ed5bee2e50fdc4972d4286
 C:\Workspace\HF\MonitoringClient\bin\Debug\Google.Protobuf.xml
 C:\Workspace\HF\MonitoringClient\bin\Debug\linq2db.pdb
 C:\Workspace\HF\MonitoringClient\bin\Debug\linq2db.xml
@@ -416,6 +433,7 @@ C:\Workspace\HF\MonitoringClient\obj\Debug\MonitoringClient.csproj.CoreCompileIn
 C:\Workspace\HF\MonitoringClient\obj\Debug\MonitoringClient.csproj.CopyComplete
 C:\Workspace\HF\MonitoringClient\obj\Debug\MonitoringClient.exe
 C:\Workspace\HF\MonitoringClient\obj\Debug\MonitoringClient.pdb
+<<<<<<< HEAD
 C:\Workspace\HF\MonitoringClient\obj\Debug\View\CustomerView.g.cs
 C:\Workspace\HF\MonitoringClient\obj\Debug\View\CustomerView.baml
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\View\CustomerView.baml
@@ -424,3 +442,5 @@ D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\Google.Protobuf.pdb
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\nunit.framework.pdb
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\nunit.framework.xml
+=======
+>>>>>>> ad0ff86a7bd02819f6ed5bee2e50fdc4972d4286

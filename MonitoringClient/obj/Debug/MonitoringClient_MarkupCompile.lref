@@ -1,6 +1,14 @@
 ﻿
 
+<<<<<<< HEAD
 FD:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\MainWindow.xaml;;
 FD:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\View\LocationView.xaml;;
 FD:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\View\NavigationView.xaml;;
+=======
+FC:\Workspace\HF\MonitoringClient\MainWindow.xaml;;
+FC:\Workspace\HF\MonitoringClient\View\LocationView.xaml;;
+FC:\Workspace\HF\MonitoringClient\View\LogEntryView.xaml;;
+FC:\Workspace\HF\MonitoringClient\View\LogMessageAddView.xaml;;
+FC:\Workspace\HF\MonitoringClient\View\NavigationView.xaml;;
+>>>>>>> ad0ff86a7bd02819f6ed5bee2e50fdc4972d4286
 

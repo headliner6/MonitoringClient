@@ -1,15 +1,16 @@
 ﻿using MonitoringClient.Command;
 using MonitoringClient.DataStructures;
-using MonitoringClient.Model;
 using MonitoringClient.Repository;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+<<<<<<< HEAD
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+=======
+>>>>>>> ad0ff86a7bd02819f6ed5bee2e50fdc4972d4286
 using System.Windows.Input;
 
 namespace MonitoringClient.ViewModel

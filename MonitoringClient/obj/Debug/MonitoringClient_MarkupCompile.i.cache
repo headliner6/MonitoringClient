@@ -12,9 +12,19 @@ DEBUG;TRACE
 C:\Workspace\HF\MonitoringClient\App.xaml
 61543880953
 
+<<<<<<< HEAD
 39507240036
 1321821375082
 MainWindow.xaml;View\CustomerView.xaml;View\LocationView.xaml;View\LogEntryView.xaml;View\LogMessageAddView.xaml;View\NavigationView.xaml;
+=======
+32-566762725
+<<<<<<< HEAD
+131460754797
+=======
+133-1687670581
+>>>>>>> 668977939ae99b48c0c10b2c39682e15378b1672
+MainWindow.xaml;View\LocationView.xaml;View\LogEntryView.xaml;View\LogMessageAddView.xaml;View\NavigationView.xaml;
+>>>>>>> ad0ff86a7bd02819f6ed5bee2e50fdc4972d4286
 
 False
 

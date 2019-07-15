@@ -1,9 +1,6 @@
 ﻿using LinqToDB.Data;
 using MonitoringClient.Model;
-using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Windows;
 
 namespace MonitoringClient.Repository
