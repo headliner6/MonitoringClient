@@ -42,7 +42,7 @@ namespace MonitoringClient.RegExp
             {
                 return null;
             }
-            if (!Regex.IsMatch(addressnumber, "(^CU[0-9]{5})"))
+            if (!Regex.IsMatch(addressnumber, "(^CU[0-9]{5}$)"))
             {
                 return "Addressnumber muss zwingend mit Präfix 'CU' beginnen und anschliessend 5 Ziffern beinhalten.";
             }
