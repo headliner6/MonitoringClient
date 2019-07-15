@@ -54,7 +54,7 @@ namespace MonitoringClient.RegExp
             {
                 return null;
             }
-            if (true)
+            if (!Regex.IsMatch(accountNumber, "(^[1-8]{1}$)"))
             {
                 return "CustomerAccountNumber muss 1-8 sein!";
             }

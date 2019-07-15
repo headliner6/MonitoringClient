@@ -420,3 +420,7 @@ C:\Workspace\HF\MonitoringClient\obj\Debug\View\CustomerView.g.cs
 C:\Workspace\HF\MonitoringClient\obj\Debug\View\CustomerView.baml
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\View\CustomerView.baml
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\View\CustomerView.g.cs
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\nunit.framework.dll
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\Google.Protobuf.pdb
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\nunit.framework.pdb
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\nunit.framework.xml
