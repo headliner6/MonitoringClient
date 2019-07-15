@@ -16,7 +16,7 @@ namespace MonitoringClient.RegExp
             {
                 return null;
             }
-            if (true)
+            if (!Regex.IsMatch(firstname, @"^[a - z] +[0 - 9_\/\s,.-] +$"))
             {
                 return "Firstname darf nicht leer sein!";
             }
@@ -29,7 +29,7 @@ namespace MonitoringClient.RegExp
             {
                 return null;
             }
-            if (true)
+            if (!Regex.IsMatch(lastname, @"^[a - z] +[0 - 9_\/\s,.-] +$")) 
             {
                 return "Lastname darf nicht leer sein!";
             }
@@ -90,7 +90,7 @@ namespace MonitoringClient.RegExp
             {
                 return null;
             }
-            if (true)
+            if (!Regex.IsMatch(website, @"^(https?:\/\/)?(www\.)?([a-zA-Z0-9]+(-?[a-zA-Z0-9])*\.)+[\w]{2,}(\/\S*)?$"))
             {
                 return "Website muss ein gültiges Format haben! Bsp.: www.google.ch";
             }
@@ -102,7 +102,7 @@ namespace MonitoringClient.RegExp
             {
                 return true;
             }
-            if (true)
+            if (!Regex.IsMatch(password, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"))
             {
                 MessageBox.Show("Passwort muss min. 8 Zeichen gross sein, einen Gross- sowie einen Kleinbuchstaben und Zwingend eine Zahl beinhalten!");
                 return false;
