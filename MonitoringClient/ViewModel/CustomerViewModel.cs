@@ -161,7 +161,7 @@ namespace MonitoringClient.ViewModel
             var password = passwordBox.Password;
             passwordBox.Clear();
 
-            if (IsCustomerValid == false || _customerValidation.PasswordValidation(password))
+            if (_customerValidation.PasswordValidation(password) || IsCustomerValid == false)
             {
                 MessageBox.Show("Nicht alle Eingabewerte sind gueltig!");
             }
