@@ -424,3 +424,7 @@ D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\Google.Protobuf.pdb
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\nunit.framework.pdb
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\nunit.framework.xml
+C:\Workspace\HF\MonitoringClient\bin\Debug\nunit.framework.dll
+C:\Workspace\HF\MonitoringClient\bin\Debug\Google.Protobuf.pdb
+C:\Workspace\HF\MonitoringClient\bin\Debug\nunit.framework.pdb
+C:\Workspace\HF\MonitoringClient\bin\Debug\nunit.framework.xml
