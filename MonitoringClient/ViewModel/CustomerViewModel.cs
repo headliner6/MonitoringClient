@@ -49,6 +49,7 @@ namespace MonitoringClient.ViewModel
             }
         }
 
+        public string FirstnameSearch { get; set; } = "Firstname";
         public string Firstname
         {
             get
@@ -59,6 +60,7 @@ namespace MonitoringClient.ViewModel
                 OnPropertyChanged("Firstname");
             }
         }
+        public string LastnameSearch { get; set; } = "Lastname";
         public string Lastname
         {
             get
@@ -219,7 +221,9 @@ namespace MonitoringClient.ViewModel
         private void ClearPropertiesAndSelectedItem(object obj)
         {
             SelectedItem = null;
+            FirstnameSearch = "Firstname";
             Firstname = null;
+            LastnameSearch = "Lastname";
             Lastname = null;
             Addressnumber = null;
             CustomerAccountNumber = 0;
@@ -230,7 +234,9 @@ namespace MonitoringClient.ViewModel
         private void ClearPropertiesAndSelectedItem()
         {
             SelectedItem = null;
+            FirstnameSearch = "Firstname";
             Firstname = null;
+            LastnameSearch = "Lastname";
             Lastname = null;
             Addressnumber = null;
             CustomerAccountNumber = 0;

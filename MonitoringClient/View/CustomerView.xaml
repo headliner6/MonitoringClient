@@ -13,15 +13,62 @@
         <GroupBox Header="Customer Navigation" Grid.Row="0">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="600"/>
+                    <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="button_back"
                         Command="{Binding Path=NavigateBack}"
                         Content="Back"
-                        Margin="0,16,-39,15" Width="70"/>
+                        Height="30"
+                        Width="80"
+                        HorizontalAlignment="Left"
+                        Margin="2"
+                        Grid.Column="0"/>
+                <TextBlock x:Name="txtblock_Firstname2"
+                               Grid.Row="0"
+                               Grid.Column="1"
+                               Text="Search customer: "
+                               HorizontalAlignment="Center"    
+                               VerticalAlignment="Top"
+                               FontWeight="ExtraBold"
+                               FontSize="12"
+                               FontStyle="Italic"
+                               Margin="2"
+                               Height="20"
+                               Width="100"/>
+                <TextBlock x:Name="txtblock_Firstname3"
+                               Grid.Row="0"
+                               Grid.Column="1"
+                               Text="Firstname: "
+                               HorizontalAlignment="Left"    
+                               VerticalAlignment="Top"
+                               FontSize="12"
+                               FontStyle="Italic"
+                               Margin="2"
+                               Height="20"
+                               Width="100"/>
+                <TextBox x:Name="txtbox_Firstname2"
+                             Text="{Binding Path=FirstnameSearch, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                             Grid.Row="0"
+                             Grid.Column="1"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Bottom"
+                             Margin="2"
+                             Height="25"
+                             Width="200"/>
+                <TextBox x:Name="txtbox_Lastname2"
+                             Text="{Binding Path=LastnameSearch, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                             Grid.Row="0"
+                             Grid.Column="1"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Bottom"
+                             Margin="2"
+                             Height="25"
+                             Width="200"/>
             </Grid>
         </GroupBox>
         <GroupBox Header="CustomerData" Grid.Row="1" Height="auto">
