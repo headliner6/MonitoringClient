@@ -49,7 +49,7 @@ namespace MonitoringClient.ViewModel
             }
         }
 
-        public string FirstnameSearch { get; set; } = "Firstname";
+        public string FirstnameSearch { get; set; }
         public string Firstname
         {
             get
@@ -60,7 +60,7 @@ namespace MonitoringClient.ViewModel
                 OnPropertyChanged("Firstname");
             }
         }
-        public string LastnameSearch { get; set; } = "Lastname";
+        public string LastnameSearch { get; set; }
         public string Lastname
         {
             get
