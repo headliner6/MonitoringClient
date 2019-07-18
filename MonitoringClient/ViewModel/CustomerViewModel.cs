@@ -22,6 +22,7 @@ namespace MonitoringClient.ViewModel
         private ObservableCollection<CustomerModel> _customers;
         private CustomerRepository _customerRepository;
         private CustomerModel _selectedItem;
+        private string _selectedCountryCode;
         private CustomerValidation _customerValidation;
         private string _firstname;
         private string _lastname;
@@ -48,8 +49,20 @@ namespace MonitoringClient.ViewModel
                 OnPropertyChanged("SelectedItem");
             }
         }
+        public string SelectedCountryCode
+        {
+            get
+            {
+                return _selectedCountryCode;
+            }
+            set
+            {
+                _selectedCountryCode = value;
+                OnPropertyChanged("SelctedCountryCode");
+                OnPropertyChanged("PhoneNumber");
+            }
+        }
 
-        public string FirstnameSearch { get; set; }
         public string Firstname
         {
             get
@@ -60,7 +73,6 @@ namespace MonitoringClient.ViewModel
                 OnPropertyChanged("Firstname");
             }
         }
-        public string LastnameSearch { get; set; }
         public string Lastname
         {
             get
@@ -131,6 +143,7 @@ namespace MonitoringClient.ViewModel
                 OnPropertyChanged("Customers");
             }
         }
+        public List<string> CountryCode { get; }
         public ICommand NavigateBack { get; set; }
 
         public CustomerViewModel(Action<object> navigateToLogEntryView)
@@ -141,6 +154,8 @@ namespace MonitoringClient.ViewModel
             CreateNewCustomer = new BaseCommand(ClearPropertiesAndSelectedItem);
             this.navigateToLogEntryView = navigateToLogEntryView;
             _customerValidation = new CustomerValidation();
+            CountryCode = new List<string>();
+            InitialiseCountryCodes();
         }
 
         public void GetAll()
@@ -221,9 +236,9 @@ namespace MonitoringClient.ViewModel
         private void ClearPropertiesAndSelectedItem(object obj)
         {
             SelectedItem = null;
-            FirstnameSearch = "Firstname";
+            SelectedCountryCode = CountryCode.First();
+            OnPropertyChanged("SelectedCountryCode");
             Firstname = null;
-            LastnameSearch = "Lastname";
             Lastname = null;
             Addressnumber = null;
             CustomerAccountNumber = 0;
@@ -234,15 +249,22 @@ namespace MonitoringClient.ViewModel
         private void ClearPropertiesAndSelectedItem()
         {
             SelectedItem = null;
-            FirstnameSearch = "Firstname";
+            SelectedCountryCode = CountryCode.First();
+            OnPropertyChanged("SelectedCountryCode");
             Firstname = null;
-            LastnameSearch = "Lastname";
             Lastname = null;
             Addressnumber = null;
             CustomerAccountNumber = 0;
             PhoneNumber = null;
             Email = null;
             Website = null;
+        }
+        private void InitialiseCountryCodes()
+        {
+            CountryCode.Add("Schweiz");
+            CountryCode.Add("Deutschland");
+            CountryCode.Add("Liechtenstein");
+            SelectedCountryCode = CountryCode.First();
         }
         protected void OnPropertyChanged(string name)
         {
@@ -312,7 +334,7 @@ namespace MonitoringClient.ViewModel
                     error = _customerValidation.CustomerAccountNumberValidation(_customerAccountNumber.ToString());
                     break;
                 case "PhoneNumber":
-                    error = _customerValidation.PhoneNumberValidation(_phoneNumber);
+                    error = _customerValidation.PhoneNumberValidation(_phoneNumber, _selectedCountryCode);
                     break;
                 case "Email":
                     error = _customerValidation.EmailValidation(_email);
