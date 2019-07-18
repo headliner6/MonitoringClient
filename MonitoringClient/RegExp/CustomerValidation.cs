@@ -29,7 +29,7 @@ namespace MonitoringClient.RegExp
             {
                 return "Lastname darf nicht leer sein!";
             }
-            if (!Regex.IsMatch(lastname, @"^[a-zA-Z]+$")) 
+            if (!Regex.IsMatch(lastname, @"^[a-zA-Z]+$"))
             {
                 return "Lastname darf nicht leer sein!";
             }
@@ -60,15 +60,30 @@ namespace MonitoringClient.RegExp
             }
             return null;
         }
-        public string PhoneNumberValidation(string phoneNumber) // TODO: komplett überarbeiten gemäss Dokumentation
+        public string PhoneNumberValidation(string phoneNumber, string SelectedCountryCode)
         {
-            if (phoneNumber == null)
+            switch (SelectedCountryCode)
             {
-                return "Phone number muss ein gültiges Format haben!! Bsp.: +41 75 409 00 00-56";
-            }
-            if (!Regex.IsMatch(phoneNumber, @"^(0|0041|\+41)?[1-9\s][0-9\s]{1,12}$"))
-            {
-                return "Phone number muss ein gültiges Format haben!! Bsp.: +41 75 409 00 00-56";
+                case "Schweiz":
+                    if (phoneNumber == null || !Regex.IsMatch(phoneNumber, @"^(0|0041|\+41|[0-9]{3})(\s?(\(0\))?\s?|\s?(\/)?\s?)?([1-9\s]|[0-9\s]{1,12})([-][0-9]{2})?$"))
+                    {
+                        return "Phone number muss ein gültiges Format haben!! Bsp.: +41 75 409 00 00-56";
+                    }
+                    break;
+
+                case "Deutschland":
+                    if (phoneNumber == null || !Regex.IsMatch(phoneNumber, @"^(0049|\+49)(\s?(\(0\))?\s?|\s?(\/)?\s?)?([1-9\s]|[0-9\s]{1,12})([-][0-9]{2})?$"))
+                    {
+                        return "Phone number muss ein gültiges Format haben!! Bsp.: +49 75 409 00 00-56";
+                    }
+                    break;
+
+                case "Liechtenstein":
+                    if (phoneNumber == null || !Regex.IsMatch(phoneNumber, @"^(00423|\+423)(\s?(\(0\))?\s?|\s?(\/)?\s?)?([1-9\s]|[0-9\s]{1,12})([-][0-9]{2})?$"))
+                    {
+                        return "Phone number muss ein gültiges Format haben!! Bsp.: +423 75 409 00 00-56";
+                    }
+                    break;
             }
             return null;
         }
@@ -84,7 +99,7 @@ namespace MonitoringClient.RegExp
             }
             return null;
         }
-        public string WebsiteValidation(string website) // TODO: wwww.ch darf nicht gülitg sein
+        public string WebsiteValidation(string website)
         {
             if (website == null)
             {

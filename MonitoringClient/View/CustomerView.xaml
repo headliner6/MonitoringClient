@@ -16,10 +16,11 @@
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="110"/>
+                    <ColumnDefinition Width="205"/>
+                    <ColumnDefinition Width="235"/>
+                    <ColumnDefinition Width="85"/>
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="button_back"
@@ -60,7 +61,7 @@
                              HorizontalAlignment="Left"
                              VerticalAlignment="Bottom"
                              Margin="2"
-                             Height="25"
+                             Height="20"
                              Width="200"/>
                 <TextBlock x:Name="txtblock_Lastname2"
                                Grid.Row="0"
@@ -77,11 +78,18 @@
                              Text="{Binding Path=LastnameSearch, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                              Grid.Row="0"
                              Grid.Column="3"
-                             HorizontalAlignment="Center"
+                             HorizontalAlignment="Left"
                              VerticalAlignment="Bottom"
                              Margin="2"
-                             Height="25"
+                             Height="20"
                              Width="200"/>
+                <Button x:Name="button_search"
+                            Command="{Binding Path=SaveCustomerCommand}"
+                            CommandParameter="{Binding ElementName=pwbox_Password}"
+                            Content="Search"
+                            Grid.Row="0"
+                            Grid.Column="4"
+                            Margin="2"/>
             </Grid>
         </GroupBox>
         <GroupBox Header="CustomerData" Grid.Row="1" Height="auto">
@@ -107,6 +115,7 @@
                           Height="180"/>
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
                         <RowDefinition Height="25"/>
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="25"/>
@@ -122,7 +131,7 @@
                         <ColumnDefinition Width="90"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock x:Name="txtblock_Firstname"
-                               Grid.Row="0"
+                               Grid.Row="1"
                                Grid.Column="0"
                                Text="Firstname: "
                                HorizontalAlignment="Left"        
@@ -130,7 +139,7 @@
                                Width="100"/>
                     <TextBox x:Name="txtbox_Firstname"
                              Text="{Binding Path=Firstname, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                             Grid.Row="0"
+                             Grid.Row="1"
                              Grid.Column="0"
                              HorizontalAlignment="Right"
                              Margin="2"
@@ -139,14 +148,14 @@
                                Text="{Binding ElementName=txtbox_Firstname, Path=(Validation.Errors).CurrentItem.ErrorContent}"
                                FontSize="10"
                                TextWrapping="Wrap"
-                               Grid.Row="1"
+                               Grid.Row="2"
                                Grid.Column="0"
                                HorizontalAlignment="Left"
                                Margin="2"
                                Width="340"
                                />
                     <TextBlock x:Name="txtblock_Lastname"
-                               Grid.Row="2"
+                               Grid.Row="3"
                                Grid.Column="0"
                                Text="Lastname: "
                                HorizontalAlignment="Left"        
@@ -154,7 +163,7 @@
                                Width="100"/>
                     <TextBox x:Name="txtbox_Lastname"
                              Text="{Binding Path=Lastname, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                             Grid.Row="2"
+                             Grid.Row="3"
                              Grid.Column="0"
                              HorizontalAlignment="Right"
                              Margin="2"
@@ -163,14 +172,14 @@
                                Text="{Binding ElementName=txtbox_Lastname, Path=(Validation.Errors).CurrentItem.ErrorContent}"
                                FontSize="10"
                                TextWrapping="Wrap"
-                               Grid.Row="3"
+                               Grid.Row="4"
                                Grid.Column="0"
                                HorizontalAlignment="Left"
                                Margin="2"
                                Width="340"
                                />
                     <TextBlock x:Name="txtblock_Addressnumber"
-                               Grid.Row="4"
+                               Grid.Row="5"
                                Grid.Column="0"
                                Text="Address number: "
                                HorizontalAlignment="Left"        
@@ -178,7 +187,7 @@
                                Width="100"/>
                     <TextBox x:Name="txtbox_Addressnumber"
                              Text="{Binding Path=Addressnumber, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                             Grid.Row="4"
+                             Grid.Row="5"
                              Grid.Column="0"
                              HorizontalAlignment="Right"
                              Margin="2"
@@ -187,14 +196,14 @@
                                Text="{Binding ElementName=txtbox_Addressnumber, Path=(Validation.Errors).CurrentItem.ErrorContent}"
                                FontSize="10"
                                TextWrapping="Wrap"
-                               Grid.Row="5"
+                               Grid.Row="6"
                                Grid.Column="0"
                                HorizontalAlignment="Left"
                                Margin="2"
                                Width="340"
                                />
                     <TextBlock x:Name="txtblock_CustomerAccountNumber"
-                               Grid.Row="6"
+                               Grid.Row="7"
                                Grid.Column="0"
                                Text="CustomerAccountNumber: "
                                HorizontalAlignment="Left"        
@@ -202,7 +211,7 @@
                                Width="150"/>
                     <TextBox x:Name="txtbox_CustomerAccountNumber"
                              Text="{Binding Path=CustomerAccountNumber, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                             Grid.Row="6"
+                             Grid.Row="7"
                              Grid.Column="0"
                              HorizontalAlignment="Right"
                              Margin="2"
@@ -211,14 +220,22 @@
                                Text="{Binding ElementName=txtbox_CustomerAccountNumber, Path=(Validation.Errors).CurrentItem.ErrorContent}"
                                FontSize="10"
                                TextWrapping="Wrap"
-                               Grid.Row="7"
+                               Grid.Row="8"
                                Grid.Column="0"
                                HorizontalAlignment="Left"
                                Margin="2"
                                Width="340"
                                />
-                    <TextBlock x:Name="txtblock_PhoneNumber"
+                    <ComboBox  x:Name="combobox_CountryCode"
                                Grid.Row="0"
+                               Grid.Column="1"
+                               ItemsSource="{Binding Path=CountryCode}"
+                               SelectedItem="{Binding Path=SelectedCountryCode, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                               HorizontalAlignment="Right"
+                               Margin="2"
+                               Width="200"/>
+                    <TextBlock x:Name="txtblock_PhoneNumber"
+                               Grid.Row="1"
                                Grid.Column="1"        
                                Text="Phone number: "
                                HorizontalAlignment="Left"
@@ -226,7 +243,7 @@
                                Width="100"/>
                     <TextBox x:Name="txtbox_PhoneNumber"
                              Text="{Binding Path=PhoneNumber, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                             Grid.Row="0"
+                             Grid.Row="1"
                              Grid.Column="1"        
                              HorizontalAlignment="Right"     
                              Margin="2"
@@ -235,14 +252,14 @@
                                Text="{Binding ElementName=txtbox_PhoneNumber, Path=(Validation.Errors).CurrentItem.ErrorContent}"
                                FontSize="10"
                                TextWrapping="Wrap"
-                               Grid.Row="1"
+                               Grid.Row="2"
                                Grid.Column="1"
                                HorizontalAlignment="Left"
                                Margin="2"
                                Width="340"
                                />
                     <TextBlock x:Name="txtblock_Email"
-                               Grid.Row="2"
+                               Grid.Row="3"
                                Grid.Column="1"        
                                Text="Email address: "
                                HorizontalAlignment="Left"     
@@ -250,7 +267,7 @@
                                Width="100"/>
                     <TextBox x:Name="txtbox_Email"
                              Text="{Binding Path=Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                             Grid.Row="2"
+                             Grid.Row="3"
                              Grid.Column="1"        
                              HorizontalAlignment="Right"
                              Margin="2"
@@ -259,14 +276,14 @@
                                Text="{Binding ElementName=txtbox_Email, Path=(Validation.Errors).CurrentItem.ErrorContent}"
                                FontSize="10"
                                TextWrapping="Wrap"
-                               Grid.Row="3"
+                               Grid.Row="4"
                                Grid.Column="1"
                                HorizontalAlignment="Left"
                                Margin="2"
                                Width="340"
                                />
                     <TextBlock x:Name="txtblock_Website"
-                               Grid.Row="4"
+                               Grid.Row="5"
                                Grid.Column="1"        
                                Text="Website: "
                                Margin="2"
@@ -274,7 +291,7 @@
                                Width="60"/>
                     <TextBox x:Name="txtbox_Website"
                              Text="{Binding Path=Website, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                             Grid.Row="4"
+                             Grid.Row="5"
                              Grid.Column="1"  
                              HorizontalAlignment="Right"        
                              Margin="2"
@@ -283,21 +300,21 @@
                                Text="{Binding ElementName=txtbox_Website, Path=(Validation.Errors).CurrentItem.ErrorContent}"
                                FontSize="10"
                                TextWrapping="Wrap"
-                               Grid.Row="5"
+                               Grid.Row="6"
                                Grid.Column="1"
                                HorizontalAlignment="Left"
                                Margin="2"
                                Width="340"
                                />
                     <TextBlock x:Name="txtblock_Password"
-                               Grid.Row="6"
+                               Grid.Row="7"
                                Grid.Column="1"
                                Text="Password: "
                                HorizontalAlignment="Left"
                                Margin="2"
                                Width="60"/>
                     <PasswordBox x:Name="pwbox_Password"
-                                 Grid.Row="6"
+                                 Grid.Row="7"
                                  Grid.Column="1"
                                  HorizontalAlignment="Right" 
                                  Margin="2"
