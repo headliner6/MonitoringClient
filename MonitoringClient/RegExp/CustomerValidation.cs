@@ -66,7 +66,7 @@ namespace MonitoringClient.RegExp
             {
                 return "Phone number muss ein gültiges Format haben!! Bsp.: +41 75 409 00 00-56";
             }
-            if (!Regex.IsMatch(phoneNumber, @"^(0|0041|\+41)?[1-9\s][0-9\s]{1,12}$"))
+            if (!Regex.IsMatch(phoneNumber, @"^(0|0041|\+41)?([1-9\s][0-9\s]{1,12})([-][0-9]{2})?$"))
             {
                 return "Phone number muss ein gültiges Format haben!! Bsp.: +41 75 409 00 00-56";
             }
