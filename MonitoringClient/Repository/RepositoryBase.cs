@@ -23,7 +23,6 @@ namespace MonitoringClient.Repository
 
         protected RepositoryBase()
         {
-            /*"Server = localhost; Database = inventarisierungsloesung; User Id = root; Pwd = password;"*//*"Server = localhost; Database = ; Uid = root; Pwd = ;"*/
             this.ConnectionString = @"Data Source=.\;Database=Inventarisierungsloesung;Trusted_Connection=true;Enlist=False";
             this.DbProvider = "SqlServer";
         }

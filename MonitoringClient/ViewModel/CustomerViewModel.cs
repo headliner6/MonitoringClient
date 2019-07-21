@@ -34,10 +34,10 @@ namespace MonitoringClient.ViewModel
         private string _email;
         private string _website;
 
-        public ICommand SaveCustomerCommand { get; set; }
-        public ICommand CreateNewCustomer { get; set; }
+        public SaveCustomerCommand SaveCustomerCommand { get; set; }
+        public CreateNewCustomerCommand CreateNewCustomer { get; set; }
         public LoadAllCustomerCommand LoadAllCustomerCommand { get; set; }
-        public ICommand SearchCustomerCommand { get; set; }
+        public SearchCustomerCommand SearchCustomerCommand { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public string ConnectionString { get; set; }
         public CustomerModel SelectedItem
@@ -53,19 +53,17 @@ namespace MonitoringClient.ViewModel
                 OnPropertyChanged("SelectedItem");
             }
         }
-        public string SelectedCountryCode
+        public ObservableCollection<CustomerModel> Customers
         {
-            get
-            {
-                return _selectedCountryCode;
-            }
+            get { return _customers; }
             set
             {
-                _selectedCountryCode = value;
-                OnPropertyChanged("SelctedCountryCode");
-                OnPropertyChanged("PhoneNumber");
+                _customers = value;
+                OnPropertyChanged("Customers");
             }
         }
+        public List<string> CountryCode { get; }
+        public ICommand NavigateBack { get; set; }
 
         public string Firstname
         {
@@ -127,6 +125,19 @@ namespace MonitoringClient.ViewModel
                 OnPropertyChanged("CustomerAccountNumber");
             }
         }
+        public string SelectedCountryCode
+        {
+            get
+            {
+                return _selectedCountryCode;
+            }
+            set
+            {
+                _selectedCountryCode = value;
+                OnPropertyChanged("SelctedCountryCode");
+                OnPropertyChanged("PhoneNumber");
+            }
+        }
         public string PhoneNumber
         {
             get
@@ -158,25 +169,13 @@ namespace MonitoringClient.ViewModel
             }
         }
 
-        public ObservableCollection<CustomerModel> Customers
-        {
-            get { return _customers; }
-            set
-            {
-                _customers = value;
-                OnPropertyChanged("Customers");
-            }
-        }
-        public List<string> CountryCode { get; }
-        public ICommand NavigateBack { get; set; }
-
         public CustomerViewModel(Action<object> navigateToLogEntryView)
         {
             _customerRepository = new CustomerRepository();
             NavigateBack = new BaseCommand(OnNavigateBack);
-            SaveCustomerCommand = new BaseCommand(SaveCustomer);
-            CreateNewCustomer = new BaseCommand(ClearPropertiesAndSelectedItem);
-            SearchCustomerCommand = new BaseCommand(SearchCustomer);
+            SaveCustomerCommand = new SaveCustomerCommand(this);
+            CreateNewCustomer = new CreateNewCustomerCommand(this);
+            SearchCustomerCommand = new SearchCustomerCommand(this);
             LoadAllCustomerCommand = new LoadAllCustomerCommand(this);
             this.navigateToLogEntryView = navigateToLogEntryView;
             _customerValidation = new CustomerValidation();
@@ -196,9 +195,8 @@ namespace MonitoringClient.ViewModel
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
         }
-        private void SaveCustomer(object parameter)
+        public void SaveCustomer(PasswordBox passwordBox)
         {
-            var passwordBox = parameter as PasswordBox;
             var password = passwordBox.Password;
             passwordBox.Clear();
 
@@ -227,6 +225,57 @@ namespace MonitoringClient.ViewModel
             {
                 MessageBox.Show("Nicht alle Eingabewerte sind gueltig!");
             }
+        }
+        public void ClearPropertiesAndSelectedItem()
+        {
+            SelectedItem = null;
+            SelectedCountryCode = CountryCode.First();
+            OnPropertyChanged("SelectedCountryCode");
+            Firstname = null;
+            Lastname = null;
+            Addressnumber = null;
+            CustomerAccountNumber = 0;
+            PhoneNumber = null;
+            Email = null;
+            Website = null;
+        }
+        public void SearchCustomer()
+        {
+            foreach (CustomerModel customer in Customers)
+            {
+                if (customer.Firstname.Equals(_firstnameSearch) && customer.Lastname.Equals(_lastanemSearch))
+                {
+                    try
+                    {
+                        _customerRepository.ConnectionString = ConnectionString;
+                        Customers.Clear();
+                        Customers.Add(_customerRepository.GetSingle(customer.Id));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+                    }
+                    return;
+                }
+            }
+            MessageBox.Show(@"Der Kunde '" + FirstnameSearch + "' '" + LastnameSearch + "' wurde nicht gefunden!");
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        private void OnNavigateBack(object obj)
+        {
+            navigateToLogEntryView.Invoke("LogEntryView");
+        }
+        private void InitialiseCountryCodes()
+        {
+            CountryCode.Add("Schweiz");
+            CountryCode.Add("Deutschland");
+            CountryCode.Add("Liechtenstein");
+            SelectedCountryCode = CountryCode.First();
         }
         private CustomerModel CreateCustomerToSave(string password)
         {
@@ -258,69 +307,6 @@ namespace MonitoringClient.ViewModel
                 Website = _selectedItem.Website;
             }
         }
-        private void ClearPropertiesAndSelectedItem(object obj)
-        {
-            SelectedItem = null;
-            SelectedCountryCode = CountryCode.First();
-            OnPropertyChanged("SelectedCountryCode");
-            Firstname = null;
-            Lastname = null;
-            Addressnumber = null;
-            CustomerAccountNumber = 0;
-            PhoneNumber = null;
-            Email = null;
-            Website = null;
-        }
-        private void ClearPropertiesAndSelectedItem()
-        {
-            SelectedItem = null;
-            SelectedCountryCode = CountryCode.First();
-            OnPropertyChanged("SelectedCountryCode");
-            Firstname = null;
-            Lastname = null;
-            Addressnumber = null;
-            CustomerAccountNumber = 0;
-            PhoneNumber = null;
-            Email = null;
-            Website = null;
-        }
-        private void InitialiseCountryCodes()
-        {
-            CountryCode.Add("Schweiz");
-            CountryCode.Add("Deutschland");
-            CountryCode.Add("Liechtenstein");
-            SelectedCountryCode = CountryCode.First();
-        }
-        public void SearchCustomer(object obj)
-        {
-            foreach (CustomerModel customer in Customers)
-            {
-                if (customer.Firstname.Equals(_firstnameSearch) && customer.Lastname.Equals(_lastanemSearch))
-                {
-                    try
-                    {
-                        _customerRepository.ConnectionString = ConnectionString;
-                        Customers.Clear();
-                        Customers.Add(_customerRepository.GetSingle(customer.Id));
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-                    }
-                    return;
-                }
-            }
-            MessageBox.Show(@"Der Kunde '" + FirstnameSearch + "' '" + LastnameSearch + "' wurde nicht gefunden!");
-        }
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-        private void OnNavigateBack(object obj)
-        {
-            navigateToLogEntryView.Invoke("LogEntryView");
-        }
-
         string IDataErrorInfo.Error
         {
             get
@@ -335,7 +321,7 @@ namespace MonitoringClient.ViewModel
                 return GetValidationError(propertyName);
             }
         }
-        public bool IsCustomerValid
+        private bool IsCustomerValid
         {
             get
             {

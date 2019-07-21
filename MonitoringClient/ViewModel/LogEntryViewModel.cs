@@ -36,7 +36,7 @@ namespace MonitoringClient.ViewModel
             }
         }
         public string ConnectionString { get; set; }
-        public LoadButtonCommand LoadButtonCommand { get; set; }
+        public LoadAllLogEntriesCommand LoadButtonCommand { get; set; }
         public ConfirmButtonCommand ConfirmButtonCommand { get; set; }
         public FindDuplicatesButtonCommand FindDuplicatesButtonCommand { get; set; }
 
@@ -45,7 +45,7 @@ namespace MonitoringClient.ViewModel
             NavigateLogMessageAddView = new BaseCommand(StartLogMessageAddView);
             NavigateLocationView = new BaseCommand(StartLocationView);
             NavigateCustomerView = new BaseCommand(StartCustomerView);
-            LoadButtonCommand = new LoadButtonCommand(this);
+            LoadButtonCommand = new LoadAllLogEntriesCommand(this);
             ConfirmButtonCommand = new ConfirmButtonCommand(this);
             FindDuplicatesButtonCommand = new FindDuplicatesButtonCommand(this);
             this.navigateToLogMessageAddView = navigateToLogMessageAddView;
