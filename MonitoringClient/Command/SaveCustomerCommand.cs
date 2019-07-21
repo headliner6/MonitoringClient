@@ -4,18 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace MonitoringClient.Command
 {
-    public class LoadButtonCommand : ICommand
+    public class SaveCustomerCommand : ICommand
     {
-        private LogEntryViewModel _logEntryViewModel;
+        private CustomerViewModel _customerViewModel;
         public event EventHandler CanExecuteChanged;
-                
-        public LoadButtonCommand(LogEntryViewModel levm)
+
+        public SaveCustomerCommand(CustomerViewModel cvm)
         {
-            this._logEntryViewModel = levm;
+            this._customerViewModel = cvm;
         }
         public bool CanExecute(object parameter)
         {
@@ -23,7 +24,7 @@ namespace MonitoringClient.Command
         }
         public void Execute(object parameter)
         {
-            _logEntryViewModel.GetAll();
+            _customerViewModel.SaveCustomer(parameter as PasswordBox);
         }
     }
 }
