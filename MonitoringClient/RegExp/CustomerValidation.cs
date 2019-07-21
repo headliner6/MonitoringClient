@@ -87,7 +87,7 @@ namespace MonitoringClient.RegExp
             }
             return null;
         }
-        public string EmailValidation(string email) // TODO: 1% Ausnahme muss dokumentiert werden
+        public string EmailValidation(string email)
         {
             if (email == null)
             {
