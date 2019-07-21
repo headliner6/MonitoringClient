@@ -25,7 +25,9 @@ namespace MonitoringClient.ViewModel
         private string _selectedCountryCode;
         private CustomerValidation _customerValidation;
         private string _firstname;
+        private string _firstnameSearch;
         private string _lastname;
+        private string _lastanemSearch;
         private string _addressnumber;
         private int _customerAccountNumber;
         private string _phoneNumber;
@@ -34,6 +36,8 @@ namespace MonitoringClient.ViewModel
 
         public ICommand SaveCustomerCommand { get; set; }
         public ICommand CreateNewCustomer { get; set; }
+        public LoadAllCustomerCommand LoadAllCustomerCommand { get; set; }
+        public ICommand SearchCustomerCommand { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public string ConnectionString { get; set; }
         public CustomerModel SelectedItem
@@ -73,6 +77,16 @@ namespace MonitoringClient.ViewModel
                 OnPropertyChanged("Firstname");
             }
         }
+        public string FirstnameSearch
+        {
+            get
+            { return _firstnameSearch; }
+            set
+            {
+                _firstnameSearch = value;
+                OnPropertyChanged("FirstnameSearch");
+            }
+        }
         public string Lastname
         {
             get
@@ -81,6 +95,16 @@ namespace MonitoringClient.ViewModel
             {
                 _lastname = value;
                 OnPropertyChanged("Lastname");
+            }
+        }
+        public string LastnameSearch
+        {
+            get
+            { return _lastanemSearch; }
+            set
+            {
+                _lastanemSearch = value;
+                OnPropertyChanged("LastnameSearch");
             }
         }
         public string Addressnumber
@@ -152,6 +176,8 @@ namespace MonitoringClient.ViewModel
             NavigateBack = new BaseCommand(OnNavigateBack);
             SaveCustomerCommand = new BaseCommand(SaveCustomer);
             CreateNewCustomer = new BaseCommand(ClearPropertiesAndSelectedItem);
+            SearchCustomerCommand = new BaseCommand(SearchCustomer);
+            LoadAllCustomerCommand = new LoadAllCustomerCommand(this);
             this.navigateToLogEntryView = navigateToLogEntryView;
             _customerValidation = new CustomerValidation();
             CountryCode = new List<string>();
@@ -170,7 +196,6 @@ namespace MonitoringClient.ViewModel
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
         }
-
         private void SaveCustomer(object parameter)
         {
             var passwordBox = parameter as PasswordBox;
@@ -265,6 +290,27 @@ namespace MonitoringClient.ViewModel
             CountryCode.Add("Deutschland");
             CountryCode.Add("Liechtenstein");
             SelectedCountryCode = CountryCode.First();
+        }
+        public void SearchCustomer(object obj)
+        {
+            foreach (CustomerModel customer in Customers)
+            {
+                if (customer.Firstname.Equals(_firstnameSearch) && customer.Lastname.Equals(_lastanemSearch))
+                {
+                    try
+                    {
+                        _customerRepository.ConnectionString = ConnectionString;
+                        Customers.Clear();
+                        Customers.Add(_customerRepository.GetSingle(customer.Id));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+                    }
+                    return;
+                }
+            }
+            MessageBox.Show(@"Der Kunde '" + FirstnameSearch + "' '" + LastnameSearch + "' wurde nicht gefunden!");
         }
         protected void OnPropertyChanged(string name)
         {

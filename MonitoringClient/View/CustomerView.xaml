@@ -19,8 +19,9 @@
                     <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="110"/>
                     <ColumnDefinition Width="205"/>
-                    <ColumnDefinition Width="235"/>
-                    <ColumnDefinition Width="85"/>
+                    <ColumnDefinition Width="230"/>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="90"/>
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="button_back"
@@ -84,11 +85,16 @@
                              Height="20"
                              Width="200"/>
                 <Button x:Name="button_search"
-                            Command="{Binding Path=SaveCustomerCommand}"
-                            CommandParameter="{Binding ElementName=pwbox_Password}"
+                            Command="{Binding Path=SearchCustomerCommand}"
                             Content="Search"
                             Grid.Row="0"
                             Grid.Column="4"
+                            Margin="2"/>
+                <Button x:Name="button_load"
+                            Command="{Binding Path=LoadAllCustomerCommand}"
+                            Content="All Customer"
+                            Grid.Row="0"
+                            Grid.Column="5"
                             Margin="2"/>
             </Grid>
         </GroupBox>
