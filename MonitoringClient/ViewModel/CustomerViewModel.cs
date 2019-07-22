@@ -200,7 +200,7 @@ namespace MonitoringClient.ViewModel
             var password = passwordBox.Password;
             passwordBox.Clear();
 
-            if (_customerValidation.PasswordValidation(password) && IsCustomerValid == true)
+            if (IsCustomerValid(password) == true)
             {
                 try
                 {
@@ -224,7 +224,7 @@ namespace MonitoringClient.ViewModel
             else
             {
                 MessageBox.Show("Nicht alle Eingabewerte sind gueltig!");
-            }             
+            }
         }
         public void ClearPropertiesAndSelectedItem()
         {
@@ -321,19 +321,21 @@ namespace MonitoringClient.ViewModel
                 return GetValidationError(propertyName);
             }
         }
-        private bool IsCustomerValid
+        private bool IsCustomerValid(string password)
         {
-            get
+            if (_customerValidation.PasswordValidation(password) == false)
             {
-                foreach (string property in ValidatedProperties)
-                {
-                    if(GetValidationError(property) != null)
-                    {
-                        return false;
-                    }
-                }
-                return true;
+                MessageBox.Show("Passwort muss min. 8 Zeichen gross sein, einen Gross- sowie einen Kleinbuchstaben, ein Sonderzeichen und Zwingend eine Zahl beinhalten!");
+                return false;
             }
+            foreach (string property in ValidatedProperties)
+            {
+                if (GetValidationError(property) != null)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
         private readonly string[] ValidatedProperties =
         {

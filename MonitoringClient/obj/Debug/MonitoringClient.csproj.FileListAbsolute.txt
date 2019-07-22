@@ -393,7 +393,6 @@ C:\Workspace\HF\MonitoringClient\bin\Debug\Google.Protobuf.xml
 C:\Workspace\HF\MonitoringClient\bin\Debug\linq2db.pdb
 C:\Workspace\HF\MonitoringClient\bin\Debug\linq2db.xml
 C:\Workspace\HF\MonitoringClient\bin\Debug\MySql.Data.xml
-C:\Workspace\HF\MonitoringClient\obj\Debug\MonitoringClient.csprojAssemblyReference.cache
 C:\Workspace\HF\MonitoringClient\obj\Debug\MonitoringClient.exe.config
 C:\Workspace\HF\MonitoringClient\obj\Debug\MainWindow.g.cs
 C:\Workspace\HF\MonitoringClient\obj\Debug\View\LocationView.g.cs
@@ -428,3 +427,10 @@ C:\Workspace\HF\MonitoringClient\bin\Debug\nunit.framework.dll
 C:\Workspace\HF\MonitoringClient\bin\Debug\Google.Protobuf.pdb
 C:\Workspace\HF\MonitoringClient\bin\Debug\nunit.framework.pdb
 C:\Workspace\HF\MonitoringClient\bin\Debug\nunit.framework.xml
+C:\Workspace\HF\MonitoringClient\bin\Debug\Renci.SshNet.dll
+C:\Workspace\HF\MonitoringClient\bin\Debug\Renci.SshNet.xml
+C:\Workspace\HF\MonitoringClient\bin\Debug\NUnit3.TestAdapter.dll
+C:\Workspace\HF\MonitoringClient\bin\Debug\NUnit3.TestAdapter.pdb
+C:\Workspace\HF\MonitoringClient\bin\Debug\nunit.engine.dll
+C:\Workspace\HF\MonitoringClient\bin\Debug\nunit.engine.api.dll
+C:\Workspace\HF\MonitoringClient\obj\Debug\MonitoringClient_Content.g.cs
