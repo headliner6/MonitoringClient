@@ -22,7 +22,6 @@ namespace MonitoringClient.RegExp
             }
             return null;
         }
-
         public string LastnameValidation(string lastname)
         {
             if (lastname == null)
@@ -35,7 +34,6 @@ namespace MonitoringClient.RegExp
             }
             return null;
         }
-
         public string AddressnumberValidation(string addressnumber)
         {
             if (addressnumber == null)
@@ -93,7 +91,7 @@ namespace MonitoringClient.RegExp
             {
                 return "Email address muss ein gültiges Format haben! Bsp.: test@provider.ch";
             }
-            if (!Regex.IsMatch(email, @"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"))
+            if (!Regex.IsMatch(email, @"^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"))
             {
                 return "Email address muss ein gültiges Format haben! Bsp.: test@provider.ch";
             }
@@ -119,12 +117,10 @@ namespace MonitoringClient.RegExp
             }
             if (!Regex.IsMatch(password, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"))
             {
-                MessageBox.Show("Passwort muss min. 8 Zeichen gross sein, einen Gross- sowie einen Kleinbuchstaben und Zwingend eine Zahl beinhalten!");
                 return false;
             }
             return true;
         }
-
 
     }
 }
