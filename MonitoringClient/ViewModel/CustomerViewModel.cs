@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -259,6 +260,38 @@ namespace MonitoringClient.ViewModel
                 }
             }
             MessageBox.Show(@"Der Kunde '" + FirstnameSearch + "' '" + LastnameSearch + "' wurde nicht gefunden!");
+        }
+
+        public void GetPhoneNumberDetails()
+        {
+            string countryCode = "";
+            string areaCode = "";
+            string telephoneNumber = "";
+            string directDialing = "";
+
+            if (Regex.IsMatch(PhoneNumber, @"^(0041|\+41)"))
+            {
+                var match = Regex.Match(PhoneNumber, @"^(0041|\+41)");
+                countryCode = match.Value;
+            }
+
+            if (Regex.IsMatch(PhoneNumber, @"^(0041|\+41)"))
+            {
+                var match = Regex.Match(PhoneNumber, @"^(0041|\+41)");
+                areaCode = match.Value;
+            }
+            if (Regex.IsMatch(PhoneNumber, @"^(0041|\+41)"))
+            {
+                var match = Regex.Match(PhoneNumber, @"^(0041|\+41)");
+                telephoneNumber = match.Value;
+            }
+            if (Regex.IsMatch(PhoneNumber, @"([-][0-9]{2})$"))
+            {
+                var match = Regex.Match(PhoneNumber, @"([-][0-9]{2})$");
+                directDialing = match.Value;
+            }
+
+            MessageBox.Show("Laendervorwahl: " + countryCode + Environment.NewLine + "Ortsvorwahl: " + Environment.NewLine + "Rufnummer: " + Environment.NewLine + "Durchwahl: " + directDialing);
         }
 
         protected void OnPropertyChanged(string name)
