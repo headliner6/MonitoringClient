@@ -434,3 +434,10 @@ C:\Workspace\HF\MonitoringClient\bin\Debug\NUnit3.TestAdapter.pdb
 C:\Workspace\HF\MonitoringClient\bin\Debug\nunit.engine.dll
 C:\Workspace\HF\MonitoringClient\bin\Debug\nunit.engine.api.dll
 C:\Workspace\HF\MonitoringClient\obj\Debug\MonitoringClient_Content.g.cs
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\NUnit3.TestAdapter.dll
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\NUnit3.TestAdapter.pdb
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\nunit.engine.dll
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\nunit.engine.api.dll
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\Renci.SshNet.dll
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\Renci.SshNet.xml
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\MonitoringClient_Content.g.cs
