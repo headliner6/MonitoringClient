@@ -109,6 +109,7 @@
     <Compile Include="Command\LoadAllLogEntriesCommand.cs" />
     <Compile Include="Services\IViewModel.cs" />
     <Compile Include="Tests\CustomerValidationTest.cs" />
+    <Compile Include="Tests\LogMessageValidationTest.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\LocationViewModel.cs" />
     <Compile Include="ViewModel\LogEntryViewModel.cs" />

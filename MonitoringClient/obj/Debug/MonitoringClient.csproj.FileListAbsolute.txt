@@ -6,9 +6,7 @@ D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\MonitoringClient.pdb
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\BouncyCastle.Crypto.dll
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\Google.Protobuf.dll
-D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\MySql.Data.dll
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\Google.Protobuf.xml
-D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\MySql.Data.xml
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\View\NavigationView.g.cs
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\MainWindow.baml
@@ -431,3 +429,8 @@ C:\Workspace\HF\MonitoringClient\bin\Debug\NUnit3.TestAdapter.dll
 C:\Workspace\HF\MonitoringClient\bin\Debug\NUnit3.TestAdapter.pdb
 C:\Workspace\HF\MonitoringClient\bin\Debug\nunit.engine.dll
 C:\Workspace\HF\MonitoringClient\bin\Debug\nunit.engine.api.dll
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\NUnit3.TestAdapter.dll
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\NUnit3.TestAdapter.pdb
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\nunit.engine.dll
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\nunit.engine.api.dll
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\obj\Debug\MonitoringClient_Content.g.cs

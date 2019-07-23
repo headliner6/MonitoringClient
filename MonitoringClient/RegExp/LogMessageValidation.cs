@@ -13,7 +13,7 @@ namespace MonitoringClient.RegExp
         {
             if (pod == null)
             {
-                return null;
+                return "Pod darf nicht leer sein!";
             }
             if (!Regex.IsMatch(pod, @"^(?!\s*$).+"))
             {
@@ -26,7 +26,7 @@ namespace MonitoringClient.RegExp
         {
             if (severity == null)
             {
-                return null;
+                return "Severity darf nur Zahlen enthalten!";
             }
             if (!Regex.IsMatch(severity, "(^[0-9])"))
             {
@@ -39,7 +39,7 @@ namespace MonitoringClient.RegExp
         {
             if (hostname == null)
             {
-                return null;
+                return "Hostname darf nicht leer sein!";
             }
             if (!Regex.IsMatch(hostname, @"^(?!\s*$).+"))
             {
@@ -51,7 +51,7 @@ namespace MonitoringClient.RegExp
         {
             if (message == null)
             {
-                return null;
+                return "Message darf nicht leer sein!";
             }
             if (!Regex.IsMatch(message, @"^(?!\s*$).+"))
             {
