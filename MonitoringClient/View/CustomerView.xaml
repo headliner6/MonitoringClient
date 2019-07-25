@@ -341,7 +341,7 @@
                             Grid.RowSpan="2"
                             Margin="2"/>
                     <Button x:Name="button_phoneDetails"
-                            Command="{Binding Path=GetPhoneNumberDetailsCommand}"
+                            Command="{Binding Path=PhoneNumberDetailsCommand}"
                             Grid.Row="4"
                             Grid.Column="2"
                             Grid.RowSpan="2"

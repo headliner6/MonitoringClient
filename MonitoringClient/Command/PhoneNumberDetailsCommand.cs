@@ -8,12 +8,12 @@ using System.Windows.Input;
 
 namespace MonitoringClient.Command
 {
-    public class GetPhoneNumberDetailsCommand : ICommand
+    public class PhoneNumberDetailsCommand : ICommand
     {
         private CustomerViewModel _customerViewModel;
         public event EventHandler CanExecuteChanged;
 
-        public GetPhoneNumberDetailsCommand(CustomerViewModel cvm)
+        public PhoneNumberDetailsCommand(CustomerViewModel cvm)
         {
             this._customerViewModel = cvm;
         }
