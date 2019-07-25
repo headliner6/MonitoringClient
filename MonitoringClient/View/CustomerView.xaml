@@ -56,7 +56,7 @@
                                Height="20"
                                Width="100"/>
                 <TextBox x:Name="txtbox_Firstname2"
-                             Text="{Binding Path=FirstnameSearch, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                             Text="{Binding Path=FirstnameSearch, UpdateSourceTrigger=PropertyChanged}"
                              Grid.Row="0"
                              Grid.Column="2"
                              HorizontalAlignment="Left"
@@ -76,7 +76,7 @@
                                Height="20"
                                Width="100"/>
                 <TextBox x:Name="txtbox_Lastname2"
-                             Text="{Binding Path=LastnameSearch, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                             Text="{Binding Path=LastnameSearch, UpdateSourceTrigger=PropertyChanged}"
                              Grid.Row="0"
                              Grid.Column="3"
                              HorizontalAlignment="Left"
@@ -151,7 +151,7 @@
                              Margin="2"
                              Width="200"/>
                     <TextBlock x:Name="firstnameErrorMessage"
-                               Text="{Binding ElementName=txtbox_Firstname, Path=(Validation.Errors).CurrentItem.ErrorContent}"
+                               Text="{Binding ElementName=txtbox_Firstname, Path=(Validation.Errors)[0].ErrorContent}"
                                FontSize="10"
                                TextWrapping="Wrap"
                                Grid.Row="2"
@@ -175,7 +175,7 @@
                              Margin="2"
                              Width="200"/>
                     <TextBlock x:Name="lastnameErrorMessage"
-                               Text="{Binding ElementName=txtbox_Lastname, Path=(Validation.Errors).CurrentItem.ErrorContent}"
+                               Text="{Binding ElementName=txtbox_Lastname, Path=(Validation.Errors)[0].ErrorContent}"
                                FontSize="10"
                                TextWrapping="Wrap"
                                Grid.Row="4"
@@ -199,7 +199,7 @@
                              Margin="2"
                              Width="200"/>
                     <TextBlock x:Name="addressnumberErrorMessage"
-                               Text="{Binding ElementName=txtbox_Addressnumber, Path=(Validation.Errors).CurrentItem.ErrorContent}"
+                               Text="{Binding ElementName=txtbox_Addressnumber, Path=(Validation.Errors)[0].ErrorContent}"
                                FontSize="10"
                                TextWrapping="Wrap"
                                Grid.Row="6"
@@ -223,7 +223,7 @@
                              Margin="2"
                              Width="200"/>
                     <TextBlock x:Name="customerAccountNumberErrorMessage"
-                               Text="{Binding ElementName=txtbox_CustomerAccountNumber, Path=(Validation.Errors).CurrentItem.ErrorContent}"
+                               Text="{Binding ElementName=txtbox_CustomerAccountNumber, Path=(Validation.Errors)[0].ErrorContent}"
                                FontSize="10"
                                TextWrapping="Wrap"
                                Grid.Row="8"
@@ -236,7 +236,7 @@
                                Grid.Row="0"
                                Grid.Column="1"
                                ItemsSource="{Binding Path=CountryCode}"
-                               SelectedItem="{Binding Path=SelectedCountryCode, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                               SelectedItem="{Binding Path=SelectedCountryCode, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                HorizontalAlignment="Right"
                                Margin="2"
                                Width="200"/>
@@ -255,7 +255,7 @@
                              Margin="2"
                              Width="200"/>
                     <TextBlock x:Name="phoneNumberErrorMessage"
-                               Text="{Binding ElementName=txtbox_PhoneNumber, Path=(Validation.Errors).CurrentItem.ErrorContent}"
+                               Text="{Binding ElementName=txtbox_PhoneNumber, Path=(Validation.Errors)[0].ErrorContent}"
                                FontSize="10"
                                TextWrapping="Wrap"
                                Grid.Row="2"
@@ -279,7 +279,7 @@
                              Margin="2"
                              Width="200"/>
                     <TextBlock x:Name="emailErrorMessage"
-                               Text="{Binding ElementName=txtbox_Email, Path=(Validation.Errors).CurrentItem.ErrorContent}"
+                               Text="{Binding ElementName=txtbox_Email, Path=(Validation.Errors)[0].ErrorContent}"
                                FontSize="10"
                                TextWrapping="Wrap"
                                Grid.Row="4"
@@ -303,7 +303,7 @@
                              Margin="2"
                              Width="200"/>
                     <TextBlock x:Name="websiteErrorMessage"
-                               Text="{Binding ElementName=txtbox_Website, Path=(Validation.Errors).CurrentItem.ErrorContent}"
+                               Text="{Binding ElementName=txtbox_Website, Path=(Validation.Errors)[0].ErrorContent}"
                                FontSize="10"
                                TextWrapping="Wrap"
                                Grid.Row="6"
