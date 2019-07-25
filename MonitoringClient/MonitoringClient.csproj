@@ -88,6 +88,7 @@
     </ApplicationDefinition>
     <Compile Include="Command\CreateNewCustomerCommand.cs" />
     <Compile Include="Command\LoadAllCustomerCommand.cs" />
+    <Compile Include="Command\PhoneNumberDetailsCommand.cs" />
     <Compile Include="Command\SaveCustomerCommand.cs" />
     <Compile Include="Command\SearchCustomerCommand.cs" />
     <Compile Include="DataStructures\LocationTreeBuilder.cs" />

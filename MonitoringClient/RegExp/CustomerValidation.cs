@@ -63,21 +63,21 @@ namespace MonitoringClient.RegExp
             switch (SelectedCountryCode)
             {
                 case "Schweiz":
-                    if (phoneNumber == null || !Regex.IsMatch(phoneNumber, @"^(0|0041|\+41|[0-9]{3})(\s?(\(0\))?\s?|\s?(\/)?\s?)?([1-9\s]|[0-9\s]{1,12})([-][0-9]{2})?$"))
+                    if (phoneNumber == null || !Regex.IsMatch(phoneNumber, @"^(0041|\+41|0)(\s?\(0\)\s?)?(\s?[1-9]{2}\s?)(\/\s?)?([0-9\s]{1,9})([-][0-9]{2})?$"))
                     {
                         return "Phone number muss ein gültiges Format haben!! Bsp.: +41 75 409 00 00-56";
                     }
                     break;
 
                 case "Deutschland":
-                    if (phoneNumber == null || !Regex.IsMatch(phoneNumber, @"^(0049|\+49)(\s?(\(0\))?\s?|\s?(\/)?\s?)?([1-9\s]|[0-9\s]{1,12})([-][0-9]{2})?$"))
+                    if (phoneNumber == null || !Regex.IsMatch(phoneNumber, @"^(0049|\+49)(\s?\(0\)\s?)?(\s?\([0-9]{2}\)\s?|\s?[0-9]{2}\s?)([0-9\s]{1,15})([-][0-9]{2})?$"))
                     {
                         return "Phone number muss ein gültiges Format haben!! Bsp.: +49 75 409 00 00-56";
                     }
                     break;
 
                 case "Liechtenstein":
-                    if (phoneNumber == null || !Regex.IsMatch(phoneNumber, @"^(00423|\+423)(\s?(\(0\))?\s?|\s?(\/)?\s?)?([1-9\s]|[0-9\s]{1,12})([-][0-9]{2})?$"))
+                    if (phoneNumber == null || !Regex.IsMatch(phoneNumber, @"^(00423|\+423)([0-9\s]{1,10})([-][0-9]{2})?$"))
                     {
                         return "Phone number muss ein gültiges Format haben!! Bsp.: +423 75 409 00 00-56";
                     }

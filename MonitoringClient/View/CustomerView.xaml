@@ -334,12 +334,20 @@
                             Grid.RowSpan="2"
                             Margin="2"/>
                     <Button x:Name="button_newCustomer"
-                            Command="{Binding Path=CreateNewCustomer}"
+                            Command="{Binding Path=CreateNewCustomerCommand}"
                             Content="New Customer"
                             Grid.Row="2"
                             Grid.Column="2"
                             Grid.RowSpan="2"
                             Margin="2"/>
+                    <Button x:Name="button_phoneDetails"
+                            Command="{Binding Path=PhoneNumberDetailsCommand}"
+                            Grid.Row="4"
+                            Grid.Column="2"
+                            Grid.RowSpan="2"
+                            Margin="2">
+                        <TextBlock TextWrapping="Wrap">Phone Number Details</TextBlock>
+                    </Button>
                 </Grid>
             </Grid>
         </GroupBox>

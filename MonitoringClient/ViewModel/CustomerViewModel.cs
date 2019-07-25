@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,9 +36,10 @@ namespace MonitoringClient.ViewModel
         private string _website;
 
         public SaveCustomerCommand SaveCustomerCommand { get; set; }
-        public CreateNewCustomerCommand CreateNewCustomer { get; set; }
+        public CreateNewCustomerCommand CreateNewCustomerCommand { get; set; }
         public LoadAllCustomerCommand LoadAllCustomerCommand { get; set; }
         public SearchCustomerCommand SearchCustomerCommand { get; set; }
+        public PhoneNumberDetailsCommand PhoneNumberDetailsCommand { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public string ConnectionString { get; set; }
         public CustomerModel SelectedItem
@@ -174,9 +176,10 @@ namespace MonitoringClient.ViewModel
             _customerRepository = new CustomerRepository();
             NavigateBack = new BaseCommand(OnNavigateBack);
             SaveCustomerCommand = new SaveCustomerCommand(this);
-            CreateNewCustomer = new CreateNewCustomerCommand(this);
+            CreateNewCustomerCommand = new CreateNewCustomerCommand(this);
             SearchCustomerCommand = new SearchCustomerCommand(this);
             LoadAllCustomerCommand = new LoadAllCustomerCommand(this);
+            PhoneNumberDetailsCommand = new PhoneNumberDetailsCommand(this);
             this.navigateToLogEntryView = navigateToLogEntryView;
             _customerValidation = new CustomerValidation();
             CountryCode = new List<string>();
@@ -259,6 +262,64 @@ namespace MonitoringClient.ViewModel
                 }
             }
             MessageBox.Show(@"Der Kunde '" + FirstnameSearch + "' '" + LastnameSearch + "' wurde nicht gefunden!");
+        }
+
+        public void PhoneNumberDetails()
+        {
+            string countryCode = "";
+            string areaCode = "";
+            string telephoneNumber = "";
+            string directDialing = "";
+
+            switch (SelectedCountryCode)
+            {
+                case "Schweiz":
+                    if (_customerValidation.PhoneNumberValidation(PhoneNumber, SelectedCountryCode) == null)
+                    {
+                        var match = Regex.Match(PhoneNumber, @"^(0041|\+41|0)(\s?\(0\)\s?)?(\s?[1-9]{2}\s?)(\/\s?)?([0-9\s]{1,9})([-][0-9]{2})?$");
+                        countryCode = match.Groups[1].ToString();
+                        areaCode = match.Groups[3].ToString();
+                        telephoneNumber = match.Groups[5].ToString();
+                        directDialing = match.Groups[6].ToString();
+                        MessageBox.Show("Laendervorwahl: " + countryCode + Environment.NewLine + "Ortsvorwahl: " + areaCode + Environment.NewLine + "Rufnummer: " + telephoneNumber + Environment.NewLine + "Durchwahl: " + directDialing);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Phone number hat kein gueltiges Format!");
+                    }
+                    break;
+
+                case "Deutschland":
+                    if (_customerValidation.PhoneNumberValidation(PhoneNumber, SelectedCountryCode) == null)
+                    {
+                        var match = Regex.Match(PhoneNumber, @"^(0049|\+49)(\s?\(0\)\s?)?(\s?\([0-9]{2}\)\s?|\s?[0-9]{2}\s?)([0-9\s]{1,15})([-][0-9]{2})?$");
+                        countryCode = match.Groups[1].ToString();
+                        areaCode = match.Groups[3].ToString();
+                        telephoneNumber = match.Groups[4].ToString();
+                        directDialing = match.Groups[5].ToString();
+                        MessageBox.Show("Laendervorwahl: " + countryCode + Environment.NewLine + "Ortsvorwahl: " + areaCode + Environment.NewLine + "Rufnummer: " + telephoneNumber + Environment.NewLine + "Durchwahl: " + directDialing);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Phone number hat kein gueltiges Format!");
+                    }
+                    break;
+
+                case "Liechtenstein":
+                    if (_customerValidation.PhoneNumberValidation(PhoneNumber, SelectedCountryCode) == null)
+                    {
+                        var match = Regex.Match(PhoneNumber, @"^(00423|\+423)([0-9\s]{1,10})([-][0-9]{2})?$");
+                        countryCode = match.Groups[1].ToString();
+                        telephoneNumber = match.Groups[2].ToString();
+                        directDialing = match.Groups[3].ToString();
+                        MessageBox.Show("Laendervorwahl: " + countryCode + Environment.NewLine + "Ortsvorwahl: " + areaCode + Environment.NewLine + "Rufnummer: " + telephoneNumber + Environment.NewLine + "Durchwahl: " + directDialing);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Phone number hat kein gueltiges Format!");
+                    }
+                    break;
+            }
         }
 
         protected void OnPropertyChanged(string name)
