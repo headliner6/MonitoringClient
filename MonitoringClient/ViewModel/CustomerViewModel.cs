@@ -320,16 +320,6 @@ namespace MonitoringClient.ViewModel
                     break;
             }
         }
-
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-
-        private void OnNavigateBack(object obj)
-        {
-            navigateToLogEntryView.Invoke("LogEntryView");
-        }
         private void InitialiseCountryCodes()
         {
             CountryCode.Add("Schweiz");
@@ -384,6 +374,15 @@ namespace MonitoringClient.ViewModel
                     OnPropertyChanged("SelectedCountryCode");
                 }
             }
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+        private void OnNavigateBack(object obj)
+        {
+            navigateToLogEntryView.Invoke("LogEntryView");
         }
         string IDataErrorInfo.Error
         {
