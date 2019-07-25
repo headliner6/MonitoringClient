@@ -64,7 +64,7 @@ namespace MonitoringClient.ViewModel
                 OnPropertyChanged("Customers");
             }
         }
-        public List<string> CountryCode { get; }
+        public List<string> CountryCode { get; set; }
         public ICommand NavigateBack { get; set; }
 
         public string Firstname
@@ -263,7 +263,6 @@ namespace MonitoringClient.ViewModel
             }
             MessageBox.Show(@"Der Kunde '" + FirstnameSearch + "' '" + LastnameSearch + "' wurde nicht gefunden!");
         }
-
         public void PhoneNumberDetails()
         {
             string countryCode = "";
@@ -366,6 +365,24 @@ namespace MonitoringClient.ViewModel
                 PhoneNumber = _selectedItem.PhoneNumber;
                 Email = _selectedItem.Email;
                 Website = _selectedItem.Website;
+                if (_customerValidation.PhoneNumberValidation(PhoneNumber, "Schweiz") == null)
+                {
+                    var index = CountryCode.IndexOf("Schweiz");
+                    SelectedCountryCode = CountryCode[index];
+                    OnPropertyChanged("SelectedCountryCode");
+                }
+                if (_customerValidation.PhoneNumberValidation(PhoneNumber, "Deutschland") == null)
+                {
+                    var index = CountryCode.IndexOf("Deutschland");
+                    SelectedCountryCode = CountryCode[index];
+                    OnPropertyChanged("SelectedCountryCode");
+                }
+                if (_customerValidation.PhoneNumberValidation(PhoneNumber, "Liechtenstein") == null)
+                {
+                    var index = CountryCode.IndexOf("Liechtenstein");
+                    SelectedCountryCode = CountryCode[index];
+                    OnPropertyChanged("SelectedCountryCode");
+                }
             }
         }
         string IDataErrorInfo.Error
