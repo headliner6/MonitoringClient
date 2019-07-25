@@ -165,6 +165,127 @@ namespace MonitoringClient.Tests
         }
 
         [Test]
+        public void PhoneNumberValidation_checkDiffrentCombinationsForGermany_allFalse()
+        {
+            //arrange
+            string phone1 = "+4955asdf897";
+            string phone2 = "00 041 546 78 79-15";
+            string phone3 = "49 558 88 99-15";
+            string phone4 = "+49 55 44 213 12a";
+            string phone5 = "+049 55 44 213 12-15";
+            string phone6 = "55 44 213 12-15";
+
+            //act
+            var customerValidator = new CustomerValidation();
+
+            var resultat1 = customerValidator.PhoneNumberValidation(phone1, "Deutschland");
+            var resultat2 = customerValidator.PhoneNumberValidation(phone2, "Deutschland");
+            var resultat3 = customerValidator.PhoneNumberValidation(phone3, "Deutschland");
+            var resultat4 = customerValidator.PhoneNumberValidation(phone4, "Deutschland");
+            var resultat5 = customerValidator.PhoneNumberValidation(phone5, "Deutschland");
+            var resultat6 = customerValidator.PhoneNumberValidation(phone6, "Deutschland");
+
+            //assert
+
+            Assert.That(resultat1.Equals("Phone number muss ein gültiges Format haben!! Bsp.: +49 75 409 00 00-56"));
+            Assert.That(resultat2.Equals("Phone number muss ein gültiges Format haben!! Bsp.: +49 75 409 00 00-56"));
+            Assert.That(resultat3.Equals("Phone number muss ein gültiges Format haben!! Bsp.: +49 75 409 00 00-56"));
+            Assert.That(resultat4.Equals("Phone number muss ein gültiges Format haben!! Bsp.: +49 75 409 00 00-56"));
+            Assert.That(resultat5.Equals("Phone number muss ein gültiges Format haben!! Bsp.: +49 75 409 00 00-56"));
+            Assert.That(resultat6.Equals("Phone number muss ein gültiges Format haben!! Bsp.: +49 75 409 00 00-56"));
+
+        }
+
+        [Test]
+        public void PhoneNumberValidation_checkDiffrentCombinationsForGermany_allTrue()
+        {
+            //arrange
+            string phone1 = "0049301234567";
+            string phone2 = "+49 30 12345-67";
+            string phone3 = "+49 (30) 12345-67";
+            string phone4 = "0049 30 1234567";
+            string phone5 = "+49 (30) 12345";
+            string phone6 = "0049 (0)30 12345-67";
+
+            //act
+            var customerValidator = new CustomerValidation();
+
+            var resultat1 = customerValidator.PhoneNumberValidation(phone1, "Deutschland");
+            var resultat2 = customerValidator.PhoneNumberValidation(phone2, "Deutschland");
+            var resultat3 = customerValidator.PhoneNumberValidation(phone3, "Deutschland");
+            var resultat4 = customerValidator.PhoneNumberValidation(phone4, "Deutschland");
+            var resultat5 = customerValidator.PhoneNumberValidation(phone5, "Deutschland");
+            var resultat6 = customerValidator.PhoneNumberValidation(phone6, "Deutschland");
+
+            //assert
+
+            Assert.That(resultat1 == null);
+            Assert.That(resultat2 == null);
+            Assert.That(resultat3 == null);
+            Assert.That(resultat4 == null);
+            Assert.That(resultat5 == null);
+            Assert.That(resultat6 == null);
+        }
+
+        [Test]
+        public void PhoneNumberValidation_checkDiffrentCombinationsForLichtenstein_allFalse()
+        {
+            //arrange
+            string phone1 = "+42355asdf897";
+            string phone2 = "00423 041 546 78 79-155";
+            string phone3 = "49 558 88 99-15";
+            string phone4 = "+423 55 44 213 12a";
+            string phone5 = "+41 55 44 213 12-15";
+            string phone6 = "0 44 213 12-15";
+
+            //act
+            var customerValidator = new CustomerValidation();
+
+            var resultat1 = customerValidator.PhoneNumberValidation(phone1, "Liechtenstein");
+            var resultat2 = customerValidator.PhoneNumberValidation(phone2, "Liechtenstein");
+            var resultat3 = customerValidator.PhoneNumberValidation(phone3, "Liechtenstein");
+            var resultat4 = customerValidator.PhoneNumberValidation(phone4, "Liechtenstein");
+            var resultat5 = customerValidator.PhoneNumberValidation(phone5, "Liechtenstein");
+            var resultat6 = customerValidator.PhoneNumberValidation(phone6, "Liechtenstein");
+
+            //assert
+
+            Assert.That(resultat1.Equals("Phone number muss ein gültiges Format haben!! Bsp.: +423 75 409 00 00-56"));
+            Assert.That(resultat2.Equals("Phone number muss ein gültiges Format haben!! Bsp.: +423 75 409 00 00-56"));
+            Assert.That(resultat3.Equals("Phone number muss ein gültiges Format haben!! Bsp.: +423 75 409 00 00-56"));
+            Assert.That(resultat4.Equals("Phone number muss ein gültiges Format haben!! Bsp.: +423 75 409 00 00-56"));
+            Assert.That(resultat5.Equals("Phone number muss ein gültiges Format haben!! Bsp.: +423 75 409 00 00-56"));
+            Assert.That(resultat6.Equals("Phone number muss ein gültiges Format haben!! Bsp.: +423 75 409 00 00-56"));
+
+        }
+
+        [Test]
+        public void PhoneNumberValidation_checkDiffrentCombinationsForLichtenstein_allTrue()
+        {
+            //arrange
+            string phone1 = "00423 236 88 11-15";
+            string phone2 = "+423 236 06 03";
+            string phone3 = "00423 237 74 00";
+            string phone4 = "+423 237 74 00-15";
+
+            //act
+            var customerValidator = new CustomerValidation();
+
+            var resultat1 = customerValidator.PhoneNumberValidation(phone1, "Lichtenstein");
+            var resultat2 = customerValidator.PhoneNumberValidation(phone2, "Lichtenstein");
+            var resultat3 = customerValidator.PhoneNumberValidation(phone3, "Lichtenstein");
+            var resultat4 = customerValidator.PhoneNumberValidation(phone4, "Lichtenstein");
+
+            //assert
+
+            Assert.That(resultat1 == null);
+            Assert.That(resultat2 == null);
+            Assert.That(resultat3 == null);
+            Assert.That(resultat4 == null);
+
+        }
+
+        [Test]
         public void AddressnumberValidation_checkDiffrentCombinations_allFalse()
         {
             //arrange
@@ -206,7 +327,6 @@ namespace MonitoringClient.Tests
             Assert.That(resultat1 == null);
             Assert.That(resultat2 == null);
         }
-
 
         [Test]
         public void CustomerAccountNumberValidation_checkAccountNumber0And10To16_allFalse()
