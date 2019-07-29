@@ -1,13 +1,11 @@
 ﻿using MonitoringClient.Model;
+using MonitoringClient.Repository.Context;
+using System.Data.Entity;
 
 namespace MonitoringClient.Repository
 {
-    class LocationModelRepository : RepositoryBase<LocationModel>
+    public class LocationModelRepository : RepositoryBase<Location>
     {
-        public override string TableName { get; }
-        public LocationModelRepository()
-        {
-            TableName = "location";
-        }
+
     }
 }

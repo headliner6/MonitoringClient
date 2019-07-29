@@ -1,13 +1,10 @@
 ﻿using MonitoringClient.Model;
+using MonitoringClient.Repository.Context;
+using System.Data.Entity;
 
 namespace MonitoringClient.Repository
 {
-    public class CustomerRepository : RepositoryBase<CustomerModel>
+    public class CustomerRepository : RepositoryBase<Customer>
     {
-        public override string TableName { get; }
-        public CustomerRepository()
-        {
-            TableName = "customer";
-        }
     }
 }

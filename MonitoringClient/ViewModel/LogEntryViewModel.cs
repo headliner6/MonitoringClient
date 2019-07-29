@@ -2,6 +2,7 @@
 using MonitoringClient.Command;
 using MonitoringClient.Model;
 using MonitoringClient.Repository;
+using MonitoringClient.Repository.Context;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -19,14 +20,14 @@ namespace MonitoringClient.ViewModel
         private readonly Action<object> navigateToCustomerView;
         private DuplicateChecker _duplicateChecker;
         private LogEntryModelRepository _logEntryModelRepository;
-        private ObservableCollection<LogEntryModel> _logentries;
+        private ObservableCollection<V_logentries> _logentries;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand NavigateLogMessageAddView { get; set; }
         public ICommand NavigateLocationView { get; set; }
         public ICommand NavigateCustomerView { get; set; }
-        public ObservableCollection<LogEntryModel> Logentries
+        public ObservableCollection<V_logentries> Logentries
         {
             get { return _logentries; }
             set
@@ -52,10 +53,9 @@ namespace MonitoringClient.ViewModel
             this.navigateToLocationView = navigateToLocationView;
             this.navigateToCustomerView = navigateToCustomerView;
 
-            Logentries = new ObservableCollection<LogEntryModel>();
+            Logentries = new ObservableCollection<V_logentries>();
             _duplicateChecker = new DuplicateChecker();
             _logEntryModelRepository = new LogEntryModelRepository();
-
             ConnectionString = _logEntryModelRepository.ConnectionString;
         }
         public void GetAll()
@@ -64,7 +64,7 @@ namespace MonitoringClient.ViewModel
             try
             {
                 _logEntryModelRepository.ConnectionString = ConnectionString;
-                Logentries = new ObservableCollection<LogEntryModel>(_logEntryModelRepository.GetAll());
+                Logentries = new ObservableCollection<V_logentries>(_logEntryModelRepository.GetAll());
             }
             catch (Exception ex)
             {
@@ -77,7 +77,7 @@ namespace MonitoringClient.ViewModel
         }
         public void CheckForDuplicates()
         {
-            var logentries = new ObservableCollection<LogEntryModel>(_duplicateChecker.FindDuplicates(Logentries).Cast<LogEntryModel>());
+            var logentries = new ObservableCollection<V_logentries>(_duplicateChecker.FindDuplicates(Logentries).Cast<V_logentries>());
             if (logentries.Count == 0)
             {
                 MessageBox.Show("Keine Duplikate vorhanden!");

@@ -7,7 +7,7 @@ namespace MonitoringClient.DataStructures
 {
     public class LocationTreeBuilder
     {
-        public ObservableCollection<LocationNode> BuildTree(List<LocationModel> locations)
+        public ObservableCollection<LocationNode> BuildTree(List<Location> locations)
         {
             var mainParentNode = FindMainTreeRootNode(locations);
             locations.Reverse();
@@ -17,9 +17,9 @@ namespace MonitoringClient.DataStructures
             return tree;
         }
 
-        private void BuildTree(LocationNode mainParentNode, List<LocationModel> locations)
+        private void BuildTree(LocationNode mainParentNode, List<Location> locations)
         {
-            foreach (var location in locations.Reverse<LocationModel>())
+            foreach (var location in locations.Reverse<Location>())
             {
                 if (location.ParentLocation.Equals(mainParentNode.Location.Id))
                 {
@@ -34,10 +34,10 @@ namespace MonitoringClient.DataStructures
             }
         }
 
-        private LocationNode FindMainTreeRootNode(List<LocationModel> locations)
+        private LocationNode FindMainTreeRootNode(List<Location> locations)
         {
             LocationNode mainParentNode = null;
-            foreach (var location in locations.Reverse<LocationModel>())
+            foreach (var location in locations.Reverse<Location>())
             {
                 if (location.ParentLocation == 0)
                 {

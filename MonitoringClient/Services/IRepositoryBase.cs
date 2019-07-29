@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MonitoringClient.Repository
 {
-    public interface IRepositoryBase<M>
+    public interface IRepositoryBase<TEntity> where TEntity : class
     {
         /// <summary>
         /// Liefert ein einzelnes Model-Objekt vom Typ M zurück,
@@ -16,22 +16,22 @@ namespace MonitoringClient.Repository
         /// <typeparam name="P">Type des PrimaryKey</typeparam>
         /// <param name="pkValue">Wert des PrimaryKey</param>
         /// <returns>gefundenes Model-Objekt, ansonsten null</returns>
-        M GetSingle<P>(P pkValue);
+        TEntity GetSingle<P>(P pkValue);
         /// <summary>
         /// Fügt das Model-Objekt zur Datenbank hinzu (Insert)
         /// </summary>
         /// <param name="entity">zu speicherndes Model-Object</param>
-        void Add(M entity);
+        void Add(TEntity entity);
         /// <summary>
         /// Löscht das Model-Objekt aus der Datenbank (Delete)
         /// </summary>
         /// <param name="entity">zu löschendes Model-Object</param>
-        void Delete(M entity);
+        void Delete(TEntity entity);
         /// <summary>
         /// Aktualisiert das Model-Objekt in der Datenbank hinzu (Update)
         /// </summary>
         /// <param name="entity">zu aktualisierendes Model-Object</param>
-        void Update(M entity);
+        void Update(TEntity entity);
         /// <summary>
         /// Gibt eine Liste von Model-Objekten vom Typ M zurück,
         /// die gemäss der WhereBedingung geladen wurden. Die Werte der
@@ -45,12 +45,12 @@ namespace MonitoringClient.Repository
         /// <param name="parameterValues">Parameter-Werte für die Wherebedingung
         /// bspw: {{"netPrice", 10.5}, {"active", true}, {"desc", "Wolle%"}}</param>
         /// <returns></returns>
-        IQueryable<M> GetAll(Expression<Func<M, bool>> whereCondition);
+        IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> whereCondition);
         /// <summary>
         /// Gibt eine Liste aller in der DB vorhandenen Model-Objekte vom Typ M zurück
         /// </summary>
         /// <returns></returns>
-        IQueryable<M> GetAll();
+        IEnumerable<TEntity> GetAll();
         /// <summary>
         /// Zählt in der Datenbank die Anzahl Model-Objekte vom Typ M, die der
         /// Where-Bedingung entsprechen
@@ -61,7 +61,7 @@ namespace MonitoringClient.Repository
         /// <param name="parameterValues">Parameter-Werte für die Wherebedingung
         /// bspw: {{"netPrice", 10.5}, {"active", true}, {"desc", "Wolle%"}}</param>
         /// <returns></returns>
-        long Count(Expression<Func<M, bool>> whereCondition);
+        long Count(Expression<Func<TEntity, bool>> whereCondition);
         /// <summary>
         /// Zählt alle Model-Objekte vom Typ M
         /// </summary>
@@ -70,6 +70,5 @@ namespace MonitoringClient.Repository
         /// <summary>
         /// Gibt den Tabellennamen zurück, auf die sich das Repository bezieht
         /// </summary>
-        string TableName { get; }
     }
 }

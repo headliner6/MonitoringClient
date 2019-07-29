@@ -2,6 +2,7 @@
 using MonitoringClient.DataStructures;
 using MonitoringClient.Model;
 using MonitoringClient.Repository;
+using MonitoringClient.Repository.Context;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

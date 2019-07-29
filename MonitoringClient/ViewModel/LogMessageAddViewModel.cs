@@ -1,6 +1,7 @@
 ﻿using MonitoringClient.Command;
 using MonitoringClient.RegExp;
 using MonitoringClient.Repository;
+using MonitoringClient.Repository.Context;
 using System;
 using System.ComponentModel;
 using System.Text.RegularExpressions;

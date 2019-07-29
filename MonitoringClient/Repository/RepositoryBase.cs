@@ -1,33 +1,32 @@
-﻿using LinqToDB;
+﻿using MonitoringClient.Repository.Context;
 using MonitoringClient.Services;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Windows;
 
 namespace MonitoringClient.Repository
 {
-    public abstract class RepositoryBase<M> : IRepositoryBase<M>
-        where M : class, IModel, new()
+    public abstract class RepositoryBase<TEntity> : DbContext, IRepositoryBase<TEntity>
+        where TEntity : class, IModel, new()
     {
-        public abstract string TableName { get; }
         public string ConnectionString { get; set; } // "Server = localhost; Database = inventarisierungsloesung; Uid = root; Pwd = password;"
-        public string DbProvider { get; }
 
         protected RepositoryBase()
         {
-            this.ConnectionString = @"Data Source=.\;Database=Inventarisierungsloesung;Trusted_Connection=true;Enlist=False";
-            this.DbProvider = "SqlServer";
+            this.ConnectionString = @"Data Source=.\; initial catalog=Inventarisierungsloesung;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;";
         }
 
-        public long Count(Expression <Func<M, bool>> whereCondition)
+        public long Count(Expression<Func<TEntity, bool>> whereCondition)
         {
             try
             {
-                using (var context = new DataContext(DbProvider, ConnectionString))
+                using (var context = new InventarisierungsloesungDB(ConnectionString))
                 {
-                    return context.GetTable<M>().Where(whereCondition).Count();
+                    return context.Set<TEntity>().Where(whereCondition).Count();
                 }
             }
             catch (Exception ex)
@@ -35,92 +34,68 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                 throw ex;
             }
-        } // funktioniert, 21.06.2019 inkl. LINQ
+        }
 
         public long Count()
         {
             try
             {
-                using (var context = new DataContext(DbProvider, ConnectionString))
+                using (var context = new InventarisierungsloesungDB(ConnectionString))
                 {
-                   return context.GetTable<M>().Count();
+                    return context.Set<TEntity>().Count();
                 }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                 throw ex;
             }
-        } // funktioniert, 19.06.2019 inkl. LINQ
+        }
 
-        public M GetSingle<P>(P pkValue)
+        public TEntity GetSingle<P>(P pkValue)
         {
             try
             {
-                using (var context = new DataContext(DbProvider, ConnectionString))
+                using (var context = new InventarisierungsloesungDB(ConnectionString))
                 {
-                    var table = context.GetTable<M>();
-                    IQueryable<M> tableQuery = table.Where(row => row.Id.Equals(pkValue));
+                    var table = context.Set<TEntity>();
+                    IQueryable<TEntity> tableQuery = table.Where(row => row.Id.Equals(pkValue));
                     return tableQuery.FirstOrDefault();
                 }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                 throw ex;
             }
-        }// funktioniert, 19.06.2019 inkl. LINQ
+        }
 
-        public virtual void Add(M entity)
+        public virtual void Add(TEntity entity)
         {
             try
             {
-                using (var context = new DataContext(DbProvider, ConnectionString))
+                using (var context = new InventarisierungsloesungDB(ConnectionString))
                 {
-                    var finish = context.Insert<M>(entity);
-                    if (finish == 1)
-                    {
-                        MessageBox.Show("Hinzufuegen war erfolgreich!");
-                    }
+                    context.Set<TEntity>().Add(entity);
                 }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
                 throw ex;
             }
-        } // funktioniert, 19.06.2019 inkl. LINQ
+        }
 
-        public virtual void Delete(M entity)
+        public virtual void Delete(TEntity entity)
         {
             try
             {
-                using (var context = new DataContext(DbProvider, ConnectionString))
+                using (var context = new InventarisierungsloesungDB(ConnectionString))
                 {
-                    var finish = context.Delete<M>(entity);
-                    if (finish == 1)
-                    {
-                        MessageBox.Show("Loeschen war erfolgreich!");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-            }
-        } // funktioniert, 19.06.2019 inkl. LINQ
-
-        public virtual void Update(M entity)
-        {
-            try
-            {
-                using (var context = new DataContext(DbProvider, ConnectionString))
-                {
-                    var finish = context.Update<M>(entity);
-                    if (finish == 1)
-                    {
-                        MessageBox.Show("Update war erfolgreich!");
-                    }
+                    context.Set<TEntity>().Remove(entity);
                 }
 
             }
@@ -128,22 +103,50 @@ namespace MonitoringClient.Repository
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
-        } // funktioniert, 19.06.2019 inkl. LINQ
+        }
 
-        public IQueryable<M> GetAll(Expression<Func<M, bool>> whereCondition)
+        public virtual void Update(TEntity entity)
         {
-            using (var context = new DataContext(DbProvider, ConnectionString))
+            try
             {
-                return context.GetTable<M>().Where(whereCondition);
-            }
-        } // funktioniert, 21.06.2019 inkl. LINQ
+                using (var context = new InventarisierungsloesungDB(ConnectionString))
+                {
+                    var result = GetSingle(entity.Id);
+                    if (result != null)
+                    {
+                        result = entity;
+                        int finish = context.SaveChanges();
+                        if (finish > 0)
+                        {
+                            MessageBox.Show("Hinzufuegen war erfolgreich!");
+                        }
+                    }
+                }
 
-        public IQueryable<M> GetAll()
-        {
-            using (var context = new DataContext(DbProvider, ConnectionString))
-            {
-                return context.GetTable<M>();
             }
-        } // funktioniert, 19.06.2019 inkl. LINQ
+            catch (Exception ex)
+            {
+                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+            }
+        }
+
+        public IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> whereCondition)
+        {
+            using (var context = new InventarisierungsloesungDB(ConnectionString))
+            {
+                return context.Set<TEntity>().Where(whereCondition);
+            }
+
+        }
+
+        public IEnumerable<TEntity> GetAll()
+        {
+            IEnumerable<TEntity> collection;
+            using (var context = new InventarisierungsloesungDB(ConnectionString))
+            {
+                return collection = context.Set<TEntity>().ToList();
+            }
+
+        }
     }
 }

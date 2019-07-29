@@ -1,27 +1,21 @@
-﻿using LinqToDB.Data;
-using MonitoringClient.Model;
+﻿using MonitoringClient.Model;
+using MonitoringClient.Repository.Context;
 using System;
-using System.Collections.Generic;
-using System.Data;
+using System.Data.Entity;
 using System.Windows;
 
 namespace MonitoringClient.Repository
 {
-    public class LogEntryModelRepository : RepositoryBase<LogEntryModel>
+    public class LogEntryModelRepository : RepositoryBase<V_logentries>
     {
-        public override string TableName { get; }
-        public LogEntryModelRepository()
-        {
-            TableName = "v_logentries";
-        }
 
         public void ConfirmLogentries(int id)
         {
             try
             {
-                using (var dataConnection = new DataConnection(DbProvider, ConnectionString))
-                {   
-                    dataConnection.QueryProc<LogEntryModel>("LogClear", new DataParameter("@_logentries_id", id));
+                using (var context = new InventarisierungsloesungDB(ConnectionString))
+                {
+                    context.LogClear(id);
                 }
             }
             catch (Exception ex)
@@ -34,13 +28,9 @@ namespace MonitoringClient.Repository
         {
             try
             {
-                using (var dataConnection = new DataConnection(DbProvider, ConnectionString))
+                using (var context = new InventarisierungsloesungDB(ConnectionString))
                 {
-                    dataConnection.QueryProc<LogEntryModel>("LogMessageAdd",
-                        new DataParameter("@i_pod", pod),
-                        new DataParameter("@i_hostname", hostname),
-                        new DataParameter("@i_severity", severity),
-                        new DataParameter("@i_message", message));
+                    context.LogMessageAdd(pod, hostname, severity, message);
                 }
             }
             catch (Exception ex)
@@ -48,17 +38,17 @@ namespace MonitoringClient.Repository
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
         }
-        public override void Add(LogEntryModel entity)
+        public override void Add(V_logentries entity)
         {
             throw new NotSupportedException();
         }
 
-        public override void Delete(LogEntryModel entity)
+        public override void Delete(V_logentries entity)
         {
             throw new NotSupportedException();
         }
 
-        public override void Update(LogEntryModel entity)
+        public override void Update(V_logentries entity)
         {
             throw new NotSupportedException();
         }

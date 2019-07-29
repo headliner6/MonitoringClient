@@ -3,6 +3,7 @@ using MonitoringClient.DataStructures;
 using MonitoringClient.Model;
 using MonitoringClient.RegExp;
 using MonitoringClient.Repository;
+using MonitoringClient.Repository.Context;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,9 +21,9 @@ namespace MonitoringClient.ViewModel
     public class CustomerViewModel : INotifyPropertyChanged, IViewModel, IDataErrorInfo
     {
         private readonly Action<object> navigateToLogEntryView;
-        private ObservableCollection<CustomerModel> _customers;
+        private ObservableCollection<Customer> _customers;
         private CustomerRepository _customerRepository;
-        private CustomerModel _selectedItem;
+        private Customer _selectedItem;
         private string _selectedCountryCode;
         private CustomerValidation _customerValidation;
         private string _firstname;
@@ -42,7 +43,7 @@ namespace MonitoringClient.ViewModel
         public PhoneNumberDetailsCommand PhoneNumberDetailsCommand { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public string ConnectionString { get; set; }
-        public CustomerModel SelectedItem
+        public Customer SelectedItem
         {
             get
             {
@@ -55,7 +56,7 @@ namespace MonitoringClient.ViewModel
                 OnPropertyChanged("SelectedItem");
             }
         }
-        public ObservableCollection<CustomerModel> Customers
+        public ObservableCollection<Customer> Customers
         {
             get { return _customers; }
             set
@@ -190,8 +191,8 @@ namespace MonitoringClient.ViewModel
         {
             try
             {
-                _customerRepository.ConnectionString = ConnectionString;
-                Customers = new ObservableCollection<CustomerModel>(_customerRepository.GetAll());
+                //_customerRepository.ConnectionString = ConnectionString;
+                Customers = new ObservableCollection<Customer>(_customerRepository.GetAll());
             }
             catch (Exception ex)
             {
@@ -244,7 +245,7 @@ namespace MonitoringClient.ViewModel
         }
         public void SearchCustomer()
         {
-            foreach (CustomerModel customer in Customers)
+            foreach (Customer customer in Customers)
             {
                 if (customer.Firstname.Equals(_firstnameSearch) && customer.Lastname.Equals(_lastanemSearch))
                 {
@@ -337,9 +338,9 @@ namespace MonitoringClient.ViewModel
             CountryCode.Add("Liechtenstein");
             SelectedCountryCode = CountryCode.First();
         }
-        private CustomerModel CreateCustomerToSave(string password)
+        private Customer CreateCustomerToSave(string password)
         {
-            var customer = new CustomerModel();
+            var customer = new Customer();
             if (_selectedItem != null)
             {
                 customer.Id = _selectedItem.Id;
