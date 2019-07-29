@@ -245,21 +245,24 @@ namespace MonitoringClient.ViewModel
         }
         public void SearchCustomer()
         {
-            foreach (Customer customer in Customers)
+            if (Customers != null)
             {
-                if (customer.Firstname.Equals(_firstnameSearch) && customer.Lastname.Equals(_lastanemSearch))
+                foreach (Customer customer in Customers)
                 {
-                    try
+                    if (customer.Firstname.Equals(_firstnameSearch) && customer.Lastname.Equals(_lastanemSearch))
                     {
-                        _customerRepository.ConnectionString = ConnectionString;
-                        Customers.Clear();
-                        Customers.Add(_customerRepository.GetSingle(customer.Id));
+                        try
+                        {
+                            _customerRepository.ConnectionString = ConnectionString;
+                            Customers.Clear();
+                            Customers.Add(_customerRepository.GetSingle(customer.Id));
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+                        }
+                        return;
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-                    }
-                    return;
                 }
             }
             MessageBox.Show(@"Der Kunde '" + FirstnameSearch + "' '" + LastnameSearch + "' wurde nicht gefunden!");

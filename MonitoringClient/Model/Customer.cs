@@ -1,4 +1,5 @@
 ﻿using MonitoringClient.Services;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MonitoringClient.Model
 {
