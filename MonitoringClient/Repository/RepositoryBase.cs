@@ -1,4 +1,5 @@
-﻿using MonitoringClient.Repository.Context;
+﻿
+using MonitoringClient.Repository.Context;
 using MonitoringClient.Services;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,8 @@ namespace MonitoringClient.Repository
 
         protected RepositoryBase()
         {
-            this.ConnectionString = @"Data Source=.\; initial catalog=Inventarisierungsloesung;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;";
+            this.ConnectionString = "InventarisierungsloesungDB";/*@"Data Source=.\; initial catalog=Inventarisierungsloesung;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;";*/
+
         }
 
         public long Count(Expression<Func<TEntity, bool>> whereCondition)
@@ -144,7 +146,8 @@ namespace MonitoringClient.Repository
             IEnumerable<TEntity> collection;
             using (var context = new InventarisierungsloesungDB(ConnectionString))
             {
-                return collection = context.Set<TEntity>().ToList();
+                return collection = context.Set<TEntity>().AsNoTracking();
+
             }
 
         }

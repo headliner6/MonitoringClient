@@ -26,10 +26,10 @@ namespace MonitoringClient.Command
             if (parameter != null)
             {
                 var sellectedItems = (IList)parameter;
-                var sellectedItemscollection = sellectedItems.Cast<V_logentries>().ToList();
+                var sellectedItemscollection = sellectedItems.Cast<v_logentries>().ToList();
                 foreach (var logEntry in sellectedItemscollection)
                 {
-                    _logEntryViewModel.ConfirmLogentries(logEntry.Id);
+                    _logEntryViewModel.ConfirmLogentries(logEntry.id);
                     _logEntryViewModel.GetAll();
                 }
             }

@@ -1,6 +1,10 @@
 ﻿using DuplicateCheckerLib;
 using MonitoringClient.Services;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace MonitoringClient.Model
 {
@@ -13,18 +17,6 @@ namespace MonitoringClient.Model
         public int Severity { get; set; }
         public DateTime Timestamp { get; set; }
         public string Message { get; set; }
-
-        public V_logentries() { }
-        public V_logentries(int id, string pod, string location, string hostname, int severity, DateTime timestamp, string message)
-        {
-            this.Id = id;
-            this.Pod = pod;
-            this.Location = location;
-            this.Hostname = hostname;
-            this.Severity = severity;
-            this.Timestamp = timestamp;
-            this.Message = message;
-        }
 
         public override bool Equals(object value)
         {
@@ -74,3 +66,4 @@ namespace MonitoringClient.Model
 
     }
 }
+

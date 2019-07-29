@@ -43,7 +43,7 @@ namespace MonitoringClient.Repository
             throw new NotSupportedException();
         }
 
-        public override void Delete(V_logentries entity)
+        public override void Delete (V_logentries entity)
         {
             throw new NotSupportedException();
         }

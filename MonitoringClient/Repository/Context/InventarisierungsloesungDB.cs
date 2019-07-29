@@ -6,21 +6,21 @@ using System.Data.Entity.Infrastructure;
 
 namespace MonitoringClient.Repository.Context
 {
-    public class InventarisierungsloesungDB : DbContext
+    public partial class InventarisierungsloesungDB : DbContext
     {
         public InventarisierungsloesungDB(string connectionString)
             : base(connectionString)
         {
         }
 
-        public virtual DbSet<V_logentries> test { get; set; }
+        public virtual DbSet<V_logentries> V_Logentries { get; set; }
         public virtual DbSet<Location> Location { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
+        public virtual DbSet<Kundenkonto> Kundenkonto { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer<InventarisierungsloesungDB>(null);
-            base.OnModelCreating(modelBuilder);
+            //throw new UnintentionalCodeFirstException();
         }
 
         public virtual ObjectResult<V_logentries> LogClear(int id)

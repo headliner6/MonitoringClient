@@ -69,6 +69,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -88,16 +90,90 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="abrechnung.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="address.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Command\CreateNewCustomerCommand.cs" />
     <Compile Include="Command\LoadAllCustomerCommand.cs" />
     <Compile Include="Command\PhoneNumberDetailsCommand.cs" />
     <Compile Include="Command\SaveCustomerCommand.cs" />
     <Compile Include="Command\SearchCustomerCommand.cs" />
+    <Compile Include="contact.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="credentials.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="customer.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataStructures\LocationTreeBuilder.cs" />
     <Compile Include="DataStructures\LocationNode.cs" />
     <Compile Include="DataStructures\CreatePasswordHash.cs" />
+    <Compile Include="device.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="deviceport.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="devicetype.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="devicetype_has_operatingsystem.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="interface.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InventarisierungsloesungModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InventarisierungsloesungModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InventarisierungsloesungModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InventarisierungsloesungModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InventarisierungsloesungModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="kundenkonto.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="location.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="log.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\Kundenkonto.cs" />
     <Compile Include="Model\Location.cs" />
+    <Compile Include="Model\V_logentries.cs" />
+    <Compile Include="network.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="operatingsystem.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="person.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pointofdelivery.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="produkte.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="produktegruppe.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="RegExp\CustomerValidation.cs" />
     <Compile Include="RegExp\LogMessageValidation.cs" />
     <Compile Include="Repository\Context\InventarisierungsloesungDB.cs" />
@@ -112,8 +188,20 @@
     <Compile Include="Command\FindDuplicatesButtonCommand.cs" />
     <Compile Include="Command\LoadAllLogEntriesCommand.cs" />
     <Compile Include="Services\IViewModel.cs" />
+    <Compile Include="softwaredienstleistung.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Tests\CustomerValidationTest.cs" />
     <Compile Include="Tests\LogMessageValidationTest.cs" />
+    <Compile Include="town.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="transportmedium.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\LocationViewModel.cs" />
     <Compile Include="ViewModel\LogEntryViewModel.cs" />
@@ -133,6 +221,9 @@
     </Compile>
     <Compile Include="View\NavigationView.xaml.cs">
       <DependentUpon>NavigationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="v_logentries.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -168,7 +259,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\V_logentries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -186,6 +276,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="InventarisierungsloesungModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>InventarisierungsloesungModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="InventarisierungsloesungModel.edmx.diagram">
+      <DependentUpon>InventarisierungsloesungModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -195,7 +292,21 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="InventarisierungsloesungModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>InventarisierungsloesungModel.Context.cs</LastGenOutput>
+      <DependentUpon>InventarisierungsloesungModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="InventarisierungsloesungModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>InventarisierungsloesungModel.edmx</DependentUpon>
+      <LastGenOutput>InventarisierungsloesungModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
