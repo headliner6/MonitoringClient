@@ -96,7 +96,7 @@ namespace MonitoringClient.ViewModel
         {
             POD = "";
             Hostname = "";
-            Severity = 0;
+            Severity = null;
             Message = "";
         }
         protected void OnPropertyChanged(string name)
