@@ -74,7 +74,11 @@ namespace MonitoringClient.Repository
             {
                 var context = new InventarisierungsloesungEntities();
                 context.Set<TEntity>().Add(entity);
-                context.SaveChanges();
+                int finish = context.SaveChanges();
+                if (finish > 0)
+                {
+                    MessageBox.Show("Hinzufuegen war erfolgreich!");
+                }
 
 
             }
@@ -111,10 +115,11 @@ namespace MonitoringClient.Repository
                 if (result != null)
                 {
                     result = entity;
+                    context.Entry(result).State = EntityState.Modified;
                     int finish = context.SaveChanges();
                     if (finish > 0)
                     {
-                        MessageBox.Show("Hinzufuegen war erfolgreich!");
+                        MessageBox.Show("Update war erfolgreich!");
                     }
                 }
 

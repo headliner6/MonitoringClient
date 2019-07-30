@@ -250,7 +250,7 @@ namespace MonitoringClient.ViewModel
                     {
                         try
                         {
-                            _customerRepository.ConnectionString = ConnectionString;
+                            //_customerRepository.ConnectionString = ConnectionString;
                             Customers.Clear();
                             Customers.Add(_customerRepository.GetSingle(customer.Id));
                         }
