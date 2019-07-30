@@ -16,7 +16,7 @@ namespace MonitoringClient.ViewModel
         private LogMessageValidation _logMessageValidation;
         private string _pod;
         private string _hostname;
-        private string _severity;
+        private int? _severity;
         private string _message;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -43,7 +43,7 @@ namespace MonitoringClient.ViewModel
             }
 
         }
-        public string Severity
+        public int? Severity
         {
             get { return _severity; }
             set
@@ -97,7 +97,7 @@ namespace MonitoringClient.ViewModel
         {
             POD = "";
             Hostname = "";
-            Severity = "";
+            Severity = 0;
             Message = "";
         }
         protected void OnPropertyChanged(string name)
@@ -157,7 +157,7 @@ namespace MonitoringClient.ViewModel
                     break;
 
                 case "Severity":
-                    error = _logMessageValidation.SeverityValidation(_severity);
+                    error = _logMessageValidation.SeverityValidation(_severity.ToString());
                     break;
                 case "Message":
                     error = _logMessageValidation.MessageValidation(_message);

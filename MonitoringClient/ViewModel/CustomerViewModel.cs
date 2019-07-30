@@ -190,7 +190,6 @@ namespace MonitoringClient.ViewModel
         {
             try
             {
-                //_customerRepository.ConnectionString = ConnectionString;
                 Customers = new ObservableCollection<Customer>(_customerRepository.GetAll());
             }
             catch (Exception ex)
@@ -207,7 +206,6 @@ namespace MonitoringClient.ViewModel
             {
                 try
                 {
-                    _customerRepository.ConnectionString = ConnectionString;
                     if (_selectedItem != null)
                     {
                         _customerRepository.Update(CreateCustomerToSave(password));
@@ -351,7 +349,7 @@ namespace MonitoringClient.ViewModel
             customer.Lastname = Lastname;
             customer.Addressnumber = Addressnumber;
             customer.CustomerAccountNumber = CustomerAccountNumber;
-            customer.PhoneNumber = PhoneNumber;
+            customer.Phonenumber = PhoneNumber;
             customer.Email = Email;
             customer.Website = Website;
             customer.Password = new CreatePasswordHash().GetSaltedHash(password);
@@ -364,8 +362,8 @@ namespace MonitoringClient.ViewModel
                 Firstname = _selectedItem.Firstname;
                 Lastname = _selectedItem.Lastname;
                 Addressnumber = _selectedItem.Addressnumber;
-                CustomerAccountNumber = _selectedItem.CustomerAccountNumber;
-                PhoneNumber = _selectedItem.PhoneNumber;
+                CustomerAccountNumber = (int)_selectedItem.CustomerAccountNumber;
+                PhoneNumber = _selectedItem.Phonenumber;
                 Email = _selectedItem.Email;
                 Website = _selectedItem.Website;
                 if (_customerValidation.PhoneNumberValidation(PhoneNumber, "Schweiz") == null)

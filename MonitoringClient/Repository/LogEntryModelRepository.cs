@@ -1,22 +1,21 @@
 ﻿using MonitoringClient.Model;
-using MonitoringClient.Repository.Context;
 using System;
 using System.Data.Entity;
 using System.Windows;
 
 namespace MonitoringClient.Repository
 {
-    public class LogEntryModelRepository : RepositoryBase<V_logentries>
+    public class LogEntryModelRepository : RepositoryBase<LogEntries>
     {
 
         public void ConfirmLogentries(int id)
         {
             try
             {
-                using (var context = new InventarisierungsloesungDB(ConnectionString))
-                {
-                    context.LogClear(id);
-                }
+                var context = new InventarisierungsloesungEntities();
+
+                context.LogClear(id);
+
             }
             catch (Exception ex)
             {
@@ -24,31 +23,31 @@ namespace MonitoringClient.Repository
             }
         }
 
-        public void AddMessage(string pod, string hostname, string severity, string message)
+        public void AddMessage(string pod, string hostname, int? severity, string message)
         {
             try
             {
-                using (var context = new InventarisierungsloesungDB(ConnectionString))
-                {
-                    context.LogMessageAdd(pod, hostname, severity, message);
-                }
+                var context = new InventarisierungsloesungEntities();
+
+                context.LogMessageAdd(pod, hostname, severity, message);
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
         }
-        public override void Add(V_logentries entity)
+        public override void Add(LogEntries entity)
         {
             throw new NotSupportedException();
         }
 
-        public override void Delete (V_logentries entity)
+        public override void Delete(LogEntries entity)
         {
             throw new NotSupportedException();
         }
 
-        public override void Update(V_logentries entity)
+        public override void Update(LogEntries entity)
         {
             throw new NotSupportedException();
         }

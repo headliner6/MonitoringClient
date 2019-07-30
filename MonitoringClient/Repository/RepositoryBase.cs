@@ -1,5 +1,4 @@
-﻿
-using MonitoringClient.Repository.Context;
+﻿using MonitoringClient.Model;
 using MonitoringClient.Services;
 using System;
 using System.Collections.Generic;
@@ -18,7 +17,7 @@ namespace MonitoringClient.Repository
 
         protected RepositoryBase()
         {
-            this.ConnectionString = "InventarisierungsloesungDB";/*@"Data Source=.\; initial catalog=Inventarisierungsloesung;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;";*/
+            this.ConnectionString = "InventarisierungsloesungEntities";/*@"Data Source=.\; initial catalog=Inventarisierungsloesung;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;";*/
 
         }
 
@@ -26,10 +25,10 @@ namespace MonitoringClient.Repository
         {
             try
             {
-                using (var context = new InventarisierungsloesungDB(ConnectionString))
-                {
-                    return context.Set<TEntity>().Where(whereCondition).Count();
-                }
+                var context = new InventarisierungsloesungEntities();
+
+                return context.Set<TEntity>().Where(whereCondition).Count();
+
             }
             catch (Exception ex)
             {
@@ -42,10 +41,10 @@ namespace MonitoringClient.Repository
         {
             try
             {
-                using (var context = new InventarisierungsloesungDB(ConnectionString))
-                {
-                    return context.Set<TEntity>().Count();
-                }
+                var context = new InventarisierungsloesungEntities();
+
+                return context.Set<TEntity>().Count();
+
 
             }
             catch (Exception ex)
@@ -59,13 +58,8 @@ namespace MonitoringClient.Repository
         {
             try
             {
-                using (var context = new InventarisierungsloesungDB(ConnectionString))
-                {
-                    var table = context.Set<TEntity>();
-                    IQueryable<TEntity> tableQuery = table.Where(row => row.Id.Equals(pkValue));
-                    return tableQuery.FirstOrDefault();
-                }
-
+                var context = new InventarisierungsloesungEntities();
+                return context.Set<TEntity>().Find(pkValue);
             }
             catch (Exception ex)
             {
@@ -78,10 +72,10 @@ namespace MonitoringClient.Repository
         {
             try
             {
-                using (var context = new InventarisierungsloesungDB(ConnectionString))
-                {
-                    context.Set<TEntity>().Add(entity);
-                }
+                var context = new InventarisierungsloesungEntities();
+                context.Set<TEntity>().Add(entity);
+                context.SaveChanges();
+
 
             }
             catch (Exception ex)
@@ -95,10 +89,10 @@ namespace MonitoringClient.Repository
         {
             try
             {
-                using (var context = new InventarisierungsloesungDB(ConnectionString))
-                {
-                    context.Set<TEntity>().Remove(entity);
-                }
+                var context = new InventarisierungsloesungEntities();
+
+                context.Set<TEntity>().Remove(entity);
+                context.SaveChanges();
 
             }
             catch (Exception ex)
@@ -111,17 +105,16 @@ namespace MonitoringClient.Repository
         {
             try
             {
-                using (var context = new InventarisierungsloesungDB(ConnectionString))
+                var context = new InventarisierungsloesungEntities();
+
+                var result = GetSingle(entity.Id);
+                if (result != null)
                 {
-                    var result = GetSingle(entity.Id);
-                    if (result != null)
+                    result = entity;
+                    int finish = context.SaveChanges();
+                    if (finish > 0)
                     {
-                        result = entity;
-                        int finish = context.SaveChanges();
-                        if (finish > 0)
-                        {
-                            MessageBox.Show("Hinzufuegen war erfolgreich!");
-                        }
+                        MessageBox.Show("Hinzufuegen war erfolgreich!");
                     }
                 }
 
@@ -134,22 +127,17 @@ namespace MonitoringClient.Repository
 
         public IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> whereCondition)
         {
-            using (var context = new InventarisierungsloesungDB(ConnectionString))
-            {
-                return context.Set<TEntity>().Where(whereCondition);
-            }
+            var context = new InventarisierungsloesungEntities();
+
+            return context.Set<TEntity>().Where(whereCondition);
+
 
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public IQueryable<TEntity> GetAll()
         {
-            IEnumerable<TEntity> collection;
-            using (var context = new InventarisierungsloesungDB(ConnectionString))
-            {
-                return collection = context.Set<TEntity>().AsNoTracking();
-
-            }
-
+            var context = new InventarisierungsloesungEntities();
+            return context.Set<TEntity>();
         }
     }
 }

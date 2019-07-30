@@ -50,7 +50,7 @@ namespace MonitoringClient.Repository
         /// Gibt eine Liste aller in der DB vorhandenen Model-Objekte vom Typ M zurück
         /// </summary>
         /// <returns></returns>
-        IEnumerable<TEntity> GetAll();
+        IQueryable<TEntity> GetAll();
         /// <summary>
         /// Zählt in der Datenbank die Anzahl Model-Objekte vom Typ M, die der
         /// Where-Bedingung entsprechen
