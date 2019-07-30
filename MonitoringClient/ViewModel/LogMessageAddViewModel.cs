@@ -79,7 +79,6 @@ namespace MonitoringClient.ViewModel
         {
             if (IsLogMessageValid == true)
             {
-                _logEntryModelRepository.ConnectionString = ConnectionString;
                 _logEntryModelRepository.AddMessage(POD, Hostname, Severity, Message);
                 navigateToLogEntryView.Invoke("LogEntryView");
             }

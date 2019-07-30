@@ -29,7 +29,7 @@ namespace MonitoringClient.Command
                 var sellectedItemscollection = sellectedItems.Cast<LogEntries>().ToList();
                 foreach (var logEntry in sellectedItemscollection)
                 {
-                    _logEntryViewModel.ConfirmLogentries((int)logEntry.Id);
+                    _logEntryViewModel.ConfirmLogentries(logEntry.Id);
                     _logEntryViewModel.GetAll();
                 }
             }

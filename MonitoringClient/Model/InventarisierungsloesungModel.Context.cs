@@ -52,11 +52,11 @@ namespace MonitoringClient.Model
         public virtual DbSet<Town> Town { get; set; }
         public virtual DbSet<Transportmedium> Transportmedium { get; set; }
     
-        public virtual int LogClear(Nullable<int> logEntriesId)
+        public virtual long LogClear(Nullable<long> logEntriesId)
         {
             var logEntriesIdParameter = logEntriesId.HasValue ?
                 new ObjectParameter("LogEntriesId", logEntriesId) :
-                new ObjectParameter("LogEntriesId", typeof(int));
+                new ObjectParameter("LogEntriesId", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LogClear", logEntriesIdParameter);
         }

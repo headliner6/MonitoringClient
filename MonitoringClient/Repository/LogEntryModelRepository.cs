@@ -8,7 +8,7 @@ namespace MonitoringClient.Repository
     public class LogEntryModelRepository : RepositoryBase<LogEntries>
     {
 
-        public void ConfirmLogentries(int id)
+        public void ConfirmLogentries(long id)
         {
             try
             {

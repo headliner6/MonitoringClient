@@ -24,7 +24,7 @@ namespace MonitoringClient.RegExp
 
         public string SeverityValidation(string severity)
         {
-            if (severity == null)
+            if (severity == "0" ||severity == null)
             {
                 return "Severity darf nur Zahlen enthalten!";
             }

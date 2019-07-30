@@ -70,7 +70,7 @@ namespace MonitoringClient.ViewModel
                 MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
             }
         }
-        public void ConfirmLogentries(int id)
+        public void ConfirmLogentries(long id)
         {
             _logEntryModelRepository.ConfirmLogentries(id);
         }
