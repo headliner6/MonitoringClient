@@ -40,6 +40,7 @@ namespace MonitoringClient.ViewModel
         public LoadAllCustomerCommand LoadAllCustomerCommand { get; set; }
         public SearchCustomerCommand SearchCustomerCommand { get; set; }
         public PhoneNumberDetailsCommand PhoneNumberDetailsCommand { get; set; }
+        public DeleteCustomerCommand DeleteCustomerCommand { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public string ConnectionString { get; set; }
         public Customer SelectedItem
@@ -180,6 +181,7 @@ namespace MonitoringClient.ViewModel
             SearchCustomerCommand = new SearchCustomerCommand(this);
             LoadAllCustomerCommand = new LoadAllCustomerCommand(this);
             PhoneNumberDetailsCommand = new PhoneNumberDetailsCommand(this);
+            DeleteCustomerCommand = new DeleteCustomerCommand(this);
             this.navigateToLogEntryView = navigateToLogEntryView;
             _customerValidation = new CustomerValidation();
             CountryCode = new List<string>();
@@ -250,7 +252,6 @@ namespace MonitoringClient.ViewModel
                     {
                         try
                         {
-                            //_customerRepository.ConnectionString = ConnectionString;
                             Customers.Clear();
                             Customers.Add(_customerRepository.GetSingle(customer.Id));
                         }
@@ -319,6 +320,14 @@ namespace MonitoringClient.ViewModel
                         MessageBox.Show("Phone number hat kein gueltiges Format!");
                     }
                     break;
+            }
+        }
+
+        public void DeleteCustomer()
+        {
+            if (SelectedItem != null)
+            {
+                _customerRepository.Delete(SelectedItem);
             }
         }
 

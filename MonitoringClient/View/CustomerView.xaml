@@ -329,6 +329,7 @@
                             Command="{Binding Path=SaveCustomerCommand}"
                             CommandParameter="{Binding ElementName=pwbox_Password}"
                             Content="Save"
+                            HorizontalContentAlignment="Center"
                             Grid.Row="0"
                             Grid.Column="2"
                             Grid.RowSpan="2"
@@ -336,17 +337,28 @@
                     <Button x:Name="button_newCustomer"
                             Command="{Binding Path=CreateNewCustomerCommand}"
                             Content="New Customer"
+                            HorizontalContentAlignment="Center"
                             Grid.Row="2"
                             Grid.Column="2"
                             Grid.RowSpan="2"
                             Margin="2"/>
                     <Button x:Name="button_phoneDetails"
                             Command="{Binding Path=PhoneNumberDetailsCommand}"
+                            HorizontalContentAlignment="Left"
                             Grid.Row="4"
                             Grid.Column="2"
                             Grid.RowSpan="2"
                             Margin="2">
                         <TextBlock TextWrapping="Wrap">Phone Number Details</TextBlock>
+                    </Button>
+                    <Button x:Name="button_deleteCustomer"
+                            Command="{Binding Path=DeleteCustomerCommand}"
+                            HorizontalContentAlignment="Left"
+                            Grid.Row="6"
+                            Grid.Column="2"
+                            Grid.RowSpan="2"
+                            Margin="2">
+                        <TextBlock TextWrapping="Wrap">Delete Customer</TextBlock>
                     </Button>
                 </Grid>
             </Grid>

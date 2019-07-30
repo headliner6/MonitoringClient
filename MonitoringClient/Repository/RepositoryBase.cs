@@ -95,9 +95,16 @@ namespace MonitoringClient.Repository
             {
                 var context = new InventarisierungsloesungEntities();
 
-                context.Set<TEntity>().Remove(entity);
-                context.SaveChanges();
-
+                if (entity != null)
+                {
+                    TEntity deletedEntity = context.Set<TEntity>().Where(c => c.Id == entity.Id).FirstOrDefault();
+                    context.Set<TEntity>().Remove(deletedEntity);
+                    int finish = context.SaveChanges();
+                    if (finish > 0)
+                    {
+                        MessageBox.Show("Löschen war erfolgreich!");
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -111,11 +118,12 @@ namespace MonitoringClient.Repository
             {
                 var context = new InventarisierungsloesungEntities();
 
-                var result = GetSingle(entity.Id);
-                if (result != null)
+                var foundedEntity = GetSingle(entity.Id);
+                if (foundedEntity != null)
                 {
-                    result = entity;
-                    context.Entry(result).State = EntityState.Modified;
+                    //Update
+                    foundedEntity = entity;
+                    context.Entry(foundedEntity).State = EntityState.Modified;
                     int finish = context.SaveChanges();
                     if (finish > 0)
                     {
