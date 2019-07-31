@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InventarisierungsloesungModelStoreContainer" CdmEntityContainer="InventarisierungsloesungEntities">
+    <EntitySetMapping Name="Accounting">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.Accounting">
+        <MappingFragment StoreEntitySet="Accounting">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CustomerAccountNumber_FK" ColumnName="CustomerAccountNumber_FK" />
+          <ScalarProperty Name="Location_FK" ColumnName="Location_FK" />
+          <ScalarProperty Name="Device_FK" ColumnName="Device_FK" />
+          <ScalarProperty Name="Interface_FK" ColumnName="Interface_FK" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Address">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.Address">
+        <MappingFragment StoreEntitySet="Address">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Town_FK" ColumnName="Town_FK" />
+          <ScalarProperty Name="Streetname" ColumnName="Streetname" />
+          <ScalarProperty Name="Streetnumber" ColumnName="Streetnumber" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Additive" ColumnName="Additive" />
+          <ScalarProperty Name="Pobox" ColumnName="Pobox" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contact">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.Contact">
+        <MappingFragment StoreEntitySet="Contact">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Person_FK" ColumnName="Person_FK" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Credentials">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.Credentials">
+        <MappingFragment StoreEntitySet="Credentials">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Snmp" ColumnName="Snmp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customer">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="Addressnumber" ColumnName="Addressnumber" />
+          <ScalarProperty Name="CustomerAccountNumber" ColumnName="CustomerAccountNumber" />
+          <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerAccount">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.CustomerAccount">
+        <MappingFragment StoreEntitySet="CustomerAccount">
+          <ScalarProperty Name="CustomerAccountNumber" ColumnName="CustomerAccountNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Device">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.Device">
+        <MappingFragment StoreEntitySet="Device">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Location_FK" ColumnName="Location_FK" />
+          <ScalarProperty Name="DeviceType_FK" ColumnName="DeviceType_FK" />
+          <ScalarProperty Name="InventoryDate" ColumnName="InventoryDate" />
+          <ScalarProperty Name="DeactivateDate" ColumnName="DeactivateDate" />
+          <ScalarProperty Name="Hostname" ColumnName="Hostname" />
+          <ScalarProperty Name="Domain" ColumnName="Domain" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Deviceport">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.Deviceport">
+        <MappingFragment StoreEntitySet="Deviceport">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Device_fk" ColumnName="Device_fk" />
+          <ScalarProperty Name="Transportmedium_fk" ColumnName="Transportmedium_fk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Devicetype">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.Devicetype">
+        <MappingFragment StoreEntitySet="Devicetype">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DevicetypeHasOperatingsystem">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.DevicetypeHasOperatingsystem">
+        <MappingFragment StoreEntitySet="DevicetypeHasOperatingsystem">
+          <ScalarProperty Name="DeviceType_fk" ColumnName="DeviceType_fk" />
+          <ScalarProperty Name="Operatingsystem_fk" ColumnName="Operatingsystem_fk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Interface">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.Interface">
+        <MappingFragment StoreEntitySet="Interface">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Network_fk" ColumnName="Network_fk" />
+          <ScalarProperty Name="Device_fk" ColumnName="Device_fk" />
+          <ScalarProperty Name="Ip_adress_v4" ColumnName="Ip_adress_v4" />
+          <ScalarProperty Name="Mac_adresse" ColumnName="Mac_adresse" />
+          <ScalarProperty Name="IsFullDuplex" ColumnName="IsFullDuplex" />
+          <ScalarProperty Name="Bandwith" ColumnName="Bandwith" />
+          <ScalarProperty Name="Is_in_use" ColumnName="Is_in_use" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Location">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.Location">
+        <MappingFragment StoreEntitySet="Location">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ParentLocation" ColumnName="ParentLocation" />
+          <ScalarProperty Name="Addressnumber" ColumnName="Addressnumber" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="Building" ColumnName="Building" />
+          <ScalarProperty Name="Room" ColumnName="Room" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Log">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.Log">
+        <MappingFragment StoreEntitySet="Log">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Device_fk" ColumnName="Device_fk" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="LogMessage" ColumnName="LogMessage" />
+          <ScalarProperty Name="Level" ColumnName="Level" />
+          <ScalarProperty Name="Is_acknowledged" ColumnName="Is_acknowledged" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogEntries">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.LogEntries">
+        <MappingFragment StoreEntitySet="LogEntries">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Pod" ColumnName="Pod" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Hostname" ColumnName="Hostname" />
+          <ScalarProperty Name="Severity" ColumnName="Severity" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Network">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.Network">
+        <MappingFragment StoreEntitySet="Network">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Subnet" ColumnName="Subnet" />
+          <ScalarProperty Name="Mask" ColumnName="Mask" />
+          <ScalarProperty Name="Vlan" ColumnName="Vlan" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Operatingsystem">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.Operatingsystem">
+        <MappingFragment StoreEntitySet="Operatingsystem">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OperatingsystemName" ColumnName="OperatingsystemName" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Person">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.Person">
+        <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pointofdelivery">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.Pointofdelivery">
+        <MappingFragment StoreEntitySet="Pointofdelivery">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Customer_id_fk" ColumnName="Customer_id_fk" />
+          <ScalarProperty Name="Contact_id_fk" ColumnName="Contact_id_fk" />
+          <ScalarProperty Name="Cocation_fk" ColumnName="Cocation_fk" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="Timezone" ColumnName="Timezone" />
+          <ScalarProperty Name="TimeZonePositiv" ColumnName="TimeZonePositiv" />
+          <ScalarProperty Name="NtpServerIp" ColumnName="NtpServerIp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Productname" ColumnName="Productname" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Productgroup_fk" ColumnName="Productgroup_fk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Productgroup">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.Productgroup">
+        <MappingFragment StoreEntitySet="Productgroup">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Hardware" ColumnName="Hardware" />
+          <ScalarProperty Name="Software" ColumnName="Software" />
+          <ScalarProperty Name="OtherProduct" ColumnName="OtherProduct" />
+          <ScalarProperty Name="Accounting_fk" ColumnName="Accounting_fk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SoftwareService">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.SoftwareService">
+        <MappingFragment StoreEntitySet="SoftwareService">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="HoursWorked" ColumnName="HoursWorked" />
+          <ScalarProperty Name="Accounting_fk" ColumnName="Accounting_fk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Town">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.Town">
+        <MappingFragment StoreEntitySet="Town">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="Town1" ColumnName="Town" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transportmedium">
+      <EntityTypeMapping TypeName="InventarisierungsloesungModel.Transportmedium">
+        <MappingFragment StoreEntitySet="Transportmedium">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="DevicesHasCredentials" TypeName="InventarisierungsloesungModel.DevicesHasCredentials" StoreEntitySet="DevicesHasCredentials">
+      <EndProperty Name="Device">
+        <ScalarProperty Name="Id" ColumnName="DeviceId" />
+      </EndProperty>
+      <EndProperty Name="Credentials">
+        <ScalarProperty Name="Id" ColumnName="CredentialsId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="LogClear" FunctionName="InventarisierungsloesungModel.Store.LogClear" />
+    <FunctionImportMapping FunctionImportName="LogMessageAdd" FunctionName="InventarisierungsloesungModel.Store.LogMessageAdd" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="InventarisierungsloesungModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="InventarisierungsloesungModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="InventarisierungsloesungModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="InventarisierungsloesungModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="InventarisierungsloesungModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="InventarisierungsloesungModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="InventarisierungsloesungModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="InventarisierungsloesungModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="InventarisierungsloesungModel.Store.sp_upgraddiagrams" />
+  </EntityContainerMapping>
+</Mapping>
