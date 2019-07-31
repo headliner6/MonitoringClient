@@ -23,7 +23,6 @@ namespace MonitoringClient.ViewModel
         {
             if (obj.ToString() == "LogMessageAddView")
             {
-                var logEntryViewModel = selectedViewModel;
                 SelectedViewModel = new LogMessageAddViewModel(OpenLogentryView);
                 var logMessageAddViewModel = (LogMessageAddViewModel) selectedViewModel;
             }
@@ -32,7 +31,6 @@ namespace MonitoringClient.ViewModel
         {
             if (obj.ToString() == "LocationView")
             {
-                var logEntryViewModel = selectedViewModel;
                 SelectedViewModel = new LocationViewModel(OpenLogentryView);
                 var locationViewModel = (LocationViewModel)selectedViewModel;
                 locationViewModel.GetAll();
@@ -43,7 +41,6 @@ namespace MonitoringClient.ViewModel
         {
             if (obj.ToString() == "CustomerView")
             {
-                var logEntryViewModel = selectedViewModel;
                 SelectedViewModel = new CustomerViewModel(OpenLogentryView);
                 var customerViewModel = (CustomerViewModel)selectedViewModel;
                 customerViewModel.GetAll();
@@ -54,7 +51,6 @@ namespace MonitoringClient.ViewModel
         {
             if (obj.ToString() == "LogEntryView")
             {
-                var logMessageAddViewModel = selectedViewModel;
                 SelectedViewModel = new LogEntryViewModel(OpenLogMessageAddView, OpenLocationView, OpenCustomerView);
                 LogEntryViewModel logEntryViewModel = (LogEntryViewModel) selectedViewModel;
                 logEntryViewModel.GetAll();
