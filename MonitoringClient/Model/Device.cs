@@ -44,5 +44,6 @@ namespace MonitoringClient.Model
         public virtual ICollection<Log> Log { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Credentials> Credentials { get; set; }
+        public virtual Devicetype Devicetype { get; set; }
     }
 }

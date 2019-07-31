@@ -52,7 +52,7 @@ namespace MonitoringClient.Model
         public virtual DbSet<Town> Town { get; set; }
         public virtual DbSet<Transportmedium> Transportmedium { get; set; }
     
-        public virtual long LogClear(Nullable<long> logEntriesId)
+        public virtual int LogClear(Nullable<long> logEntriesId)
         {
             var logEntriesIdParameter = logEntriesId.HasValue ?
                 new ObjectParameter("LogEntriesId", logEntriesId) :

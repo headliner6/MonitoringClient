@@ -12,7 +12,7 @@ namespace MonitoringClient.Model
     using DuplicateCheckerLib;
     using MonitoringClient.Services;
     using System;
-    
+
     public partial class LogEntries : IModel, IEntity
     {
         public long Id { get; set; }

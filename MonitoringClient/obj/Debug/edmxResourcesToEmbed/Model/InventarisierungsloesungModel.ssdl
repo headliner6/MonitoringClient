@@ -410,17 +410,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="devicetype_has_operatingsystem$devicetype_has_operatingsystem_ibfk_2">
-    <End Role="Operatingsystem" Type="Self.Operatingsystem" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
+  <Association Name="FK__Device__DeviceTy__6166761E">
+    <End Role="Devicetype" Type="Self.Devicetype" Multiplicity="1" />
+    <End Role="Device" Type="Self.Device" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Devicetype">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Device">
+        <PropertyRef Name="DeviceType_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Devicetyp__Devic__634EBE90">
+    <End Role="Devicetype" Type="Self.Devicetype" Multiplicity="1" />
     <End Role="DevicetypeHasOperatingsystem" Type="Self.DevicetypeHasOperatingsystem" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Operatingsystem">
+      <Principal Role="Devicetype">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="DevicetypeHasOperatingsystem">
-        <PropertyRef Name="Operatingsystem_fk" />
+        <PropertyRef Name="DeviceType_fk" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -566,7 +576,7 @@
   </Association>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
   <Function Name="LogClear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="LogEntriesId" Type="int" Mode="In" />
+    <Parameter Name="LogEntriesId" Type="bigint" Mode="In" />
   </Function>
   <Function Name="LogMessageAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="i_pod" Type="nvarchar" Mode="In" />
@@ -696,8 +706,12 @@
       <End Role="Credentials" EntitySet="Credentials" />
       <End Role="DevicesHasCredentials" EntitySet="DevicesHasCredentials" />
     </AssociationSet>
-    <AssociationSet Name="devicetype_has_operatingsystem$devicetype_has_operatingsystem_ibfk_2" Association="Self.devicetype_has_operatingsystem$devicetype_has_operatingsystem_ibfk_2">
-      <End Role="Operatingsystem" EntitySet="Operatingsystem" />
+    <AssociationSet Name="FK__Device__DeviceTy__6166761E" Association="Self.FK__Device__DeviceTy__6166761E">
+      <End Role="Devicetype" EntitySet="Devicetype" />
+      <End Role="Device" EntitySet="Device" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Devicetyp__Devic__634EBE90" Association="Self.FK__Devicetyp__Devic__634EBE90">
+      <End Role="Devicetype" EntitySet="Devicetype" />
       <End Role="DevicetypeHasOperatingsystem" EntitySet="DevicetypeHasOperatingsystem" />
     </AssociationSet>
     <AssociationSet Name="interface$interface_ibfk_1" Association="Self.interface$interface_ibfk_1">

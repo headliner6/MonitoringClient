@@ -14,9 +14,21 @@ namespace MonitoringClient.Model
     
     public partial class Devicetype
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Devicetype()
+        {
+            this.Device = new HashSet<Device>();
+            this.DevicetypeHasOperatingsystem = new HashSet<DevicetypeHasOperatingsystem>();
+        }
+    
         public long Id { get; set; }
         public string Manufacturer { get; set; }
         public string Model { get; set; }
         public string Version { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Device> Device { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DevicetypeHasOperatingsystem> DevicetypeHasOperatingsystem { get; set; }
     }
 }

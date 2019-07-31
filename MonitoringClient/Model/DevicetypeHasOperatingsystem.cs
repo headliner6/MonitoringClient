@@ -18,5 +18,6 @@ namespace MonitoringClient.Model
         public long Operatingsystem_fk { get; set; }
     
         public virtual Operatingsystem Operatingsystem { get; set; }
+        public virtual Devicetype Devicetype { get; set; }
     }
 }
