@@ -42,7 +42,6 @@ namespace MonitoringClient.ViewModel
         public PhoneNumberDetailsCommand PhoneNumberDetailsCommand { get; set; }
         public DeleteCustomerCommand DeleteCustomerCommand { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
-        public string ConnectionString { get; set; }
         public Customer SelectedItem
         {
             get
@@ -206,8 +205,6 @@ namespace MonitoringClient.ViewModel
 
             if (IsCustomerValid(password) == true)
             {
-                try
-                {
                     if (_selectedItem != null)
                     {
                         _customerRepository.Update(CreateCustomerToSave(password));
@@ -218,11 +215,6 @@ namespace MonitoringClient.ViewModel
                     }
                     this.GetAll();
                     this.ClearPropertiesAndSelectedItem();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-                }
             }
             else
             {
@@ -250,15 +242,8 @@ namespace MonitoringClient.ViewModel
                 {
                     if (customer.Firstname.Equals(_firstnameSearch) && customer.Lastname.Equals(_lastanemSearch))
                     {
-                        try
-                        {
                             Customers.Clear();
                             Customers.Add(_customerRepository.GetSingle(customer.Id));
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
-                        }
                         return;
                     }
                 }

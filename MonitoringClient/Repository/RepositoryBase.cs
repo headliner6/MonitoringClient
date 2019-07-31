@@ -1,7 +1,6 @@
 ﻿using MonitoringClient.Model;
 using MonitoringClient.Services;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -13,12 +12,9 @@ namespace MonitoringClient.Repository
     public abstract class RepositoryBase<TEntity> : DbContext, IRepositoryBase<TEntity>
         where TEntity : class, IModel, new()
     {
-        public string ConnectionString { get; set; } // "Server = localhost; Database = inventarisierungsloesung; Uid = root; Pwd = password;"
 
         protected RepositoryBase()
         {
-            this.ConnectionString = "InventarisierungsloesungEntities";/*@"Data Source=.\; initial catalog=Inventarisierungsloesung;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;";*/
-
         }
 
         public long Count(Expression<Func<TEntity, bool>> whereCondition)
@@ -26,7 +22,6 @@ namespace MonitoringClient.Repository
             try
             {
                 var context = new InventarisierungsloesungEntities();
-
                 return context.Set<TEntity>().Where(whereCondition).Count();
 
             }
@@ -141,10 +136,7 @@ namespace MonitoringClient.Repository
         public IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> whereCondition)
         {
             var context = new InventarisierungsloesungEntities();
-
             return context.Set<TEntity>().Where(whereCondition);
-
-
         }
 
         public IQueryable<TEntity> GetAll()

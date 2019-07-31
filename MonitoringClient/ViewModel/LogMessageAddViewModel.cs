@@ -63,8 +63,6 @@ namespace MonitoringClient.ViewModel
             }
 
         }
-        public string ConnectionString { get; set; }
-
         public LogMessageAddViewModel(Action<object> navigateToLogEntryView)
         {
             NavigateBack = new BaseCommand(OnNavigateBack);

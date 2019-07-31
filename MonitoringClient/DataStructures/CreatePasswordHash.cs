@@ -7,8 +7,6 @@ using System.Security.Cryptography;
 
 namespace MonitoringClient.DataStructures
 {
-
-    //TODO: mit SALT ergänzen, MD5Hashes können schnell entcripted werden
     public class CreatePasswordHash
     {
         public string GetSaltedHash(string input)
@@ -16,6 +14,7 @@ namespace MonitoringClient.DataStructures
             byte[] salt;
             var rngProvider = new RNGCryptoServiceProvider();
             var sha512Provider = new SHA512CryptoServiceProvider();
+
             rngProvider.GetBytes(salt = new byte[16]);
             var pbkdf2 = new Rfc2898DeriveBytes(input,salt);
 

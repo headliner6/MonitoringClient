@@ -21,7 +21,6 @@ namespace MonitoringClient.ViewModel
         private LocationModelRepository _locationModelRepository;
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public string ConnectionString { get; set; }
         public ObservableCollection<LocationNode> Locations
         {
             get { return _locations; }
@@ -44,7 +43,6 @@ namespace MonitoringClient.ViewModel
         {
             try
             {
-                _locationModelRepository.ConnectionString = ConnectionString;
                 var locationTreeBuilder = new LocationTreeBuilder();
                 var locations = _locationModelRepository.GetAll().ToList();
                 locations.Sort((x, y) => Comparer<long?>.Default.Compare(x.ParentLocation, y.ParentLocation));

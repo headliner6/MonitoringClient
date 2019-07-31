@@ -35,7 +35,6 @@ namespace MonitoringClient.ViewModel
                 OnPropertyChanged("Logentries");
             }
         }
-        public string ConnectionString { get; set; }
         public LoadAllLogEntriesCommand LoadButtonCommand { get; set; }
         public ConfirmButtonCommand ConfirmButtonCommand { get; set; }
         public FindDuplicatesButtonCommand FindDuplicatesButtonCommand { get; set; }
@@ -55,14 +54,12 @@ namespace MonitoringClient.ViewModel
             Logentries = new ObservableCollection<LogEntries>();
             _duplicateChecker = new DuplicateChecker();
             _logEntryModelRepository = new LogEntryModelRepository();
-            ConnectionString = _logEntryModelRepository.ConnectionString;
         }
         public void GetAll()
         {
 
             try
             {
-                _logEntryModelRepository.ConnectionString = ConnectionString;
                 Logentries = new ObservableCollection<LogEntries>(_logEntryModelRepository.GetAll());
             }
             catch (Exception ex)

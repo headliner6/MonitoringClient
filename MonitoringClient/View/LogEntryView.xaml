@@ -19,17 +19,6 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="txtblock_connection"
-                           Grid.Row="0" Text="Server Connection String: "
-                           Width="150"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Center"/>
-                <TextBox x:Name="txtbox_connectionString"
-                         Text="{Binding Path=ConnectionString}"
-                         HorizontalAlignment="Left"
-                         Grid.Row="0"
-                         Width="500"
-                         Height="20" Margin="142,8,-129,3"/>
                 <Button x:Name="button_locationView"
                         Grid.Row="1"
                         Command="{Binding Path=NavigateLocationView}"
