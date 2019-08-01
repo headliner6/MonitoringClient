@@ -13,6 +13,7 @@ namespace MonitoringClient.Services
     {
         private readonly KeyValuePair<string, string> _defaultPath;
 
+        //evtl. ist der Default-Path falsch sollte das Plugin nicht funktionieren.
         public PluginLoader()
         {
             _defaultPath = new KeyValuePair<string, string>(@".\DataExporterDLL\", " *.dll");
@@ -40,7 +41,7 @@ namespace MonitoringClient.Services
             }
             return dataexporters;
         }
-        public ICollection<IDataExportPlugin> GetDataExporters(string path, string searchPattern)
+        public List<IDataExportPlugin> GetDataExporters(string path, string searchPattern)
         {
             var dataexporters = new List<IDataExportPlugin>();
             var files = GetFiles(path, searchPattern);
