@@ -163,7 +163,7 @@ namespace MonitoringClient.ViewModel
             {
                 Exporters.Add(exporter.Name);
             }
-            SelectedExporter = Exporters.First();
+            SelectedExporter = Exporters.FirstOrDefault();
         }
         private void StartLogMessageAddView(object obj)
         {
