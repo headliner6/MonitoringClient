@@ -29,6 +29,7 @@ namespace JsonExporter
             var streamWriter = new StreamWriter(destinationPath);
             var writer = new JsonTextWriter(streamWriter);
             serializer.Serialize(writer, data);
+            streamWriter.Close();
         }
     }
 }
