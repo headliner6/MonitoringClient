@@ -1,9 +1,10 @@
 ﻿using LinqToDB.Mapping;
 using MonitoringClient.Services;
+using System;
 
 namespace MonitoringClient.Model
 {
-    [Table ("customer")]
+    [Table ("customer"), Serializable]
     public class CustomerModel : IModel
     {
         [Column("CUSTOMER_ID"), PrimaryKey, NotNull]

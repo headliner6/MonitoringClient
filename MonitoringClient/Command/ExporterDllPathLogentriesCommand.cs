@@ -13,9 +13,9 @@ namespace MonitoringClient.Command
         private LogEntryViewModel _logEntryViewModel;
         public event EventHandler CanExecuteChanged;
 
-        public ExporterDllPathLogentriesCommand(LogEntryViewModel cvm)
+        public ExporterDllPathLogentriesCommand(LogEntryViewModel lvm)
         {
-            this._logEntryViewModel = cvm;
+            this._logEntryViewModel = lvm;
         }
         public bool CanExecute(object parameter)
         {

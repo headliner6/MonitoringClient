@@ -1,8 +1,10 @@
-﻿using MonitoringClient.Command;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using MonitoringClient.Command;
 using MonitoringClient.DataStructures;
 using MonitoringClient.Model;
 using MonitoringClient.RegExp;
 using MonitoringClient.Repository;
+using MonitoringClient.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -32,12 +34,18 @@ namespace MonitoringClient.ViewModel
         private string _phoneNumber;
         private string _email;
         private string _website;
+        private string _selectedExporter;
+        private string _exportPath;
+        private string _exporterDllPath;
 
         public SaveCustomerCommand SaveCustomerCommand { get; set; }
         public CreateNewCustomerCommand CreateNewCustomerCommand { get; set; }
         public LoadAllCustomerCommand LoadAllCustomerCommand { get; set; }
         public SearchCustomerCommand SearchCustomerCommand { get; set; }
         public PhoneNumberDetailsCommand PhoneNumberDetailsCommand { get; set; }
+        public ExportCustomersCommand ExportCustomersCommand { get; set; }
+        public ExportPathCustomersCommand ExportPathCustomersCommand { get; set; }
+        public ExporterDllPathCustomersCommand ExporterDllPathCustomersCommand { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public string ConnectionString { get; set; }
         public CustomerModel SelectedItem
@@ -168,7 +176,31 @@ namespace MonitoringClient.ViewModel
                 OnPropertyChanged("Website");
             }
         }
-
+        public List<string> Exporters { get; set; }
+        public string SelectedExporter
+        {
+            get
+            {
+                return _selectedExporter;
+            }
+            set
+            {
+                _selectedExporter = value;
+                OnPropertyChanged("SelectedExporter");
+            }
+        }
+        public string ExportPath
+        {
+            get
+            {
+                return _exportPath;
+            }
+            set
+            {
+                _exportPath = value;
+                OnPropertyChanged("ExportPath");
+            }
+        }
         public CustomerViewModel(Action<object> navigateToLogEntryView)
         {
             _customerRepository = new CustomerRepository();
@@ -178,6 +210,9 @@ namespace MonitoringClient.ViewModel
             SearchCustomerCommand = new SearchCustomerCommand(this);
             LoadAllCustomerCommand = new LoadAllCustomerCommand(this);
             PhoneNumberDetailsCommand = new PhoneNumberDetailsCommand(this);
+            ExportCustomersCommand = new ExportCustomersCommand(this);
+            ExportPathCustomersCommand = new ExportPathCustomersCommand(this);
+            ExporterDllPathCustomersCommand = new ExporterDllPathCustomersCommand(this);
             this.navigateToLogEntryView = navigateToLogEntryView;
             _customerValidation = new CustomerValidation();
             CountryCode = new List<string>();
@@ -318,6 +353,58 @@ namespace MonitoringClient.ViewModel
                     break;
             }
         }
+        public void Export()
+        {
+            var loader = new PluginLoader();
+            try
+            {
+                var exporters = loader.GetDataExporters(_exporterDllPath);
+                foreach (var exporter in exporters)
+                {
+                    if (exporter.Name == SelectedExporter)
+                    {
+                        exporter.Export(Customers, _exportPath);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+            }
+        }
+        public void ChooseExportPath()
+        {
+            using (var dialog = new CommonOpenFileDialog())
+            {
+                dialog.ShowDialog();
+                ExportPath = dialog.FileName;
+                dialog.Dispose();
+            }
+        }
+        public void ChooseExporterDllPath()
+        {
+            using (var dialog = new CommonOpenFileDialog())
+            {
+                dialog.IsFolderPicker = true;
+                dialog.ShowDialog();
+                _exporterDllPath = dialog.FileName;
+                dialog.Dispose();
+            }
+            InitialiseExporters(_exporterDllPath);
+        }
+        private void InitialiseExporters(string path)
+        {
+            Exporters = new List<string>();
+            var loader = new PluginLoader();
+            var exporters = loader.GetDataExporters(path);
+            foreach (var exporter in exporters)
+            {
+                Exporters.Add(exporter.Name);
+            }
+            SelectedExporter = Exporters.FirstOrDefault();
+            OnPropertyChanged("Exporters");
+        }
+
         private void InitialiseCountryCodes()
         {
             CountryCode.Add("Schweiz");

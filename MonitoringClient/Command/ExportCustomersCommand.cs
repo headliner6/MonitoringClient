@@ -8,14 +8,14 @@ using System.Windows.Input;
 
 namespace MonitoringClient.Command
 {
-    public class ExportLogentriesCommand : ICommand
+    public class ExportCustomersCommand : ICommand
     {
-        private LogEntryViewModel _logEntryViewModel;
+        private CustomerViewModel _customerViewModel;
         public event EventHandler CanExecuteChanged;
 
-        public ExportLogentriesCommand(LogEntryViewModel lvm)
+        public ExportCustomersCommand(CustomerViewModel cvm)
         {
-            this._logEntryViewModel = lvm;
+            this._customerViewModel = cvm;
         }
         public bool CanExecute(object parameter)
         {
@@ -23,7 +23,7 @@ namespace MonitoringClient.Command
         }
         public void Execute(object parameter)
         {
-            _logEntryViewModel.Export();
+            _customerViewModel.Export();
         }
     }
 }

@@ -4,11 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="515" d:DesignWidth="1000">
+             d:DesignHeight="700" d:DesignWidth="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" MinHeight="70" />
             <RowDefinition Height="auto" MinHeight="250" />
+            <RowDefinition Height="auto" MinHeight="90" />
         </Grid.RowDefinitions>
         <GroupBox Header="Customer Navigation" Grid.Row="0">
             <Grid>
@@ -349,6 +350,61 @@
                         <TextBlock TextWrapping="Wrap">Phone Number Details</TextBlock>    
                     </Button>
                 </Grid>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Customer Export" Grid.Row="2" Height="auto" Margin="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="txtblock_exportPath"
+                           Grid.Row="0" Text="Export Path: "
+                           Grid.Column="0"
+                           Width="150"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Margin="2"/>
+                <TextBox x:Name="txtbox_exportPath"
+                         Text="{Binding Path=ExportPath, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                         HorizontalAlignment="Left"
+                         Grid.Column="0"
+                         Width="295"
+                         Height="25"
+                         Margin="2"/>
+                <Button x:Name="button_exportPathCustomers"
+                        Command="{Binding Path=ExportPathCustomersCommand}"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Content="Export to"
+                        Height="25"
+                        Margin="2"/>
+                <Button x:Name="button_exporterDLLPath"
+                        Command="{Binding Path=ExporterDllPathCustomersCommand}"
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Content=".dll-Files from"
+                        Height="25"
+                        Margin="2"/>
+                <ComboBox  x:Name="combobox_Exporters"
+                               Grid.Row="0"
+                               Grid.Column="3"
+                               ItemsSource="{Binding Path=Exporters}"
+                               SelectedItem="{Binding Path=SelectedExporter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                               Height="25"
+                               Margin="2"/>
+                <Button x:Name="button_exportLogentries"
+                        Command="{Binding Path=ExportCustomersCommand}"
+                        Grid.Row="0"
+                        Grid.Column="4"
+                        Content="Export Logentries"
+                        Margin="2"/>
             </Grid>
         </GroupBox>
     </Grid>
