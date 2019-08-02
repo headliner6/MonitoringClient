@@ -104,6 +104,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Command\ExporterDllPathLogentriesCommand.cs" />
     <Compile Include="Command\ExportPathLogentriesCommand.cs" />
     <Compile Include="Command\CreateNewCustomerCommand.cs" />
     <Compile Include="Command\ExportLogentriesCommand.cs" />

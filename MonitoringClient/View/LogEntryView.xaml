@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="1000">
+             d:DesignHeight="600" d:DesignWidth="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" MinHeight="100" />
@@ -103,10 +103,10 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
-
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="150"/>
@@ -129,12 +129,19 @@
                         Command="{Binding Path=ExportPathLogentriesCommand}"
                         Grid.Row="0"
                         Grid.Column="1"
-                        Content="Choose Path"
+                        Content="Export to"
                         Height="25"
                         Margin="2"/>
-                <ComboBox  x:Name="combobox_CountryCode"
+                <Button x:Name="button_exporterDLLPath"
+                        Command="{Binding Path=ExporterDllPathLogentriesCommand}"
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Content=".dll-Files from"
+                        Height="25"
+                        Margin="2"/>
+                <ComboBox  x:Name="combobox_Exporters"
                                Grid.Row="0"
-                               Grid.Column="2"
+                               Grid.Column="3"
                                ItemsSource="{Binding Path=Exporters}"
                                SelectedItem="{Binding Path=SelectedExporter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                Height="25"
@@ -142,7 +149,7 @@
                 <Button x:Name="button_exportLogentries"
                         Command="{Binding Path=ExportLogentriesCommand}"
                         Grid.Row="0"
-                        Grid.Column="3"
+                        Grid.Column="4"
                         Content="Export Logentries"
                         Margin="2"/>
             </Grid>

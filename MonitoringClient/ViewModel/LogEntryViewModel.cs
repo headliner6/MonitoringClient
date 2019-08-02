@@ -25,6 +25,7 @@ namespace MonitoringClient.ViewModel
         private ObservableCollection<LogEntryModel> _logentries;
         private string _selectedExporter;
         private string _exportPath;
+        private string _exporterDllPath;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -46,6 +47,7 @@ namespace MonitoringClient.ViewModel
         public FindDuplicatesButtonCommand FindDuplicatesButtonCommand { get; set; }
         public ExportLogentriesCommand ExportLogentriesCommand { get; set; }
         public ExportPathLogentriesCommand ExportPathLogentriesCommand { get; set; }
+        public ExporterDllPathLogentriesCommand ExporterDllPathLogentriesCommand { get; set; }
         public List<string> Exporters { get; set; }
         public string SelectedExporter
         {
@@ -82,6 +84,7 @@ namespace MonitoringClient.ViewModel
             FindDuplicatesButtonCommand = new FindDuplicatesButtonCommand(this);
             ExportLogentriesCommand = new ExportLogentriesCommand(this);
             ExportPathLogentriesCommand = new ExportPathLogentriesCommand(this);
+            ExporterDllPathLogentriesCommand = new ExporterDllPathLogentriesCommand(this);
             this.navigateToLogMessageAddView = navigateToLogMessageAddView;
             this.navigateToLocationView = navigateToLocationView;
             this.navigateToCustomerView = navigateToCustomerView;
@@ -91,7 +94,6 @@ namespace MonitoringClient.ViewModel
             _logEntryModelRepository = new LogEntryModelRepository();
 
             ConnectionString = _logEntryModelRepository.ConnectionString;
-            InitialiseExporters();
         }
         public void GetAll()
         {
@@ -127,7 +129,7 @@ namespace MonitoringClient.ViewModel
             var loader = new PluginLoader();
             try
             {
-                var exporters = loader.GetDataExporters();
+                var exporters = loader.GetDataExporters(_exporterDllPath);
                 foreach (var exporter in exporters)
                 {
                     if (exporter.Name == SelectedExporter)
@@ -147,23 +149,37 @@ namespace MonitoringClient.ViewModel
             {
                 dialog.ShowDialog();
                 ExportPath = dialog.FileName;
+                dialog.Dispose();
             }
+        }
+
+        public void ChooseExporterDllPath()
+        {
+            using (var dialog = new CommonOpenFileDialog())
+            {
+                dialog.IsFolderPicker = true;
+                dialog.ShowDialog();
+                _exporterDllPath = dialog.FileName;
+                dialog.Dispose();
+            }
+            InitialiseExporters(_exporterDllPath);
         }
 
         protected void OnPropertyChanged(string name)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
-        private void InitialiseExporters()
+        private void InitialiseExporters(string path)
         {
             Exporters = new List<string>();
             var loader = new PluginLoader();
-            var exporters = loader.GetDataExporters();
+            var exporters = loader.GetDataExporters(path);
             foreach (var exporter in exporters)
             {
                 Exporters.Add(exporter.Name);
             }
             SelectedExporter = Exporters.FirstOrDefault();
+            OnPropertyChanged("Exporters");
         }
         private void StartLogMessageAddView(object obj)
         {
