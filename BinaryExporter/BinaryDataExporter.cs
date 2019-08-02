@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,7 +22,7 @@ namespace BinaryExporter
 
         public void Export(IEnumerable data, string destinationPath)
         {
-            if(File.Exists(destinationPath))
+            if (File.Exists(destinationPath))
             {
                 File.Delete(destinationPath);
             }

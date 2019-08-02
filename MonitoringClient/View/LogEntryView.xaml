@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="700">
+             d:DesignHeight="450" d:DesignWidth="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" MinHeight="100" />
@@ -33,7 +33,7 @@
                          Grid.Row="0"
                          Grid.ColumnSpan="4"
                          Width="500"
-                         Height="20" Margin="142,8,-129,3"/>
+                         Height="25" Margin="142,8,-129,3"/>
                 <Button x:Name="button_locationView"
                         Grid.Row="1"
                         Grid.Column="0"
@@ -103,18 +103,48 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
+
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
                     <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="300"/>
-                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
+                <TextBlock x:Name="txtblock_exportPath"
+                           Grid.Row="0" Text="Export Path: "
+                           Grid.Column="0"
+                           Width="150"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Margin="2"/>
+                <TextBox x:Name="txtbox_exportPath"
+                         Text="{Binding Path=ExportPath, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                         HorizontalAlignment="Left"
+                         Grid.Column="0"
+                         Width="295"
+                         Height="25"
+                         Margin="2"/>
+                <Button x:Name="button_exportPathLognetries"
+                        Command="{Binding Path=ExportPathLogentriesCommand}"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Content="Choose Path"
+                        Height="25"
+                        Margin="2"/>
+                <ComboBox  x:Name="combobox_CountryCode"
+                               Grid.Row="0"
+                               Grid.Column="2"
+                               ItemsSource="{Binding Path=Exporters}"
+                               SelectedItem="{Binding Path=SelectedExporter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                               Height="25"
+                               Margin="2"/>
                 <Button x:Name="button_exportLogentries"
                         Command="{Binding Path=ExportLogentriesCommand}"
                         Grid.Row="0"
-                        Grid.Column="0"
+                        Grid.Column="3"
                         Content="Export Logentries"
-                        />
+                        Margin="2"/>
             </Grid>
         </GroupBox>
     </Grid>
