@@ -1,0 +1,8 @@
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\BinaryExporter\bin\Debug\BinaryExporter.dll
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\BinaryExporter\bin\Debug\BinaryExporter.pdb
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\BinaryExporter\bin\Debug\PluginContracts.dll
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\BinaryExporter\obj\Debug\BinaryExporter.csprojAssemblyReference.cache
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\BinaryExporter\obj\Debug\BinaryExporter.csproj.CoreCompileInputs.cache
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\BinaryExporter\obj\Debug\BinaryExporter.csproj.CopyComplete
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\BinaryExporter\obj\Debug\BinaryExporter.dll
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\BinaryExporter\obj\Debug\BinaryExporter.pdb
