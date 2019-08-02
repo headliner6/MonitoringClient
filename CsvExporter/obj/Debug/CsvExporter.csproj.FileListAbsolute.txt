@@ -1,0 +1,8 @@
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\CsvExporter\bin\Debug\CsvExporter.dll
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\CsvExporter\bin\Debug\CsvExporter.pdb
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\CsvExporter\bin\Debug\PluginContracts.dll
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\CsvExporter\obj\Debug\CsvExporter.csprojAssemblyReference.cache
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\CsvExporter\obj\Debug\CsvExporter.csproj.CoreCompileInputs.cache
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\CsvExporter\obj\Debug\CsvExporter.csproj.CopyComplete
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\CsvExporter\obj\Debug\CsvExporter.dll
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\CsvExporter\obj\Debug\CsvExporter.pdb
