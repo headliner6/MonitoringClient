@@ -447,3 +447,5 @@ D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\Microsoft.WindowsAPICodePack.xml
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\Newtonsoft.Json.dll
+D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\Newtonsoft.Json.xml
