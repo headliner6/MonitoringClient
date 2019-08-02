@@ -121,6 +121,7 @@
     <Compile Include="Model\CustomerModel.cs" />
     <Compile Include="Model\LocationModel.cs" />
     <Compile Include="RegExp\CustomerValidation.cs" />
+    <Compile Include="RegExp\ExportValidation.cs" />
     <Compile Include="RegExp\LogMessageValidation.cs" />
     <Compile Include="Repository\CustomerRepository.cs" />
     <Compile Include="Services\IModel.cs" />

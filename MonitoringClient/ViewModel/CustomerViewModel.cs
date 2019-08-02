@@ -355,21 +355,39 @@ namespace MonitoringClient.ViewModel
         }
         public void Export()
         {
-            var loader = new PluginLoader();
-            try
+            if (Customers.Count != 0)
             {
-                var exporters = loader.GetDataExporters(_exporterDllPath);
-                foreach (var exporter in exporters)
+                var validator = new ExportValidation();
+                if (validator.ExportPathValidation(_exportPath))
                 {
-                    if (exporter.Name == SelectedExporter)
+                    if (validator.ExportDllPathValidation(_exporterDllPath))
                     {
-                        exporter.Export(Customers, _exportPath);
+                        if (validator.SelectedExporterValidation(_selectedExporter))
+                        {
+                            var loader = new PluginLoader();
+                            try
+                            {
+                                var exporters = loader.GetDataExporters(_exporterDllPath);
+                                foreach (var exporter in exporters)
+                                {
+                                    if (exporter.Name == SelectedExporter)
+                                    {
+                                        exporter.Export(Customers, _exportPath);
+                                        MessageBox.Show("Export erfolgreich! --> Path: " + _exportPath);
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+                            }
+                        }
                     }
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+                MessageBox.Show("Keine Logentries verfügbar!");
             }
         }
         public void ChooseExportPath()
