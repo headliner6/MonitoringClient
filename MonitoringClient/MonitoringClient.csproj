@@ -96,6 +96,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Command\CreateNewCustomerCommand.cs" />
+    <Compile Include="Command\ExportLogentriesCommand.cs" />
     <Compile Include="Command\PhoneNumberDetailsCommand.cs" />
     <Compile Include="Command\LoadAllCustomerCommand.cs" />
     <Compile Include="Command\SaveCustomerCommand.cs" />

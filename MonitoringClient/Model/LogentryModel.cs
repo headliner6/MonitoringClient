@@ -5,7 +5,7 @@ using System;
 
 namespace MonitoringClient.Model
 {
-    [Table ("v_logentries")]
+    [Table ("v_logentries"), Serializable]
     public class LogEntryModel : IEntity, IModel
     {
         [Column ("id"), PrimaryKey, NotNull]

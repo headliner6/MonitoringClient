@@ -2,6 +2,7 @@
 using MonitoringClient.Command;
 using MonitoringClient.Model;
 using MonitoringClient.Repository;
+using MonitoringClient.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -39,6 +40,7 @@ namespace MonitoringClient.ViewModel
         public LoadAllLogEntriesCommand LoadButtonCommand { get; set; }
         public ConfirmButtonCommand ConfirmButtonCommand { get; set; }
         public FindDuplicatesButtonCommand FindDuplicatesButtonCommand { get; set; }
+        public ExportLogentriesCommand ExportLogentriesCommand { get; set; }
 
         public LogEntryViewModel(Action<object> navigateToLogMessageAddView, Action<object> navigateToLocationView, Action<object> navigateToCustomerView)
         {
@@ -48,6 +50,7 @@ namespace MonitoringClient.ViewModel
             LoadButtonCommand = new LoadAllLogEntriesCommand(this);
             ConfirmButtonCommand = new ConfirmButtonCommand(this);
             FindDuplicatesButtonCommand = new FindDuplicatesButtonCommand(this);
+            ExportLogentriesCommand = new ExportLogentriesCommand(this);
             this.navigateToLogMessageAddView = navigateToLogMessageAddView;
             this.navigateToLocationView = navigateToLocationView;
             this.navigateToCustomerView = navigateToCustomerView;
@@ -87,6 +90,19 @@ namespace MonitoringClient.ViewModel
                 Logentries = logentries;
             }
         }
+        public void Export()
+        {
+            var loader = new PluginLoader();
+            var exporters = loader.GetDataExporters();
+            foreach (var exporter in exporters)
+            {
+                if (exporter.Name == "BinaryDataExporter")
+                {
+                    exporter.Export(Logentries, @"D:/myfile.dat");
+                }
+            }
+        }
+
         protected void OnPropertyChanged(string name)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

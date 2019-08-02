@@ -7,17 +7,20 @@
              d:DesignHeight="450" d:DesignWidth="700">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" MinHeight="70" />
+            <RowDefinition Height="auto" MinHeight="100" />
             <RowDefinition Height="auto" MinHeight="250" />
+            <RowDefinition Height="auto" MinHeight="90" />
         </Grid.RowDefinitions>
         <GroupBox Header="LogEntry Navigation" Grid.Row="0" Height="auto">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="460"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="txtblock_connection"
                            Grid.Row="0" Text="Server Connection String: "
@@ -28,28 +31,35 @@
                          Text="{Binding Path=ConnectionString}"
                          HorizontalAlignment="Left"
                          Grid.Row="0"
+                         Grid.ColumnSpan="4"
                          Width="500"
                          Height="20" Margin="142,8,-129,3"/>
                 <Button x:Name="button_locationView"
                         Grid.Row="1"
+                        Grid.Column="0"
                         Command="{Binding Path=NavigateLocationView}"
                         Content="LocationView"
-                        Width="83" Margin="10,10,435,11" Height="40" />
+                        Margin="2"/>
                 <Button x:Name="button_customerView"
                         Grid.Row="1"
+                        Grid.Column="1"
                         Command="{Binding Path=NavigateCustomerView}"
                         Content="CustomerView"
-                        Width="84" Margin="105,10,340,11" Height="40" />
+                        Margin="2"/>
             </Grid>
         </GroupBox>
         <GroupBox Header="LogEntry Data" Grid.Row="1" Height="auto">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="300"/>
                 </Grid.ColumnDefinitions>
                 <DataGrid x:Name="logentrie_dataGrid"
                           IsReadOnly="true"
@@ -57,31 +67,54 @@
                           HorizontalAlignment="stretch"
                           RowHeaderWidth="0"
                           Grid.Row="0"
+                          Grid.ColumnSpan="5"
                           VerticalScrollBarVisibility="auto"
                           Margin="2"
-                          MaxWidth="1000"
+                          Width="680"
                           Height="180"/>
                 <Button x:Name="button_load"
                         Command="{Binding Path=LoadButtonCommand}"
                         Grid.Row="1"
+                        Grid.Column="0"
                         Content="Load"
-                        Width="70" Height="20" Margin="10,10,608,56"/>
+                        Margin="2"/>
                 <Button x:Name="button_confirm"
                         Command="{Binding Path=ConfirmButtonCommand}"
                         CommandParameter="{Binding ElementName=logentrie_dataGrid, Path=SelectedItems}"
                         Grid.Row="1"
+                        Grid.Column="1"
                         Content="Confirm"
-                        Width="70" Margin="85,13,533,58"/>
+                        Margin="2"/>
                 <Button x:Name="button_add"
                         Command="{Binding Path=NavigateLogMessageAddView}"
                         Grid.Row="1"
+                        Grid.Column="2"
                         Content="Add"
-                        Width="70" RenderTransformOrigin="0.5,0.5" Margin="160,13,458,58"/>
+                        Margin="2"/>
                 <Button x:Name="button_findDuplicates"
                         Command="{Binding Path=FindDuplicatesButtonCommand}"
                         Grid.Row="1"
+                        Grid.Column="3"
                         Content="Find Duplicates"
-                        Width="140" Margin="235,13,313,58"/>
+                        Margin="2"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="LogEntry Export" Grid.Row="2" Height="auto" Margin="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="300"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="button_exportLogentries"
+                        Command="{Binding Path=ExportLogentriesCommand}"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Content="Export Logentries"
+                        />
             </Grid>
         </GroupBox>
     </Grid>

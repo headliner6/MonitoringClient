@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security;
+using System.Windows;
 
 namespace MonitoringClient.Services
 {
@@ -16,7 +17,7 @@ namespace MonitoringClient.Services
         //evtl. ist der Default-Path falsch sollte das Plugin nicht funktionieren.
         public PluginLoader()
         {
-            _defaultPath = new KeyValuePair<string, string>(@".\DataExporterDLL\", " *.dll");
+            _defaultPath = GetDefaultPath();
         }
 
         public List<IDataExportPlugin> GetDataExporters()
@@ -28,7 +29,7 @@ namespace MonitoringClient.Services
                 try
                 {
                     var assembly = Assembly.LoadFile(file);
-                    foreach (var typ in assembly.GetTypes().Where((typ) => typ == typeof(IDataExportPlugin) && typeof(IDataExportPlugin).IsAssignableFrom(typ)))
+                    foreach (var typ in assembly.GetTypes().Where((typ) => typ != typeof(IDataExportPlugin) && typeof(IDataExportPlugin).IsAssignableFrom(typ)))
                     {
                         var dataexporter = (IDataExportPlugin)Activator.CreateInstance(typ);
                         dataexporters.Add(dataexporter);
@@ -66,11 +67,34 @@ namespace MonitoringClient.Services
 
         private string[] GetFiles()
         {
-            return Directory.GetFiles(_defaultPath.Key, _defaultPath.Value);
+            try
+            {
+                return Directory.GetFiles(_defaultPath.Key, _defaultPath.Value);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+                throw ex;
+            }
         }
         private string[] GetFiles(string path, string searchPattern)
         {
-            return Directory.GetFiles(path, searchPattern);
+            try
+            {
+                return Directory.GetFiles(path, searchPattern);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Folgender Fehler ist aufgetreten: " + ex.Message);
+                throw ex;
+            }
+        }
+        private KeyValuePair<string, string> GetDefaultPath()
+        {
+            var currentPath = Directory.GetCurrentDirectory();
+            var finalPath = Directory.GetParent(Directory.GetParent(currentPath).FullName).FullName + @"\DataExporterDLL";
+
+            return new KeyValuePair<string, string>(finalPath, "*.dll");
         }
     }
 }
