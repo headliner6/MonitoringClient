@@ -403,7 +403,7 @@
                         Command="{Binding Path=ExportCustomersCommand}"
                         Grid.Row="0"
                         Grid.Column="4"
-                        Content="Export Logentries"
+                        Content="Export Customers"
                         Margin="2"/>
             </Grid>
         </GroupBox>
