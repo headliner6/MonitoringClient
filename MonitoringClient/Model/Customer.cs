@@ -12,7 +12,9 @@ namespace MonitoringClient.Model
     using MonitoringClient.Services;
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Customer : IModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,7 +22,6 @@ namespace MonitoringClient.Model
         {
             this.Pointofdelivery = new HashSet<Pointofdelivery>();
         }
-    
         public long Id { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
@@ -30,7 +31,7 @@ namespace MonitoringClient.Model
         public string Email { get; set; }
         public string Website { get; set; }
         public string Password { get; set; }
-    
+        [Browsable(false)]
         public virtual CustomerAccount CustomerAccount { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pointofdelivery> Pointofdelivery { get; set; }

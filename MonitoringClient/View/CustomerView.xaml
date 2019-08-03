@@ -118,7 +118,8 @@
                           VerticalScrollBarVisibility="auto"
                           Margin="2"
                           MaxWidth="950"
-                          Height="180"/>
+                          Height="180"
+                          AutoGenerateColumns="True"/>
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
