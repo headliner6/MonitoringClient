@@ -39,7 +39,7 @@ namespace MonitoringClient.DataStructures
             LocationNode mainParentNode = null;
             foreach (var location in locations.Reverse<Location>())
             {
-                if (location.ParentLocation == 0)
+                if (location.ParentLocation == null)
                 {
                     mainParentNode = new LocationNode(location);
                     locations.Remove(location);

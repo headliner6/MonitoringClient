@@ -150,11 +150,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InventarisierungsloesungModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\InventarisierungsloesungModel1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>InventarisierungsloesungModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Model\Location.cs">
       <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
     </Compile>
@@ -183,12 +178,6 @@
       <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\SoftwareService.cs">
-      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\sp_helpdiagrams_Result.cs">
       <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\sysdiagrams.cs">
@@ -288,7 +277,7 @@
     </EmbeddedResource>
     <EntityDeploy Include="Model\InventarisierungsloesungModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>InventarisierungsloesungModel1.Designer.cs</LastGenOutput>
+      <LastGenOutput>InventarisierungsloesungModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="Model\InventarisierungsloesungModel.edmx.diagram">
       <DependentUpon>InventarisierungsloesungModel.edmx</DependentUpon>
@@ -307,7 +296,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Model\InventarisierungsloesungModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

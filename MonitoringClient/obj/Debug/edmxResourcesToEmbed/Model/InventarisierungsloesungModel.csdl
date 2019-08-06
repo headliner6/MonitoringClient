@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="InventarisierungsloesungModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <ComplexType Name="GetLocationsHirarchicalRecursive_Result">
+    <Property Name="Id" Type="Int64" />
+    <Property Name="ParentLocation" Type="Int64" />
+    <Property Name="Addressnumber" Type="Int64" />
+    <Property Name="Designation" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+    <Property Name="Building" Type="Int64" />
+    <Property Name="Room" Type="Int64" />
+  </ComplexType>
   <EntityType Name="Accounting">
     <Key>
       <PropertyRef Name="Id" />
@@ -89,10 +97,10 @@
     <NavigationProperty Name="Accounting" Relationship="Self.abrechnung_abrechnung_ibfk_3" FromRole="Device" ToRole="Accounting" />
     <NavigationProperty Name="Location" Relationship="Self.device_device_ibfk_1" FromRole="Device" ToRole="Location" />
     <NavigationProperty Name="Deviceport" Relationship="Self.deviceport_deviceport_ibfk_1" FromRole="Device" ToRole="Deviceport" />
+    <NavigationProperty Name="Devicetype" Relationship="Self.FK__Device__DeviceTy__6166761E" FromRole="Device" ToRole="Devicetype" />
     <NavigationProperty Name="Interface" Relationship="Self.interface_interface_ibfk_2" FromRole="Device" ToRole="Interface" />
     <NavigationProperty Name="Log" Relationship="Self.log_log_ibfk_1" FromRole="Device" ToRole="Log" />
     <NavigationProperty Name="Credentials" Relationship="Self.DevicesHasCredentials" FromRole="Device" ToRole="Credentials" />
-    <NavigationProperty Name="Devicetype" Relationship="InventarisierungsloesungModel.FK__Device__DeviceTy__6166761E" FromRole="Device" ToRole="Devicetype" />
   </EntityType>
   <EntityType Name="Deviceport">
     <Key>
@@ -113,18 +121,18 @@
     <Property Name="Manufacturer" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Model" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Version" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Device" Relationship="InventarisierungsloesungModel.FK__Device__DeviceTy__6166761E" FromRole="Devicetype" ToRole="Device" />
-    <NavigationProperty Name="DevicetypeHasOperatingsystem" Relationship="InventarisierungsloesungModel.FK__Devicetyp__Devic__634EBE90" FromRole="Devicetype" ToRole="DevicetypeHasOperatingsystem" />
+    <NavigationProperty Name="Device" Relationship="Self.FK__Device__DeviceTy__6166761E" FromRole="Devicetype" ToRole="Device" />
+    <NavigationProperty Name="DevicetypeHasOperatingsystem" Relationship="Self.FK__Devicetyp__Devic__0880433F" FromRole="Devicetype" ToRole="DevicetypeHasOperatingsystem" />
   </EntityType>
   <EntityType Name="DevicetypeHasOperatingsystem">
     <Key>
-      <PropertyRef Name="DeviceType_fk" />
-      <PropertyRef Name="Operatingsystem_fk" />
+      <PropertyRef Name="Id" />
     </Key>
     <Property Name="DeviceType_fk" Type="Int64" Nullable="false" />
     <Property Name="Operatingsystem_fk" Type="Int64" Nullable="false" />
-    <NavigationProperty Name="Operatingsystem" Relationship="Self.devicetype_has_operatingsystem_devicetype_has_operatingsystem_ibfk_2" FromRole="DevicetypeHasOperatingsystem" ToRole="Operatingsystem" />
-    <NavigationProperty Name="Devicetype" Relationship="InventarisierungsloesungModel.FK__Devicetyp__Devic__634EBE90" FromRole="DevicetypeHasOperatingsystem" ToRole="Devicetype" />
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Devicetype" Relationship="Self.FK__Devicetyp__Devic__0880433F" FromRole="DevicetypeHasOperatingsystem" ToRole="Devicetype" />
+    <NavigationProperty Name="Operatingsystem" Relationship="Self.FK__Devicetyp__Opera__09746778" FromRole="DevicetypeHasOperatingsystem" ToRole="Operatingsystem" />
   </EntityType>
   <EntityType Name="Interface">
     <Key>
@@ -148,7 +156,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ParentLocation" Type="Int64" Nullable="false" />
+    <Property Name="ParentLocation" Type="Int64" />
     <Property Name="Addressnumber" Type="Int64" Nullable="false" />
     <Property Name="Designation" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Building" Type="Int64" Nullable="false" />
@@ -201,7 +209,7 @@
     <Property Name="OperatingsystemName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Model" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Version" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="DevicetypeHasOperatingsystem" Relationship="Self.devicetype_has_operatingsystem_devicetype_has_operatingsystem_ibfk_2" FromRole="Operatingsystem" ToRole="DevicetypeHasOperatingsystem" />
+    <NavigationProperty Name="DevicetypeHasOperatingsystem" Relationship="Self.FK__Devicetyp__Opera__09746778" FromRole="Operatingsystem" ToRole="DevicetypeHasOperatingsystem" />
   </EntityType>
   <EntityType Name="Person">
     <Key>
@@ -478,6 +486,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Device__DeviceTy__6166761E">
+    <End Role="Devicetype" Type="Self.Devicetype" Multiplicity="1" />
+    <End Role="Device" Type="Self.Device" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Devicetype">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Device">
+        <PropertyRef Name="DeviceType_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="interface_interface_ibfk_2">
     <End Role="Device" Type="Self.Device" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -520,10 +540,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="devicetype_has_operatingsystem_devicetype_has_operatingsystem_ibfk_2">
-    <End Role="Operatingsystem" Type="Self.Operatingsystem" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
+  <Association Name="FK__Devicetyp__Devic__0880433F">
+    <End Role="Devicetype" Type="Self.Devicetype" Multiplicity="1" />
+    <End Role="DevicetypeHasOperatingsystem" Type="Self.DevicetypeHasOperatingsystem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Devicetype">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DevicetypeHasOperatingsystem">
+        <PropertyRef Name="DeviceType_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Devicetyp__Opera__09746778">
+    <End Role="Operatingsystem" Type="Self.Operatingsystem" Multiplicity="1" />
     <End Role="DevicetypeHasOperatingsystem" Type="Self.DevicetypeHasOperatingsystem" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Operatingsystem">
@@ -661,6 +691,10 @@
       <End Role="Device" EntitySet="Device" />
       <End Role="Deviceport" EntitySet="Deviceport" />
     </AssociationSet>
+    <AssociationSet Name="FK__Device__DeviceTy__6166761E" Association="Self.FK__Device__DeviceTy__6166761E">
+      <End Role="Devicetype" EntitySet="Devicetype" />
+      <End Role="Device" EntitySet="Device" />
+    </AssociationSet>
     <AssociationSet Name="interface_interface_ibfk_2" Association="Self.interface_interface_ibfk_2">
       <End Role="Device" EntitySet="Device" />
       <End Role="Interface" EntitySet="Interface" />
@@ -673,7 +707,11 @@
       <End Role="Transportmedium" EntitySet="Transportmedium" />
       <End Role="Deviceport" EntitySet="Deviceport" />
     </AssociationSet>
-    <AssociationSet Name="devicetype_has_operatingsystem_devicetype_has_operatingsystem_ibfk_2" Association="Self.devicetype_has_operatingsystem_devicetype_has_operatingsystem_ibfk_2">
+    <AssociationSet Name="FK__Devicetyp__Devic__0880433F" Association="Self.FK__Devicetyp__Devic__0880433F">
+      <End Role="Devicetype" EntitySet="Devicetype" />
+      <End Role="DevicetypeHasOperatingsystem" EntitySet="DevicetypeHasOperatingsystem" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Devicetyp__Opera__09746778" Association="Self.FK__Devicetyp__Opera__09746778">
       <End Role="Operatingsystem" EntitySet="Operatingsystem" />
       <End Role="DevicetypeHasOperatingsystem" EntitySet="DevicetypeHasOperatingsystem" />
     </AssociationSet>
@@ -718,11 +756,11 @@
       <Parameter Name="diagramname" Mode="In" Type="String" />
       <Parameter Name="owner_id" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(InventarisierungsloesungModel.sp_helpdiagramdefinition_Result)">
+    <FunctionImport Name="sp_helpdiagramdefinition">
       <Parameter Name="diagramname" Mode="In" Type="String" />
       <Parameter Name="owner_id" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(InventarisierungsloesungModel.sp_helpdiagrams_Result)">
+    <FunctionImport Name="sp_helpdiagrams">
       <Parameter Name="diagramname" Mode="In" Type="String" />
       <Parameter Name="owner_id" Mode="In" Type="Int32" />
     </FunctionImport>
@@ -732,57 +770,5 @@
       <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
-    <AssociationSet Name="FK__Device__DeviceTy__6166761E" Association="InventarisierungsloesungModel.FK__Device__DeviceTy__6166761E">
-      <End Role="Devicetype" EntitySet="Devicetype" />
-      <End Role="Device" EntitySet="Device" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Devicetyp__Devic__634EBE90" Association="InventarisierungsloesungModel.FK__Devicetyp__Devic__634EBE90">
-      <End Role="Devicetype" EntitySet="Devicetype" />
-      <End Role="DevicetypeHasOperatingsystem" EntitySet="DevicetypeHasOperatingsystem" />
-    </AssociationSet>
-    <FunctionImport Name="GetLocationsHirarchicalRecursive" IsComposable="true" EntitySet="Location" ReturnType="Collection(InventarisierungsloesungModel.Location)" />
   </EntityContainer>
-  <ComplexType Name="sp_helpdiagramdefinition_Result">
-    <Property Type="Int32" Name="version" Nullable="true" />
-    <Property Type="Binary" Name="definition" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="sp_helpdiagrams_Result">
-    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-    <Property Type="Int32" Name="ID" Nullable="false" />
-    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="OwnerID" Nullable="false" />
-  </ComplexType>
-  <Association Name="FK__Device__DeviceTy__6166761E">
-    <End Type="InventarisierungsloesungModel.Devicetype" Role="Devicetype" Multiplicity="1" />
-    <End Type="InventarisierungsloesungModel.Device" Role="Device" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Devicetype">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Device">
-        <PropertyRef Name="DeviceType_FK" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Devicetyp__Devic__634EBE90">
-    <End Type="InventarisierungsloesungModel.Devicetype" Role="Devicetype" Multiplicity="1" />
-    <End Type="InventarisierungsloesungModel.DevicetypeHasOperatingsystem" Role="DevicetypeHasOperatingsystem" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Devicetype">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="DevicetypeHasOperatingsystem">
-        <PropertyRef Name="DeviceType_fk" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <ComplexType Name="GetLocationsHirarchicalRecursive_Result">
-    <Property Type="Int64" Name="Id" Nullable="true" />
-    <Property Type="Int64" Name="ParentLocation" Nullable="true" />
-    <Property Type="Int64" Name="Addressnumber" Nullable="true" />
-    <Property Type="String" Name="Designation" Nullable="true" MaxLength="45" />
-    <Property Type="Int64" Name="Building" Nullable="true" />
-    <Property Type="Int64" Name="Room" Nullable="true" />
-  </ComplexType>
 </Schema>
