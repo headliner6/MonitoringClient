@@ -10,16 +10,14 @@
 namespace MonitoringClient.Model
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class LogEntries
+    public partial class GetLocationsHirarchicalRecursive_Result
     {
-        public long Id { get; set; }
-        public string Pod { get; set; }
-        public string Location { get; set; }
-        public string Hostname { get; set; }
-        public Nullable<int> Severity { get; set; }
-        public Nullable<System.DateTime> Timestamp { get; set; }
-        public string Message { get; set; }
+        public Nullable<long> Id { get; set; }
+        public Nullable<long> ParentLocation { get; set; }
+        public Nullable<long> Addressnumber { get; set; }
+        public string Designation { get; set; }
+        public Nullable<long> Building { get; set; }
+        public Nullable<long> Room { get; set; }
     }
 }

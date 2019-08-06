@@ -148,7 +148,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ParentLocation" Type="Int64" />
+    <Property Name="ParentLocation" Type="Int64" Nullable="false" />
     <Property Name="Addressnumber" Type="Int64" Nullable="false" />
     <Property Name="Designation" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Building" Type="Int64" Nullable="false" />
@@ -740,6 +740,7 @@
       <End Role="Devicetype" EntitySet="Devicetype" />
       <End Role="DevicetypeHasOperatingsystem" EntitySet="DevicetypeHasOperatingsystem" />
     </AssociationSet>
+    <FunctionImport Name="GetLocationsHirarchicalRecursive" IsComposable="true" EntitySet="Location" ReturnType="Collection(InventarisierungsloesungModel.Location)" />
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -776,4 +777,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="GetLocationsHirarchicalRecursive_Result">
+    <Property Type="Int64" Name="Id" Nullable="true" />
+    <Property Type="Int64" Name="ParentLocation" Nullable="true" />
+    <Property Type="Int64" Name="Addressnumber" Nullable="true" />
+    <Property Type="String" Name="Designation" Nullable="true" MaxLength="45" />
+    <Property Type="Int64" Name="Building" Nullable="true" />
+    <Property Type="Int64" Name="Room" Nullable="true" />
+  </ComplexType>
 </Schema>

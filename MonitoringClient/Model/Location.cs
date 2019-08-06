@@ -9,11 +9,10 @@
 
 namespace MonitoringClient.Model
 {
-    using MonitoringClient.Services;
     using System;
     using System.Collections.Generic;
     
-    public partial class Location : IModel
+    public partial class Location
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Location()
@@ -24,7 +23,7 @@ namespace MonitoringClient.Model
         }
     
         public long Id { get; set; }
-        public Nullable<long> ParentLocation { get; set; }
+        public long ParentLocation { get; set; }
         public long Addressnumber { get; set; }
         public string Designation { get; set; }
         public long Building { get; set; }

@@ -130,7 +130,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ParentLocation" Type="bigint" />
+          <Property Name="ParentLocation" Type="bigint" Nullable="false" />
           <Property Name="Addressnumber" Type="bigint" Nullable="false" />
           <Property Name="Designation" Type="nvarchar" MaxLength="45" Nullable="false" />
           <Property Name="Building" Type="bigint" Nullable="false" />
@@ -580,6 +580,20 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="GetLocationsHirarchicalRecursive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Id" Type="bigint" />
+                <Property Name="ParentLocation" Type="bigint" />
+                <Property Name="Addressnumber" Type="bigint" />
+                <Property Name="Designation" Type="nvarchar" MaxLength="45" />
+                <Property Name="Building" Type="bigint" />
+                <Property Name="Room" Type="bigint" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="LogClear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LogEntriesId" Type="bigint" Mode="In" />
         </Function>
@@ -912,7 +926,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ParentLocation" Type="Int64" />
+          <Property Name="ParentLocation" Type="Int64" Nullable="false" />
           <Property Name="Addressnumber" Type="Int64" Nullable="false" />
           <Property Name="Designation" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Building" Type="Int64" Nullable="false" />
@@ -1504,6 +1518,7 @@
             <End Role="Devicetype" EntitySet="Devicetype" />
             <End Role="DevicetypeHasOperatingsystem" EntitySet="DevicetypeHasOperatingsystem" />
           </AssociationSet>
+          <FunctionImport Name="GetLocationsHirarchicalRecursive" IsComposable="true" EntitySet="Location" ReturnType="Collection(InventarisierungsloesungModel.Location)" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1540,6 +1555,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetLocationsHirarchicalRecursive_Result">
+          <Property Type="Int64" Name="Id" Nullable="true" />
+          <Property Type="Int64" Name="ParentLocation" Nullable="true" />
+          <Property Type="Int64" Name="Addressnumber" Nullable="true" />
+          <Property Type="String" Name="Designation" Nullable="true" MaxLength="45" />
+          <Property Type="Int64" Name="Building" Nullable="true" />
+          <Property Type="Int64" Name="Room" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1841,6 +1864,8 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="InventarisierungsloesungModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="InventarisierungsloesungModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="GetLocationsHirarchicalRecursive" FunctionName="InventarisierungsloesungModel.Store.GetLocationsHirarchicalRecursive">
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

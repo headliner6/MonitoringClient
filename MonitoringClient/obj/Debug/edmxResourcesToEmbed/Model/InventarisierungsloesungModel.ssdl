@@ -125,7 +125,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ParentLocation" Type="bigint" />
+    <Property Name="ParentLocation" Type="bigint" Nullable="false" />
     <Property Name="Addressnumber" Type="bigint" Nullable="false" />
     <Property Name="Designation" Type="nvarchar" MaxLength="45" Nullable="false" />
     <Property Name="Building" Type="bigint" Nullable="false" />
@@ -575,6 +575,20 @@
     </ReferentialConstraint>
   </Association>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="GetLocationsHirarchicalRecursive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="Id" Type="bigint" />
+          <Property Name="ParentLocation" Type="bigint" />
+          <Property Name="Addressnumber" Type="bigint" />
+          <Property Name="Designation" Type="nvarchar" MaxLength="45" />
+          <Property Name="Building" Type="bigint" />
+          <Property Name="Room" Type="bigint" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
   <Function Name="LogClear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LogEntriesId" Type="bigint" Mode="In" />
   </Function>
