@@ -43,10 +43,8 @@ namespace MonitoringClient.ViewModel
         {
             try
             {
-                //_locationModelRepository.GetLocationsHirarchical();
                 var locationTreeBuilder = new LocationTreeBuilder();
-                var locations = _locationModelRepository.GetAll().ToList();
-                locations.Sort((x, y) => Comparer<long?>.Default.Compare(x.ParentLocation, y.ParentLocation));
+                var locations = _locationModelRepository.GetLocationsHirarchical().ToList();                
                 Locations = new ObservableCollection<LocationNode>(locationTreeBuilder.BuildTree(locations));
             }
             catch (Exception ex)

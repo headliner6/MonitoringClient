@@ -180,6 +180,12 @@
     <Compile Include="Model\SoftwareService.cs">
       <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_helpdiagrams_Result.cs">
+      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\sysdiagrams.cs">
       <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
     </Compile>

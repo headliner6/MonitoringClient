@@ -9,19 +9,14 @@
 
 namespace MonitoringClient.Model
 {
-    using DuplicateCheckerLib;
-    using MonitoringClient.Services;
     using System;
-    using System.Collections.Generic;
     
-    public partial class LogEntries : IModel, IEntity
+    public partial class sp_helpdiagrams_Result
     {
-        public long Id { get; set; }
-        public string Pod { get; set; }
-        public string Location { get; set; }
-        public string Hostname { get; set; }
-        public Nullable<int> Severity { get; set; }
-        public Nullable<System.DateTime> Timestamp { get; set; }
-        public string Message { get; set; }
+        public string Database { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }

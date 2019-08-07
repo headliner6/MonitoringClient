@@ -157,10 +157,10 @@
     </Key>
     <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ParentLocation" Type="Int64" />
-    <Property Name="Addressnumber" Type="Int64" Nullable="false" />
-    <Property Name="Designation" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Building" Type="Int64" Nullable="false" />
-    <Property Name="Room" Type="Int64" Nullable="false" />
+    <Property Name="Addressnumber" Type="Int64" />
+    <Property Name="Designation" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+    <Property Name="Building" Type="Int64" />
+    <Property Name="Room" Type="Int64" />
     <NavigationProperty Name="Accounting" Relationship="Self.abrechnung_abrechnung_ibfk_2" FromRole="Location" ToRole="Accounting" />
     <NavigationProperty Name="Address" Relationship="Self.location_location_ibfk_1" FromRole="Location" ToRole="Address" />
     <NavigationProperty Name="Device" Relationship="Self.device_device_ibfk_1" FromRole="Location" ToRole="Device" />
@@ -389,7 +389,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="location_location_ibfk_1">
-    <End Role="Address" Type="Self.Address" Multiplicity="1">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1">
       <OnDelete Action="Cascade" />
     </End>
     <End Role="Location" Type="Self.Location" Multiplicity="*" />
@@ -731,6 +731,7 @@
       <End Role="Device" EntitySet="Device" />
       <End Role="Credentials" EntitySet="Credentials" />
     </AssociationSet>
+    <FunctionImport Name="GetLocationsHirarchicalRecursive" IsComposable="true" ReturnType="Collection(InventarisierungsloesungModel.GetLocationsHirarchicalRecursive_Result)" />
     <FunctionImport Name="LogClear">
       <Parameter Name="LogEntriesId" Mode="In" Type="Int64" />
     </FunctionImport>
@@ -756,11 +757,11 @@
       <Parameter Name="diagramname" Mode="In" Type="String" />
       <Parameter Name="owner_id" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="sp_helpdiagramdefinition">
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(InventarisierungsloesungModel.sp_helpdiagramdefinition_Result)">
       <Parameter Name="diagramname" Mode="In" Type="String" />
       <Parameter Name="owner_id" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="sp_helpdiagrams">
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(InventarisierungsloesungModel.sp_helpdiagrams_Result)">
       <Parameter Name="diagramname" Mode="In" Type="String" />
       <Parameter Name="owner_id" Mode="In" Type="Int32" />
     </FunctionImport>
@@ -771,4 +772,15 @@
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
   </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
 </Schema>

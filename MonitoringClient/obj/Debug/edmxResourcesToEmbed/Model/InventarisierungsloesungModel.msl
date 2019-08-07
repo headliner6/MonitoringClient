@@ -271,13 +271,42 @@
         <ScalarProperty Name="Id" ColumnName="CredentialsId" />
       </EndProperty>
     </AssociationSetMapping>
+    <FunctionImportMapping FunctionName="InventarisierungsloesungModel.Store.GetLocationsHirarchicalRecursive" FunctionImportName="GetLocationsHirarchicalRecursive">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="InventarisierungsloesungModel.GetLocationsHirarchicalRecursive_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ParentLocation" ColumnName="ParentLocation" />
+          <ScalarProperty Name="Addressnumber" ColumnName="Addressnumber" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="Building" ColumnName="Building" />
+          <ScalarProperty Name="Room" ColumnName="Room" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="LogClear" FunctionName="InventarisierungsloesungModel.Store.LogClear" />
     <FunctionImportMapping FunctionImportName="LogMessageAdd" FunctionName="InventarisierungsloesungModel.Store.LogMessageAdd" />
     <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="InventarisierungsloesungModel.Store.sp_alterdiagram" />
     <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="InventarisierungsloesungModel.Store.sp_creatediagram" />
     <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="InventarisierungsloesungModel.Store.sp_dropdiagram" />
-    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="InventarisierungsloesungModel.Store.sp_helpdiagramdefinition" />
-    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="InventarisierungsloesungModel.Store.sp_helpdiagrams" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="InventarisierungsloesungModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="InventarisierungsloesungModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="InventarisierungsloesungModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="InventarisierungsloesungModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="InventarisierungsloesungModel.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="InventarisierungsloesungModel.Store.sp_upgraddiagrams" />
   </EntityContainerMapping>
