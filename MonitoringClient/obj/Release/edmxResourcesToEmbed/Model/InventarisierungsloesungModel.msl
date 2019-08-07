@@ -105,6 +105,7 @@
         <MappingFragment StoreEntitySet="DevicetypeHasOperatingsystem">
           <ScalarProperty Name="DeviceType_fk" ColumnName="DeviceType_fk" />
           <ScalarProperty Name="Operatingsystem_fk" ColumnName="Operatingsystem_fk" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -270,6 +271,18 @@
         <ScalarProperty Name="Id" ColumnName="CredentialsId" />
       </EndProperty>
     </AssociationSetMapping>
+    <FunctionImportMapping FunctionName="InventarisierungsloesungModel.Store.GetLocationsHirarchicalRecursive" FunctionImportName="GetLocationsHirarchicalRecursive">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="InventarisierungsloesungModel.GetLocationsHirarchicalRecursive_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ParentLocation" ColumnName="ParentLocation" />
+          <ScalarProperty Name="Addressnumber" ColumnName="Addressnumber" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="Building" ColumnName="Building" />
+          <ScalarProperty Name="Room" ColumnName="Room" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="LogClear" FunctionName="InventarisierungsloesungModel.Store.LogClear" />
     <FunctionImportMapping FunctionImportName="LogMessageAdd" FunctionName="InventarisierungsloesungModel.Store.LogMessageAdd" />
     <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="InventarisierungsloesungModel.Store.sp_alterdiagram" />

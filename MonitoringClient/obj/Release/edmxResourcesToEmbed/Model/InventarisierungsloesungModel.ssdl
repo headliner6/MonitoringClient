@@ -100,11 +100,11 @@
   </EntityType>
   <EntityType Name="DevicetypeHasOperatingsystem">
     <Key>
-      <PropertyRef Name="DeviceType_fk" />
-      <PropertyRef Name="Operatingsystem_fk" />
+      <PropertyRef Name="Id" />
     </Key>
     <Property Name="DeviceType_fk" Type="bigint" Nullable="false" />
     <Property Name="Operatingsystem_fk" Type="bigint" Nullable="false" />
+    <Property Name="Id" Type="bigint" Nullable="false" />
   </EntityType>
   <EntityType Name="Interface">
     <Key>
@@ -126,10 +126,10 @@
     </Key>
     <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ParentLocation" Type="bigint" />
-    <Property Name="Addressnumber" Type="bigint" Nullable="false" />
-    <Property Name="Designation" Type="nvarchar" MaxLength="45" Nullable="false" />
-    <Property Name="Building" Type="bigint" Nullable="false" />
-    <Property Name="Room" Type="bigint" Nullable="false" />
+    <Property Name="Addressnumber" Type="bigint" />
+    <Property Name="Designation" Type="nvarchar" MaxLength="45" />
+    <Property Name="Building" Type="bigint" />
+    <Property Name="Room" Type="bigint" />
   </EntityType>
   <EntityType Name="Log">
     <Key>
@@ -422,7 +422,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Devicetyp__Devic__634EBE90">
+  <Association Name="FK__Devicetyp__Devic__0880433F">
     <End Role="Devicetype" Type="Self.Devicetype" Multiplicity="1" />
     <End Role="DevicetypeHasOperatingsystem" Type="Self.DevicetypeHasOperatingsystem" Multiplicity="*" />
     <ReferentialConstraint>
@@ -431,6 +431,18 @@
       </Principal>
       <Dependent Role="DevicetypeHasOperatingsystem">
         <PropertyRef Name="DeviceType_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Devicetyp__Opera__09746778">
+    <End Role="Operatingsystem" Type="Self.Operatingsystem" Multiplicity="1" />
+    <End Role="DevicetypeHasOperatingsystem" Type="Self.DevicetypeHasOperatingsystem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Operatingsystem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DevicetypeHasOperatingsystem">
+        <PropertyRef Name="Operatingsystem_fk" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -463,7 +475,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="location$location_ibfk_1">
-    <End Role="Address" Type="Self.Address" Multiplicity="1">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1">
       <OnDelete Action="Cascade" />
     </End>
     <End Role="Location" Type="Self.Location" Multiplicity="*" />
@@ -575,6 +587,20 @@
     </ReferentialConstraint>
   </Association>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="GetLocationsHirarchicalRecursive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="Id" Type="bigint" />
+          <Property Name="ParentLocation" Type="bigint" />
+          <Property Name="Addressnumber" Type="bigint" />
+          <Property Name="Designation" Type="nvarchar" MaxLength="45" />
+          <Property Name="Building" Type="bigint" />
+          <Property Name="Room" Type="bigint" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
   <Function Name="LogClear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LogEntriesId" Type="bigint" Mode="In" />
   </Function>
@@ -710,8 +736,12 @@
       <End Role="Devicetype" EntitySet="Devicetype" />
       <End Role="Device" EntitySet="Device" />
     </AssociationSet>
-    <AssociationSet Name="FK__Devicetyp__Devic__634EBE90" Association="Self.FK__Devicetyp__Devic__634EBE90">
+    <AssociationSet Name="FK__Devicetyp__Devic__0880433F" Association="Self.FK__Devicetyp__Devic__0880433F">
       <End Role="Devicetype" EntitySet="Devicetype" />
+      <End Role="DevicetypeHasOperatingsystem" EntitySet="DevicetypeHasOperatingsystem" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Devicetyp__Opera__09746778" Association="Self.FK__Devicetyp__Opera__09746778">
+      <End Role="Operatingsystem" EntitySet="Operatingsystem" />
       <End Role="DevicetypeHasOperatingsystem" EntitySet="DevicetypeHasOperatingsystem" />
     </AssociationSet>
     <AssociationSet Name="interface$interface_ibfk_1" Association="Self.interface$interface_ibfk_1">
