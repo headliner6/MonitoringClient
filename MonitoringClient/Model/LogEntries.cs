@@ -24,6 +24,20 @@ namespace MonitoringClient.Model
         public Nullable<System.DateTime> Timestamp { get; set; }
         public string Message { get; set; }
 
+        public override bool Equals(object value)
+        {
+            return Equals(value as LogEntries);
+        }
+
+        public bool Equals(LogEntries other)
+        {
+            if (object.ReferenceEquals(null, other)) return false;
+            if (object.ReferenceEquals(this, other)) return true;
+
+            return (object.Equals(this.Severity, other.Severity)) &&
+                   (object.Equals(this.Message, other.Message));
+        }
+
         public override int GetHashCode()
         {
             unchecked

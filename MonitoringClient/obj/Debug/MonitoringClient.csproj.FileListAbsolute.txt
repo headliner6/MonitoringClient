@@ -437,3 +437,4 @@ C:\Workspace\HF\MonitoringClient\bin\Debug\EntityFramework.xml
 C:\Workspace\HF\MonitoringClient\bin\Debug\EntityFramework.SqlServer.xml
 C:\Workspace\HF\MonitoringClient\bin\Debug\de\EntityFramework.resources.dll
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\de\EntityFramework.resources.dll
+C:\Workspace\HF\MonitoringClient\obj\Debug\MonitoringClient.csprojAssemblyReference.cache
