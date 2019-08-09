@@ -7,13 +7,11 @@
       <Schema Namespace="InventarisierungsloesungModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Accounting">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CustomerAccountNumber_FK" Type="bigint" Nullable="false" />
-          <Property Name="Location_FK" Type="bigint" Nullable="false" />
-          <Property Name="Device_FK" Type="bigint" Nullable="false" />
-          <Property Name="Interface_FK" Type="bigint" Nullable="false" />
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="Customer_fk" Type="bigint" />
+          <Property Name="Device_fk" Type="bigint" />
         </EntityType>
         <EntityType Name="Address">
           <Key>
@@ -52,17 +50,10 @@
           <Property Name="Firstname" Type="nvarchar" MaxLength="255" />
           <Property Name="Lastname" Type="nvarchar" MaxLength="255" />
           <Property Name="Addressnumber" Type="nvarchar" MaxLength="45" Nullable="false" />
-          <Property Name="CustomerAccountNumber" Type="bigint" Nullable="false" />
           <Property Name="Phonenumber" Type="nvarchar" MaxLength="255" />
           <Property Name="Email" Type="nvarchar" MaxLength="255" />
           <Property Name="Website" Type="nvarchar" MaxLength="255" />
           <Property Name="Password" Type="nvarchar" MaxLength="255" />
-        </EntityType>
-        <EntityType Name="CustomerAccount">
-          <Key>
-            <PropertyRef Name="CustomerAccountNumber" />
-          </Key>
-          <Property Name="CustomerAccountNumber" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Device">
           <Key>
@@ -76,6 +67,7 @@
           <Property Name="Hostname" Type="nvarchar" MaxLength="255" />
           <Property Name="Domain" Type="nvarchar" MaxLength="255" />
           <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="PriceCHF" Type="float" />
         </EntityType>
         <EntityType Name="Deviceport">
           <Key>
@@ -193,7 +185,7 @@
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Customer_id_fk" Type="bigint" Nullable="false" />
           <Property Name="Contact_id_fk" Type="bigint" Nullable="false" />
-          <Property Name="Cocation_fk" Type="bigint" Nullable="false" />
+          <Property Name="Location_fk" Type="bigint" Nullable="false" />
           <Property Name="Designation" Type="nvarchar" MaxLength="45" />
           <Property Name="Timezone" Type="time" Precision="7" Nullable="false" />
           <Property Name="TimeZonePositiv" Type="smallint" Nullable="false" />
@@ -216,7 +208,7 @@
           <Property Name="Hardware" Type="nvarchar" MaxLength="255" />
           <Property Name="Software" Type="nvarchar" MaxLength="255" />
           <Property Name="OtherProduct" Type="nvarchar" MaxLength="255" />
-          <Property Name="Accounting_fk" Type="bigint" Nullable="false" />
+          <Property Name="Accounting_fk" Type="bigint" />
         </EntityType>
         <EntityType Name="SoftwareService">
           <Key>
@@ -224,7 +216,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HoursWorked" Type="int" Nullable="false" />
-          <Property Name="Accounting_fk" Type="bigint" Nullable="false" />
+          <Property Name="Accounting_fk" Type="bigint" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -251,58 +243,6 @@
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="45" Nullable="false" />
         </EntityType>
-        <Association Name="abrechnung$abrechnung_ibfk_1">
-          <End Role="CustomerAccount" Type="Self.CustomerAccount" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Accounting" Type="Self.Accounting" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CustomerAccount">
-              <PropertyRef Name="CustomerAccountNumber" />
-            </Principal>
-            <Dependent Role="Accounting">
-              <PropertyRef Name="CustomerAccountNumber_FK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="abrechnung$abrechnung_ibfk_2">
-          <End Role="Location" Type="Self.Location" Multiplicity="1" />
-          <End Role="Accounting" Type="Self.Accounting" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Location">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Accounting">
-              <PropertyRef Name="Location_FK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="abrechnung$abrechnung_ibfk_3">
-          <End Role="Device" Type="Self.Device" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Accounting" Type="Self.Accounting" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Device">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Accounting">
-              <PropertyRef Name="Device_FK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="abrechnung$abrechnung_ibfk_4">
-          <End Role="Interface" Type="Self.Interface" Multiplicity="1" />
-          <End Role="Accounting" Type="Self.Accounting" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Interface">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Accounting">
-              <PropertyRef Name="Interface_FK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="address$address_ibfk_1">
           <End Role="Town" Type="Self.Town" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -328,20 +268,6 @@
             </Principal>
             <Dependent Role="Contact">
               <PropertyRef Name="Person_FK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="customer$customer_ibfk_1">
-          <End Role="CustomerAccount" Type="Self.CustomerAccount" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CustomerAccount">
-              <PropertyRef Name="CustomerAccountNumber" />
-            </Principal>
-            <Dependent Role="Customer">
-              <PropertyRef Name="CustomerAccountNumber" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -415,6 +341,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Accountin__Custo__22401542">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Accounting" Type="Self.Accounting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accounting">
+              <PropertyRef Name="Customer_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Device__DeviceTy__6166761E">
           <End Role="Devicetype" Type="Self.Devicetype" Multiplicity="1" />
           <End Role="Device" Type="Self.Device" Multiplicity="*" />
@@ -448,6 +386,30 @@
             </Principal>
             <Dependent Role="DevicetypeHasOperatingsystem">
               <PropertyRef Name="Operatingsystem_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Productgr__Accou__2334397B">
+          <End Role="Accounting" Type="Self.Accounting" Multiplicity="0..1" />
+          <End Role="Productgroup" Type="Self.Productgroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounting">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Productgroup">
+              <PropertyRef Name="Accounting_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SoftwareS__Accou__24285DB4">
+          <End Role="Accounting" Type="Self.Accounting" Multiplicity="0..1" />
+          <End Role="SoftwareService" Type="Self.SoftwareService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounting">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SoftwareService">
+              <PropertyRef Name="Accounting_fk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -545,7 +507,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Pointofdelivery">
-              <PropertyRef Name="Cocation_fk" />
+              <PropertyRef Name="Location_fk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -560,34 +522,6 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="Productgroup_fk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="produktegruppe$produktegruppe_ibfk_1">
-          <End Role="Accounting" Type="Self.Accounting" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Productgroup" Type="Self.Productgroup" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Accounting">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Productgroup">
-              <PropertyRef Name="Accounting_fk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="softwaredienstleistung$softwaredienstleistung_ibfk_1">
-          <End Role="Accounting" Type="Self.Accounting" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="SoftwareService" Type="Self.SoftwareService" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Accounting">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SoftwareService">
-              <PropertyRef Name="Accounting_fk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -669,7 +603,6 @@
           <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Credentials" EntityType="Self.Credentials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CustomerAccount" EntityType="Self.CustomerAccount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Device" EntityType="Self.Device" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Deviceport" EntityType="Self.Deviceport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DevicesHasCredentials" EntityType="Self.DevicesHasCredentials" Schema="dbo" store:Type="Tables" />
@@ -689,22 +622,6 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Town" EntityType="Self.Town" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transportmedium" EntityType="Self.Transportmedium" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="abrechnung$abrechnung_ibfk_1" Association="Self.abrechnung$abrechnung_ibfk_1">
-            <End Role="CustomerAccount" EntitySet="CustomerAccount" />
-            <End Role="Accounting" EntitySet="Accounting" />
-          </AssociationSet>
-          <AssociationSet Name="abrechnung$abrechnung_ibfk_2" Association="Self.abrechnung$abrechnung_ibfk_2">
-            <End Role="Location" EntitySet="Location" />
-            <End Role="Accounting" EntitySet="Accounting" />
-          </AssociationSet>
-          <AssociationSet Name="abrechnung$abrechnung_ibfk_3" Association="Self.abrechnung$abrechnung_ibfk_3">
-            <End Role="Device" EntitySet="Device" />
-            <End Role="Accounting" EntitySet="Accounting" />
-          </AssociationSet>
-          <AssociationSet Name="abrechnung$abrechnung_ibfk_4" Association="Self.abrechnung$abrechnung_ibfk_4">
-            <End Role="Interface" EntitySet="Interface" />
-            <End Role="Accounting" EntitySet="Accounting" />
-          </AssociationSet>
           <AssociationSet Name="address$address_ibfk_1" Association="Self.address$address_ibfk_1">
             <End Role="Town" EntitySet="Town" />
             <End Role="Address" EntitySet="Address" />
@@ -712,10 +629,6 @@
           <AssociationSet Name="contact$contact_ibfk_1" Association="Self.contact$contact_ibfk_1">
             <End Role="Person" EntitySet="Person" />
             <End Role="Contact" EntitySet="Contact" />
-          </AssociationSet>
-          <AssociationSet Name="customer$customer_ibfk_1" Association="Self.customer$customer_ibfk_1">
-            <End Role="CustomerAccount" EntitySet="CustomerAccount" />
-            <End Role="Customer" EntitySet="Customer" />
           </AssociationSet>
           <AssociationSet Name="device$device_ibfk_1" Association="Self.device$device_ibfk_1">
             <End Role="Location" EntitySet="Location" />
@@ -737,6 +650,10 @@
             <End Role="Credentials" EntitySet="Credentials" />
             <End Role="DevicesHasCredentials" EntitySet="DevicesHasCredentials" />
           </AssociationSet>
+          <AssociationSet Name="FK__Accountin__Custo__22401542" Association="Self.FK__Accountin__Custo__22401542">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Accounting" EntitySet="Accounting" />
+          </AssociationSet>
           <AssociationSet Name="FK__Device__DeviceTy__6166761E" Association="Self.FK__Device__DeviceTy__6166761E">
             <End Role="Devicetype" EntitySet="Devicetype" />
             <End Role="Device" EntitySet="Device" />
@@ -748,6 +665,14 @@
           <AssociationSet Name="FK__Devicetyp__Opera__09746778" Association="Self.FK__Devicetyp__Opera__09746778">
             <End Role="Operatingsystem" EntitySet="Operatingsystem" />
             <End Role="DevicetypeHasOperatingsystem" EntitySet="DevicetypeHasOperatingsystem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Productgr__Accou__2334397B" Association="Self.FK__Productgr__Accou__2334397B">
+            <End Role="Accounting" EntitySet="Accounting" />
+            <End Role="Productgroup" EntitySet="Productgroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SoftwareS__Accou__24285DB4" Association="Self.FK__SoftwareS__Accou__24285DB4">
+            <End Role="Accounting" EntitySet="Accounting" />
+            <End Role="SoftwareService" EntitySet="SoftwareService" />
           </AssociationSet>
           <AssociationSet Name="interface$interface_ibfk_1" Association="Self.interface$interface_ibfk_1">
             <End Role="Network" EntitySet="Network" />
@@ -781,14 +706,6 @@
             <End Role="Productgroup" EntitySet="Productgroup" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="produktegruppe$produktegruppe_ibfk_1" Association="Self.produktegruppe$produktegruppe_ibfk_1">
-            <End Role="Accounting" EntitySet="Accounting" />
-            <End Role="Productgroup" EntitySet="Productgroup" />
-          </AssociationSet>
-          <AssociationSet Name="softwaredienstleistung$softwaredienstleistung_ibfk_1" Association="Self.softwaredienstleistung$softwaredienstleistung_ibfk_1">
-            <End Role="Accounting" EntitySet="Accounting" />
-            <End Role="SoftwareService" EntitySet="SoftwareService" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -805,19 +722,14 @@
         </ComplexType>
         <EntityType Name="Accounting">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CustomerAccountNumber_FK" Type="Int64" Nullable="false" />
-          <Property Name="Location_FK" Type="Int64" Nullable="false" />
-          <Property Name="Device_FK" Type="Int64" Nullable="false" />
-          <Property Name="Interface_FK" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="CustomerAccount" Relationship="Self.abrechnung_abrechnung_ibfk_1" FromRole="Accounting" ToRole="CustomerAccount" />
-          <NavigationProperty Name="Location" Relationship="Self.abrechnung_abrechnung_ibfk_2" FromRole="Accounting" ToRole="Location" />
-          <NavigationProperty Name="Device" Relationship="Self.abrechnung_abrechnung_ibfk_3" FromRole="Accounting" ToRole="Device" />
-          <NavigationProperty Name="Interface" Relationship="Self.abrechnung_abrechnung_ibfk_4" FromRole="Accounting" ToRole="Interface" />
-          <NavigationProperty Name="Productgroup" Relationship="Self.produktegruppe_produktegruppe_ibfk_1" FromRole="Accounting" ToRole="Productgroup" />
-          <NavigationProperty Name="SoftwareService" Relationship="Self.softwaredienstleistung_softwaredienstleistung_ibfk_1" FromRole="Accounting" ToRole="SoftwareService" />
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="Customer_fk" Type="Int64" />
+          <Property Name="Device_fk" Type="Int64" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Accountin__Custo__22401542" FromRole="Accounting" ToRole="Customer" />
+          <NavigationProperty Name="Productgroup" Relationship="Self.FK__Productgr__Accou__2334397B" FromRole="Accounting" ToRole="Productgroup" />
+          <NavigationProperty Name="SoftwareService" Relationship="Self.FK__SoftwareS__Accou__24285DB4" FromRole="Accounting" ToRole="SoftwareService" />
         </EntityType>
         <EntityType Name="Address">
           <Key>
@@ -861,21 +773,12 @@
           <Property Name="Firstname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Lastname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Addressnumber" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CustomerAccountNumber" Type="Int64" Nullable="false" />
           <Property Name="Phonenumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Website" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CustomerAccount" Relationship="Self.customer_customer_ibfk_1" FromRole="Customer" ToRole="CustomerAccount" />
+          <NavigationProperty Name="Accounting" Relationship="Self.FK__Accountin__Custo__22401542" FromRole="Customer" ToRole="Accounting" />
           <NavigationProperty Name="Pointofdelivery" Relationship="Self.pointofdelivery_pointofdelivery_ibfk_1" FromRole="Customer" ToRole="Pointofdelivery" />
-        </EntityType>
-        <EntityType Name="CustomerAccount">
-          <Key>
-            <PropertyRef Name="CustomerAccountNumber" />
-          </Key>
-          <Property Name="CustomerAccountNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Accounting" Relationship="Self.abrechnung_abrechnung_ibfk_1" FromRole="CustomerAccount" ToRole="Accounting" />
-          <NavigationProperty Name="Customer" Relationship="Self.customer_customer_ibfk_1" FromRole="CustomerAccount" ToRole="Customer" />
         </EntityType>
         <EntityType Name="Device">
           <Key>
@@ -889,7 +792,7 @@
           <Property Name="Hostname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Domain" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Accounting" Relationship="Self.abrechnung_abrechnung_ibfk_3" FromRole="Device" ToRole="Accounting" />
+          <Property Name="PriceCHF" Type="Double" />
           <NavigationProperty Name="Location" Relationship="Self.device_device_ibfk_1" FromRole="Device" ToRole="Location" />
           <NavigationProperty Name="Deviceport" Relationship="Self.deviceport_deviceport_ibfk_1" FromRole="Device" ToRole="Deviceport" />
           <NavigationProperty Name="Devicetype" Relationship="Self.FK__Device__DeviceTy__6166761E" FromRole="Device" ToRole="Devicetype" />
@@ -942,7 +845,6 @@
           <Property Name="Bandwith" Type="Int32" />
           <Property Name="Is_in_use" Type="Int16" />
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Accounting" Relationship="Self.abrechnung_abrechnung_ibfk_4" FromRole="Interface" ToRole="Accounting" />
           <NavigationProperty Name="Device" Relationship="Self.interface_interface_ibfk_2" FromRole="Interface" ToRole="Device" />
           <NavigationProperty Name="Network" Relationship="Self.interface_interface_ibfk_1" FromRole="Interface" ToRole="Network" />
         </EntityType>
@@ -956,7 +858,6 @@
           <Property Name="Designation" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
           <Property Name="Building" Type="Int64" />
           <Property Name="Room" Type="Int64" />
-          <NavigationProperty Name="Accounting" Relationship="Self.abrechnung_abrechnung_ibfk_2" FromRole="Location" ToRole="Accounting" />
           <NavigationProperty Name="Address" Relationship="Self.location_location_ibfk_1" FromRole="Location" ToRole="Address" />
           <NavigationProperty Name="Device" Relationship="Self.device_device_ibfk_1" FromRole="Location" ToRole="Device" />
           <NavigationProperty Name="Pointofdelivery" Relationship="Self.pointofdelivery_pointofdelivery_ibfk_3" FromRole="Location" ToRole="Pointofdelivery" />
@@ -1022,7 +923,7 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Customer_id_fk" Type="Int64" Nullable="false" />
           <Property Name="Contact_id_fk" Type="Int64" Nullable="false" />
-          <Property Name="Cocation_fk" Type="Int64" Nullable="false" />
+          <Property Name="Location_fk" Type="Int64" Nullable="false" />
           <Property Name="Designation" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
           <Property Name="Timezone" Type="Time" Nullable="false" Precision="7" />
           <Property Name="TimeZonePositiv" Type="Int16" Nullable="false" />
@@ -1049,8 +950,8 @@
           <Property Name="Hardware" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Software" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="OtherProduct" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Accounting_fk" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Accounting" Relationship="Self.produktegruppe_produktegruppe_ibfk_1" FromRole="Productgroup" ToRole="Accounting" />
+          <Property Name="Accounting_fk" Type="Int64" />
+          <NavigationProperty Name="Accounting" Relationship="Self.FK__Productgr__Accou__2334397B" FromRole="Productgroup" ToRole="Accounting" />
           <NavigationProperty Name="Product" Relationship="Self.produkte_produkte_ibfk_1" FromRole="Productgroup" ToRole="Product" />
         </EntityType>
         <EntityType Name="SoftwareService">
@@ -1059,8 +960,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HoursWorked" Type="Int32" Nullable="false" />
-          <Property Name="Accounting_fk" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Accounting" Relationship="Self.softwaredienstleistung_softwaredienstleistung_ibfk_1" FromRole="SoftwareService" ToRole="Accounting" />
+          <Property Name="Accounting_fk" Type="Int64" />
+          <NavigationProperty Name="Accounting" Relationship="Self.FK__SoftwareS__Accou__24285DB4" FromRole="SoftwareService" ToRole="Accounting" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1089,80 +990,36 @@
           <Property Name="Description" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Deviceport" Relationship="Self.deviceport_deviceport_ibfk_2" FromRole="Transportmedium" ToRole="Deviceport" />
         </EntityType>
-        <Association Name="abrechnung_abrechnung_ibfk_1">
-          <End Role="CustomerAccount" Type="Self.CustomerAccount" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+        <Association Name="FK__Accountin__Custo__22401542">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
           <End Role="Accounting" Type="Self.Accounting" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CustomerAccount">
-              <PropertyRef Name="CustomerAccountNumber" />
-            </Principal>
-            <Dependent Role="Accounting">
-              <PropertyRef Name="CustomerAccountNumber_FK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="abrechnung_abrechnung_ibfk_2">
-          <End Role="Location" Type="Self.Location" Multiplicity="1" />
-          <End Role="Accounting" Type="Self.Accounting" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Location">
+            <Principal Role="Customer">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Accounting">
-              <PropertyRef Name="Location_FK" />
+              <PropertyRef Name="Customer_fk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="abrechnung_abrechnung_ibfk_3">
-          <End Role="Device" Type="Self.Device" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Accounting" Type="Self.Accounting" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Device">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Accounting">
-              <PropertyRef Name="Device_FK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="abrechnung_abrechnung_ibfk_4">
-          <End Role="Interface" Type="Self.Interface" Multiplicity="1" />
-          <End Role="Accounting" Type="Self.Accounting" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Interface">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Accounting">
-              <PropertyRef Name="Interface_FK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="produktegruppe_produktegruppe_ibfk_1">
-          <End Role="Accounting" Type="Self.Accounting" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+        <Association Name="FK__Productgr__Accou__2334397B">
+          <End Role="Accounting" Type="Self.Accounting" Multiplicity="0..1" />
           <End Role="Productgroup" Type="Self.Productgroup" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Accounting">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Productgroup">
               <PropertyRef Name="Accounting_fk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="softwaredienstleistung_softwaredienstleistung_ibfk_1">
-          <End Role="Accounting" Type="Self.Accounting" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+        <Association Name="FK__SoftwareS__Accou__24285DB4">
+          <End Role="Accounting" Type="Self.Accounting" Multiplicity="0..1" />
           <End Role="SoftwareService" Type="Self.SoftwareService" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Accounting">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="SoftwareService">
               <PropertyRef Name="Accounting_fk" />
@@ -1222,20 +1079,6 @@
             </Principal>
             <Dependent Role="Pointofdelivery">
               <PropertyRef Name="Contact_id_fk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="customer_customer_ibfk_1">
-          <End Role="CustomerAccount" Type="Self.CustomerAccount" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CustomerAccount">
-              <PropertyRef Name="CustomerAccountNumber" />
-            </Principal>
-            <Dependent Role="Customer">
-              <PropertyRef Name="CustomerAccountNumber" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1383,7 +1226,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Pointofdelivery">
-              <PropertyRef Name="Cocation_fk" />
+              <PropertyRef Name="Location_fk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1411,7 +1254,6 @@
           <EntitySet Name="Contact" EntityType="Self.Contact" />
           <EntitySet Name="Credentials" EntityType="Self.Credentials" />
           <EntitySet Name="Customer" EntityType="Self.Customer" />
-          <EntitySet Name="CustomerAccount" EntityType="Self.CustomerAccount" />
           <EntitySet Name="Device" EntityType="Self.Device" />
           <EntitySet Name="Deviceport" EntityType="Self.Deviceport" />
           <EntitySet Name="Devicetype" EntityType="Self.Devicetype" />
@@ -1430,27 +1272,15 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Town" EntityType="Self.Town" />
           <EntitySet Name="Transportmedium" EntityType="Self.Transportmedium" />
-          <AssociationSet Name="abrechnung_abrechnung_ibfk_1" Association="Self.abrechnung_abrechnung_ibfk_1">
-            <End Role="CustomerAccount" EntitySet="CustomerAccount" />
+          <AssociationSet Name="FK__Accountin__Custo__22401542" Association="Self.FK__Accountin__Custo__22401542">
+            <End Role="Customer" EntitySet="Customer" />
             <End Role="Accounting" EntitySet="Accounting" />
           </AssociationSet>
-          <AssociationSet Name="abrechnung_abrechnung_ibfk_2" Association="Self.abrechnung_abrechnung_ibfk_2">
-            <End Role="Location" EntitySet="Location" />
-            <End Role="Accounting" EntitySet="Accounting" />
-          </AssociationSet>
-          <AssociationSet Name="abrechnung_abrechnung_ibfk_3" Association="Self.abrechnung_abrechnung_ibfk_3">
-            <End Role="Device" EntitySet="Device" />
-            <End Role="Accounting" EntitySet="Accounting" />
-          </AssociationSet>
-          <AssociationSet Name="abrechnung_abrechnung_ibfk_4" Association="Self.abrechnung_abrechnung_ibfk_4">
-            <End Role="Interface" EntitySet="Interface" />
-            <End Role="Accounting" EntitySet="Accounting" />
-          </AssociationSet>
-          <AssociationSet Name="produktegruppe_produktegruppe_ibfk_1" Association="Self.produktegruppe_produktegruppe_ibfk_1">
+          <AssociationSet Name="FK__Productgr__Accou__2334397B" Association="Self.FK__Productgr__Accou__2334397B">
             <End Role="Accounting" EntitySet="Accounting" />
             <End Role="Productgroup" EntitySet="Productgroup" />
           </AssociationSet>
-          <AssociationSet Name="softwaredienstleistung_softwaredienstleistung_ibfk_1" Association="Self.softwaredienstleistung_softwaredienstleistung_ibfk_1">
+          <AssociationSet Name="FK__SoftwareS__Accou__24285DB4" Association="Self.FK__SoftwareS__Accou__24285DB4">
             <End Role="Accounting" EntitySet="Accounting" />
             <End Role="SoftwareService" EntitySet="SoftwareService" />
           </AssociationSet>
@@ -1469,10 +1299,6 @@
           <AssociationSet Name="pointofdelivery_pointofdelivery_ibfk_2" Association="Self.pointofdelivery_pointofdelivery_ibfk_2">
             <End Role="Contact" EntitySet="Contact" />
             <End Role="Pointofdelivery" EntitySet="Pointofdelivery" />
-          </AssociationSet>
-          <AssociationSet Name="customer_customer_ibfk_1" Association="Self.customer_customer_ibfk_1">
-            <End Role="CustomerAccount" EntitySet="CustomerAccount" />
-            <End Role="Customer" EntitySet="Customer" />
           </AssociationSet>
           <AssociationSet Name="pointofdelivery_pointofdelivery_ibfk_1" Association="Self.pointofdelivery_pointofdelivery_ibfk_1">
             <End Role="Customer" EntitySet="Customer" />
@@ -1552,11 +1378,11 @@
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(InventarisierungsloesungModel.sp_helpdiagramdefinition_Result)">
+          <FunctionImport Name="sp_helpdiagramdefinition">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(InventarisierungsloesungModel.sp_helpdiagrams_Result)">
+          <FunctionImport Name="sp_helpdiagrams">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1567,17 +1393,6 @@
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1587,11 +1402,9 @@
           <EntitySetMapping Name="Accounting">
             <EntityTypeMapping TypeName="InventarisierungsloesungModel.Accounting">
               <MappingFragment StoreEntitySet="Accounting">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CustomerAccountNumber_FK" ColumnName="CustomerAccountNumber_FK" />
-                <ScalarProperty Name="Location_FK" ColumnName="Location_FK" />
-                <ScalarProperty Name="Device_FK" ColumnName="Device_FK" />
-                <ScalarProperty Name="Interface_FK" ColumnName="Interface_FK" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Customer_fk" ColumnName="Customer_fk" />
+                <ScalarProperty Name="Device_fk" ColumnName="Device_fk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1634,18 +1447,10 @@
                 <ScalarProperty Name="Firstname" ColumnName="Firstname" />
                 <ScalarProperty Name="Lastname" ColumnName="Lastname" />
                 <ScalarProperty Name="Addressnumber" ColumnName="Addressnumber" />
-                <ScalarProperty Name="CustomerAccountNumber" ColumnName="CustomerAccountNumber" />
                 <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Website" ColumnName="Website" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CustomerAccount">
-            <EntityTypeMapping TypeName="InventarisierungsloesungModel.CustomerAccount">
-              <MappingFragment StoreEntitySet="CustomerAccount">
-                <ScalarProperty Name="CustomerAccountNumber" ColumnName="CustomerAccountNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1660,6 +1465,7 @@
                 <ScalarProperty Name="Hostname" ColumnName="Hostname" />
                 <ScalarProperty Name="Domain" ColumnName="Domain" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PriceCHF" ColumnName="PriceCHF" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1780,7 +1586,7 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Customer_id_fk" ColumnName="Customer_id_fk" />
                 <ScalarProperty Name="Contact_id_fk" ColumnName="Contact_id_fk" />
-                <ScalarProperty Name="Cocation_fk" ColumnName="Cocation_fk" />
+                <ScalarProperty Name="Location_fk" ColumnName="Location_fk" />
                 <ScalarProperty Name="Designation" ColumnName="Designation" />
                 <ScalarProperty Name="Timezone" ColumnName="Timezone" />
                 <ScalarProperty Name="TimeZonePositiv" ColumnName="TimeZonePositiv" />
@@ -1871,25 +1677,8 @@
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="InventarisierungsloesungModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="InventarisierungsloesungModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="InventarisierungsloesungModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="InventarisierungsloesungModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="InventarisierungsloesungModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="InventarisierungsloesungModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="InventarisierungsloesungModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="InventarisierungsloesungModel.Store.sp_helpdiagramdefinition" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="InventarisierungsloesungModel.Store.sp_helpdiagrams" />
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="InventarisierungsloesungModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="InventarisierungsloesungModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
@@ -1909,7 +1698,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

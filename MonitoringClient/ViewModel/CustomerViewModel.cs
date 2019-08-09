@@ -30,7 +30,6 @@ namespace MonitoringClient.ViewModel
         private string _lastname;
         private string _lastanemSearch;
         private string _addressnumber;
-        private int _customerAccountNumber;
         private string _phoneNumber;
         private string _email;
         private string _website;
@@ -115,16 +114,6 @@ namespace MonitoringClient.ViewModel
             {
                 _addressnumber = value;
                 OnPropertyChanged("Addressnumber");
-            }
-        }
-        public int CustomerAccountNumber
-        {
-            get
-            { return _customerAccountNumber; }
-            set
-            {
-                _customerAccountNumber = value;
-                OnPropertyChanged("CustomerAccountNumber");
             }
         }
         public string SelectedCountryCode
@@ -229,7 +218,6 @@ namespace MonitoringClient.ViewModel
             Firstname = null;
             Lastname = null;
             Addressnumber = null;
-            CustomerAccountNumber = 0;
             PhoneNumber = null;
             Email = null;
             Website = null;
@@ -342,7 +330,6 @@ namespace MonitoringClient.ViewModel
             customer.Firstname = Firstname;
             customer.Lastname = Lastname;
             customer.Addressnumber = Addressnumber;
-            customer.CustomerAccountNumber = CustomerAccountNumber;
             customer.Phonenumber = PhoneNumber;
             customer.Email = Email;
             customer.Website = Website;
@@ -356,7 +343,6 @@ namespace MonitoringClient.ViewModel
                 Firstname = _selectedItem.Firstname;
                 Lastname = _selectedItem.Lastname;
                 Addressnumber = _selectedItem.Addressnumber;
-                CustomerAccountNumber = (int)_selectedItem.CustomerAccountNumber;
                 PhoneNumber = _selectedItem.Phonenumber;
                 Email = _selectedItem.Email;
                 Website = _selectedItem.Website;
@@ -415,7 +401,6 @@ namespace MonitoringClient.ViewModel
             "Firstname",
             "Lastname",
             "Addressnumber",
-            "CustomerAccountNumber",
             "PhoneNumber",
             "EmailAddress",
             "Website",
@@ -436,9 +421,6 @@ namespace MonitoringClient.ViewModel
 
                 case "Addressnumber":
                     error = _customerValidation.AddressnumberValidation(_addressnumber);
-                    break;
-                case "CustomerAccountNumber":
-                    error = _customerValidation.CustomerAccountNumberValidation(_customerAccountNumber.ToString());
                     break;
                 case "PhoneNumber":
                     error = _customerValidation.PhoneNumberValidation(_phoneNumber, _selectedCountryCode);

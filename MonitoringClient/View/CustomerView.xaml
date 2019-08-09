@@ -209,20 +209,6 @@
                                Margin="2"
                                Width="340"
                                />
-                    <TextBlock x:Name="txtblock_CustomerAccountNumber"
-                               Grid.Row="7"
-                               Grid.Column="0"
-                               Text="CustomerAccountNumber: "
-                               HorizontalAlignment="Left"        
-                               Margin="2"
-                               Width="150"/>
-                    <TextBox x:Name="txtbox_CustomerAccountNumber"
-                             Text="{Binding Path=CustomerAccountNumber, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                             Grid.Row="7"
-                             Grid.Column="0"
-                             HorizontalAlignment="Right"
-                             Margin="2"
-                             Width="200"/>
                     <TextBlock x:Name="customerAccountNumberErrorMessage"
                                Text="{Binding ElementName=txtbox_CustomerAccountNumber, Path=(Validation.Errors)[0].ErrorContent}"
                                FontSize="10"

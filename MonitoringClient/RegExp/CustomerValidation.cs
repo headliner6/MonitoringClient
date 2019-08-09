@@ -46,18 +46,6 @@ namespace MonitoringClient.RegExp
             }
             return null;
         }
-        public string CustomerAccountNumberValidation(string accountNumber)
-        {
-            if (accountNumber == null)
-            {
-                return "CustomerAccountNumber muss 1-8 sein!";
-            }
-            if (!Regex.IsMatch(accountNumber, @"^[1-8]{1}$"))
-            {
-                return "CustomerAccountNumber muss 1-8 sein!";
-            }
-            return null;
-        }
         public string PhoneNumberValidation(string phoneNumber, string SelectedCountryCode)
         {
             switch (SelectedCountryCode)

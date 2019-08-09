@@ -328,61 +328,6 @@ namespace MonitoringClient.Tests
             Assert.That(resultat2 == null);
         }
 
-        [Test]
-        public void CustomerAccountNumberValidation_checkAccountNumber0And10To16_allFalse()
-        {
-
-            //act
-            var customerValidator = new CustomerValidation();
-
-            var resultat1 = customerValidator.CustomerAccountNumberValidation("0");
-            var resultat2 = customerValidator.CustomerAccountNumberValidation("10");
-            var resultat3 = customerValidator.CustomerAccountNumberValidation("11");
-            var resultat4 = customerValidator.CustomerAccountNumberValidation("12");
-            var resultat5 = customerValidator.CustomerAccountNumberValidation("13");
-            var resultat6 = customerValidator.CustomerAccountNumberValidation("14");
-            var resultat7 = customerValidator.CustomerAccountNumberValidation("15");
-            var resultat8 = customerValidator.CustomerAccountNumberValidation("16");
-
-            //assert
-
-            Assert.That(resultat1.Equals("CustomerAccountNumber muss 1-8 sein!"));
-            Assert.That(resultat2.Equals("CustomerAccountNumber muss 1-8 sein!"));
-            Assert.That(resultat3.Equals("CustomerAccountNumber muss 1-8 sein!"));
-            Assert.That(resultat4.Equals("CustomerAccountNumber muss 1-8 sein!"));
-            Assert.That(resultat5.Equals("CustomerAccountNumber muss 1-8 sein!"));
-            Assert.That(resultat6.Equals("CustomerAccountNumber muss 1-8 sein!"));
-            Assert.That(resultat7.Equals("CustomerAccountNumber muss 1-8 sein!"));
-            Assert.That(resultat8.Equals("CustomerAccountNumber muss 1-8 sein!"));
-
-        }
-
-        [Test]
-        public void CustomerAccountNumberValidation_checkAccountNumber1To8_allTrue()
-        {
-            //act
-            var customerValidator = new CustomerValidation();
-
-            var resultat1 = customerValidator.CustomerAccountNumberValidation("1");
-            var resultat2 = customerValidator.CustomerAccountNumberValidation("2");
-            var resultat3 = customerValidator.CustomerAccountNumberValidation("3");
-            var resultat4 = customerValidator.CustomerAccountNumberValidation("4");
-            var resultat5 = customerValidator.CustomerAccountNumberValidation("5");
-            var resultat6 = customerValidator.CustomerAccountNumberValidation("6");
-            var resultat7 = customerValidator.CustomerAccountNumberValidation("7");
-            var resultat8 = customerValidator.CustomerAccountNumberValidation("8");
-
-            //assert
-
-            Assert.That(resultat1 == null);
-            Assert.That(resultat2 == null);
-            Assert.That(resultat3 == null);
-            Assert.That(resultat4 == null);
-            Assert.That(resultat5 == null);
-            Assert.That(resultat6 == null);
-            Assert.That(resultat7 == null);
-            Assert.That(resultat8 == null);
-        }
 
         [Test]
         public void EmailValidation_checkDiffrentCombinations_allFalse()

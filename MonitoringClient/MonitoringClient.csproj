@@ -114,9 +114,6 @@
     <Compile Include="Model\Customer.cs">
       <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\CustomerAccount.cs">
-      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\Device.cs">
       <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
     </Compile>
@@ -178,12 +175,6 @@
       <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\SoftwareService.cs">
-      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\sp_helpdiagrams_Result.cs">
       <DependentUpon>InventarisierungsloesungModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\sysdiagrams.cs">
