@@ -91,7 +91,7 @@ namespace MonitoringClient.RegExp
             {
                 return "Email address muss ein gültiges Format haben! Bsp.: test@provider.ch";
             }
-            if (!Regex.IsMatch(email, @"^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"))
+            if (!Regex.IsMatch(email, @"^([a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]{1,}\.).[a-z]{1,}$"))
             {
                 return "Email address muss ein gültiges Format haben! Bsp.: test@provider.ch";
             }
