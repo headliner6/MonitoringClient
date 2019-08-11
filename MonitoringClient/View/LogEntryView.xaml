@@ -126,14 +126,16 @@
                          Height="25"
                          Margin="2"/>
                 <Button x:Name="button_exportPathLognetries"
-                        Command="{Binding Path=ExportPathLogentriesCommand}"
+                        Command="{Binding Path=ExportLogentries}"
+                        CommandParameter="ChooseExportPath"
                         Grid.Row="0"
                         Grid.Column="1"
                         Content="Export to"
                         Height="25"
                         Margin="2"/>
                 <Button x:Name="button_exporterDLLPath"
-                        Command="{Binding Path=ExporterDllPathLogentriesCommand}"
+                        Command="{Binding Path=ExportLogentries}"
+                        CommandParameter="ChooseExporterDllPath"
                         Grid.Row="0"
                         Grid.Column="2"
                         Content=".dll-Files from"
@@ -147,7 +149,8 @@
                                Height="25"
                                Margin="2"/>
                 <Button x:Name="button_exportLogentries"
-                        Command="{Binding Path=ExportLogentriesCommand}"
+                        Command="{Binding Path=ExportLogentries}"
+                        CommandParameter="Export"
                         Grid.Row="0"
                         Grid.Column="4"
                         Content="Export Logentries"

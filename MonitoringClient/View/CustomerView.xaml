@@ -379,14 +379,16 @@
                          Height="25"
                          Margin="2"/>
                 <Button x:Name="button_exportPathCustomers"
-                        Command="{Binding Path=ExportPathCustomersCommand}"
+                        Command="{Binding Path=ExportCustomers}"
+                        CommandParameter="ChooseExportPath"
                         Grid.Row="0"
                         Grid.Column="1"
                         Content="Export to"
                         Height="25"
                         Margin="2"/>
                 <Button x:Name="button_exporterDLLPath"
-                        Command="{Binding Path=ExporterDllPathCustomersCommand}"
+                        Command="{Binding Path=ExportCustomers}"
+                        CommandParameter="ChooseExporterDllPath"
                         Grid.Row="0"
                         Grid.Column="2"
                         Content=".dll-Files from"
@@ -400,7 +402,8 @@
                                Height="25"
                                Margin="2"/>
                 <Button x:Name="button_exportLogentries"
-                        Command="{Binding Path=ExportCustomersCommand}"
+                        Command="{Binding Path=ExportCustomers}"
+                        CommandParameter="Export"
                         Grid.Row="0"
                         Grid.Column="4"
                         Content="Export Customers"

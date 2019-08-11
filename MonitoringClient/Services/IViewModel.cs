@@ -9,5 +9,9 @@ namespace MonitoringClient.ViewModel
     public interface IViewModel
     {
         string ConnectionString { get; set; }
+        void GetAll();
+        void Export();
+        void ChooseExportPath();
+        void ChooseExporterDllPath();
     }
 }

@@ -37,15 +37,15 @@ namespace MonitoringClient.ViewModel
         private string _selectedExporter;
         private string _exportPath;
         private string _exporterDllPath;
+        private IExporter _exporter;
 
         public SaveCustomerCommand SaveCustomerCommand { get; set; }
         public CreateNewCustomerCommand CreateNewCustomerCommand { get; set; }
-        public LoadAllCustomerCommand LoadAllCustomerCommand { get; set; }
+        public GetAllCommand LoadAllCustomerCommand { get; set; }
         public SearchCustomerCommand SearchCustomerCommand { get; set; }
         public PhoneNumberDetailsCommand PhoneNumberDetailsCommand { get; set; }
-        public ExportCustomersCommand ExportCustomersCommand { get; set; }
-        public ExportPathCustomersCommand ExportPathCustomersCommand { get; set; }
-        public ExporterDllPathCustomersCommand ExporterDllPathCustomersCommand { get; set; }
+        public ExportDataCommand ExportCustomers { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public string ConnectionString { get; set; }
         public CustomerModel SelectedItem
@@ -208,13 +208,12 @@ namespace MonitoringClient.ViewModel
             SaveCustomerCommand = new SaveCustomerCommand(this);
             CreateNewCustomerCommand = new CreateNewCustomerCommand(this);
             SearchCustomerCommand = new SearchCustomerCommand(this);
-            LoadAllCustomerCommand = new LoadAllCustomerCommand(this);
+            LoadAllCustomerCommand = new GetAllCommand(this);
             PhoneNumberDetailsCommand = new PhoneNumberDetailsCommand(this);
-            ExportCustomersCommand = new ExportCustomersCommand(this);
-            ExportPathCustomersCommand = new ExportPathCustomersCommand(this);
-            ExporterDllPathCustomersCommand = new ExporterDllPathCustomersCommand(this);
-            this.navigateToLogEntryView = navigateToLogEntryView;
+            ExportCustomers = new ExportDataCommand(this);
             _customerValidation = new CustomerValidation();
+            _exporter = new Exporter();
+            this.navigateToLogEntryView = navigateToLogEntryView;
             CountryCode = new List<string>();
             InitialiseCountryCodes();
         }
@@ -392,35 +391,22 @@ namespace MonitoringClient.ViewModel
         }
         public void ChooseExportPath()
         {
-            using (var dialog = new CommonOpenFileDialog())
+            try
             {
-                dialog.ShowDialog();
-                ExportPath = dialog.FileName;
-                dialog.Dispose();
+                ExportPath = _exporter.ChooseExportPath();
             }
+            catch (Exception ex) { }
         }
         public void ChooseExporterDllPath()
         {
-            using (var dialog = new CommonOpenFileDialog())
+            try
             {
-                dialog.IsFolderPicker = true;
-                dialog.ShowDialog();
-                _exporterDllPath = dialog.FileName;
-                dialog.Dispose();
+                _exporterDllPath = _exporter.ChooseExporterDllPath();
+                Exporters = _exporter.InitialiseExporters(_exporterDllPath);
+                SelectedExporter = Exporters.FirstOrDefault();
+                OnPropertyChanged("Exporters");
             }
-            InitialiseExporters(_exporterDllPath);
-        }
-        private void InitialiseExporters(string path)
-        {
-            Exporters = new List<string>();
-            var loader = new PluginLoader();
-            var exporters = loader.GetDataExporters(path);
-            foreach (var exporter in exporters)
-            {
-                Exporters.Add(exporter.Name);
-            }
-            SelectedExporter = Exporters.FirstOrDefault();
-            OnPropertyChanged("Exporters");
+            catch (Exception ex) { }
         }
 
         private void InitialiseCountryCodes()

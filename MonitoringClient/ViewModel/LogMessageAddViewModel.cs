@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace MonitoringClient.ViewModel
 {
-    public class LogMessageAddViewModel : IViewModel, IDataErrorInfo, INotifyPropertyChanged
+    public class LogMessageAddViewModel : IDataErrorInfo, INotifyPropertyChanged, IViewModel
     {
         private readonly Action<object> navigateToLogEntryView;
         private LogEntryModelRepository _logEntryModelRepository;
@@ -164,6 +164,26 @@ namespace MonitoringClient.ViewModel
                     break;
             }
             return error;
+        }
+
+        public void Export()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ChooseExportPath()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ChooseExporterDllPath()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GetAll()
+        {
+            throw new NotImplementedException();
         }
     }
 }

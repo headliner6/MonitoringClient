@@ -1,4 +1,5 @@
 ﻿using MonitoringClient.Model;
+using MonitoringClient.Services;
 using System.Collections.ObjectModel;
 
 namespace MonitoringClient.DataStructures

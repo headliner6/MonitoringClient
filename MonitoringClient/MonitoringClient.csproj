@@ -104,15 +104,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Command\ExportCustomersCommand.cs" />
-    <Compile Include="Command\ExporterDllPathCustomersCommand.cs" />
-    <Compile Include="Command\ExporterDllPathLogentriesCommand.cs" />
-    <Compile Include="Command\ExportPathCustomersCommand.cs" />
-    <Compile Include="Command\ExportPathLogentriesCommand.cs" />
+    <Compile Include="Command\ExportDataCommand.cs" />
     <Compile Include="Command\CreateNewCustomerCommand.cs" />
-    <Compile Include="Command\ExportLogentriesCommand.cs" />
     <Compile Include="Command\PhoneNumberDetailsCommand.cs" />
-    <Compile Include="Command\LoadAllCustomerCommand.cs" />
+    <Compile Include="Command\GetAllCommand.cs" />
     <Compile Include="Command\SaveCustomerCommand.cs" />
     <Compile Include="Command\SearchCustomerCommand.cs" />
     <Compile Include="DataStructures\LocationTreeBuilder.cs" />
@@ -124,15 +119,16 @@
     <Compile Include="RegExp\ExportValidation.cs" />
     <Compile Include="RegExp\LogMessageValidation.cs" />
     <Compile Include="Repository\CustomerRepository.cs" />
+    <Compile Include="Services\Exporter.cs" />
+    <Compile Include="Services\IExporter.cs" />
     <Compile Include="Services\IModel.cs" />
     <Compile Include="Services\IRepositoryBase.cs" />
     <Compile Include="Repository\LocationModelRepository.cs" />
     <Compile Include="Repository\LogEntryModelRepository.cs" />
     <Compile Include="Repository\RepositoryBase.cs" />
     <Compile Include="Command\BaseCommand.cs" />
-    <Compile Include="Command\ConfirmButtonCommand.cs" />
+    <Compile Include="Command\ConfirmLogEntriesButtonCommand.cs" />
     <Compile Include="Command\FindDuplicatesButtonCommand.cs" />
-    <Compile Include="Command\LoadAllLogentriesCommand.cs" />
     <Compile Include="Services\IViewModel.cs" />
     <Compile Include="Services\PluginLoader.cs" />
     <Compile Include="Tests\CustomerValidationTest.cs" />

@@ -23,20 +23,20 @@ namespace MonitoringClient.ViewModel
         {
             if (obj.ToString() == "LogMessageAddView")
             {
-                var logEntryViewModel = (IViewModel) selectedViewModel;
+                var tempViewModel = (IViewModel) selectedViewModel;
                 SelectedViewModel = new LogMessageAddViewModel(OpenLogentryView);
                 var logMessageAddViewModel = (LogMessageAddViewModel) selectedViewModel;
-                logMessageAddViewModel.ConnectionString = logEntryViewModel.ConnectionString;
+                logMessageAddViewModel.ConnectionString = tempViewModel.ConnectionString;
             }
         }
         private void OpenLocationView(object obj)
         {
             if (obj.ToString() == "LocationView")
             {
-                var logEntryViewModel = (IViewModel)selectedViewModel;
+                var tempViewModel = (IViewModel)selectedViewModel;
                 SelectedViewModel = new LocationViewModel(OpenLogentryView);
                 var locationViewModel = (LocationViewModel)selectedViewModel;
-                locationViewModel.ConnectionString = logEntryViewModel.ConnectionString;
+                locationViewModel.ConnectionString = tempViewModel.ConnectionString;
                 locationViewModel.GetAll();
             }
         }
@@ -45,10 +45,10 @@ namespace MonitoringClient.ViewModel
         {
             if (obj.ToString() == "CustomerView")
             {
-                var logEntryViewModel = (IViewModel)selectedViewModel;
+                var tempViewModel = (IViewModel)selectedViewModel;
                 SelectedViewModel = new CustomerViewModel(OpenLogentryView);
                 var customerViewModel = (CustomerViewModel)selectedViewModel;
-                customerViewModel.ConnectionString = logEntryViewModel.ConnectionString;
+                customerViewModel.ConnectionString = tempViewModel.ConnectionString;
                 customerViewModel.GetAll();
             }
         }
@@ -57,10 +57,10 @@ namespace MonitoringClient.ViewModel
         {
             if (obj.ToString() == "LogEntryView")
             {
-                var logMessageAddViewModel = (IViewModel) selectedViewModel;
+                var tempViewModel = (IViewModel) selectedViewModel;
                 SelectedViewModel = new LogEntryViewModel(OpenLogMessageAddView, OpenLocationView, OpenCustomerView);
                 LogEntryViewModel logEntryViewModel = (LogEntryViewModel) selectedViewModel;
-                logEntryViewModel.ConnectionString = logMessageAddViewModel.ConnectionString;
+                logEntryViewModel.ConnectionString = tempViewModel.ConnectionString;
                 logEntryViewModel.GetAll();
             }
         }

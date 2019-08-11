@@ -27,6 +27,7 @@ namespace MonitoringClient.ViewModel
         private string _selectedExporter;
         private string _exportPath;
         private string _exporterDllPath;
+        private IExporter _exporter;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -43,12 +44,10 @@ namespace MonitoringClient.ViewModel
             }
         }
         public string ConnectionString { get; set; }
-        public LoadAllLogentriesCommand LoadButtonCommand { get; set; }
-        public ConfirmButtonCommand ConfirmButtonCommand { get; set; }
+        public GetAllCommand LoadButtonCommand { get; set; }
+        public ConfirmLogEntriesButtonCommand ConfirmButtonCommand { get; set; }
         public FindDuplicatesButtonCommand FindDuplicatesButtonCommand { get; set; }
-        public ExportLogentriesCommand ExportLogentriesCommand { get; set; }
-        public ExportPathLogentriesCommand ExportPathLogentriesCommand { get; set; }
-        public ExporterDllPathLogentriesCommand ExporterDllPathLogentriesCommand { get; set; }
+        public ExportDataCommand ExportLogentries { get; set; }
         public List<string> Exporters { get; set; }
         public string SelectedExporter
         {
@@ -80,12 +79,11 @@ namespace MonitoringClient.ViewModel
             NavigateLogMessageAddView = new BaseCommand(StartLogMessageAddView);
             NavigateLocationView = new BaseCommand(StartLocationView);
             NavigateCustomerView = new BaseCommand(StartCustomerView);
-            LoadButtonCommand = new LoadAllLogentriesCommand(this);
-            ConfirmButtonCommand = new ConfirmButtonCommand(this);
+            LoadButtonCommand = new GetAllCommand(this);
+            ConfirmButtonCommand = new ConfirmLogEntriesButtonCommand(this);
             FindDuplicatesButtonCommand = new FindDuplicatesButtonCommand(this);
-            ExportLogentriesCommand = new ExportLogentriesCommand(this);
-            ExportPathLogentriesCommand = new ExportPathLogentriesCommand(this);
-            ExporterDllPathLogentriesCommand = new ExporterDllPathLogentriesCommand(this);
+            ExportLogentries = new ExportDataCommand(this);
+            _exporter = new Exporter();
             this.navigateToLogMessageAddView = navigateToLogMessageAddView;
             this.navigateToLocationView = navigateToLocationView;
             this.navigateToCustomerView = navigateToCustomerView;
@@ -164,39 +162,28 @@ namespace MonitoringClient.ViewModel
         }
         public void ChooseExportPath()
         {
-            using (var dialog = new CommonOpenFileDialog())
+            try
             {
-                dialog.ShowDialog();
-                ExportPath = dialog.FileName;
+                ExportPath = _exporter.ChooseExportPath();
             }
+            catch (Exception ex) { }
         }
 
         public void ChooseExporterDllPath()
         {
-            using (var dialog = new CommonOpenFileDialog())
+            try
             {
-                dialog.IsFolderPicker = true;
-                dialog.ShowDialog();
-                _exporterDllPath = dialog.FileName;
+                _exporterDllPath = _exporter.ChooseExporterDllPath();
+                Exporters = _exporter.InitialiseExporters(_exporterDllPath);
+                SelectedExporter = Exporters.FirstOrDefault();
+                OnPropertyChanged("Exporters");
             }
-            InitialiseExporters(_exporterDllPath);
+            catch (Exception ex) { }
         }
 
         protected void OnPropertyChanged(string name)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-        private void InitialiseExporters(string path)
-        {
-            Exporters = new List<string>();
-            var loader = new PluginLoader();
-            var exporters = loader.GetDataExporters(path);
-            foreach (var exporter in exporters)
-            {
-                Exporters.Add(exporter.Name);
-            }
-            SelectedExporter = Exporters.FirstOrDefault();
-            OnPropertyChanged("Exporters");
         }
         private void StartLogMessageAddView(object obj)
         {

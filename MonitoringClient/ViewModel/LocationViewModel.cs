@@ -65,5 +65,20 @@ namespace MonitoringClient.ViewModel
         {
             navigateToLogEntryView.Invoke("LogEntryView");
         }
+
+        public void Export()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ChooseExportPath()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ChooseExporterDllPath()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
