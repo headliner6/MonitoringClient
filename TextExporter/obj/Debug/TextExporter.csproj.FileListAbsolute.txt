@@ -1,0 +1,10 @@
+C:\Workspace\HF\TextExporter\bin\Debug\TextExporter.dll
+C:\Workspace\HF\TextExporter\bin\Debug\TextExporter.pdb
+C:\Workspace\HF\TextExporter\bin\Debug\PluginContracts.dll
+C:\Workspace\HF\TextExporter\obj\Debug\TextExporter.csprojAssemblyReference.cache
+C:\Workspace\HF\TextExporter\obj\Debug\TextExporter.csproj.CoreCompileInputs.cache
+C:\Workspace\HF\TextExporter\obj\Debug\TextExporter.csproj.CopyComplete
+C:\Workspace\HF\TextExporter\obj\Debug\TextExporter.dll
+C:\Workspace\HF\TextExporter\obj\Debug\TextExporter.pdb
+C:\Workspace\HF\TextExporter\bin\Debug\Newtonsoft.Json.dll
+C:\Workspace\HF\TextExporter\bin\Debug\Newtonsoft.Json.xml

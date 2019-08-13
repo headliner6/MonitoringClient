@@ -25,11 +25,11 @@ namespace CsvExporter
             {
                 File.Delete(destinationPath);
             }
-            var csvString = CreateCsvString<IEnumerable>(data);
+            var csvString = CreateCsvString(data);
             File.WriteAllText(destinationPath, csvString);
         }
 
-        private string CreateCsvString<T>(IEnumerable data) where T : class
+        private string CreateCsvString(IEnumerable data)
         {
             var csvString = "";
             var delimiter = ";";

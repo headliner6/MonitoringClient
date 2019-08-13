@@ -13,3 +13,4 @@ C:\Workspace\HF\CsvExporter\bin\Debug\CsvExporter.dll
 C:\Workspace\HF\CsvExporter\bin\Debug\CsvExporter.pdb
 C:\Workspace\HF\CsvExporter\bin\Debug\PluginContracts.dll
 C:\Workspace\HF\CsvExporter\obj\Debug\CsvExporter.csproj.CopyComplete
+C:\Workspace\HF\CsvExporter\obj\Debug\CsvExporter.csprojAssemblyReference.cache
