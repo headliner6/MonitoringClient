@@ -1,14 +1,11 @@
 ﻿using MonitoringClient.Command;
 using MonitoringClient.DataStructures;
-using MonitoringClient.Model;
 using MonitoringClient.Repository;
+using MonitoringClient.Services;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -18,7 +15,7 @@ namespace MonitoringClient.ViewModel
     {
         private readonly Action<object> navigateToLogEntryView;
         private ObservableCollection<LocationNode> _locations;
-        private LocationModelRepository _locationModelRepository;
+        private ILocationModelRepository _locationModelRepository;
 
         public event PropertyChangedEventHandler PropertyChanged;
         public string ConnectionString { get; set; }

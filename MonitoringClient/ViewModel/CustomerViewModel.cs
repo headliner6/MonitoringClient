@@ -21,7 +21,7 @@ namespace MonitoringClient.ViewModel
     {
         private readonly Action<object> navigateToLogEntryView;
         private ObservableCollection<CustomerModel> _customers;
-        private CustomerRepository _customerRepository;
+        private ICustomerModelRepository _customerRepository;
         private CustomerModel _selectedItem;
         private string _selectedCountryCode;
         private CustomerValidation _customerValidation;

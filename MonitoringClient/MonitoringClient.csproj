@@ -120,7 +120,10 @@
     <Compile Include="RegExp\LogMessageValidation.cs" />
     <Compile Include="Repository\CustomerRepository.cs" />
     <Compile Include="Services\Exporter.cs" />
+    <Compile Include="Services\ICustomerModelRepository.cs" />
     <Compile Include="Services\IExporter.cs" />
+    <Compile Include="Services\ILocationModelRepository.cs" />
+    <Compile Include="Services\ILogEntryModelRepository.cs" />
     <Compile Include="Services\IModel.cs" />
     <Compile Include="Services\IRepositoryBase.cs" />
     <Compile Include="Repository\LocationModelRepository.cs" />

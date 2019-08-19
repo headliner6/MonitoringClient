@@ -1,5 +1,6 @@
 ﻿using LinqToDB.Data;
 using MonitoringClient.Model;
+using MonitoringClient.Services;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Windows;
 
 namespace MonitoringClient.Repository
 {
-    public class LogEntryModelRepository : RepositoryBase<LogEntryModel>
+    public class LogEntryModelRepository : RepositoryBase<LogEntryModel>, ILogEntryModelRepository
     {
         public override string TableName { get; }
         public LogEntryModelRepository()

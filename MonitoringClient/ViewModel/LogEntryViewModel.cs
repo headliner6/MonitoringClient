@@ -22,7 +22,7 @@ namespace MonitoringClient.ViewModel
         private readonly Action<object> navigateToLocationView;
         private readonly Action<object> navigateToCustomerView;
         private DuplicateChecker _duplicateChecker;
-        private LogEntryModelRepository _logEntryModelRepository;
+        private ILogEntryModelRepository _logEntryModelRepository;
         private ObservableCollection<LogEntryModel> _logentries;
         private string _selectedExporter;
         private string _exportPath;

@@ -71,5 +71,6 @@ namespace MonitoringClient.Repository
         /// Gibt den Tabellennamen zurück, auf die sich das Repository bezieht
         /// </summary>
         string TableName { get; }
+        string ConnectionString { get; set; }
     }
 }
