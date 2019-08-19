@@ -423,17 +423,9 @@ D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\Google.Protobuf.pdb
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\nunit.framework.pdb
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\nunit.framework.xml
-C:\Workspace\HF\MonitoringClient\bin\Debug\nunit.framework.dll
 C:\Workspace\HF\MonitoringClient\bin\Debug\Google.Protobuf.pdb
-C:\Workspace\HF\MonitoringClient\bin\Debug\nunit.framework.pdb
-C:\Workspace\HF\MonitoringClient\bin\Debug\nunit.framework.xml
 C:\Workspace\HF\MonitoringClient\bin\Debug\Renci.SshNet.dll
 C:\Workspace\HF\MonitoringClient\bin\Debug\Renci.SshNet.xml
-C:\Workspace\HF\MonitoringClient\bin\Debug\NUnit3.TestAdapter.dll
-C:\Workspace\HF\MonitoringClient\bin\Debug\NUnit3.TestAdapter.pdb
-C:\Workspace\HF\MonitoringClient\bin\Debug\nunit.engine.dll
-C:\Workspace\HF\MonitoringClient\bin\Debug\nunit.engine.api.dll
-C:\Workspace\HF\MonitoringClient\obj\Debug\MonitoringClient_Content.g.cs
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\NUnit3.TestAdapter.dll
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\NUnit3.TestAdapter.pdb
 D:\HF\Workspace\ProgrammingAdvanced\MonitoringClient\MonitoringClient\bin\Debug\nunit.engine.dll
