@@ -1,6 +1,7 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using MonitoringClient.Command;
 using MonitoringClient.DataStructures;
+using MonitoringClient.IoC;
 using MonitoringClient.Model;
 using MonitoringClient.RegExp;
 using MonitoringClient.Repository;
@@ -21,7 +22,7 @@ namespace MonitoringClient.ViewModel
     {
         private readonly Action<object> navigateToLogEntryView;
         private ObservableCollection<CustomerModel> _customers;
-        private ICustomerModelRepository _customerRepository;
+        private readonly ICustomerRepository _customerRepository;
         private CustomerModel _selectedItem;
         private string _selectedCountryCode;
         private CustomerValidation _customerValidation;
@@ -203,7 +204,7 @@ namespace MonitoringClient.ViewModel
         }
         public CustomerViewModel(Action<object> navigateToLogEntryView)
         {
-            _customerRepository = new CustomerRepository();
+            _customerRepository = GetCustomerRepository();
             NavigateBack = new BaseCommand(OnNavigateBack);
             SaveCustomerCommand = new SaveCustomerCommand(this);
             CreateNewCustomerCommand = new CreateNewCustomerCommand(this);
@@ -469,6 +470,13 @@ namespace MonitoringClient.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+
+        private ICustomerRepository GetCustomerRepository()
+        {
+            var injector = new Injector();
+            return injector.InjectCustomerRepository();
+        }
+
         private void OnNavigateBack(object obj)
         {
             navigateToLogEntryView.Invoke("LogEntryView");

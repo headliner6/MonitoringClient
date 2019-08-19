@@ -1,5 +1,6 @@
 ﻿using MonitoringClient.Command;
 using MonitoringClient.DataStructures;
+using MonitoringClient.IoC;
 using MonitoringClient.Repository;
 using MonitoringClient.Services;
 using System;
@@ -15,7 +16,7 @@ namespace MonitoringClient.ViewModel
     {
         private readonly Action<object> navigateToLogEntryView;
         private ObservableCollection<LocationNode> _locations;
-        private ILocationModelRepository _locationModelRepository;
+        private readonly ILocationRepository _locationModelRepository;
 
         public event PropertyChangedEventHandler PropertyChanged;
         public string ConnectionString { get; set; }
@@ -33,7 +34,7 @@ namespace MonitoringClient.ViewModel
 
         public LocationViewModel(Action<object> navigateToLogEntryView)
         {
-            _locationModelRepository = new LocationModelRepository();
+            _locationModelRepository = GetLocationRepository();
             NavigateBack = new BaseCommand(OnNavigateBack);
             this.navigateToLogEntryView = navigateToLogEntryView;
         }
@@ -53,16 +54,6 @@ namespace MonitoringClient.ViewModel
             }
         }
 
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-
-        private void OnNavigateBack(object obj)
-        {
-            navigateToLogEntryView.Invoke("LogEntryView");
-        }
-
         public void Export()
         {
             throw new NotImplementedException();
@@ -76,6 +67,22 @@ namespace MonitoringClient.ViewModel
         public void ChooseExporterDllPath()
         {
             throw new NotImplementedException();
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        private ILocationRepository GetLocationRepository()
+        {
+            var injector = new Injector();
+            return injector.InjectLocationRepository();
+        }
+
+        private void OnNavigateBack(object obj)
+        {
+            navigateToLogEntryView.Invoke("LogEntryView");
         }
     }
 }

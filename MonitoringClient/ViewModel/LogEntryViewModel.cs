@@ -1,6 +1,7 @@
 ﻿using DuplicateCheckerLib;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using MonitoringClient.Command;
+using MonitoringClient.IoC;
 using MonitoringClient.Model;
 using MonitoringClient.RegExp;
 using MonitoringClient.Repository;
@@ -21,8 +22,8 @@ namespace MonitoringClient.ViewModel
         private readonly Action<object> navigateToLogMessageAddView;
         private readonly Action<object> navigateToLocationView;
         private readonly Action<object> navigateToCustomerView;
+        private readonly ILogEntryRepository _logEntryModelRepository;
         private DuplicateChecker _duplicateChecker;
-        private ILogEntryModelRepository _logEntryModelRepository;
         private ObservableCollection<LogEntryModel> _logentries;
         private string _selectedExporter;
         private string _exportPath;
@@ -90,7 +91,7 @@ namespace MonitoringClient.ViewModel
 
             Logentries = new ObservableCollection<LogEntryModel>();
             _duplicateChecker = new DuplicateChecker();
-            _logEntryModelRepository = new LogEntryModelRepository();
+            _logEntryModelRepository = GetLogEntryModelRepository();
 
             ConnectionString = _logEntryModelRepository.ConnectionString;
         }
@@ -184,6 +185,12 @@ namespace MonitoringClient.ViewModel
         protected void OnPropertyChanged(string name)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        private ILogEntryRepository GetLogEntryModelRepository()
+        {
+            var injector = new Injector();
+            return injector.InjectLogEntryRepository();
         }
         private void StartLogMessageAddView(object obj)
         {

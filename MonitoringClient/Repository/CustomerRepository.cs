@@ -3,7 +3,7 @@ using MonitoringClient.Services;
 
 namespace MonitoringClient.Repository
 {
-    public class CustomerRepository : RepositoryBase<CustomerModel>, ICustomerModelRepository
+    public class CustomerRepository : RepositoryBase<CustomerModel>, ICustomerRepository
     {
         public override string TableName { get; }
         public CustomerRepository()

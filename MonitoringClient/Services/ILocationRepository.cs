@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 
 namespace MonitoringClient.Services
 {
-    public interface ILogEntryModelRepository : IRepositoryBase<LogEntryModel>
+    public interface ILocationRepository : IRepositoryBase<LocationModel>
     {
-        void ConfirmLogentries(int id);
-        void AddMessage(string pod, string hostname, string severity, string message);
     }
 }

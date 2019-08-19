@@ -12,7 +12,7 @@ namespace MonitoringClient.ViewModel
     public class LogMessageAddViewModel : IDataErrorInfo, INotifyPropertyChanged, IViewModel
     {
         private readonly Action<object> navigateToLogEntryView;
-        private LogEntryModelRepository _logEntryModelRepository;
+        private LogEntryRepository _logEntryModelRepository;
         private LogMessageValidation _logMessageValidation;
         private string _pod;
         private string _hostname;
@@ -70,7 +70,7 @@ namespace MonitoringClient.ViewModel
             NavigateBack = new BaseCommand(OnNavigateBack);
             NavigateAndSave = new BaseCommand(OnNavigateAndSave);
             this.navigateToLogEntryView = navigateToLogEntryView;
-            _logEntryModelRepository = new LogEntryModelRepository();
+            _logEntryModelRepository = new LogEntryRepository();
             _logMessageValidation = new LogMessageValidation();
             ClearAllFields();
         }

@@ -3,10 +3,10 @@ using MonitoringClient.Services;
 
 namespace MonitoringClient.Repository
 {
-    class LocationModelRepository : RepositoryBase<LocationModel>, ILocationModelRepository
+    public class LocationRepository : RepositoryBase<LocationModel>, ILocationRepository
     {
         public override string TableName { get; }
-        public LocationModelRepository()
+        public LocationRepository()
         {
             TableName = "location";
         }

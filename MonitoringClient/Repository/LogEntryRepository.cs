@@ -9,10 +9,10 @@ using System.Windows;
 
 namespace MonitoringClient.Repository
 {
-    public class LogEntryModelRepository : RepositoryBase<LogEntryModel>, ILogEntryModelRepository
+    public class LogEntryRepository : RepositoryBase<LogEntryModel>, ILogEntryRepository
     {
         public override string TableName { get; }
-        public LogEntryModelRepository()
+        public LogEntryRepository()
         {
             TableName = "v_logentries";
         }

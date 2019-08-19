@@ -3,7 +3,7 @@ using MonitoringClient.Repository;
 
 namespace MonitoringClient.Services
 {
-    public interface ICustomerModelRepository : IRepositoryBase<CustomerModel>
+    public interface ICustomerRepository : IRepositoryBase<CustomerModel>
     {
     }
 }

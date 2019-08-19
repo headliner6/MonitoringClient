@@ -456,3 +456,14 @@ C:\Workspace\HF\MonitoringClient\bin\Debug\PluginContracts.dll
 C:\Workspace\HF\MonitoringClient\bin\Debug\Microsoft.WindowsAPICodePack.xml
 C:\Workspace\HF\MonitoringClient\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
 C:\Workspace\HF\MonitoringClient\bin\Debug\Newtonsoft.Json.xml
+C:\Workspace\HF\MonitoringClient\bin\Debug\Autofac.dll
+C:\Workspace\HF\MonitoringClient\bin\Debug\Castle.Core.dll
+C:\Workspace\HF\MonitoringClient\bin\Debug\Moq.dll
+C:\Workspace\HF\MonitoringClient\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Workspace\HF\MonitoringClient\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Workspace\HF\MonitoringClient\bin\Debug\Autofac.pdb
+C:\Workspace\HF\MonitoringClient\bin\Debug\Autofac.xml
+C:\Workspace\HF\MonitoringClient\bin\Debug\Castle.Core.xml
+C:\Workspace\HF\MonitoringClient\bin\Debug\Moq.xml
+C:\Workspace\HF\MonitoringClient\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Workspace\HF\MonitoringClient\bin\Debug\System.Threading.Tasks.Extensions.xml
